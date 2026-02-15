@@ -300,7 +300,7 @@ export default function Chapter2() {
             </div>
           </div>
 
-          <div className="bg-slate-800 rounded-lg p-4">
+          <div className="bg-slate-800 rounded-lg p-4 mb-4">
             <p className="text-cyan-300 font-semibold mb-2">
               {isZh ? '直和分解' : 'Direct Sum Decomposition'}
             </p>
@@ -310,6 +310,111 @@ export default function Chapter2() {
                 ? '欧氏空间的切空间等于子流形的切空间与法空间的直和。'
                 : "Euclidean space's tangent space equals the direct sum of submanifold's tangent and normal spaces."}
             </p>
+          </div>
+
+          {/* What is direct sum? */}
+          <div className="bg-gradient-to-r from-purple-900/30 to-blue-900/30 rounded-lg p-4 border border-purple-700 mb-4">
+            <h3 className="text-purple-400 font-semibold mb-2">
+              ❓ {isZh ? '什么是"直和"？' : 'What is "Direct Sum"?'}
+            </h3>
+            <p className="text-slate-300 text-sm mb-3">
+              {isZh 
+                ? '直和⊕是一种特殊的"组合"方式，要求两个空间完全互不重叠，可以唯一地分解。'
+                : 'Direct sum ⊕ is a special way of "combining" spaces, requiring them to have no overlap and allowing unique decomposition.'}
+            </p>
+            <div className="grid md:grid-cols-2 gap-3 text-sm">
+              <div className="bg-slate-900 rounded p-3">
+                <p className="text-cyan-400 font-semibold mb-1">{isZh ? '条件 1：不重叠' : 'Condition 1: No Overlap'}</p>
+                <MathBlock>{'T_p M \\cap T_p^\\perp M = \\{0\\}'}</MathBlock>
+                <p className="text-slate-500 text-xs">{isZh ? '两个空间只共享零向量' : 'Spaces share only the zero vector'}</p>
+              </div>
+              <div className="bg-slate-900 rounded p-3">
+                <p className="text-cyan-400 font-semibold mb-1">{isZh ? '条件 2：完整覆盖' : 'Condition 2: Complete Coverage'}</p>
+                <MathBlock>{'T_p M + T_p^\\perp M = T_p E^m'}</MathBlock>
+                <p className="text-slate-500 text-xs">{isZh ? '两者合起来恰好是整个空间' : 'Together they span the whole space'}</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Pizza analogy for direct sum */}
+          <div className="bg-gradient-to-r from-yellow-900/30 to-orange-900/30 rounded-lg p-4 border border-yellow-700 mb-4">
+            <h3 className="text-yellow-400 font-semibold mb-2">
+              🍕 {isZh ? '披萨类比' : 'Pizza Analogy'}
+            </h3>
+            <p className="text-slate-300 text-sm mb-2">
+              {isZh 
+                ? '想象一整块披萨被切成两部分：'
+                : 'Imagine a pizza cut into two parts:'}
+            </p>
+            <ul className="text-slate-300 text-sm space-y-1">
+              <li>• {isZh ? '切空间 T_pM = 你的那份披萨' : 'Tangent space T_pM = your portion of pizza'}</li>
+              <li>• {isZh ? '法空间 T_p⊥M = 朋友的那份披萨' : 'Normal space T_p⊥M = friend\'s portion'}</li>
+              <li>• {isZh ? '直和 ⊕ = 两份合起来恰好是完整的披萨，没有重叠也没有缺失' : 'Direct sum ⊕ = both portions together make the complete pizza, no overlap, no missing'}</li>
+            </ul>
+            <p className="text-green-400 text-sm mt-2">
+              ✅ {isZh 
+                ? '关键：任何向量都能唯一地分解为"切向分量 + 法向分量"'
+                : 'Key: Any vector can be uniquely decomposed into "tangent part + normal part"'}
+            </p>
+          </div>
+
+          {/* Why direct sum matters */}
+          <div className="bg-slate-800 rounded-lg p-4 mb-4">
+            <h3 className="text-cyan-400 font-semibold mb-2">
+              🤔 {isZh ? '为什么直和分解重要？' : 'Why Does Direct Sum Matter?'}
+            </h3>
+            <p className="text-slate-300 text-sm mb-3">
+              {isZh 
+                ? '直和分解让我们可以把复杂的高维问题拆解为两个独立的部分来分析：'
+                : 'Direct sum decomposition lets us break down complex high-dimensional problems into two independent parts:'}
+            </p>
+            <div className="grid md:grid-cols-2 gap-3 text-sm">
+              <div className="bg-slate-900 rounded p-3 border-l-4 border-cyan-500">
+                <p className="text-cyan-400 font-semibold">{isZh ? '切向部分' : 'Tangent Part'}</p>
+                <p className="text-slate-400">{isZh ? '研究子流形本身的"内在几何"' : 'Studies the "intrinsic geometry" of the submanifold'}</p>
+                <p className="text-slate-500 text-xs mt-1">{isZh ? '例：曲面上两点之间的最短路径' : 'E.g., shortest path between two points on surface'}</p>
+              </div>
+              <div className="bg-slate-900 rounded p-3 border-l-4 border-pink-500">
+                <p className="text-pink-400 font-semibold">{isZh ? '法向部分' : 'Normal Part'}</p>
+                <p className="text-slate-400">{isZh ? '研究子流形如何"弯曲"嵌入外部空间' : 'Studies how the submanifold "bends" in ambient space'}</p>
+                <p className="text-slate-500 text-xs mt-1">{isZh ? '例：曲面的弯曲程度（曲率）' : 'E.g., degree of bending (curvature)'}</p>
+              </div>
+            </div>
+            <p className="text-yellow-400 text-sm mt-3">
+              💡 {isZh 
+                ? '接触数理论正是研究法向部分的几何性质！'
+                : 'Contact number theory studies precisely the geometry of the normal part!'}
+            </p>
+          </div>
+
+          {/* Concrete decomposition example */}
+          <div className="bg-slate-800 rounded-lg p-4">
+            <h3 className="text-cyan-400 font-semibold mb-2">
+              📐 {isZh ? '具体例子：球面上的直和分解' : 'Concrete Example: Direct Sum on Sphere'}
+            </h3>
+            <p className="text-slate-300 text-sm mb-2">
+              {isZh 
+                ? '考虑单位球面 S² ⊂ E³，在点 p = (1, 0, 0) 处：'
+                : 'Consider unit sphere S² ⊂ E³, at point p = (1, 0, 0):'}
+            </p>
+            <div className="grid md:grid-cols-2 gap-3 text-sm mb-3">
+              <div className="bg-slate-900 rounded p-3">
+                <p className="text-cyan-400 font-semibold">{isZh ? '切空间' : 'Tangent Space'}</p>
+                <MathBlock>{'T_p S^2 = \\{(0, y, z) : y, z \\in \\mathbb{R}\\}'}</MathBlock>
+                <p className="text-slate-500 text-xs">{isZh ? 'y-z平面（2维）' : 'y-z plane (2D)'}</p>
+              </div>
+              <div className="bg-slate-900 rounded p-3">
+                <p className="text-pink-400 font-semibold">{isZh ? '法空间' : 'Normal Space'}</p>
+                <MathBlock>{'T_p^\\perp S^2 = \\{(x, 0, 0) : x \\in \\mathbb{R}\\}'}</MathBlock>
+                <p className="text-slate-500 text-xs">{isZh ? 'x轴方向（1维）' : 'x-axis direction (1D)'}</p>
+              </div>
+            </div>
+            <p className="text-slate-300 text-sm">
+              {isZh 
+                ? '任何向量 v = (a, b, c) ∈ E³ 可以唯一分解为：'
+                : 'Any vector v = (a, b, c) ∈ E³ can be uniquely decomposed as:'}
+            </p>
+            <MathBlock>{'v = \\underbrace{(0, b, c)}_{\\text{' + (isZh ? '切向' : 'tangent') + '}} + \\underbrace{(a, 0, 0)}_{\\text{' + (isZh ? '法向' : 'normal') + '}}'}</MathBlock>
           </div>
         </section>
 
@@ -330,15 +435,71 @@ export default function Chapter2() {
             </p>
           </div>
 
+          {/* Intuitive understanding */}
+          <div className="bg-gradient-to-r from-green-900/30 to-cyan-900/30 rounded-lg p-4 border border-green-700 mb-4">
+            <h3 className="text-green-400 font-semibold mb-2">
+              🚗 {isZh ? '开车类比：理解"弯曲"' : 'Driving Analogy: Understanding "Bending"'}
+            </h3>
+            <p className="text-slate-300 text-sm mb-3">
+              {isZh 
+                ? '想象你在一条路上开车：'
+                : 'Imagine driving on a road:'}
+            </p>
+            <ul className="text-slate-300 text-sm space-y-2">
+              <li>• <span className="text-cyan-400">{isZh ? '直路' : 'Straight road'}</span>: {isZh ? '方向盘不用转 → h = 0（没有弯曲）' : 'No steering needed → h = 0 (no bending)'}</li>
+              <li>• <span className="text-yellow-400">{isZh ? '缓弯' : 'Gentle curve'}</span>: {isZh ? '方向盘轻轻转 → h 较小（轻微弯曲）' : 'Slight steering → h is small (mild bending)'}</li>
+              <li>• <span className="text-red-400">{isZh ? '急弯' : 'Sharp turn'}</span>: {isZh ? '方向盘大幅度转 → h 较大（剧烈弯曲）' : 'Heavy steering → h is large (strong bending)'}</li>
+            </ul>
+            <p className="text-yellow-400 text-sm mt-3">
+              💡 {isZh 
+                ? '第二基本形式h精确地量化了这种"需要转方向盘"的程度！'
+                : 'Second fundamental form h precisely quantifies this "steering needed" degree!'}
+            </p>
+          </div>
+
+          {/* First vs Second fundamental form */}
+          <div className="bg-slate-800 rounded-lg p-4 mb-4">
+            <h3 className="text-cyan-400 font-semibold mb-2">
+              📊 {isZh ? '第一基本形式 vs 第二基本形式' : 'First vs Second Fundamental Form'}
+            </h3>
+            <div className="grid md:grid-cols-2 gap-3 text-sm">
+              <div className="bg-slate-900 rounded p-3 border-l-4 border-blue-500">
+                <p className="text-blue-400 font-semibold mb-1">{isZh ? '第一基本形式 I' : 'First Fundamental Form I'}</p>
+                <p className="text-slate-400">{isZh ? '测量子流形上的长度和角度' : 'Measures lengths and angles on the submanifold'}</p>
+                <p className="text-slate-500 text-xs mt-1">{isZh ? '"内在几何"：不需要知道外部空间' : '"Intrinsic geometry": doesn\'t need ambient space'}</p>
+                <p className="text-slate-500 text-xs">{isZh ? '例：曲面上两点的测地距离' : 'E.g., geodesic distance on surface'}</p>
+              </div>
+              <div className="bg-slate-900 rounded p-3 border-l-4 border-orange-500">
+                <p className="text-orange-400 font-semibold mb-1">{isZh ? '第二基本形式 h' : 'Second Fundamental Form h'}</p>
+                <p className="text-slate-400">{isZh ? '测量子流形如何弯曲嵌入外部空间' : 'Measures how submanifold bends in ambient space'}</p>
+                <p className="text-slate-500 text-xs mt-1">{isZh ? '"外在几何"：需要知道嵌入方式' : '"Extrinsic geometry": needs embedding info'}</p>
+                <p className="text-slate-500 text-xs">{isZh ? '例：曲面在空间中的弯曲程度' : 'E.g., degree of surface bending in space'}</p>
+              </div>
+            </div>
+            <p className="text-slate-300 text-sm mt-3">
+              {isZh 
+                ? '著名的Gauss绝妙定理(Theorema Egregium)说：对于曲面，高斯曲率虽然用第二基本形式定义，但其实是内在不变量！'
+                : 'The famous Theorema Egregium states: for surfaces, Gaussian curvature, though defined using the second fundamental form, is actually an intrinsic invariant!'}
+            </p>
+          </div>
+
           <div className="bg-slate-800 rounded-lg p-4 mb-4">
             <p className="text-cyan-300 font-semibold mb-2">
-              {isZh ? 'Gauss公式' : 'Gauss Formula'}
+              {isZh ? 'Gauss公式——分解导数' : 'Gauss Formula—Decomposing Derivatives'}
             </p>
             <MathBlock>{'\\tilde{\\nabla}_X Y = \\nabla_X Y + h(X, Y)'}</MathBlock>
-            <p className="text-slate-400 text-sm mt-2">
-              {isZh 
-                ? '其中 ∇̃ 是外部空间的联络，∇ 是子流形的联络，h(X,Y) 是法向量。'
-                : 'Where ∇̃ is the ambient connection, ∇ is the submanifold connection, and h(X,Y) is a normal vector.'}
+            <div className="mt-3 text-sm">
+              <p className="text-slate-300 mb-2">{isZh ? '解读：' : 'Interpretation:'}</p>
+              <ul className="text-slate-400 space-y-1">
+                <li>• <Math>{'\\tilde{\\nabla}_X Y'}</Math>: {isZh ? '在外部空间E^m中对Y求导（沿X方向）' : 'Derivative of Y in ambient space E^m (along X direction)'}</li>
+                <li>• <Math>{'\\nabla_X Y'}</Math>: {isZh ? '切向分量 — 在子流形M内的导数' : 'Tangent part — derivative within submanifold M'}</li>
+                <li>• <Math>{'h(X, Y)'}</Math>: {isZh ? '法向分量 — 这就是第二基本形式！' : 'Normal part — this is the second fundamental form!'}</li>
+              </ul>
+            </div>
+            <p className="text-yellow-400 text-sm mt-3">
+              💡 {isZh 
+                ? 'Gauss公式正是直和分解的应用：把导数分解为切向+法向两部分！'
+                : 'Gauss formula is exactly the application of direct sum: decomposing derivative into tangent + normal!'}
             </p>
           </div>
 
@@ -352,16 +513,78 @@ export default function Chapter2() {
                 : 'The second fundamental form is a symmetric bilinear map:'}
             </p>
             <MathBlock>{'h: T_pM \\times T_pM \\to T_p^\\perp M'}</MathBlock>
+            <div className="mt-3 text-sm">
+              <p className="text-slate-300 mb-2">{isZh ? '逐项理解：' : 'Understanding each part:'}</p>
+              <ul className="text-slate-400 space-y-1">
+                <li>• <span className="text-cyan-400">{isZh ? '输入' : 'Input'}</span>: {isZh ? '两个切向量 X, Y ∈ T_pM' : 'Two tangent vectors X, Y ∈ T_pM'}</li>
+                <li>• <span className="text-pink-400">{isZh ? '输出' : 'Output'}</span>: {isZh ? '一个法向量 h(X,Y) ∈ T_p⊥M' : 'A normal vector h(X,Y) ∈ T_p⊥M'}</li>
+                <li>• <span className="text-green-400">{isZh ? '对称' : 'Symmetric'}</span>: h(X,Y) = h(Y,X)</li>
+                <li>• <span className="text-yellow-400">{isZh ? '双线性' : 'Bilinear'}</span>: {isZh ? '对X和Y都是线性的' : 'Linear in both X and Y'}</li>
+              </ul>
+            </div>
+          </div>
+
+          {/* Why h is a normal vector */}
+          <div className="bg-gradient-to-r from-purple-900/30 to-blue-900/30 rounded-lg p-4 border border-purple-700 mb-4">
+            <h3 className="text-purple-400 font-semibold mb-2">
+              🤔 {isZh ? '为什么h(X,Y)是法向量？' : 'Why is h(X,Y) a Normal Vector?'}
+            </h3>
+            <p className="text-slate-300 text-sm mb-2">
+              {isZh 
+                ? '直觉解释：如果你沿着子流形走（切向移动），你的位置只在子流形上变化。但如果子流形是弯曲的，你的速度方向会改变——而这个改变的方向指向"弯曲的方向"，也就是法方向！'
+                : 'Intuitive explanation: If you walk along the submanifold (tangent movement), your position only changes on the submanifold. But if the submanifold is curved, your velocity direction changes—and this change points in the "bending direction", i.e., the normal direction!'}
+            </p>
+            <div className="bg-slate-900 rounded p-3 text-sm mt-3">
+              <p className="text-cyan-400 font-semibold mb-1">{isZh ? '球面上的例子' : 'Example on Sphere'}</p>
+              <p className="text-slate-400">
+                {isZh 
+                  ? '在球面上沿赤道行走，你的速度方向不断向内弯曲（指向球心）。这个弯曲方向就是法方向！h越大，弯曲越剧烈。'
+                  : 'Walking along the equator on a sphere, your velocity direction keeps bending inward (toward the center). This bending direction is the normal direction! Larger h means more bending.'}
+              </p>
+            </div>
+          </div>
+
+          {/* Concrete example */}
+          <div className="bg-slate-800 rounded-lg p-4 mb-4">
+            <h3 className="text-cyan-400 font-semibold mb-2">
+              📐 {isZh ? '具体例子：球面的第二基本形式' : 'Concrete Example: Second Fundamental Form of Sphere'}
+            </h3>
+            <p className="text-slate-300 text-sm mb-2">
+              {isZh 
+                ? '对于半径为 r 的球面 S² ⊂ E³：'
+                : 'For a sphere S² ⊂ E³ with radius r:'}
+            </p>
+            <MathBlock>{'h(X, Y) = -\\frac{1}{r}\\langle X, Y \\rangle \\cdot \\mathbf{n}'}</MathBlock>
+            <p className="text-slate-400 text-sm mt-2">
+              {isZh 
+                ? '其中 n 是单位外法向量。注意：球面各处各方向的弯曲程度相同（1/r），这就是为什么球面是"脐"的！'
+                : 'Where n is the unit outward normal. Note: the sphere bends equally (1/r) in all directions at all points—this is why the sphere is "umbilical"!'}
+            </p>
+            <div className="grid md:grid-cols-2 gap-3 text-sm mt-3">
+              <div className="bg-slate-900 rounded p-3">
+                <p className="text-green-400 font-semibold">{isZh ? '小球（r小）' : 'Small sphere (small r)'}</p>
+                <p className="text-slate-400">{isZh ? 'h = -1/r 很大 → 弯曲剧烈' : 'h = -1/r is large → strong bending'}</p>
+              </div>
+              <div className="bg-slate-900 rounded p-3">
+                <p className="text-yellow-400 font-semibold">{isZh ? '大球（r大）' : 'Large sphere (large r)'}</p>
+                <p className="text-slate-400">{isZh ? 'h = -1/r 很小 → 弯曲平缓' : 'h = -1/r is small → gentle bending'}</p>
+              </div>
+            </div>
           </div>
 
           <div className="bg-slate-800 rounded-lg p-4">
             <p className="text-yellow-400 font-semibold mb-2">
               💡 {isZh ? '与接触数的联系' : 'Connection to Contact Number'}
             </p>
+            <p className="text-slate-300 text-sm mb-3">
+              {isZh 
+                ? '接触数通过研究 h(u,u)（沿单位向量u的"自弯曲"）的性质来定义：'
+                : 'Contact number is defined by studying properties of h(u,u) (the "self-bending" along unit vector u):'}
+            </p>
             <ul className="text-slate-300 text-sm space-y-2">
-              <li>• {isZh ? '接触数 ≥ 3 的条件涉及 h(u,u) 的性质' : 'Contact number ≥ 3 condition involves properties of h(u,u)'}</li>
-              <li>• {isZh ? '各向同性条件：' : 'Isotropy condition:'} <Math>{'\\langle h(u,u), h(u,v) \\rangle = 0'}</Math></li>
-              <li>• {isZh ? '接触数越高，对h的约束越强' : 'Higher contact number means stronger constraints on h'}</li>
+              <li>• {isZh ? '接触数 ≥ 3 的条件涉及 h(u,u) 的正交性：' : 'Contact number ≥ 3 condition involves orthogonality of h(u,u):'} <Math>{'\\langle h(u,u), h(u,v) \\rangle = 0'}</Math></li>
+              <li>• {isZh ? '这个条件限制了子流形在不同方向上"弯曲的协调性"' : 'This condition restricts how the submanifold "coordinates its bending" in different directions'}</li>
+              <li>• {isZh ? '接触数越高，对h的约束越强，子流形越"特殊"' : 'Higher contact number means stronger constraints on h, more "special" submanifold'}</li>
             </ul>
           </div>
 
@@ -376,12 +599,81 @@ export default function Chapter2() {
           <h2 className="text-xl font-semibold text-cyan-400 mb-4">
             {isZh ? '2.5 形状算子' : '2.5 Shape Operator'}
           </h2>
+
+          {/* Intuitive explanation */}
+          <div className="bg-gradient-to-r from-green-900/30 to-cyan-900/30 rounded-lg p-4 border border-green-700 mb-4">
+            <h3 className="text-green-400 font-semibold mb-2">
+              🔍 {isZh ? '形状算子的直觉' : 'Intuition of Shape Operator'}
+            </h3>
+            <p className="text-slate-300 text-sm mb-2">
+              {isZh 
+                ? '第二基本形式h告诉我们"沿某方向弯曲后得到什么法向量"。而形状算子A_ξ回答相反的问题：'
+                : 'The second fundamental form h tells us "what normal vector we get after bending in some direction". The shape operator A_ξ answers the opposite question:'}
+            </p>
+            <p className="text-yellow-400 text-sm font-semibold">
+              ❓ {isZh 
+                ? '"给定一个法方向ξ，在这个方向上弯曲会如何影响切空间？"'
+                : '"Given a normal direction ξ, how does bending in this direction affect the tangent space?"'}
+            </p>
+          </div>
+
+          {/* Mirror analogy */}
+          <div className="bg-gradient-to-r from-yellow-900/30 to-orange-900/30 rounded-lg p-4 border border-yellow-700 mb-4">
+            <h3 className="text-yellow-400 font-semibold mb-2">
+              🪞 {isZh ? '哈哈镜类比' : 'Fun House Mirror Analogy'}
+            </h3>
+            <p className="text-slate-300 text-sm mb-2">
+              {isZh 
+                ? '想象你站在哈哈镜前：'
+                : 'Imagine standing in front of a fun house mirror:'}
+            </p>
+            <ul className="text-slate-300 text-sm space-y-1">
+              <li>• {isZh ? '镜面的弯曲方式（凸/凹/波浪）= 法方向ξ的"曲率"' : 'How the mirror is curved (convex/concave/wavy) = "curvature" in normal direction ξ'}</li>
+              <li>• {isZh ? '你的像被拉伸或压缩的方式 = 形状算子 A_ξ' : 'How your image is stretched or compressed = shape operator A_ξ'}</li>
+              <li>• {isZh ? '不同方向的拉伸程度不同 = A_ξ的特征值（主曲率）' : 'Different stretching in different directions = eigenvalues of A_ξ (principal curvatures)'}</li>
+            </ul>
+            <p className="text-green-400 text-sm mt-2">
+              ✅ {isZh 
+                ? '形状算子把"法方向的几何"翻译成"切空间内的变换"！'
+                : 'Shape operator translates "normal direction geometry" into "tangent space transformation"!'}
+            </p>
+          </div>
           
           <div className="bg-slate-800 rounded-lg p-4 mb-4">
             <p className="text-cyan-300 font-semibold mb-2">
-              {isZh ? 'Weingarten公式' : 'Weingarten Formula'}
+              {isZh ? 'Weingarten公式——分解法向量的导数' : 'Weingarten Formula—Decomposing Normal Vector Derivative'}
             </p>
             <MathBlock>{'\\tilde{\\nabla}_X \\xi = -A_\\xi X + D_X \\xi'}</MathBlock>
+            <div className="mt-3 text-sm">
+              <p className="text-slate-300 mb-2">{isZh ? '解读：' : 'Interpretation:'}</p>
+              <ul className="text-slate-400 space-y-1">
+                <li>• <Math>{'\\tilde{\\nabla}_X \\xi'}</Math>: {isZh ? '在外部空间中对法向量ξ求导（沿切向X）' : 'Derivative of normal vector ξ in ambient space (along tangent X)'}</li>
+                <li>• <Math>{'-A_\\xi X'}</Math>: {isZh ? '切向分量（负号是约定）' : 'Tangent part (negative sign is convention)'}</li>
+                <li>• <Math>{'D_X \\xi'}</Math>: {isZh ? '法向分量——法联络' : 'Normal part—normal connection'}</li>
+              </ul>
+            </div>
+            <p className="text-yellow-400 text-sm mt-3">
+              💡 {isZh 
+                ? '这又是直和分解！Gauss公式分解切向量的导数，Weingarten公式分解法向量的导数。'
+                : 'This is direct sum decomposition again! Gauss formula decomposes tangent vector derivative, Weingarten formula decomposes normal vector derivative.'}
+            </p>
+          </div>
+
+          <div className="bg-slate-800 rounded-lg p-4 mb-4">
+            <p className="text-cyan-300 font-semibold mb-2">
+              {isZh ? '定义（形状算子）' : 'Definition (Shape Operator)'}
+            </p>
+            <p className="text-slate-300 mb-2">
+              {isZh 
+                ? '给定法向量 ξ ∈ T_p⊥M，形状算子是一个线性映射：'
+                : 'Given normal vector ξ ∈ T_p⊥M, the shape operator is a linear map:'}
+            </p>
+            <MathBlock>{'A_\\xi : T_pM \\to T_pM'}</MathBlock>
+            <p className="text-slate-400 text-sm mt-2">
+              {isZh 
+                ? '它把一个切向量X映射到另一个切向量 A_ξ(X)。'
+                : 'It maps a tangent vector X to another tangent vector A_ξ(X).'}
+            </p>
           </div>
 
           <div className="bg-slate-800 rounded-lg p-4 mb-4">
@@ -389,12 +681,151 @@ export default function Chapter2() {
               {isZh ? '形状算子与第二基本形式的关系' : 'Relation to Second Fundamental Form'}
             </p>
             <MathBlock>{'\\langle A_\\xi X, Y \\rangle = \\langle h(X, Y), \\xi \\rangle'}</MathBlock>
+            <p className="text-slate-400 text-sm mt-2 mb-3">
+              {isZh 
+                ? '形状算子 A_ξ 是第二基本形式的"切空间版本"——通过内积把法向量信息转换成切空间内的信息。'
+                : 'The shape operator A_ξ is the "tangent space version" of the second fundamental form—converting normal vector info to tangent space info via inner product.'}
+            </p>
+            <div className="bg-slate-900 rounded p-3 text-sm">
+              <p className="text-cyan-400 font-semibold mb-1">{isZh ? '为什么这个关系有用？' : 'Why is this relation useful?'}</p>
+              <p className="text-slate-400">
+                {isZh 
+                  ? 'h(X,Y)住在法空间（可能是高维的），但A_ξX住在切空间（子流形的维数）。A_ξ是一个矩阵，我们可以计算它的特征值、行列式、迹等！'
+                  : 'h(X,Y) lives in normal space (possibly high-dimensional), but A_ξX lives in tangent space (submanifold dimension). A_ξ is a matrix—we can compute eigenvalues, determinant, trace, etc.!'}
+              </p>
+            </div>
+          </div>
+
+          {/* Properties of shape operator */}
+          <div className="bg-slate-800 rounded-lg p-4 mb-4">
+            <h3 className="text-cyan-400 font-semibold mb-2">
+              📋 {isZh ? '形状算子的重要性质' : 'Important Properties of Shape Operator'}
+            </h3>
+            <ul className="text-slate-300 text-sm space-y-2">
+              <li className="flex items-start">
+                <span className="bg-cyan-600 text-white text-xs px-2 py-0.5 rounded mr-2 mt-0.5">1</span>
+                <span><span className="text-yellow-400">{isZh ? '自伴随（对称）' : 'Self-adjoint (Symmetric)'}</span>: ⟨A_ξX, Y⟩ = ⟨X, A_ξY⟩ — {isZh ? '所以特征值都是实数' : 'so eigenvalues are all real'}</span>
+              </li>
+              <li className="flex items-start">
+                <span className="bg-cyan-600 text-white text-xs px-2 py-0.5 rounded mr-2 mt-0.5">2</span>
+                <span><span className="text-green-400">{isZh ? '特征值 = 主曲率' : 'Eigenvalues = Principal Curvatures'}</span>: {isZh ? '沿法方向ξ的弯曲程度' : 'bending degree in normal direction ξ'}</span>
+              </li>
+              <li className="flex items-start">
+                <span className="bg-cyan-600 text-white text-xs px-2 py-0.5 rounded mr-2 mt-0.5">3</span>
+                <span><span className="text-purple-400">{isZh ? '迹 = 平均曲率（分量）' : 'Trace = Mean Curvature (component)'}</span>: tr(A_ξ) = n⟨H, ξ⟩</span>
+              </li>
+            </ul>
+          </div>
+
+          {/* Concrete example */}
+          <div className="bg-slate-800 rounded-lg p-4 mb-4">
+            <h3 className="text-cyan-400 font-semibold mb-2">
+              📐 {isZh ? '具体例子：球面的形状算子' : 'Concrete Example: Shape Operator of Sphere'}
+            </h3>
+            <p className="text-slate-300 text-sm mb-2">
+              {isZh 
+                ? '对于半径为 r 的球面 S² ⊂ E³，单位外法向量 n：'
+                : 'For sphere S² ⊂ E³ with radius r, unit outward normal n:'}
+            </p>
+            <MathBlock>{'A_n = \\frac{1}{r} \\cdot I'}</MathBlock>
             <p className="text-slate-400 text-sm mt-2">
               {isZh 
-                ? '形状算子 A_ξ 是第二基本形式的"切空间版本"。'
-                : 'The shape operator A_ξ is the "tangent space version" of the second fundamental form.'}
+                ? '形状算子就是 1/r 倍的恒等变换！这意味着：'
+                : 'The shape operator is just 1/r times the identity! This means:'}
             </p>
+            <ul className="text-slate-400 text-sm mt-2 space-y-1">
+              <li>• {isZh ? '所有主曲率相同（= 1/r）' : 'All principal curvatures are the same (= 1/r)'}</li>
+              <li>• {isZh ? '球面是"脐"的——各方向弯曲程度相同' : 'Sphere is "umbilical"—same bending in all directions'}</li>
+              <li>• {isZh ? '这与第二基本形式 h = -(1/r)⟨X,Y⟩n 完全一致' : 'This is consistent with h = -(1/r)⟨X,Y⟩n'}</li>
+            </ul>
           </div>
+
+          {/* Connection to contact number */}
+          <div className="bg-gradient-to-r from-purple-900/30 to-blue-900/30 rounded-lg p-4 border border-purple-700 mb-4">
+            <h3 className="text-purple-400 font-semibold mb-2">
+              🔗 {isZh ? '与接触数理论的联系' : 'Connection to Contact Number Theory'}
+            </h3>
+            <p className="text-slate-300 text-sm mb-3">
+              {isZh 
+                ? '在李世杰教授的论文中，许多定理涉及形状算子的特殊性质：'
+                : 'In Professor Li\'s papers, many theorems involve special properties of the shape operator:'}
+            </p>
+            <ul className="text-slate-300 text-sm space-y-2">
+              <li>• <span className="text-green-400">{isZh ? '伪脐条件' : 'Pseudo-umbilical condition'}</span>: A_H = λI — {isZh ? '沿平均曲率方向的形状算子是恒等的倍数（第7章）' : 'shape operator along mean curvature is scalar identity (Chapter 7)'}</li>
+              <li>• <span className="text-yellow-400">{isZh ? '形状算子可交换' : 'Commuting shape operators'}</span>: A_ξA_η = A_ηA_ξ — {isZh ? '不同法方向的弯曲是"兼容"的' : 'bending in different normal directions is "compatible"'}</li>
+              <li>• <span className="text-cyan-400">{isZh ? '平行平均曲率' : 'Parallel mean curvature'}</span>: DH = 0 — {isZh ? '平均曲率向量不随点变化（第8章）' : 'mean curvature vector doesn\'t change with point (Chapter 8)'}</li>
+            </ul>
+          </div>
+
+          {/* Summary comparison */}
+          <div className="bg-slate-800 rounded-lg p-4">
+            <h3 className="text-cyan-400 font-semibold mb-3">
+              📊 {isZh ? 'h vs A：两种视角，同一几何' : 'h vs A: Two Views, Same Geometry'}
+            </h3>
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="text-left border-b border-slate-600">
+                    <th className="py-2 text-slate-400">{isZh ? '方面' : 'Aspect'}</th>
+                    <th className="py-2 text-orange-400">h (第二基本形式)</th>
+                    <th className="py-2 text-cyan-400">A_ξ (形状算子)</th>
+                  </tr>
+                </thead>
+                <tbody className="text-slate-300">
+                  <tr className="border-b border-slate-700">
+                    <td className="py-2">{isZh ? '输入' : 'Input'}</td>
+                    <td className="py-2">{isZh ? '两个切向量 X, Y' : 'Two tangent vectors X, Y'}</td>
+                    <td className="py-2">{isZh ? '一个切向量 X（和法向量 ξ）' : 'One tangent vector X (and normal ξ)'}</td>
+                  </tr>
+                  <tr className="border-b border-slate-700">
+                    <td className="py-2">{isZh ? '输出' : 'Output'}</td>
+                    <td className="py-2">{isZh ? '法向量' : 'Normal vector'}</td>
+                    <td className="py-2">{isZh ? '切向量' : 'Tangent vector'}</td>
+                  </tr>
+                  <tr className="border-b border-slate-700">
+                    <td className="py-2">{isZh ? '适用场景' : 'Best for'}</td>
+                    <td className="py-2">{isZh ? '研究弯曲方向' : 'Studying bending direction'}</td>
+                    <td className="py-2">{isZh ? '计算曲率、特征值' : 'Computing curvatures, eigenvalues'}</td>
+                  </tr>
+                  <tr>
+                    <td className="py-2">{isZh ? '类比' : 'Analogy'}</td>
+                    <td className="py-2">{isZh ? '"弯向哪里？"' : '"Bending where?"'}</td>
+                    <td className="py-2">{isZh ? '"弯曲多剧烈？"' : '"How much bending?"'}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        {/* Chapter Summary */}
+        <section className="bg-gradient-to-r from-green-900/50 to-cyan-900/50 rounded-xl p-6 border border-green-700">
+          <h2 className="text-xl font-semibold text-green-400 mb-4">
+            ✅ {isZh ? '本章小结' : 'Chapter Summary'}
+          </h2>
+          <div className="grid md:grid-cols-2 gap-4 text-sm">
+            <div>
+              <p className="text-cyan-400 font-semibold mb-2">{isZh ? '核心概念' : 'Core Concepts'}</p>
+              <ul className="text-slate-300 space-y-1">
+                <li>✓ {isZh ? '嵌入与浸入：子流形如何"住在"外部空间' : 'Embedding & immersion: how submanifolds "live in" ambient space'}</li>
+                <li>✓ {isZh ? '余维数：法空间的维数 = m - n' : 'Codimension: dimension of normal space = m - n'}</li>
+                <li>✓ {isZh ? '直和分解：任何向量 = 切向 + 法向（唯一）' : 'Direct sum: any vector = tangent + normal (unique)'}</li>
+              </ul>
+            </div>
+            <div>
+              <p className="text-yellow-400 font-semibold mb-2">{isZh ? '关键工具' : 'Key Tools'}</p>
+              <ul className="text-slate-300 space-y-1">
+                <li>✓ {isZh ? '第二基本形式 h：测量弯曲方向（输出法向量）' : 'Second fundamental form h: measures bending direction (outputs normal)'}</li>
+                <li>✓ {isZh ? '形状算子 A_ξ：测量弯曲程度（输出切向量）' : 'Shape operator A_ξ: measures bending degree (outputs tangent)'}</li>
+                <li>✓ {isZh ? '两者通过内积联系：⟨A_ξX, Y⟩ = ⟨h(X,Y), ξ⟩' : 'Connected via: ⟨A_ξX, Y⟩ = ⟨h(X,Y), ξ⟩'}</li>
+              </ul>
+            </div>
+          </div>
+          <p className="text-green-400 text-sm mt-4">
+            🎯 {isZh 
+              ? '下一章：我们将利用这些工具来精确定义"接触"的概念——子流形与超球面的切触程度！'
+              : 'Next chapter: We\'ll use these tools to precisely define "contact"—the degree of tangency between submanifold and hyperspheres!'}
+          </p>
         </section>
 
         {/* Navigation */}
