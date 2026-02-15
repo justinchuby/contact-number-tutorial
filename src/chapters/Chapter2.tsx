@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { MathBlock, Math } from '../components';
+import { TangentNormalVizWithLabels, EmbeddingVizWithLabels, SecondFundamentalFormVizWithLabels } from '../visualizations';
 
 export default function Chapter2() {
   const { t, i18n } = useTranslation();
@@ -15,6 +16,19 @@ export default function Chapter2() {
       </header>
 
       <div className="space-y-8">
+        {/* Interactive: Tangent and Normal visualization */}
+        <section className="bg-slate-900 rounded-xl p-6">
+          <h2 className="text-xl font-semibold text-cyan-400 mb-4">
+            🎮 {isZh ? '交互可视化：切空间与法空间' : 'Interactive: Tangent and Normal Spaces'}
+          </h2>
+          <TangentNormalVizWithLabels />
+          <p className="text-slate-400 text-sm mt-4">
+            {isZh 
+              ? '观察点在球面上移动时，切平面和法向量如何随之变化。' 
+              : 'Watch how the tangent plane and normal vector change as the point moves on the sphere.'}
+          </p>
+        </section>
+
         {/* Section 2.1 */}
         <section className="bg-slate-900 rounded-xl p-6">
           <h2 className="text-xl font-semibold text-cyan-400 mb-4">
@@ -67,6 +81,11 @@ export default function Chapter2() {
                 🎯 {isZh ? '例：8字形（有交叉点）' : 'Example: figure-8 (has crossing point)'}
               </p>
             </div>
+          </div>
+
+          {/* Embedding visualization */}
+          <div className="mb-4">
+            <EmbeddingVizWithLabels />
           </div>
 
           {/* More vivid examples */}
@@ -241,6 +260,11 @@ export default function Chapter2() {
               <li>• {isZh ? '各向同性条件：' : 'Isotropy condition:'} <Math>{'\\langle h(u,u), h(u,v) \\rangle = 0'}</Math></li>
               <li>• {isZh ? '接触数越高，对h的约束越强' : 'Higher contact number means stronger constraints on h'}</li>
             </ul>
+          </div>
+
+          {/* Second fundamental form visualization */}
+          <div className="mt-4">
+            <SecondFundamentalFormVizWithLabels />
           </div>
         </section>
 

@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { MathBlock, Math } from '../components';
+import { TorsionComparisonViz } from '../visualizations';
 
 export default function Chapter9() {
   const { t, i18n } = useTranslation();
@@ -18,6 +19,14 @@ export default function Chapter9() {
       </header>
 
       <div className="space-y-8">
+        {/* Interactive visualization */}
+        <section className="bg-slate-900 rounded-xl p-6">
+          <h2 className="text-xl font-semibold text-cyan-400 mb-4">
+            🎮 {isZh ? '交互可视化：挠率与Frenet标架' : 'Interactive: Torsion and Frenet Frame'}
+          </h2>
+          <TorsionComparisonViz />
+        </section>
+
         {/* Paper info */}
         <section className="bg-gradient-to-r from-green-900/30 to-teal-900/30 rounded-xl p-6 border border-green-700">
           <h2 className="text-xl font-semibold text-green-400 mb-4">

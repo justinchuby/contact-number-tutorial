@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { MathBlock, Math } from '../components';
+import { IsotropyComparisonViz } from '../visualizations';
 
 export default function Chapter6() {
   const { t, i18n } = useTranslation();
@@ -15,6 +16,14 @@ export default function Chapter6() {
       </header>
 
       <div className="space-y-8">
+        {/* Interactive visualization */}
+        <section className="bg-slate-900 rounded-xl p-6">
+          <h2 className="text-xl font-semibold text-cyan-400 mb-4">
+            🎮 {isZh ? '交互可视化：各向同性 vs 非各向同性' : 'Interactive: Isotropic vs Non-Isotropic'}
+          </h2>
+          <IsotropyComparisonViz />
+        </section>
+
         {/* Section 6.1 - Isotropic */}
         <section className="bg-slate-900 rounded-xl p-6">
           <h2 className="text-xl font-semibold text-cyan-400 mb-4">
