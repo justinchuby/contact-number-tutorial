@@ -47,38 +47,50 @@ export function RotatingKleinBottle({ position = [0, 0, 0] as [number, number, n
     }
   });
 
-  // Create Klein bottle geometry using figure-8 immersion
+  // Create Klein bottle geometry using the "classical" bottle-shaped immersion
   const geometry = useMemo(() => {
-    const segments = 64;
-    const tubeSegments = 32;
+    const uSegments = 80;
+    const vSegments = 40;
     const vertices: number[] = [];
     const indices: number[] = [];
     
-    // Figure-8 Klein bottle parametrization (immersion in R³)
-    for (let i = 0; i <= segments; i++) {
-      const u = (i / segments) * Math.PI * 2;
-      for (let j = 0; j <= tubeSegments; j++) {
-        const v = (j / tubeSegments) * Math.PI * 2;
+    // Klein bottle "bottle" shape parametrization
+    // This creates the recognizable shape with a tube going back into itself
+    for (let i = 0; i <= uSegments; i++) {
+      const u = (i / uSegments) * Math.PI * 2;
+      for (let j = 0; j <= vSegments; j++) {
+        const v = (j / vSegments) * Math.PI * 2;
         
-        // Figure-8 Klein bottle equations
-        const r = 1;
-        const a = 0.3;
+        let x, y, z;
+        const cosU = Math.cos(u);
+        const sinU = Math.sin(u);
+        const cosV = Math.cos(v);
+        const sinV = Math.sin(v);
         
-        // Standard figure-8 immersion
-        const x = (r + a * Math.cos(v / 2) * Math.sin(u) - a * Math.sin(v / 2) * Math.sin(2 * u)) * Math.cos(u);
-        const y = (r + a * Math.cos(v / 2) * Math.sin(u) - a * Math.sin(v / 2) * Math.sin(2 * u)) * Math.sin(u);
-        const z = a * Math.sin(v / 2) * Math.sin(u) + a * Math.cos(v / 2) * Math.sin(2 * u);
+        // Different formulas for different parts of the bottle
+        if (u < Math.PI) {
+          // Bottom part (0 to π)
+          x = 6 * cosU * (1 + sinU) + 4 * (1 - cosU / 2) * cosU * cosV;
+          y = 16 * sinU + 4 * (1 - cosU / 2) * sinU * cosV;
+          z = 4 * (1 - cosU / 2) * sinV;
+        } else {
+          // Top part (π to 2π) - the handle that goes through
+          x = 6 * cosU * (1 + sinU) - 4 * (1 - cosU / 2) * cosV;
+          y = 16 * sinU;
+          z = 4 * (1 - cosU / 2) * sinV;
+        }
         
-        vertices.push(x, y, z);
+        // Scale down to fit nicely
+        vertices.push(x * 0.05, y * 0.05, z * 0.05);
       }
     }
     
     // Create indices for triangles
-    for (let i = 0; i < segments; i++) {
-      for (let j = 0; j < tubeSegments; j++) {
-        const a = i * (tubeSegments + 1) + j;
+    for (let i = 0; i < uSegments; i++) {
+      for (let j = 0; j < vSegments; j++) {
+        const a = i * (vSegments + 1) + j;
         const b = a + 1;
-        const c = (i + 1) * (tubeSegments + 1) + j;
+        const c = (i + 1) * (vSegments + 1) + j;
         const d = c + 1;
         
         indices.push(a, b, c);
