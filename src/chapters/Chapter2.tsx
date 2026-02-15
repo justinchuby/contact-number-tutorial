@@ -22,6 +22,13 @@ export default function Chapter2() {
             {isZh ? '2.1 切空间与法空间' : '2.1 Tangent and Normal Spaces'}
           </h2>
 
+          {/* Intuitive introduction */}
+          <p className="text-slate-300 mb-4">
+            {isZh 
+              ? '要研究曲面（或更一般的流形）的几何，第一步是理解在每个点上，空间可以被分解为两个正交的部分：切空间和法空间。'
+              : 'To study the geometry of a surface (or more generally, a manifold), the first step is understanding that at each point, space can be decomposed into two orthogonal parts: tangent space and normal space.'}
+          </p>
+
           {/* Intuitive analogy */}
           <div className="bg-gradient-to-r from-green-900/30 to-cyan-900/30 rounded-lg p-4 border border-green-700 mb-4">
             <p className="text-green-400 font-semibold mb-2">
@@ -32,37 +39,109 @@ export default function Chapter2() {
                 ? '想象你站在山坡上。切空间就是你脚下的"坡面"——所有你可以沿着山坡走的方向。法空间就是"垂直于坡面"的方向——你需要用绳索才能去的方向（比如悬崖下方）。'
                 : 'Imagine standing on a mountainside. The tangent space is the "slope" under your feet—all directions you can walk along the mountain. The normal space is "perpendicular to the slope"—directions you need a rope to go (like down a cliff).'}
             </p>
-            <p className="text-yellow-400 text-sm mt-2">
-              💡 {isZh 
-                ? '例如：站在2维山坡（曲面）上，法空间是1维的（只有"上下"一个方向）。法空间的维数在后面我们会称为"余维数"。'
-                : 'E.g., standing on a 2D slope (surface), normal space is 1D (only "up-down" direction). We\'ll call this dimension the "codimension" later.'}
+          </div>
+
+          {/* Tangent space definition */}
+          <div className="bg-slate-800 rounded-lg p-4 border-l-4 border-cyan-500 mb-4">
+            <h3 className="text-cyan-400 font-semibold mb-2">
+              {isZh ? '切空间' : 'Tangent Space'} <Math>{'T_pM'}</Math>
+            </h3>
+            <p className="text-slate-300 text-sm mb-2">
+              {isZh 
+                ? '在曲面M上的点p处，所有"沿着曲面方向"的向量构成一个向量空间，称为切空间。直观地说，如果你站在点p，切空间就是你脚下那个无穷小的"平面"。'
+                : 'At a point p on surface M, all vectors pointing "along the surface" form a vector space called the tangent space. Intuitively, if you stand at p, the tangent space is the infinitesimally small "plane" under your feet.'}
             </p>
+            <MathBlock>{'\\dim(T_pM) = n \\quad \\text{(' + (isZh ? 'n = 流形M的维数' : 'n = dimension of manifold M') + ')}'}</MathBlock>
           </div>
           
-          <div className="grid md:grid-cols-2 gap-4 mb-4">
-            <div className="bg-slate-800 rounded-lg p-4 border-l-4 border-cyan-500">
-              <h3 className="text-cyan-400 font-semibold mb-2">
-                {isZh ? '切空间' : 'Tangent Space'} <Math>{'T_pM'}</Math>
-              </h3>
-              <p className="text-slate-300 text-sm mb-2">
-                {isZh 
-                  ? '在点p处与M相切的所有向量构成的空间。'
-                  : 'The space of all vectors tangent to M at point p.'}
-              </p>
-              <MathBlock>{'\\dim(T_pM) = n'}</MathBlock>
+          {/* Normal space definition */}
+          <div className="bg-slate-800 rounded-lg p-4 border-l-4 border-pink-500 mb-4">
+            <h3 className="text-pink-400 font-semibold mb-2">
+              {isZh ? '法空间' : 'Normal Space'} <Math>{'T_p^\\perp M'}</Math>
+            </h3>
+            <p className="text-slate-300 text-sm mb-2">
+              {isZh 
+                ? '在点p处，所有与切空间正交（垂直）的向量构成法空间。法空间的维数取决于外部空间的维数。'
+                : 'At point p, all vectors orthogonal (perpendicular) to the tangent space form the normal space. Its dimension depends on the ambient space.'}
+            </p>
+            <MathBlock>{'\\dim(T_p^\\perp M) = m - n \\quad \\text{(' + (isZh ? 'm = 外部空间的维数' : 'm = dimension of ambient space') + ')}'}</MathBlock>
+          </div>
+
+          {/* Concrete examples */}
+          <div className="bg-gradient-to-r from-yellow-900/30 to-orange-900/30 rounded-lg p-4 border border-yellow-700 mb-4">
+            <h3 className="text-yellow-400 font-semibold mb-3">
+              📐 {isZh ? '具体例子' : 'Concrete Examples'}
+            </h3>
+            <div className="space-y-4 text-sm">
+              {/* Sphere */}
+              <div className="bg-slate-900 rounded-lg p-3">
+                <p className="text-cyan-400 font-semibold mb-1">
+                  {isZh ? '① 球面 S² ⊂ ℝ³' : '① Sphere S² ⊂ ℝ³'}
+                </p>
+                <p className="text-slate-300 mb-1">
+                  {isZh 
+                    ? '在北极点 p = (0, 0, 1)：'
+                    : 'At the north pole p = (0, 0, 1):'}
+                </p>
+                <ul className="text-slate-400 space-y-1 ml-4">
+                  <li>• <span className="text-cyan-400">{isZh ? '切空间' : 'Tangent'}</span> = x-y {isZh ? '平面（2维）——可以向东西南北走' : 'plane (2D)—can walk east, west, north, south'}</li>
+                  <li>• <span className="text-pink-400">{isZh ? '法空间' : 'Normal'}</span> = z {isZh ? '轴方向（1维）——只有"天"和"地"' : 'axis direction (1D)—only "up" and "down"'}</li>
+                </ul>
+              </div>
+              
+              {/* Cylinder */}
+              <div className="bg-slate-900 rounded-lg p-3">
+                <p className="text-cyan-400 font-semibold mb-1">
+                  {isZh ? '② 圆柱面 ⊂ ℝ³' : '② Cylinder ⊂ ℝ³'}
+                </p>
+                <p className="text-slate-300 mb-1">
+                  {isZh 
+                    ? '在点 p = (1, 0, 0)：'
+                    : 'At point p = (1, 0, 0):'}
+                </p>
+                <ul className="text-slate-400 space-y-1 ml-4">
+                  <li>• <span className="text-cyan-400">{isZh ? '切空间' : 'Tangent'}</span> = {isZh ? 'y-z 平面（2维）——可以绕圆柱走、可以沿轴走' : 'y-z plane (2D)—can walk around or along axis'}</li>
+                  <li>• <span className="text-pink-400">{isZh ? '法空间' : 'Normal'}</span> = x {isZh ? '轴方向（1维）——指向圆柱外' : 'axis direction (1D)—points outward from cylinder'}</li>
+                </ul>
+              </div>
+
+              {/* Torus */}
+              <div className="bg-slate-900 rounded-lg p-3">
+                <p className="text-cyan-400 font-semibold mb-1">
+                  {isZh ? '③ 环面 T² ⊂ ℝ³' : '③ Torus T² ⊂ ℝ³'}
+                </p>
+                <p className="text-slate-300 mb-1">
+                  {isZh 
+                    ? '环面像一个甜甜圈。在每个点上：'
+                    : 'A torus is shaped like a donut. At each point:'}
+                </p>
+                <ul className="text-slate-400 space-y-1 ml-4">
+                  <li>• <span className="text-cyan-400">{isZh ? '切空间' : 'Tangent'}</span> = {isZh ? '2维——可以"绕大圈"走或"绕小圈"走' : '2D—can walk "around the big circle" or "around the small circle"'}</li>
+                  <li>• <span className="text-pink-400">{isZh ? '法空间' : 'Normal'}</span> = {isZh ? '1维——垂直于甜甜圈表面的方向' : '1D—direction perpendicular to the donut surface'}</li>
+                </ul>
+              </div>
+
+              {/* Higher dimension hint */}
+              <div className="bg-slate-900 rounded-lg p-3 border border-slate-600">
+                <p className="text-purple-400 font-semibold mb-1">
+                  {isZh ? '④ 高维的情况' : '④ Higher Dimensions'}
+                </p>
+                <p className="text-slate-400">
+                  {isZh 
+                    ? '以上例子法空间都是1维的（曲面在3D空间中）。但如果曲面放在更高维的空间中，法空间可以是多维的！例如 S² ⊂ ℝ⁶，法空间是4维的。后面的"余维数"概念会精确描述这个维数。'
+                    : 'In the above examples, normal space is 1D (surface in 3D). But if a surface sits in higher-dimensional space, normal space can be multi-dimensional! E.g., S² ⊂ ℝ⁶ has 4D normal space. The "codimension" concept later will describe this precisely.'}
+                </p>
+              </div>
             </div>
-            
-            <div className="bg-slate-800 rounded-lg p-4 border-l-4 border-pink-500">
-              <h3 className="text-pink-400 font-semibold mb-2">
-                {isZh ? '法空间' : 'Normal Space'} <Math>{'T_p^\\perp M'}</Math>
-              </h3>
-              <p className="text-slate-300 text-sm mb-2">
-                {isZh 
-                  ? '与切空间正交的所有向量构成的空间。'
-                  : 'The space of all vectors orthogonal to the tangent space.'}
-              </p>
-              <MathBlock>{'\\dim(T_p^\\perp M) = m - n'}</MathBlock>
-            </div>
+          </div>
+
+          {/* Key insight */}
+          <div className="bg-gradient-to-r from-cyan-900/30 to-blue-900/30 rounded-lg p-3 border border-cyan-700">
+            <p className="text-cyan-300 text-sm">
+              💡 {isZh 
+                ? '关键观察：切空间和法空间随着点p的移动而变化！它们在每个点上的"朝向"不同，反映了曲面的弯曲。下面的动画展示了这一点。'
+                : 'Key observation: Tangent and normal spaces change as point p moves! Their "orientation" differs at each point, reflecting the curvature of the surface. The animation below shows this.'}
+            </p>
           </div>
         </section>
 
@@ -75,8 +154,8 @@ export default function Chapter2() {
           <TangentNormalVizWithLabels />
           <p className="text-slate-400 text-sm mt-4">
             {isZh 
-              ? '观察点在球面上移动时，切平面和法向量如何随之变化。' 
-              : 'Watch how the tangent plane and normal vector change as the point moves on the sphere.'}
+              ? '拖动旋转查看不同角度。切换不同曲面，观察切平面和法向量如何随点的位置变化。' 
+              : 'Drag to rotate. Switch between surfaces and observe how the tangent plane and normal vector change with point position.'}
           </p>
         </section>
 
