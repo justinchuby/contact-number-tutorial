@@ -3,24 +3,54 @@ import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls, Line, Sphere } from '@react-three/drei';
 import * as THREE from 'three';
 
-// The cutting plane visualization
-function CuttingPlane({ normal, show }: { normal: THREE.Vector3; show: boolean }) {
+// The cutting plane visualization - plane containing tangent u and normal space
+function CuttingPlane({ 
+  position, 
+  tangent, 
+  surfaceNormal, 
+  show 
+}: { 
+  position: THREE.Vector3;
+  tangent: THREE.Vector3;
+  surfaceNormal: THREE.Vector3;
+  show: boolean;
+}) {
   if (!show) return null;
   
-  const rotation = useMemo(() => {
-    const up = new THREE.Vector3(0, 0, 1);
-    const quat = new THREE.Quaternion().setFromUnitVectors(up, normal.clone().normalize());
-    const euler = new THREE.Euler().setFromQuaternion(quat);
-    return euler;
-  }, [normal]);
+  // The cutting plane E(p,u) contains: the tangent direction u and the normal space
+  // For a surface in E³, normal space is 1D (just the surface normal)
+  // So E(p,u) is spanned by u and the surface normal n
+  
+  const geometry = useMemo(() => {
+    const u = tangent.clone().normalize();
+    const n = surfaceNormal.clone().normalize();
+    
+    // Create a quad in the plane spanned by u and n
+    const size = 1.5;
+    const vertices = new Float32Array([
+      // Four corners of the plane
+      ...position.clone().add(u.clone().multiplyScalar(size)).add(n.clone().multiplyScalar(size)).toArray(),
+      ...position.clone().add(u.clone().multiplyScalar(-size)).add(n.clone().multiplyScalar(size)).toArray(),
+      ...position.clone().add(u.clone().multiplyScalar(-size)).add(n.clone().multiplyScalar(-size)).toArray(),
+      ...position.clone().add(u.clone().multiplyScalar(size)).add(n.clone().multiplyScalar(-size)).toArray(),
+    ]);
+    
+    const indices = new Uint16Array([0, 1, 2, 0, 2, 3]);
+    
+    const geom = new THREE.BufferGeometry();
+    geom.setAttribute('position', new THREE.BufferAttribute(vertices, 3));
+    geom.setIndex(new THREE.BufferAttribute(indices, 1));
+    geom.computeVertexNormals();
+    
+    return geom;
+  }, [position, tangent, surfaceNormal]);
 
   return (
-    <mesh rotation={rotation}>
-      <planeGeometry args={[2.5, 2.5]} />
+    <mesh geometry={geometry}>
       <meshStandardMaterial 
-        color="#6644ff" 
+        color="#8855ff" 
         transparent 
-        opacity={0.2} 
+        opacity={0.35} 
         side={THREE.DoubleSide}
       />
     </mesh>
@@ -150,10 +180,13 @@ function NormalSectionScene() {
         <meshBasicMaterial color="#334455" wireframe />
       </Sphere>
       
-      {/* The cutting plane */}
-      <group position={point}>
-        <CuttingPlane normal={planeNormal} show={showPlane} />
-      </group>
+      {/* The cutting plane E(p,u) - contains tangent u and surface normal */}
+      <CuttingPlane 
+        position={point} 
+        tangent={tangent} 
+        surfaceNormal={normal} 
+        show={showPlane} 
+      />
       
       {/* Normal section curve */}
       <NormalSectionCurve planeNormal={planeNormal} color="#ff00ff" />
