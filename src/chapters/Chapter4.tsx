@@ -63,9 +63,21 @@ export default function Chapter4() {
               : 'Given a point p on submanifold M and a unit tangent vector u, we want to construct a special "cutting plane".'}
           </p>
 
+          {/* Why this construction */}
+          <div className="bg-gradient-to-r from-yellow-900/30 to-orange-900/30 rounded-lg p-4 border border-yellow-700 mb-4">
+            <p className="text-yellow-400 font-semibold mb-2">
+              🤔 {isZh ? '为什么要用法空间构造切割平面？' : 'Why Use Normal Space to Construct Cutting Plane?'}
+            </p>
+            <p className="text-slate-300 text-sm">
+              {isZh 
+                ? '我们想要一个"最自然"的切割方式。法空间是与子流形垂直的所有方向。用切向量u和法空间张成的平面，恰好是包含u且最"直接地穿过"子流形的方式。这样得到的曲线能最好地反映子流形沿u方向的几何性质。'
+                : 'We want the "most natural" way to cut. Normal space contains all directions perpendicular to the submanifold. The plane spanned by tangent u and normal space is exactly the plane containing u that passes "most directly" through the submanifold. The resulting curve best reflects the geometric properties of the submanifold in direction u.'}
+            </p>
+          </div>
+
           <div className="bg-slate-800 rounded-lg p-4 mb-4">
             <p className="text-cyan-300 font-semibold mb-2">
-              {isZh ? '构造步骤' : 'Construction Steps'}
+              🔢 {isZh ? '构造步骤' : 'Construction Steps'}
             </p>
             <ol className="text-slate-300 space-y-2 list-decimal list-inside">
               <li>{isZh ? '取点p和方向u' : 'Take point p and direction u'}</li>
@@ -77,7 +89,7 @@ export default function Chapter4() {
 
           <div className="bg-slate-800 rounded-lg p-4">
             <p className="text-cyan-300 font-semibold mb-2">
-              {isZh ? '仿射子空间 E(p, u)' : 'Affine Subspace E(p, u)'}
+              📐 {isZh ? '仿射子空间 E(p, u)' : 'Affine Subspace E(p, u)'}
             </p>
             <MathBlock>{'E(p, u) = p + \\text{span}\\{u\\} + T^\\perp_p M'}</MathBlock>
             <p className="text-slate-400 text-sm mt-2">
@@ -322,6 +334,20 @@ export default function Chapter4() {
               ? '我们已经准备好了两条曲线：测地线γ_u和法截面β_u。下一章，我们将正式定义接触数，并证明为什么它至少为2。这是Chen-Li论文的核心内容！'
               : 'We\'ve prepared two curves: geodesic γ_u and normal section β_u. In the next chapter, we\'ll formally define contact number and prove why it\'s at least 2. This is the core content of Chen-Li\'s paper!'}
           </p>
+        </section>
+
+        {/* Chapter Summary */}
+        <section className="bg-slate-800 rounded-xl p-6">
+          <h2 className="text-lg font-semibold text-slate-400 mb-4">
+            📝 {isZh ? '本章小结' : 'Chapter Summary'}
+          </h2>
+          <ul className="text-slate-300 text-sm space-y-2">
+            <li>✅ {isZh ? '法截面 = 用包含切向量和法空间的平面切割子流形得到的曲线' : 'Normal section = curve from cutting submanifold with plane containing tangent and normal space'}</li>
+            <li>✅ {isZh ? '法截面和测地线有相同的起点和初始方向' : 'Normal section and geodesic share same starting point and initial direction'}</li>
+            <li>✅ {isZh ? '测地线是内蕴的（只取决于流形本身），法截面是外蕴的（取决于嵌入方式）' : 'Geodesic is intrinsic (depends only on manifold), normal section is extrinsic (depends on embedding)'}</li>
+            <li>✅ {isZh ? '接触数测量这两条曲线"贴合"的程度' : 'Contact number measures how closely these two curves "match"'}</li>
+            <li>✅ {isZh ? '球面上c# = ∞（测地线=法截面=大圆）' : 'On sphere c# = ∞ (geodesic = normal section = great circle)'}</li>
+          </ul>
         </section>
 
         {/* Navigation */}
