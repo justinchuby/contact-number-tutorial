@@ -17,11 +17,76 @@ export default function Chapter2() {
 
       <div className="space-y-8">
         {/* Section 2.1 */}
-
-        {/* Section 2.1 */}
         <section className="bg-slate-900 rounded-xl p-6">
           <h2 className="text-xl font-semibold text-cyan-400 mb-4">
-            {isZh ? '2.1 嵌入与浸入' : '2.1 Embeddings and Immersions'}
+            {isZh ? '2.1 切空间与法空间' : '2.1 Tangent and Normal Spaces'}
+          </h2>
+
+          {/* Intuitive analogy */}
+          <div className="bg-gradient-to-r from-green-900/30 to-cyan-900/30 rounded-lg p-4 border border-green-700 mb-4">
+            <p className="text-green-400 font-semibold mb-2">
+              🏔️ {isZh ? '爬山类比' : 'Mountain Climbing Analogy'}
+            </p>
+            <p className="text-slate-300 text-sm">
+              {isZh 
+                ? '想象你站在山坡上。切空间就是你脚下的"坡面"——所有你可以沿着山坡走的方向。法空间就是"垂直于坡面"的方向——你需要用绳索才能去的方向（比如悬崖下方）。'
+                : 'Imagine standing on a mountainside. The tangent space is the "slope" under your feet—all directions you can walk along the mountain. The normal space is "perpendicular to the slope"—directions you need a rope to go (like down a cliff).'}
+            </p>
+            <p className="text-yellow-400 text-sm mt-2">
+              💡 {isZh 
+                ? '例如：站在2维山坡（曲面）上，法空间是1维的（只有"上下"一个方向）。法空间的维数在后面我们会称为"余维数"。'
+                : 'E.g., standing on a 2D slope (surface), normal space is 1D (only "up-down" direction). We\'ll call this dimension the "codimension" later.'}
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-2 gap-4 mb-4">
+            <div className="bg-slate-800 rounded-lg p-4 border-l-4 border-cyan-500">
+              <h3 className="text-cyan-400 font-semibold mb-2">
+                {isZh ? '切空间' : 'Tangent Space'} <Math>{'T_pM'}</Math>
+              </h3>
+              <p className="text-slate-300 text-sm mb-2">
+                {isZh 
+                  ? '在点p处与M相切的所有向量构成的空间。'
+                  : 'The space of all vectors tangent to M at point p.'}
+              </p>
+              <MathBlock>{'\\dim(T_pM) = n'}</MathBlock>
+            </div>
+            
+            <div className="bg-slate-800 rounded-lg p-4 border-l-4 border-pink-500">
+              <h3 className="text-pink-400 font-semibold mb-2">
+                {isZh ? '法空间' : 'Normal Space'} <Math>{'T_p^\\perp M'}</Math>
+              </h3>
+              <p className="text-slate-300 text-sm mb-2">
+                {isZh 
+                  ? '与切空间正交的所有向量构成的空间。'
+                  : 'The space of all vectors orthogonal to the tangent space.'}
+              </p>
+              <MathBlock>{'\\dim(T_p^\\perp M) = m - n'}</MathBlock>
+            </div>
+          </div>
+        </section>
+
+
+        {/* Interactive: Tangent and Normal visualization - after concepts introduced */}
+        <section className="bg-slate-900 rounded-xl p-6">
+          <h2 className="text-xl font-semibold text-cyan-400 mb-4">
+            🎮 {isZh ? '交互可视化：切空间与法空间' : 'Interactive: Tangent and Normal Spaces'}
+          </h2>
+          <TangentNormalVizWithLabels />
+          <p className="text-slate-400 text-sm mt-4">
+            {isZh 
+              ? '观察点在球面上移动时，切平面和法向量如何随之变化。' 
+              : 'Watch how the tangent plane and normal vector change as the point moves on the sphere.'}
+          </p>
+        </section>
+
+
+        {/* Section 2.2 */}
+
+        {/* Section 2.2 */}
+        <section className="bg-slate-900 rounded-xl p-6">
+          <h2 className="text-xl font-semibold text-cyan-400 mb-4">
+            {isZh ? '2.2 嵌入与浸入' : '2.2 Embeddings and Immersions'}
           </h2>
 
           {/* Intuitive analogy */}
@@ -186,10 +251,10 @@ export default function Chapter2() {
           </div>
         </section>
 
-        {/* Section 2.2 */}
+        {/* Section 2.3 */}
         <section className="bg-slate-900 rounded-xl p-6">
           <h2 className="text-xl font-semibold text-cyan-400 mb-4">
-            {isZh ? '2.2 欧氏空间中的子流形' : '2.2 Submanifolds in Euclidean Space'}
+            {isZh ? '2.3 欧氏空间中的子流形' : '2.3 Submanifolds in Euclidean Space'}
           </h2>
           
           <p className="text-slate-300 mb-4">
@@ -354,54 +419,11 @@ export default function Chapter2() {
           </div>
         </section>
 
-        {/* Section 2.3 */}
+        {/* Section 2.4 */}
         <section className="bg-slate-900 rounded-xl p-6">
           <h2 className="text-xl font-semibold text-cyan-400 mb-4">
-            {isZh ? '2.3 切空间与法空间' : '2.3 Tangent and Normal Spaces'}
+            {isZh ? '2.4 直和分解' : '2.4 Direct Sum Decomposition'}
           </h2>
-
-          {/* Intuitive analogy */}
-          <div className="bg-gradient-to-r from-green-900/30 to-cyan-900/30 rounded-lg p-4 border border-green-700 mb-4">
-            <p className="text-green-400 font-semibold mb-2">
-              🏔️ {isZh ? '爬山类比' : 'Mountain Climbing Analogy'}
-            </p>
-            <p className="text-slate-300 text-sm">
-              {isZh 
-                ? '想象你站在山坡上。切空间就是你脚下的"坡面"——所有你可以沿着山坡走的方向。法空间就是"垂直于坡面"的方向——你需要用绳索才能去的方向（比如悬崖下方）。'
-                : 'Imagine standing on a mountainside. The tangent space is the "slope" under your feet—all directions you can walk along the mountain. The normal space is "perpendicular to the slope"—directions you need a rope to go (like down a cliff).'}
-            </p>
-            <p className="text-yellow-400 text-sm mt-2">
-              💡 {isZh 
-                ? '法空间的维数 = 余维数！例如：站在2维山坡（曲面）上，法空间是1维的（只有"上下"一个方向）。'
-                : 'Dimension of normal space = codimension! E.g., standing on a 2D slope (surface), normal space is 1D (only "up-down" direction).'}
-            </p>
-          </div>
-          
-          <div className="grid md:grid-cols-2 gap-4 mb-4">
-            <div className="bg-slate-800 rounded-lg p-4 border-l-4 border-cyan-500">
-              <h3 className="text-cyan-400 font-semibold mb-2">
-                {isZh ? '切空间' : 'Tangent Space'} <Math>{'T_pM'}</Math>
-              </h3>
-              <p className="text-slate-300 text-sm mb-2">
-                {isZh 
-                  ? '在点p处与M相切的所有向量构成的空间。'
-                  : 'The space of all vectors tangent to M at point p.'}
-              </p>
-              <MathBlock>{'\\dim(T_pM) = n'}</MathBlock>
-            </div>
-            
-            <div className="bg-slate-800 rounded-lg p-4 border-l-4 border-pink-500">
-              <h3 className="text-pink-400 font-semibold mb-2">
-                {isZh ? '法空间' : 'Normal Space'} <Math>{'T_p^\\perp M'}</Math>
-              </h3>
-              <p className="text-slate-300 text-sm mb-2">
-                {isZh 
-                  ? '与切空间正交的所有向量构成的空间。'
-                  : 'The space of all vectors orthogonal to the tangent space.'}
-              </p>
-              <MathBlock>{'\\dim(T_p^\\perp M) = m - n'}</MathBlock>
-            </div>
-          </div>
 
           <div className="bg-slate-800 rounded-lg p-4 mb-4">
             <p className="text-cyan-300 font-semibold mb-2">
@@ -521,23 +543,10 @@ export default function Chapter2() {
           </div>
         </section>
 
-        {/* Interactive: Tangent and Normal visualization - after concepts introduced */}
+        {/* Section 2.5 */}
         <section className="bg-slate-900 rounded-xl p-6">
           <h2 className="text-xl font-semibold text-cyan-400 mb-4">
-            🎮 {isZh ? '交互可视化：切空间与法空间' : 'Interactive: Tangent and Normal Spaces'}
-          </h2>
-          <TangentNormalVizWithLabels />
-          <p className="text-slate-400 text-sm mt-4">
-            {isZh 
-              ? '观察点在球面上移动时，切平面和法向量如何随之变化。' 
-              : 'Watch how the tangent plane and normal vector change as the point moves on the sphere.'}
-          </p>
-        </section>
-
-        {/* Section 2.4 - Key for Contact Number */}
-        <section className="bg-slate-900 rounded-xl p-6">
-          <h2 className="text-xl font-semibold text-cyan-400 mb-4">
-            {isZh ? '2.4 第二基本形式' : '2.4 Second Fundamental Form'}
+            {isZh ? '2.5 第二基本形式' : '2.5 Second Fundamental Form'}
           </h2>
           
           <div className="bg-gradient-to-r from-red-900/50 to-orange-900/50 rounded-lg p-4 border border-red-700 mb-4">
@@ -706,9 +715,10 @@ export default function Chapter2() {
         </section>
 
         {/* Section 2.5 */}
+        {/* Section 2.6 */}
         <section className="bg-slate-900 rounded-xl p-6">
           <h2 className="text-xl font-semibold text-cyan-400 mb-4">
-            {isZh ? '2.5 形状算子' : '2.5 Shape Operator'}
+            {isZh ? '2.6 形状算子' : '2.6 Shape Operator'}
           </h2>
 
           {/* Intuitive explanation */}
