@@ -473,9 +473,49 @@ export default function Chapter4() {
             <li>✓ {isZh ? '法截面 = 用包含切向量和法空间的平面切割子流形得到的曲线' : 'Normal section = curve from cutting submanifold with plane containing tangent and normal space'}</li>
             <li>✓ {isZh ? '法截面和测地线有相同的起点和初始方向' : 'Normal section and geodesic share same starting point and initial direction'}</li>
             <li>✓ {isZh ? '测地线是内蕴的（只取决于流形本身），法截面是外蕴的（取决于嵌入方式）' : 'Geodesic is intrinsic (depends only on manifold), normal section is extrinsic (depends on embedding)'}</li>
-            <li>✓ {isZh ? '下一章将定义一个不变量来精确衡量这两条曲线的"吻合程度"' : 'Next chapter will define an invariant to precisely measure how closely these two curves "match"'}</li>
-            <li>✓ {isZh ? '球面上c# = ∞（测地线=法截面=大圆）' : 'On sphere c# = ∞ (geodesic = normal section = great circle)'}</li>
+            <li>✓ {isZh ? '球面上测地线与法截面完全相同（都是大圆）' : 'On sphere, geodesic and normal section are identical (both great circles)'}</li>
           </ul>
+          <div className="mt-4 pt-4 border-t border-green-700/50">
+            <p className="text-yellow-400 font-semibold mb-3">
+              🤔 {isZh ? '思考题' : 'Questions to Think About'}
+            </p>
+            <div className="space-y-3">
+              <div>
+                <p className="text-slate-300 text-sm">
+                  {isZh 
+                    ? '1. 在球面上，法截面和测地线都是大圆。那在圆柱面上呢？它们还一样吗？'
+                    : '1. On a sphere, both normal section and geodesic are great circles. What about on a cylinder? Are they still the same?'}
+                </p>
+                <details className="mt-1">
+                  <summary className="text-cyan-400 text-sm cursor-pointer hover:text-cyan-300">
+                    {isZh ? '点击查看答案' : 'Click to see answer'}
+                  </summary>
+                  <p className="text-slate-400 text-xs mt-1">
+                    {isZh 
+                      ? '不一样！圆柱面上沿母线方向，测地线和法截面都是直线，是一致的。但沿斜方向，测地线是螺旋线（贴在圆柱面上），而法截面是椭圆（用平面切割圆柱）。它们从同一点出发、同一方向，但很快就分开了。'
+                      : 'No! Along the generator direction, both are straight lines. But in oblique directions, the geodesic is a helix (on the cylinder surface), while the normal section is an ellipse (plane cutting the cylinder). They start from the same point in the same direction but quickly diverge.'}
+                  </p>
+                </details>
+              </div>
+              <div>
+                <p className="text-slate-300 text-sm">
+                  {isZh 
+                    ? '2. 如果一个子流形上所有方向的法截面都和测地线完全重合，这说明什么？'
+                    : '2. If normal sections coincide with geodesics in every direction on a submanifold, what does that tell us?'}
+                </p>
+                <details className="mt-1">
+                  <summary className="text-cyan-400 text-sm cursor-pointer hover:text-cyan-300">
+                    {isZh ? '点击查看答案' : 'Click to see answer'}
+                  </summary>
+                  <p className="text-slate-400 text-xs mt-1">
+                    {isZh 
+                      ? '这意味着内蕴几何和外蕴几何完全一致——子流形在外部空间中"没有多余的弯曲"。这样的子流形被称为"全测地的"（totally geodesic），它是外部空间中最"平"的子流形。球面中的大圆就是全测地子流形的例子。'
+                      : 'This means intrinsic and extrinsic geometry completely agree — the submanifold has "no extra bending" in ambient space. Such submanifolds are called "totally geodesic" — the "flattest" possible submanifolds. Great circles in a sphere are examples.'}
+                  </p>
+                </details>
+              </div>
+            </div>
+          </div>
         </section>
 
         {/* Navigation */}

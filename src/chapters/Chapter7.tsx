@@ -500,47 +500,45 @@ export default function Chapter7() {
             <li>✓ {isZh ? 'Chen-Li发现了首例非球面pseudo-umbilical曲面（在E⁶中）' : 'Chen-Li discovered first non-spherical pseudo-umbilical surfaces (in E⁶)'}</li>
             <li>✓ {isZh ? '接触数理论不仅分类已知对象，还能发现新几何对象' : 'Contact number theory not only classifies known objects but discovers new ones'}</li>
           </ul>
-        </section>
-
-        {/* Thinking Questions */}
-        <section className="bg-slate-800 rounded-xl p-6">
-          <p className="text-yellow-400 font-semibold mb-3">
-            🤔 {isZh ? '思考题' : 'Questions to Think About'}
-          </p>
-          <div className="space-y-3">
-            <div>
-              <p className="text-slate-300 text-sm">
-                {isZh 
-                  ? '1. 为什么pseudo-umbilical曲面需要至少6维空间才能是非球面的？余维数4有什么特别之处？'
-                  : '1. Why do pseudo-umbilical surfaces need at least 6-dimensional space to be non-spherical? What\'s special about codimension 4?'}
-              </p>
-              <details className="mt-1">
-                <summary className="text-cyan-400 text-sm cursor-pointer hover:text-cyan-300">
-                  {isZh ? '点击查看答案' : 'Click to see answer'}
-                </summary>
-                <p className="text-slate-400 text-xs mt-1">
+          <div className="mt-4 pt-4 border-t border-green-700/50">
+            <p className="text-yellow-400 font-semibold mb-3">
+              🤔 {isZh ? '思考题' : 'Questions to Think About'}
+            </p>
+            <div className="space-y-3">
+              <div>
+                <p className="text-slate-300 text-sm">
                   {isZh 
-                    ? '余维数小的时候，"弯曲的空间"太小，各方向的弯曲会互相干扰。需要足够多的法方向（余维数4），才能让曲面在保持pseudo-umbilical条件的同时，有足够的"自由度"偏离球面形状。'
-                    : 'With small codimension, the "bending space" is too small, and bending in different directions interferes. You need enough normal directions (codimension 4) to give the surface enough "freedom" to deviate from spherical shape while maintaining the pseudo-umbilical condition.'}
+                    ? '1. 为什么pseudo-umbilical曲面需要至少6维空间才能是非球面的？余维数4有什么特别之处？'
+                    : '1. Why do pseudo-umbilical surfaces need at least 6-dimensional space to be non-spherical? What\'s special about codimension 4?'}
                 </p>
-              </details>
-            </div>
-            <div>
-              <p className="text-slate-300 text-sm">
-                {isZh 
-                  ? '2. 广义螺旋面（generalized helicoid）是怎样"螺旋"的？它和我们日常见的螺旋楼梯有什么联系和区别？'
-                  : '2. How does a "generalized helicoid" spiral? What\'s its connection to and difference from a spiral staircase we see in daily life?'}
-              </p>
-              <details className="mt-1">
-                <summary className="text-cyan-400 text-sm cursor-pointer hover:text-cyan-300">
-                  {isZh ? '点击查看答案' : 'Click to see answer'}
-                </summary>
-                <p className="text-slate-400 text-xs mt-1">
+                <details className="mt-1">
+                  <summary className="text-cyan-400 text-sm cursor-pointer hover:text-cyan-300">
+                    {isZh ? '点击查看答案' : 'Click to see answer'}
+                  </summary>
+                  <p className="text-slate-400 text-xs mt-1">
+                    {isZh 
+                      ? '余维数小的时候，"弯曲的空间"太小，各方向的弯曲会互相干扰。需要足够多的法方向（余维数4），才能让曲面在保持pseudo-umbilical条件的同时，有足够的"自由度"偏离球面形状。'
+                      : 'With small codimension, the "bending space" is too small, and bending in different directions interferes. You need enough normal directions (codimension 4) to give the surface enough "freedom" to deviate from spherical shape while maintaining the pseudo-umbilical condition.'}
+                  </p>
+                </details>
+              </div>
+              <div>
+                <p className="text-slate-300 text-sm">
                   {isZh 
-                    ? '螺旋楼梯是螺旋面的直观例子：绕中心轴旋转的同时向上延伸。广义螺旋面也有类似的"旋转+平移"结构，但它是在高维空间中实现的，而且可能有多个"旋转轴"——想象一下在4维空间里，可以同时绕两个正交平面旋转！'
-                    : 'A spiral staircase is an intuitive example: rotating around a central axis while extending upward. Generalized helicoids have similar "rotation + translation" structure, but realized in higher dimensions, possibly with multiple "rotation axes"—imagine in 4D space, you can rotate around two orthogonal planes simultaneously!'}
+                    ? '2. 广义螺旋面（generalized helicoid）是怎样"螺旋"的？它和我们日常见的螺旋楼梯有什么联系和区别？'
+                    : '2. How does a "generalized helicoid" spiral? What\'s its connection to and difference from a spiral staircase we see in daily life?'}
                 </p>
-              </details>
+                <details className="mt-1">
+                  <summary className="text-cyan-400 text-sm cursor-pointer hover:text-cyan-300">
+                    {isZh ? '点击查看答案' : 'Click to see answer'}
+                  </summary>
+                  <p className="text-slate-400 text-xs mt-1">
+                    {isZh 
+                      ? '螺旋楼梯是螺旋面的直观例子：绕中心轴旋转的同时向上延伸。广义螺旋面也有类似的"旋转+平移"结构，但它是在高维空间中实现的，而且可能有多个"旋转轴"——想象一下在4维空间里，可以同时绕两个正交平面旋转！'
+                      : 'A spiral staircase is an intuitive example: rotating around a central axis while extending upward. Generalized helicoids have similar "rotation + translation" structure, but realized in higher dimensions, possibly with multiple "rotation axes"—imagine in 4D space, you can rotate around two orthogonal planes simultaneously!'}
+                  </p>
+                </details>
+              </div>
             </div>
           </div>
         </section>
