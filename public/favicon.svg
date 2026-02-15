@@ -5,33 +5,30 @@
       <stop offset="100%" stop-color="#1e293b"/>
     </linearGradient>
     <linearGradient id="torus" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#7c3aed" stop-opacity="0.5"/>
-      <stop offset="100%" stop-color="#6d28d9" stop-opacity="0.3"/>
+      <stop offset="0%" stop-color="#a78bfa"/>
+      <stop offset="100%" stop-color="#7c3aed"/>
     </linearGradient>
-    <linearGradient id="torusLight" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#a78bfa" stop-opacity="0.4"/>
-      <stop offset="100%" stop-color="#8b5cf6" stop-opacity="0.2"/>
+    <linearGradient id="torusFront" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#c4b5fd"/>
+      <stop offset="100%" stop-color="#8b5cf6"/>
     </linearGradient>
   </defs>
   <!-- Background -->
-  <circle cx="32" cy="32" r="30" fill="url(#bg)" stroke="#334155" stroke-width="1.5"/>
-  <!-- Torus back half (behind hole) -->
-  <ellipse cx="32" cy="30" rx="22" ry="10" fill="none" stroke="url(#torus)" stroke-width="6" opacity="0.4"/>
-  <!-- Torus body - outer ellipse -->
-  <ellipse cx="32" cy="30" rx="22" ry="10" fill="none" stroke="#8b5cf6" stroke-width="1.2" opacity="0.6"/>
-  <!-- Torus tube cross-section left -->
-  <path d="M14 30 Q10 18 18 14 Q26 10 32 14" fill="none" stroke="url(#torusLight)" stroke-width="5" stroke-linecap="round" opacity="0.5"/>
-  <!-- Torus tube top surface -->
-  <path d="M14 30 Q18 16 32 14 Q46 16 50 30" fill="none" stroke="#a78bfa" stroke-width="1.2" opacity="0.7"/>
-  <!-- Torus tube bottom (front) -->
-  <path d="M14 30 Q18 42 32 44 Q46 42 50 30" fill="url(#torus)" stroke="#8b5cf6" stroke-width="1.2" opacity="0.8"/>
-  <!-- Torus hole inner edge -->
-  <path d="M22 30 Q26 24 32 23 Q38 24 42 30" fill="none" stroke="#6d28d9" stroke-width="1" opacity="0.5"/>
-  <path d="M22 30 Q26 35 32 36 Q38 35 42 30" fill="none" stroke="#7c3aed" stroke-width="1" opacity="0.7"/>
-  <!-- Geodesic (cyan solid) winding on torus -->
-  <path d="M16 34 Q20 44 32 44 Q44 44 50 30 Q46 18 36 15" fill="none" stroke="#22d3ee" stroke-width="2.2" stroke-linecap="round"/>
-  <!-- Normal section (green dashed) on torus -->
-  <path d="M16 34 Q22 46 32 46 Q44 42 50 30 Q48 16 38 14" fill="none" stroke="#4ade80" stroke-width="2.2" stroke-linecap="round" stroke-dasharray="3.5 2.5"/>
-  <!-- Contact point where they meet -->
-  <circle cx="16" cy="34" r="2.8" fill="#facc15"/>
+  <rect rx="14" width="64" height="64" fill="url(#bg)"/>
+  <!-- Torus back (behind hole) -->
+  <ellipse cx="32" cy="28" rx="24" ry="12" fill="url(#torus)" opacity="0.5"/>
+  <!-- Torus front tube (bottom half, bold) -->
+  <path d="M8 28 Q8 50 32 50 Q56 50 56 28" fill="url(#torusFront)" stroke="#7c3aed" stroke-width="1"/>
+  <!-- Torus hole cutout (dark) -->
+  <ellipse cx="32" cy="28" rx="12" ry="6" fill="url(#bg)"/>
+  <!-- Torus top tube highlight -->
+  <path d="M8 28 Q8 14 32 14 Q56 14 56 28" fill="url(#torus)" stroke="#8b5cf6" stroke-width="0.8" opacity="0.9"/>
+  <!-- Inner hole top edge -->
+  <path d="M20 28 Q20 22 32 22 Q44 22 44 28" fill="none" stroke="#6d28d9" stroke-width="1.2"/>
+  <!-- Geodesic - bold cyan curve on torus -->
+  <path d="M12 36 Q22 52 40 40 Q52 30 48 20" fill="none" stroke="#22d3ee" stroke-width="4" stroke-linecap="round"/>
+  <!-- Normal section - bold green dashed on torus -->
+  <path d="M12 36 Q24 54 42 38 Q54 26 48 18" fill="none" stroke="#4ade80" stroke-width="4" stroke-linecap="round" stroke-dasharray="6 4"/>
+  <!-- Contact point - big yellow dot -->
+  <circle cx="12" cy="36" r="4.5" fill="#facc15"/>
 </svg>
