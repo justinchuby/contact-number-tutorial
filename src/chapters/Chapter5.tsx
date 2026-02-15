@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { MathBlock, Math } from '../components';
+import { ContactNumberVizWithControls } from '../visualizations';
 
 export default function Chapter5() {
   const { t, i18n } = useTranslation();
@@ -22,6 +23,14 @@ export default function Chapter5() {
       </header>
 
       <div className="space-y-8">
+        {/* Interactive visualization */}
+        <section className="bg-slate-900 rounded-xl p-6">
+          <h2 className="text-xl font-semibold text-cyan-400 mb-4">
+            🎮 {isZh ? '交互可视化：接触数' : 'Interactive: Contact Number'}
+          </h2>
+          <ContactNumberVizWithControls />
+        </section>
+
         {/* Section 5.1 */}
         <section className="bg-slate-900 rounded-xl p-6">
           <h2 className="text-xl font-semibold text-cyan-400 mb-4">
