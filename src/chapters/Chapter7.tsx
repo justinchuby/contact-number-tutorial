@@ -272,6 +272,51 @@ export default function Chapter7() {
               </ul>
             </div>
 
+            {/* How Contact Number Helped */}
+            <div className="bg-gradient-to-r from-yellow-900/30 to-orange-900/30 rounded-lg p-4 border border-yellow-700">
+              <h3 className="text-yellow-400 font-semibold mb-3">
+                🔑 {isZh ? '接触数理论如何帮助发现？' : 'How Did Contact Number Theory Help?'}
+              </h3>
+              
+              <div className="space-y-3 text-sm">
+                <div>
+                  <p className="text-cyan-400 font-semibold mb-1">{isZh ? '1. 提供新视角' : '1. Provided New Perspective'}</p>
+                  <p className="text-slate-300">
+                    {isZh 
+                      ? 'Chen-Li 发现 c# ≥ 3 等价于各向同性条件。这意味着可以用接触数来"筛选"具有特殊对称性的子流形。'
+                      : 'Chen-Li discovered c# ≥ 3 is equivalent to isotropy condition. This means contact number can "filter" submanifolds with special symmetry.'}
+                  </p>
+                </div>
+
+                <div>
+                  <p className="text-cyan-400 font-semibold mb-1">{isZh ? '2. 揭示关键联系' : '2. Revealed Key Connections'}</p>
+                  <p className="text-slate-300">
+                    {isZh 
+                      ? 'Pseudo-umbilical 条件要求形状算子 A_H = λI，这与接触数 c# ≥ 3 密切相关。但 c# = 3 或 4 的曲面不一定是球面！'
+                      : 'Pseudo-umbilical requires shape operator A_H = λI, closely related to c# ≥ 3. But surfaces with c# = 3 or 4 are not necessarily spheres!'}
+                  </p>
+                </div>
+
+                <div>
+                  <p className="text-cyan-400 font-semibold mb-1">{isZh ? '3. 指明构造方向' : '3. Pointed to Construction Path'}</p>
+                  <p className="text-slate-300">
+                    {isZh 
+                      ? '通过分析接触数理论，Chen-Li 理解了为什么低维空间强迫 pseudo-umbilical 曲面是球面，以及需要多高的余维数才能打破这个限制。'
+                      : 'By analyzing contact number theory, Chen-Li understood why lower dimensions force pseudo-umbilical surfaces to be spheres, and what codimension is needed to break this constraint.'}
+                  </p>
+                </div>
+
+                <div className="bg-slate-800 rounded p-3 mt-2">
+                  <p className="text-green-400 font-semibold mb-1">{isZh ? '关键洞察' : 'Key Insight'}</p>
+                  <p className="text-slate-300">
+                    {isZh 
+                      ? '接触数理论不只是分类工具——它能指导新对象的构造！同一个框架既解释了为什么低维不行（必须是球面），又指出了高维的可能性（余维数 ≥ 4 时可以非球面）。'
+                      : 'Contact number theory is not just a classification tool—it guides construction of new objects! The same framework explains why lower dimensions fail (must be spheres) and points to higher dimensional possibilities (non-spherical when codim ≥ 4).'}
+                  </p>
+                </div>
+              </div>
+            </div>
+
             {/* Why important */}
             <div className="bg-slate-900 rounded-lg p-4">
               <h3 className="text-purple-400 font-semibold mb-2">
