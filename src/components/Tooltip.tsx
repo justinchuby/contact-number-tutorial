@@ -124,8 +124,8 @@ const definitions: Record<string, { zh: string; en: string }> = {
     en: 'Euclidean space Eⁿ (or ℝⁿ) is n-dimensional real vector space with standard inner product. The inner product ⟨x,y⟩ = Σxᵢyᵢ defines lengths and angles. It\'s "flat"—zero curvature.'
   },
   'affine-subspace': {
-    zh: '仿射子空间是"平移后的向量子空间"，形如 A = p + V，其中p是一个点，V是向量子空间。与向量子空间不同，仿射子空间不必过原点。例如：任意位置的直线或平面都是仿射子空间。',
-    en: 'An affine subspace is a "translated vector subspace" of the form A = p + V, where p is a point and V is a vector subspace. Unlike vector subspaces, affine subspaces need not pass through the origin. Example: a line or plane at any position is an affine subspace.'
+    zh: '仿射子空间是"平移后的向量子空间"，形如 A = p + V，其中p是一个点，V是向量子空间。与向量子空间不同，仿射子空间不必过原点。为什么用仿射子空间？因为切割平面E(p,u)过点p，而p通常不是原点。仿射子空间能准确描述"过任意点的平面"。',
+    en: 'An affine subspace is a "translated vector subspace" of the form A = p + V, where p is a point and V is a vector subspace. Unlike vector subspaces, affine subspaces need not pass through the origin. Why use affine subspaces? Because the cutting plane E(p,u) passes through point p, which is usually not the origin. Affine subspaces precisely describe "planes through any point".'
   },
   'geodesic': {
     zh: '测地线是流形上两点之间的"最短路径"（更准确地说是局部最短）。平面上是直线，球面上是大圆弧。它是直线在弯曲空间的推广。',

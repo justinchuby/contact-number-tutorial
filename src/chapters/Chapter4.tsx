@@ -125,7 +125,7 @@ export default function Chapter4() {
               <ul className="text-slate-300 text-sm space-y-1">
                 <li>• m = 6, n = 2, {isZh ? '余维数' : 'codim'} = 4</li>
                 <li>• T⊥_pM = {isZh ? '4维法空间' : '4D normal space'}</li>
-                <li>• E(p,u) = {isZh ? '5维仿射子空间' : '5D affine subspace'}</li>
+                <li>• E(p,u) = {isZh ? <><Tooltip term="affine-subspace">5维仿射子空间</Tooltip></> : <><Tooltip term="affine-subspace">5D affine subspace</Tooltip></>}</li>
                 <li>• β_u = {isZh ? '复杂曲线' : 'complex curve'}</li>
               </ul>
               <p className="text-yellow-400 text-xs mt-2">
