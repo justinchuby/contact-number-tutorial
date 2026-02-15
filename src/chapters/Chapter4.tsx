@@ -475,7 +475,7 @@ export default function Chapter4() {
             <li>✓ {isZh ? '测地线是内蕴的（只取决于流形本身），法截面是外蕴的（取决于嵌入方式）' : 'Geodesic is intrinsic (depends only on manifold), normal section is extrinsic (depends on embedding)'}</li>
             <li>✓ {isZh ? '球面上测地线与法截面完全相同（都是大圆）' : 'On sphere, geodesic and normal section are identical (both great circles)'}</li>
           </ul>
-          <div className="mt-4 pt-4 border-t border-green-700/50">
+          <div className="mt-6 bg-slate-900 rounded-lg p-4">
             <p className="text-yellow-400 font-semibold mb-3">
               🤔 {isZh ? '思考题' : 'Questions to Think About'}
             </p>

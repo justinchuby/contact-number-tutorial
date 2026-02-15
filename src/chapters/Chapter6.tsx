@@ -548,7 +548,7 @@ export default function Chapter6() {
             <li>✓ {isZh ? '定理3：曲面c# = 3 ⟺ 全纯曲线（微分几何与复几何的联系）' : 'Theorem 3: surface c# = 3 ⟺ holomorphic curve (link between differential and complex geometry)'}</li>
           </ul>
 
-          <div className="mt-4 pt-4 border-t border-green-700/50">
+          <div className="mt-6 bg-slate-900 rounded-lg p-4">
             <p className="text-yellow-400 font-semibold mb-3">
               🤔 {isZh ? '思考题' : 'Questions to Think About'}
             </p>

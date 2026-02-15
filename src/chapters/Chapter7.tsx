@@ -500,7 +500,7 @@ export default function Chapter7() {
             <li>✓ {isZh ? 'Chen-Li发现了首例非球面pseudo-umbilical曲面（在E⁶中）' : 'Chen-Li discovered first non-spherical pseudo-umbilical surfaces (in E⁶)'}</li>
             <li>✓ {isZh ? '接触数理论不仅分类已知对象，还能发现新几何对象' : 'Contact number theory not only classifies known objects but discovers new ones'}</li>
           </ul>
-          <div className="mt-4 pt-4 border-t border-green-700/50">
+          <div className="mt-6 bg-slate-900 rounded-lg p-4">
             <p className="text-yellow-400 font-semibold mb-3">
               🤔 {isZh ? '思考题' : 'Questions to Think About'}
             </p>
