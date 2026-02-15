@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-import { MathBlock, Math } from '../../components';
+import { MathBlock, Math } from '../components';
+import { Chapter1Viz } from '../visualizations';
 
 export default function Chapter1() {
   const { t, i18n } = useTranslation();
@@ -138,6 +139,9 @@ export default function Chapter1() {
               ? '💡 在下方的可视化中，你可以旋转探索这些流形！'
               : '💡 In the visualization below, you can rotate and explore these manifolds!'}
           </p>
+
+          {/* Interactive Visualization */}
+          <Chapter1Viz />
         </section>
 
         {/* Section 1.4 */}

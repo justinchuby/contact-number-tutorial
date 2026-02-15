@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Layout } from './components';
-import { Home, Chapter } from './chapters';
+import { Home, Chapter, Chapter1 } from './chapters';
 import './i18n';
 
 function App() {
@@ -9,6 +9,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
+          <Route path="chapter/1" element={<Chapter1 />} />
           <Route path="chapter/:id" element={<Chapter />} />
         </Route>
       </Routes>
