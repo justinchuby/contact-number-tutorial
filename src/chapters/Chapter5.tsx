@@ -268,14 +268,97 @@ export default function Chapter5() {
             </div>
           </div>
 
+          {/* Detailed Proof */}
+          <div className="bg-gradient-to-r from-blue-900/30 to-purple-900/30 rounded-lg p-4 border border-blue-700 mb-4">
+            <p className="text-blue-400 font-semibold mb-3">
+              📝 {isZh ? '详细证明' : 'Detailed Proof'}
+            </p>
+            
+            <div className="space-y-4 text-slate-300 text-sm">
+              {/* Step 1 */}
+              <div>
+                <p className="text-cyan-400 font-semibold mb-1">{isZh ? '第一步：0阶和1阶为什么相等？' : 'Step 1: Why are 0th and 1st order equal?'}</p>
+                <p>
+                  {isZh 
+                    ? '这是由定义直接保证的！测地线 γ_u 和法截面 β_u 都是从同一点 p 出发、沿同一方向 u 前进的曲线。所以：'
+                    : 'This is guaranteed directly by definition! Both geodesic γ_u and normal section β_u start from the same point p and move in direction u. So:'}
+                </p>
+                <ul className="list-disc list-inside ml-4 mt-1">
+                  <li><Math>{'\\gamma_u(0) = p = \\beta_u(0)'}</Math> {isZh ? '（起点相同）' : '(same starting point)'}</li>
+                  <li><Math>{'\\gamma_u\'(0) = u = \\beta_u\'(0)'}</Math> {isZh ? '（初始方向相同）' : '(same initial direction)'}</li>
+                </ul>
+              </div>
+
+              {/* Step 2 */}
+              <div>
+                <p className="text-cyan-400 font-semibold mb-1">{isZh ? '第二步：二阶导数是什么？' : 'Step 2: What is the second derivative?'}</p>
+                <p>
+                  {isZh 
+                    ? '对于任意曲线 c(t)，二阶导数 c\'\'(t) 就是加速度——曲线在该点如何"转弯"。在微分几何中，这与曲线的曲率密切相关。'
+                    : 'For any curve c(t), the second derivative c\'\'(t) is acceleration—how the curve "turns" at that point. In differential geometry, this relates to the curve\'s curvature.'}
+                </p>
+              </div>
+
+              {/* Step 3 */}
+              <div>
+                <p className="text-cyan-400 font-semibold mb-1">{isZh ? '第三步：计算测地线的二阶导数' : 'Step 3: Compute geodesic\'s second derivative'}</p>
+                <p>
+                  {isZh 
+                    ? '测地线的定义是"最短路径"，但等价于：沿测地线走，加速度没有切向分量——你不会在流形上"转弯"。数学上：'
+                    : 'A geodesic is defined as "shortest path", but equivalently: walking along it, acceleration has no tangential component—you don\'t "turn" on the manifold. Mathematically:'}
+                </p>
+                <MathBlock>{`\\nabla_{\\gamma'} \\gamma' = 0 \\quad \\text{${isZh ? '（测地线方程）' : '(geodesic equation)'}}`}</MathBlock>
+                <p className="mt-2">
+                  {isZh 
+                    ? '但这是在流形上的导数（∇）。在外部空间ℝ^m中，测地线的加速度是：'
+                    : 'But this is the derivative on the manifold (∇). In ambient space ℝ^m, the geodesic\'s acceleration is:'}
+                </p>
+                <MathBlock>{`\\gamma_u''(0) = h(u, u)`}</MathBlock>
+                <p className="mt-1 text-slate-400">
+                  {isZh 
+                    ? '这就是第二基本形式！它测量曲线如何"偏离"流形的切平面。'
+                    : 'This is the second fundamental form! It measures how the curve "deviates" from the tangent plane.'}
+                </p>
+              </div>
+
+              {/* Step 4 */}
+              <div>
+                <p className="text-cyan-400 font-semibold mb-1">{isZh ? '第四步：计算法截面的二阶导数' : 'Step 4: Compute normal section\'s second derivative'}</p>
+                <p>
+                  {isZh 
+                    ? '法截面 β_u 是一条平面曲线：它是子流形 M 与某个平面 π（由 u 和法向量张成）的交集。'
+                    : 'Normal section β_u is a plane curve: it\'s the intersection of M with a plane π (spanned by u and normal vectors).'}
+                </p>
+                <p className="mt-2">
+                  {isZh 
+                    ? '在这个平面 π 中，β_u 的曲率向量（二阶导数）就是它离开切方向 u 的程度。由于 β_u 本身就在 M 上，这个"离开程度"正好是：'
+                    : 'In plane π, the curvature vector (second derivative) of β_u is how much it deviates from direction u. Since β_u lies on M, this "deviation" is exactly:'}
+                </p>
+                <MathBlock>{`\\beta_u''(0) = h(u, u)`}</MathBlock>
+              </div>
+
+              {/* Step 5 */}
+              <div className="bg-green-900/30 rounded p-3 border border-green-700">
+                <p className="text-green-400 font-semibold mb-1">{isZh ? '结论' : 'Conclusion'}</p>
+                <p>
+                  {isZh 
+                    ? '因此 γ_u\'\'(0) = h(u,u) = β_u\'\'(0)，二阶导数总是相等！这证明了接触阶数至少为2。'
+                    : 'Therefore γ_u\'\'(0) = h(u,u) = β_u\'\'(0), second derivatives are always equal! This proves contact order is at least 2.'}
+                </p>
+                <MathBlock>{`c^{\\#}(M) \\geq 2 \\quad \\text{✓}`}</MathBlock>
+              </div>
+            </div>
+          </div>
+
+          {/* Intuition */}
           <div className="bg-slate-800 rounded-lg p-4">
-            <p className="text-cyan-300 font-semibold mb-2">
-              {isZh ? '证明思路' : 'Proof Sketch'}
+            <p className="text-yellow-400 font-semibold mb-2">
+              💡 {isZh ? '直观理解' : 'Intuitive Understanding'}
             </p>
             <p className="text-slate-300 text-sm">
               {isZh 
-                ? '利用第二基本形式h，可以证明二阶导数相等。这是因为测地线和法截面在原点处具有相同的二阶Taylor展开。'
-                : 'Using the second fundamental form h, we can prove the second derivatives are equal. This is because the geodesic and normal section have the same second-order Taylor expansion at the origin.'}
+                ? '测地线和法截面在起点处"起步"完全一样（位置、方向），而且它们"开始转弯"的方式也一样（都是 h(u,u)）。两条曲线只可能在"三阶以上"才开始分道扬镳——这就是为什么接触数至少是2！'
+                : 'Geodesic and normal section "start" identically (position, direction), and they "begin turning" the same way (both h(u,u)). The two curves can only diverge at "third order or higher"—that\'s why contact number is at least 2!'}
             </p>
           </div>
         </section>
