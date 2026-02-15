@@ -140,18 +140,6 @@ export default function Chapter7() {
               : 'Chen-Li specifically studied surfaces (2-dimensional submanifolds) in 6-dimensional Euclidean space. Here codimension is 4, and geometry is richer.'}
           </p>
 
-          {/* Donut in 6D */}
-          <div className="bg-gradient-to-r from-green-900/30 to-cyan-900/30 rounded-lg p-4 border border-green-700 mb-4">
-            <p className="text-green-400 font-semibold mb-2">
-              🍩 {isZh ? '甜甜圈的"变身"' : 'The Donut\'s Transformation'}
-            </p>
-            <p className="text-slate-300 text-sm">
-              {isZh 
-                ? '一个普通的三维空间里的甜甜圈（环面），接触数并不高。为什么？因为在甜甜圈的内圈，曲率像马鞍面一样；在外圈，曲率是正的，像球面。不同位置的弯曲完全不同，当然不是常各向同性的。但Chen-Li发现，把这个甜甜圈放进六维空间，用一种特殊的方式让它弯曲和折叠，就能精确调整它的几何属性，使得它处处对称（各向同性）、对称程度处处相等（常各向同性），但又没有完美到让测地线和法截面完全重合。结果：接触数不多不少，正好是4。'
-                : 'An ordinary donut (torus) in 3D doesn\'t have a high contact number. Why? Because at the inner ring, curvature is saddle-like; at the outer ring, it\'s positive like a sphere. Bending varies wildly—definitely not constant isotropic. But Chen-Li discovered that by placing this donut into 6D and bending it in a special way, they could precisely tune its geometry to be isotropic everywhere, with equal isotropy at every point, yet not so perfect that geodesics and normal sections completely coincide. Result: contact number is exactly 4.'}
-            </p>
-          </div>
-
           {/* Why E6 */}
           <div className="bg-slate-800 rounded-lg p-4 mb-4">
             <p className="text-green-400 font-semibold mb-2">
@@ -282,6 +270,18 @@ export default function Chapter7() {
                 <li>• {isZh ? '证明了pseudo-umbilical性质不蕴含球面性质' : 'Proved pseudo-umbilical does NOT imply spherical'}</li>
                 <li>• {isZh ? '这是接触数理论的一个重要应用' : 'This is an important application of contact number theory'}</li>
               </ul>
+            </div>
+
+            {/* Donut in 6D */}
+            <div className="bg-gradient-to-r from-green-900/30 to-cyan-900/30 rounded-lg p-4 border border-green-700">
+              <p className="text-green-400 font-semibold mb-2">
+                🍩 {isZh ? '甜甜圈的"变身"' : 'The Donut\'s Transformation'}
+              </p>
+              <p className="text-slate-300 text-sm">
+                {isZh 
+                  ? '一个普通的三维空间里的甜甜圈（环面），接触数并不高。为什么？因为在甜甜圈的内圈，曲率像马鞍面一样；在外圈，曲率是正的，像球面。不同位置的弯曲完全不同，当然不是常各向同性的。但Chen-Li发现，把这个甜甜圈放进六维空间，用一种特殊的方式让它弯曲和折叠，就能精确调整它的几何属性，使得它处处对称（各向同性）、对称程度处处相等（常各向同性），但又没有完美到让测地线和法截面完全重合。结果：接触数不多不少，正好是4。'
+                  : 'An ordinary donut (torus) in 3D doesn\'t have a high contact number. Why? Because at the inner ring, curvature is saddle-like; at the outer ring, it\'s positive like a sphere. Bending varies wildly—definitely not constant isotropic. But Chen-Li discovered that by placing this donut into 6D and bending it in a special way, they could precisely tune its geometry to be isotropic everywhere, with equal isotropy at every point, yet not so perfect that geodesics and normal sections completely coincide. Result: contact number is exactly 4.'}
+              </p>
             </div>
 
             {/* How Contact Number Helped */}
