@@ -215,6 +215,94 @@ export default function Chapter4() {
               {isZh ? '这个问题的答案就是接触数！' : 'The answer to this question is the Contact Number!'}
             </p>
           </div>
+
+          {/* Cylinder Example */}
+          <div className="mt-4 bg-gradient-to-r from-orange-900/30 to-yellow-900/30 rounded-lg p-4 border border-orange-700">
+            <p className="text-orange-400 font-semibold mb-3">
+              🎯 {isZh ? '经典例子：圆柱面' : 'Classic Example: Cylinder'}
+            </p>
+            <p className="text-slate-300 text-sm mb-4">
+              {isZh 
+                ? '圆柱面是理解测地线与法截面关系的绝佳例子，因为不同方向的测地线形态完全不同！'
+                : 'The cylinder is a perfect example for understanding geodesic vs normal section, because geodesics look completely different in different directions!'}
+            </p>
+
+            <div className="grid md:grid-cols-3 gap-3 mb-4">
+              <div className="bg-slate-800 rounded-lg p-3">
+                <p className="text-cyan-400 font-semibold text-sm mb-2">
+                  {isZh ? '沿轴向（竖直）' : 'Along axis (vertical)'}
+                </p>
+                <p className="text-slate-400 text-xs mb-2">
+                  {isZh ? '测地线：直线↕️' : 'Geodesic: straight line ↕️'}
+                </p>
+                <p className="text-slate-400 text-xs mb-2">
+                  {isZh ? '法截面：同样是直线' : 'Normal section: also straight line'}
+                </p>
+                <p className="text-green-400 text-xs">
+                  ✅ γ = β ({isZh ? '完全一致！' : 'identical!'})
+                </p>
+              </div>
+
+              <div className="bg-slate-800 rounded-lg p-3">
+                <p className="text-purple-400 font-semibold text-sm mb-2">
+                  {isZh ? '环绕方向（水平）' : 'Around (horizontal)'}
+                </p>
+                <p className="text-slate-400 text-xs mb-2">
+                  {isZh ? '测地线：圆⭕' : 'Geodesic: circle ⭕'}
+                </p>
+                <p className="text-slate-400 text-xs mb-2">
+                  {isZh ? '法截面：同样是圆' : 'Normal section: also circle'}
+                </p>
+                <p className="text-green-400 text-xs">
+                  ✅ γ = β ({isZh ? '完全一致！' : 'identical!'})
+                </p>
+              </div>
+
+              <div className="bg-slate-800 rounded-lg p-3">
+                <p className="text-yellow-400 font-semibold text-sm mb-2">
+                  {isZh ? '斜向（螺旋）' : 'Diagonal (helix)'}
+                </p>
+                <p className="text-slate-400 text-xs mb-2">
+                  {isZh ? '测地线：螺旋线🌀' : 'Geodesic: helix 🌀'}
+                </p>
+                <p className="text-slate-400 text-xs mb-2">
+                  {isZh ? '法截面：椭圆' : 'Normal section: ellipse'}
+                </p>
+                <p className="text-red-400 text-xs">
+                  ❌ γ ≠ β ({isZh ? '不同！' : 'different!'})
+                </p>
+              </div>
+            </div>
+
+            <div className="bg-slate-900 rounded-lg p-3">
+              <p className="text-cyan-400 font-semibold text-sm mb-2">
+                🔍 {isZh ? '深入分析' : 'Deep Analysis'}
+              </p>
+              <div className="text-slate-300 text-xs space-y-2">
+                <p>
+                  {isZh 
+                    ? '为什么斜向测地线是螺旋线？因为在圆柱面上，你沿斜向走"最短路径"时，会一边前进一边绕圈——这就是螺旋线！如果你展开圆柱面成平面，螺旋线会变成直线。'
+                    : 'Why is the diagonal geodesic a helix? Because on a cylinder, walking the "shortest path" diagonally means advancing while circling—that\'s a helix! If you unroll the cylinder flat, the helix becomes a straight line.'}
+                </p>
+                <p>
+                  {isZh 
+                    ? '为什么斜向法截面是椭圆？法截面是用包含切线和法向的平面切圆柱。斜切圆柱得到的是椭圆（想象斜切香肠）！'
+                    : 'Why is the diagonal normal section an ellipse? Normal section uses a plane containing tangent and normal to cut the cylinder. Cutting a cylinder at an angle gives an ellipse (imagine cutting a sausage diagonally)!'}
+                </p>
+              </div>
+            </div>
+
+            <div className="mt-3 bg-green-900/30 rounded-lg p-3 border border-green-700">
+              <p className="text-green-400 font-semibold text-sm mb-1">
+                💡 {isZh ? '关于圆柱面的接触数' : 'Contact Number of Cylinder'}
+              </p>
+              <p className="text-slate-300 text-xs">
+                {isZh 
+                  ? '圆柱面的接触数 c# = 2。轴向和环向测地线与法截面完全一致（c# = ∞ 在这些方向），但斜向只有2阶接触。取所有方向的最小值，所以 c# = 2。'
+                  : 'Cylinder has contact number c# = 2. Axial and circumferential geodesics match normal sections exactly (c# = ∞ in those directions), but diagonal has only 2nd order contact. Taking minimum over all directions gives c# = 2.'}
+              </p>
+            </div>
+          </div>
         </section>
 
         {/* Comprehensive visualizations */}
