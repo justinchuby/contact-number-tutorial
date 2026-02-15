@@ -186,8 +186,8 @@ export default function Chapter2() {
             </p>
             <p className="text-slate-300 text-sm">
               {isZh 
-                ? '李世杰教授研究的是嵌入的子流形（不自交）。余维数 = m - n 决定了法空间的维数，直接影响：'
-                : 'Prof. Li studies embedded submanifolds (no self-intersection). Codimension = m - n determines normal space dimension, directly affecting:'}
+                ? 'Chen-Li 的接触数理论研究的是嵌入的子流形（不自交）。余维数 = m - n 决定了法空间的维数，直接影响：'
+                : 'Chen-Li contact number theory studies embedded submanifolds (no self-intersection). Codimension = m - n determines normal space dimension, directly affecting:'}
             </p>
             <ul className="text-slate-400 text-sm mt-2 space-y-1">
               <li>• {isZh ? '法截面的复杂程度' : 'Complexity of normal sections'}</li>
@@ -210,8 +210,8 @@ export default function Chapter2() {
           
           <p className="text-slate-300 mb-4">
             {isZh 
-              ? '李世杰教授的接触数理论主要研究欧氏空间中的子流形。'
-              : "Prof. Shi-Jie Li's contact number theory primarily studies submanifolds in Euclidean space."}
+              ? '陈邦彦教授与李世杰教授的接触数理论主要研究欧氏空间中的子流形。'
+              : "The contact number theory by Prof. Bang-Yen Chen and Prof. Shi-Jie Li primarily studies submanifolds in Euclidean space."}
           </p>
 
           <div className="bg-slate-800 rounded-lg p-4 mb-4">
@@ -849,8 +849,8 @@ export default function Chapter2() {
             </h3>
             <p className="text-slate-300 text-sm mb-3">
               {isZh 
-                ? '在李世杰教授的论文中，许多定理涉及形状算子的特殊性质：'
-                : 'In Professor Li\'s papers, many theorems involve special properties of the shape operator:'}
+                ? '在Chen-Li的论文中，许多定理涉及形状算子的特殊性质：'
+                : 'In Chen-Li\'s papers, many theorems involve special properties of the shape operator:'}
             </p>
             <ul className="text-slate-300 text-sm space-y-2">
               <li>• <span className="text-green-400">{isZh ? '伪脐条件' : 'Pseudo-umbilical condition'}</span>: A_H = λI — {isZh ? '沿平均曲率方向的形状算子是恒等的倍数（第7章）' : 'shape operator along mean curvature is scalar identity (Chapter 7)'}</li>
