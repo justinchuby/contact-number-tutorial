@@ -41,11 +41,36 @@ export default function Chapter1() {
             </p>
           </div>
 
+          {/* Fun analogy box */}
+          <div className="bg-gradient-to-r from-yellow-900/30 to-orange-900/30 rounded-lg p-4 border border-yellow-700 mb-4">
+            <p className="text-yellow-400 font-semibold mb-2">
+              🎮 {isZh ? '游戏类比' : 'Gaming Analogy'}
+            </p>
+            <p className="text-slate-300 text-sm">
+              {isZh 
+                ? '想象《吃豆人》游戏：当吃豆人从屏幕右边走出去，它会从左边出现。这个游戏屏幕其实是一个环面（甜甜圈形状）！局部看起来是平的格子，但整体却是弯曲的。'
+                : 'Think of Pac-Man: when Pac-Man exits the right side of the screen, he appears on the left. The game screen is actually a torus (donut shape)! Locally it looks like a flat grid, but globally it\'s curved.'}
+            </p>
+          </div>
+
           <p className="text-slate-300 mb-4">
             {isZh 
-              ? '为什么地图会"失真"？因为地球是弯曲的，无法完美地展开成平面。这种"局部像平面，整体不是平面"的性质，正是流形的特征。'
-              : 'Why do maps "distort"? Because Earth is curved and cannot be perfectly flattened. This property of "locally flat, globally not flat" is the characteristic of a manifold.'}
+              ? '为什么地图会"失真"？因为地球是弯曲的，无法完美地展开成平面。格陵兰岛在世界地图上看起来和非洲差不多大，但实际上非洲是格陵兰的14倍！这种"局部像平面，整体不是平面"的性质，正是流形的特征。'
+              : 'Why do maps "distort"? Because Earth is curved and cannot be perfectly flattened. Greenland looks almost as big as Africa on world maps, but Africa is actually 14 times larger! This property of "locally flat, globally not flat" is the characteristic of a manifold.'}
           </p>
+
+          {/* More examples */}
+          <div className="bg-slate-800 rounded-lg p-4">
+            <p className="text-green-400 font-semibold mb-2">
+              🌟 {isZh ? '生活中的流形' : 'Manifolds in Daily Life'}
+            </p>
+            <ul className="text-slate-300 text-sm space-y-2">
+              <li>• <span className="text-cyan-400">{isZh ? '橙子皮' : 'Orange peel'}</span>: {isZh ? '剥下来可以近似展平，但会有裂缝——这就是球面！' : 'Can be approximately flattened when peeled, but with cracks—this is a sphere!'}</li>
+              <li>• <span className="text-cyan-400">{isZh ? '甜甜圈表面' : 'Donut surface'}</span>: {isZh ? '局部平坦，但整体有一个"洞"——这是环面。' : 'Locally flat, but globally has a "hole"—this is a torus.'}</li>
+              <li>• <span className="text-cyan-400">{isZh ? '纸带扭一下再粘起来' : 'Paper strip twisted and glued'}</span>: {isZh ? '这就是著名的莫比乌斯带，只有一个面！' : 'This is the famous Möbius strip, with only one side!'}</li>
+              <li>• <span className="text-cyan-400">{isZh ? '你的手臂可以转到的所有位置' : 'All positions your arm can reach'}</span>: {isZh ? '这是一个高维流形，叫做配置空间！' : 'This is a high-dimensional manifold called configuration space!'}</li>
+            </ul>
+          </div>
         </section>
 
         {/* Section 1.2 */}
@@ -53,6 +78,18 @@ export default function Chapter1() {
           <h2 className="text-xl font-semibold text-cyan-400 mb-4">
             {isZh ? '1.2 流形的正式定义' : '1.2 Formal Definition of a Manifold'}
           </h2>
+
+          {/* Analogy first */}
+          <div className="bg-gradient-to-r from-purple-900/30 to-pink-900/30 rounded-lg p-4 border border-purple-700 mb-4">
+            <p className="text-purple-400 font-semibold mb-2">
+              🗺️ {isZh ? '地图册类比' : 'Atlas Analogy'}
+            </p>
+            <p className="text-slate-300 text-sm">
+              {isZh 
+                ? '想象一本世界地图册：每一页都是地球的一小块区域的平面地图。虽然每一页都是平的，但把它们"缝合"在一起，就能描述整个弯曲的地球。数学上，这本"地图册"就叫做Atlas（图册），每一页叫做Chart（坐标卡）。'
+                : 'Imagine a world atlas: each page is a flat map of a small region of Earth. Although each page is flat, "stitching" them together describes the entire curved Earth. In mathematics, this "atlas" is literally called an Atlas, and each page is called a Chart.'}
+            </p>
+          </div>
           
           <p className="text-slate-300 mb-4">
             {isZh 

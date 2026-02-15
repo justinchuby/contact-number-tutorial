@@ -27,11 +27,29 @@ export default function Chapter5() {
           <h2 className="text-xl font-semibold text-cyan-400 mb-4">
             {isZh ? '5.1 曲线的"接触"是什么意思？' : '5.1 What Does "Contact" Between Curves Mean?'}
           </h2>
+
+          {/* Intuitive analogy */}
+          <div className="bg-gradient-to-r from-yellow-900/30 to-orange-900/30 rounded-lg p-4 border border-yellow-700 mb-4">
+            <p className="text-yellow-400 font-semibold mb-2">
+              🚗 {isZh ? '开车类比' : 'Driving Analogy'}
+            </p>
+            <p className="text-slate-300 text-sm mb-2">
+              {isZh 
+                ? '想象两辆车在高速公路上：'
+                : 'Imagine two cars on a highway:'}
+            </p>
+            <ul className="text-slate-300 text-sm space-y-1">
+              <li>• <span className="text-cyan-400">{isZh ? '0阶' : '0th order'}</span>: {isZh ? '两车在同一地点' : 'Both cars at the same location'}</li>
+              <li>• <span className="text-cyan-400">{isZh ? '1阶' : '1st order'}</span>: {isZh ? '同一地点 + 同一速度方向' : 'Same location + same velocity direction'}</li>
+              <li>• <span className="text-cyan-400">{isZh ? '2阶' : '2nd order'}</span>: {isZh ? '同一地点 + 同一速度 + 同一加速度' : 'Same location + same velocity + same acceleration'}</li>
+              <li>• <span className="text-purple-400">{isZh ? 'k阶' : 'kth order'}</span>: {isZh ? '前k个运动特征都相同！' : 'First k motion characteristics all the same!'}</li>
+            </ul>
+          </div>
           
           <p className="text-slate-300 mb-4">
             {isZh 
-              ? '两条曲线可以以不同的"紧密程度"接触：'
-              : 'Two curves can be in contact with different degrees of "closeness":'}
+              ? '两条曲线可以以不同的"紧密程度"接触。接触阶数越高，它们在接触点附近越"像"：'
+              : 'Two curves can be in contact with different degrees of "closeness". Higher contact order means they are more "similar" near the contact point:'}
           </p>
 
           <div className="space-y-3 mb-4">
@@ -39,7 +57,7 @@ export default function Chapter5() {
               <span className="bg-slate-700 text-cyan-400 rounded-full w-8 h-8 flex items-center justify-center font-bold">0</span>
               <div>
                 <p className="text-white font-semibold">{isZh ? '0阶接触' : '0th order contact'}</p>
-                <p className="text-slate-400 text-sm">{isZh ? '两条曲线在一点相遇' : 'Two curves meet at a point'}</p>
+                <p className="text-slate-400 text-sm">{isZh ? '两条曲线在一点相遇（如两条路交叉）' : 'Two curves meet at a point (like two roads crossing)'}</p>
               </div>
             </div>
             
@@ -47,7 +65,7 @@ export default function Chapter5() {
               <span className="bg-slate-700 text-cyan-400 rounded-full w-8 h-8 flex items-center justify-center font-bold">1</span>
               <div>
                 <p className="text-white font-semibold">{isZh ? '1阶接触' : '1st order contact'}</p>
-                <p className="text-slate-400 text-sm">{isZh ? '相同切线方向' : 'Same tangent direction'}</p>
+                <p className="text-slate-400 text-sm">{isZh ? '相同切线方向（如高速公路和匝道的切点）' : 'Same tangent direction (like highway and ramp tangent point)'}</p>
               </div>
             </div>
             
@@ -55,7 +73,7 @@ export default function Chapter5() {
               <span className="bg-slate-700 text-cyan-400 rounded-full w-8 h-8 flex items-center justify-center font-bold">2</span>
               <div>
                 <p className="text-white font-semibold">{isZh ? '2阶接触' : '2nd order contact'}</p>
-                <p className="text-slate-400 text-sm">{isZh ? '相同曲率' : 'Same curvature'}</p>
+                <p className="text-slate-400 text-sm">{isZh ? '相同曲率（弯曲程度一样，如完美贴合的齿轮）' : 'Same curvature (same bending, like perfectly meshing gears)'}</p>
               </div>
             </div>
             
@@ -63,9 +81,21 @@ export default function Chapter5() {
               <span className="bg-slate-700 text-purple-400 rounded-full w-8 h-8 flex items-center justify-center font-bold">k</span>
               <div>
                 <p className="text-white font-semibold">{isZh ? 'k阶接触' : 'kth order contact'}</p>
-                <p className="text-slate-400 text-sm">{isZh ? '前k阶导数相等' : 'First k derivatives equal'}</p>
+                <p className="text-slate-400 text-sm">{isZh ? '前k阶导数相等（几乎无法区分！）' : 'First k derivatives equal (almost indistinguishable!)'}</p>
               </div>
             </div>
+          </div>
+
+          {/* DNA analogy */}
+          <div className="bg-gradient-to-r from-green-900/30 to-cyan-900/30 rounded-lg p-4 border border-green-700 mb-4">
+            <p className="text-green-400 font-semibold mb-2">
+              🧬 {isZh ? 'DNA类比' : 'DNA Analogy'}
+            </p>
+            <p className="text-slate-300 text-sm">
+              {isZh 
+                ? '就像DNA测序：两段DNA序列越长的相同前缀，它们的关系越近。接触阶数就像是"几何DNA"的匹配长度！'
+                : 'Like DNA sequencing: the longer the matching prefix of two DNA sequences, the more closely related they are. Contact order is like the matching length of "geometric DNA"!'}
+            </p>
           </div>
 
           <div className="bg-slate-800 rounded-lg p-4">
@@ -86,11 +116,23 @@ export default function Chapter5() {
           <h2 className="text-xl font-semibold text-red-400 mb-4">
             ⭐ {isZh ? '5.2 接触数的正式定义' : '5.2 Formal Definition of Contact Number'}
           </h2>
+
+          {/* Key insight analogy */}
+          <div className="bg-gradient-to-r from-blue-900/30 to-purple-900/30 rounded-lg p-4 border border-blue-700 mb-4">
+            <p className="text-blue-400 font-semibold mb-2">
+              🔍 {isZh ? '核心洞察：两个"自我"的比较' : 'Core Insight: Comparing Two "Selves"'}
+            </p>
+            <p className="text-slate-300 text-sm">
+              {isZh 
+                ? '想象流形M是一个人。测地线γ是"内心的自己"——完全由内在决定（只关心流形本身）。法截面β是"别人眼中的自己"——由外部视角决定（依赖于嵌入方式）。接触数测量这两个"自我"有多一致！'
+                : 'Imagine manifold M is a person. Geodesic γ is the "inner self"—determined entirely from within (only cares about the manifold itself). Normal section β is "how others see you"—determined by external perspective (depends on embedding). Contact number measures how consistent these two "selves" are!'}
+            </p>
+          </div>
           
           <p className="text-slate-300 mb-4">
             {isZh 
-              ? '回顾：对于子流形M上的每一点p和单位切向量u，我们有两条特殊的曲线：'
-              : 'Recall: For each point p on submanifold M and unit tangent vector u, we have two special curves:'}
+              ? '对于子流形M上的每一点p和单位切向量u，我们有两条特殊的曲线：'
+              : 'For each point p on submanifold M and unit tangent vector u, we have two special curves:'}
           </p>
 
           <div className="grid md:grid-cols-2 gap-4 mb-6">
@@ -98,13 +140,16 @@ export default function Chapter5() {
               <h3 className="text-cyan-400 font-semibold mb-2">
                 {isZh ? '测地线' : 'Geodesic'} <Math>{'\\gamma_u'}</Math>
               </h3>
-              <p className="text-slate-300 text-sm">
+              <p className="text-slate-300 text-sm mb-2">
                 {isZh 
                   ? '流形M上从p出发沿u方向的测地线'
                   : 'The geodesic on M starting from p in direction u'}
               </p>
-              <p className="text-slate-400 text-xs mt-1">
-                <Math>{'\\gamma_u(0) = p, \\quad \\gamma_u\'(0) = u'}</Math>
+              <p className="text-yellow-400 text-xs mb-1">
+                🏠 {isZh ? '内蕴视角：只看流形本身' : 'Intrinsic view: only looks at the manifold'}
+              </p>
+              <p className="text-slate-500 text-xs">
+                {isZh ? '例：蚂蚁沿"直线"爬行的路径' : 'Example: path of an ant crawling "straight"'}
               </p>
             </div>
             
@@ -112,15 +157,39 @@ export default function Chapter5() {
               <h3 className="text-pink-400 font-semibold mb-2">
                 {isZh ? '法截面' : 'Normal Section'} <Math>{'\\beta_u'}</Math>
               </h3>
-              <p className="text-slate-300 text-sm">
+              <p className="text-slate-300 text-sm mb-2">
                 {isZh 
                   ? '仿射子空间E(p,u)与M的交线'
                   : 'Intersection of affine subspace E(p,u) with M'}
               </p>
-              <p className="text-slate-400 text-xs mt-1">
-                <Math>{'\\beta_u(0) = p, \\quad \\beta_u\'(0) = u'}</Math>
+              <p className="text-yellow-400 text-xs mb-1">
+                🌍 {isZh ? '外蕴视角：从外部切割流形' : 'Extrinsic view: cutting the manifold from outside'}
+              </p>
+              <p className="text-slate-500 text-xs">
+                {isZh ? '例：用平面切一个球，得到一个圆' : 'Example: slicing a sphere with a plane to get a circle'}
               </p>
             </div>
+          </div>
+
+          {/* Real example */}
+          <div className="bg-slate-900 rounded-lg p-4 mb-4">
+            <p className="text-green-400 font-semibold mb-2">
+              🌐 {isZh ? '例子：地球上的"直线"' : 'Example: "Straight Lines" on Earth'}
+            </p>
+            <p className="text-slate-300 text-sm mb-2">
+              {isZh 
+                ? '假设你从北京向正东方向"直走"：'
+                : 'Suppose you walk "straight" due east from Beijing:'}
+            </p>
+            <ul className="text-slate-400 text-sm space-y-1">
+              <li>• <span className="text-cyan-400">{isZh ? '测地线' : 'Geodesic'}</span>: {isZh ? '你会沿着大圆走，最终回到北京！' : "You'll follow a great circle and eventually return to Beijing!"}</li>
+              <li>• <span className="text-pink-400">{isZh ? '法截面' : 'Normal section'}</span>: {isZh ? '纬线圈（用水平面切地球）——这不是测地线！' : 'Latitude circle (slice Earth with horizontal plane)—this is NOT a geodesic!'}</li>
+            </ul>
+            <p className="text-slate-300 text-sm mt-2">
+              {isZh 
+                ? '在大多数点上，这两条曲线是不同的。但在某些特殊的流形上，它们可以非常"接近"——这就是高接触数的含义！'
+                : 'At most points, these two curves differ. But on some special manifolds, they can be very "close"—this is what high contact number means!'}
+            </p>
           </div>
 
           <div className="bg-slate-900 rounded-lg p-4 mb-4 border-2 border-yellow-600">

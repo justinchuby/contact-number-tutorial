@@ -20,6 +20,18 @@ export default function Chapter2() {
           <h2 className="text-xl font-semibold text-cyan-400 mb-4">
             {isZh ? '2.1 嵌入与浸入' : '2.1 Embeddings and Immersions'}
           </h2>
+
+          {/* Intuitive analogy */}
+          <div className="bg-gradient-to-r from-yellow-900/30 to-orange-900/30 rounded-lg p-4 border border-yellow-700 mb-4">
+            <p className="text-yellow-400 font-semibold mb-2">
+              🧵 {isZh ? '绳子类比' : 'String Analogy'}
+            </p>
+            <p className="text-slate-300 text-sm">
+              {isZh 
+                ? '想象把一根绳子放在桌面上。如果绳子没有打结、没有交叉，这就是"嵌入"。如果绳子像8字形那样交叉了，这就是"浸入"——局部看起来没问题，但整体上有交叉。'
+                : 'Imagine placing a string on a table. If the string has no knots and no crossings, this is an "embedding". If the string crosses itself like a figure-8, this is an "immersion"—locally it looks fine, but globally there are crossings.'}
+            </p>
+          </div>
           
           <p className="text-slate-300 mb-4">
             {isZh 
@@ -34,11 +46,11 @@ export default function Chapter2() {
               </h3>
               <p className="text-slate-300 text-sm">
                 {isZh 
-                  ? '一个光滑映射 f: M → N 是嵌入，如果它是单射、浸入，且是到其像的同胚。'
-                  : 'A smooth map f: M → N is an embedding if it is injective, an immersion, and a homeomorphism onto its image.'}
+                  ? '光滑、单射、且保持拓扑结构。'
+                  : 'Smooth, injective, and preserves topological structure.'}
               </p>
               <p className="text-slate-400 text-xs mt-2">
-                {isZh ? '例：圆嵌入平面' : 'Example: Circle embedded in plane'}
+                🎯 {isZh ? '例：把橡皮筋放在桌上（不交叉）' : 'Example: rubber band on table (no crossing)'}
               </p>
             </div>
             
@@ -48,13 +60,24 @@ export default function Chapter2() {
               </h3>
               <p className="text-slate-300 text-sm">
                 {isZh 
-                  ? '一个光滑映射 f: M → N 是浸入，如果它在每点的微分是单射。'
-                  : 'A smooth map f: M → N is an immersion if its differential is injective at every point.'}
+                  ? '局部光滑，但可能有自交。'
+                  : 'Locally smooth, but may have self-intersections.'}
               </p>
               <p className="text-slate-400 text-xs mt-2">
-                {isZh ? '例：8字形浸入平面（有自交）' : 'Example: Figure-8 immersed in plane (self-intersection)'}
+                🎯 {isZh ? '例：8字形（有交叉点）' : 'Example: figure-8 (has crossing point)'}
               </p>
             </div>
+          </div>
+
+          {/* More vivid examples */}
+          <div className="bg-slate-800 rounded-lg p-4">
+            <p className="text-cyan-400 font-semibold mb-2">
+              🌟 {isZh ? '更多生动例子' : 'More Vivid Examples'}
+            </p>
+            <ul className="text-slate-300 text-sm space-y-2">
+              <li>• <span className="text-green-400">{isZh ? '嵌入' : 'Embedding'}</span>: {isZh ? '戒指戴在手指上、水管的形状、耳机线（不打结时）' : 'Ring on finger, shape of a water pipe, earphone cord (when not tangled)'}</li>
+              <li>• <span className="text-yellow-400">{isZh ? '浸入' : 'Immersion'}</span>: {isZh ? '打结的耳机线、交叉的铁路轨道、Klein瓶在3D中的表示' : 'Tangled earphone cord, crossing railway tracks, Klein bottle representation in 3D'}</li>
+            </ul>
           </div>
         </section>
 
@@ -116,6 +139,18 @@ export default function Chapter2() {
           <h2 className="text-xl font-semibold text-cyan-400 mb-4">
             {isZh ? '2.3 切空间与法空间' : '2.3 Tangent and Normal Spaces'}
           </h2>
+
+          {/* Intuitive analogy */}
+          <div className="bg-gradient-to-r from-green-900/30 to-cyan-900/30 rounded-lg p-4 border border-green-700 mb-4">
+            <p className="text-green-400 font-semibold mb-2">
+              🏔️ {isZh ? '爬山类比' : 'Mountain Climbing Analogy'}
+            </p>
+            <p className="text-slate-300 text-sm">
+              {isZh 
+                ? '想象你站在山坡上。切空间就是你脚下的"坡面"——所有你可以沿着山坡走的方向。法空间就是"垂直于坡面"的方向——你需要用绳索才能去的方向（比如悬崖下方）。'
+                : 'Imagine standing on a mountainside. The tangent space is the "slope" under your feet—all directions you can walk along the mountain. The normal space is "perpendicular to the slope"—directions you need a rope to go (like down a cliff).'}
+            </p>
+          </div>
           
           <div className="grid md:grid-cols-2 gap-4 mb-4">
             <div className="bg-slate-800 rounded-lg p-4 border-l-4 border-cyan-500">
