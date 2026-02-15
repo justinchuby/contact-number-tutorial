@@ -915,8 +915,8 @@ export default function Chapter2() {
           </div>
           <p className="text-green-400 text-sm mt-4">
             🎯 {isZh 
-              ? '下一章：我们将利用这些工具来精确定义"接触"的概念——子流形与超球面的切触程度！'
-              : 'Next chapter: We\'ll use these tools to precisely define "contact"—the degree of tangency between submanifold and hyperspheres!'}
+              ? '下一章：我们将学习测地线——流形上的"最短路径"，它是连接内蕴几何与外蕴几何的关键桥梁。'
+              : 'Next chapter: We\'ll learn about geodesics—the "shortest paths" on manifolds, a key bridge connecting intrinsic and extrinsic geometry.'}
           </p>
 
           {/* Thinking Questions */}
