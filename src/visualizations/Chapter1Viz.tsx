@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ThreeCanvas } from '../components';
-import { RotatingSphere, RotatingTorus, RotatingKleinBottle, MobiusStrip } from './ManifoldShapes';
+import { RotatingSphere, RotatingTorus, RotatingKleinBottle, KleinBottleFigure8, MobiusStrip } from './ManifoldShapes';
 
-type ManifoldType = 'sphere' | 'torus' | 'klein' | 'mobius';
+type ManifoldType = 'sphere' | 'torus' | 'klein' | 'klein8' | 'mobius';
 
 export default function Chapter1Viz() {
   const { i18n } = useTranslation();
@@ -29,8 +29,15 @@ export default function Chapter1Viz() {
       id: 'klein', 
       label: 'Klein瓶', 
       labelEn: 'Klein Bottle',
-      desc: '不可定向曲面，无法在3D中完整嵌入',
-      descEn: 'Non-orientable surface, cannot be fully embedded in 3D'
+      desc: '经典"瓶子"形状浸入，颈部穿过瓶壁',
+      descEn: 'Classic "bottle" shape immersion, neck passes through wall'
+    },
+    { 
+      id: 'klein8', 
+      label: 'Klein瓶 (Figure-8)', 
+      labelEn: 'Klein Bottle (Figure-8)',
+      desc: 'Figure-8 浸入，更对称的表示方式',
+      descEn: 'Figure-8 immersion, a more symmetric representation'
     },
     { 
       id: 'mobius', 
@@ -46,6 +53,7 @@ export default function Chapter1Viz() {
       case 'sphere': return <RotatingSphere />;
       case 'torus': return <RotatingTorus />;
       case 'klein': return <RotatingKleinBottle />;
+      case 'klein8': return <KleinBottleFigure8 />;
       case 'mobius': return <MobiusStrip />;
     }
   };

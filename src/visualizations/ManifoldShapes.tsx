@@ -112,6 +112,75 @@ export function RotatingKleinBottle({ position = [0, 0, 0] as [number, number, n
   );
 }
 
+// Figure-8 Klein bottle immersion (alternative representation)
+export function KleinBottleFigure8({ position = [0, 0, 0] as [number, number, number] }) {
+  const ref = useRef<Mesh>(null);
+  
+  useFrame((_, delta) => {
+    if (ref.current) {
+      ref.current.rotation.x += delta * 0.15;
+      ref.current.rotation.y += delta * 0.25;
+    }
+  });
+
+  // Create Klein bottle geometry using figure-8 immersion
+  const geometry = useMemo(() => {
+    const uSegments = 80;
+    const vSegments = 40;
+    const vertices: number[] = [];
+    const indices: number[] = [];
+    
+    // Figure-8 Klein bottle parametrization
+    const a = 2; // scale factor
+    
+    for (let i = 0; i <= uSegments; i++) {
+      const u = (i / uSegments) * Math.PI * 2;
+      for (let j = 0; j <= vSegments; j++) {
+        const v = (j / vSegments) * Math.PI * 2;
+        
+        const cosU = Math.cos(u);
+        const sinU = Math.sin(u);
+        const sin2U = Math.sin(2 * u);
+        const cosHalfV = Math.cos(v / 2);
+        const sinHalfV = Math.sin(v / 2);
+        
+        // Figure-8 immersion equations
+        const r = 1 + 0.5 * cosHalfV * sinU - 0.5 * sinHalfV * sin2U;
+        const x = r * cosU;
+        const y = r * sinU;
+        const z = 0.5 * sinHalfV * sinU + 0.5 * cosHalfV * sin2U;
+        
+        vertices.push(x * a * 0.5, y * a * 0.5, z * a * 0.5);
+      }
+    }
+    
+    // Create indices for triangles
+    for (let i = 0; i < uSegments; i++) {
+      for (let j = 0; j < vSegments; j++) {
+        const a = i * (vSegments + 1) + j;
+        const b = a + 1;
+        const c = (i + 1) * (vSegments + 1) + j;
+        const d = c + 1;
+        
+        indices.push(a, b, c);
+        indices.push(b, d, c);
+      }
+    }
+    
+    const geom = new THREE.BufferGeometry();
+    geom.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
+    geom.setIndex(indices);
+    geom.computeVertexNormals();
+    return geom;
+  }, []);
+
+  return (
+    <mesh ref={ref} geometry={geometry} position={position}>
+      <meshStandardMaterial color="#ec4899" wireframe side={THREE.DoubleSide} />
+    </mesh>
+  );
+}
+
 export function MobiusStrip({ position = [0, 0, 0] as [number, number, number] }) {
   const ref = useRef<Mesh>(null);
   
