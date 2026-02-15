@@ -253,6 +253,41 @@ export default function Chapter4() {
                   : 'Normal sections depend on how the manifold is embedded in ambient space. The same manifold embedded differently will have different normal sections.'}
               </p>
             </div>
+
+            {/* Why different embeddings give different normal sections */}
+            <div className="bg-gradient-to-r from-blue-900/30 to-purple-900/30 rounded-lg p-4 border border-blue-600">
+              <h3 className="text-blue-400 font-semibold mb-2">
+                🤔 {isZh ? '为什么不同嵌入方式会有不同的法截面？' : 'Why Do Different Embeddings Give Different Normal Sections?'}
+              </h3>
+              <p className="text-slate-300 text-sm mb-3">
+                {isZh 
+                  ? '这是因为法截面的构造依赖于法空间，而法空间由嵌入方式决定：'
+                  : 'This is because normal section construction depends on the normal space, which is determined by the embedding:'}
+              </p>
+              <div className="grid md:grid-cols-2 gap-3 text-sm mb-3">
+                <div className="bg-slate-800 rounded p-3">
+                  <p className="text-cyan-400 font-semibold mb-1">{isZh ? '例：圆的两种嵌入' : 'Example: Two Embeddings of a Circle'}</p>
+                  <p className="text-slate-400 text-xs">
+                    {isZh 
+                      ? '① 圆作为xy平面上的圆（法方向=z轴）\n② 同样的圆，但嵌入在倾斜的平面上（法方向不同！）'
+                      : '① Circle in xy-plane (normal = z-axis)\n② Same circle, but in a tilted plane (different normal!)'}
+                  </p>
+                </div>
+                <div className="bg-slate-800 rounded p-3">
+                  <p className="text-purple-400 font-semibold mb-1">{isZh ? '关键洞察' : 'Key Insight'}</p>
+                  <p className="text-slate-400 text-xs">
+                    {isZh 
+                      ? '法空间 T⊥M 是"外部空间减去切空间"，所以依赖于外部空间！切空间由流形决定，但法空间由嵌入决定。'
+                      : 'Normal space T⊥M is "ambient space minus tangent space", so it depends on ambient space! Tangent space is determined by manifold, but normal space by embedding.'}
+                  </p>
+                </div>
+              </div>
+              <p className="text-yellow-400 text-xs">
+                💡 {isZh 
+                  ? '这就是为什么法截面是"外蕴"的——它取决于你把流形放在哪个空间里、怎么放。而测地线只关心流形本身，不关心它住在哪里。'
+                  : 'This is why normal sections are "extrinsic"—they depend on where you place the manifold and how. Geodesics only care about the manifold itself, not where it lives.'}
+              </p>
+            </div>
             
             <div className="bg-gradient-to-r from-yellow-900/50 to-amber-900/50 rounded-lg p-4 border border-yellow-600">
               <h3 className="text-yellow-400 font-semibold mb-2">
