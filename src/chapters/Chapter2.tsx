@@ -184,23 +184,6 @@ export default function Chapter2() {
                 : '(Technical note: Since every immersion is locally an embedding, contact number results also apply locally to immersions. Many examples in the paper are also stated using "isometric immersion" language.)'}
             </p>
           </div>
-
-          {/* Preview */}
-          <div className="bg-gradient-to-r from-green-900/30 to-cyan-900/30 rounded-lg p-4 border border-green-700">
-            <p className="text-green-400 font-semibold mb-2">
-              📣 {isZh ? '预告：余维数的重要性' : 'Preview: Why Codimension Matters'}
-            </p>
-            <p className="text-slate-300 text-sm">
-              {isZh 
-                ? '余维数 = m - n 决定了法空间的维数。在第五章中我们将看到，余维数直接影响子流形可能具有的几何对称性。'
-                : 'Codimension = m - n determines normal space dimension. In Chapter 5, we\'ll see that codimension directly affects what geometric symmetry a submanifold can have.'}
-            </p>
-            <p className="text-green-300 text-sm mt-2">
-              💡 {isZh 
-                ? '高余维数 = 更多"弯曲的空间" = 更多几何可能性！'
-                : 'Higher codimension = more "room to bend" = more geometric possibilities!'}
-            </p>
-          </div>
         </section>
 
         {/* Section 2.2 */}
@@ -350,6 +333,23 @@ export default function Chapter2() {
             </div>
             <p className="text-slate-400 text-xs mt-2">
               ⭐ {isZh ? 'Chen-Li论文研究的关键对象：E⁶中余维数4的曲面，几何结构最丰富' : 'Key object in Chen-Li paper: surfaces in E⁶ with codimension 4, richest geometry'}
+            </p>
+          </div>
+
+          {/* Preview: codimension importance */}
+          <div className="bg-gradient-to-r from-green-900/30 to-cyan-900/30 rounded-lg p-4 border border-green-700 mt-4">
+            <p className="text-green-400 font-semibold mb-2">
+              📣 {isZh ? '预告：余维数的重要性' : 'Preview: Why Codimension Matters'}
+            </p>
+            <p className="text-slate-300 text-sm">
+              {isZh 
+                ? '在第五章中我们将看到，余维数直接影响子流形可能具有的几何对称性。'
+                : 'In Chapter 5, we\'ll see that codimension directly affects what geometric symmetry a submanifold can have.'}
+            </p>
+            <p className="text-green-300 text-sm mt-2">
+              💡 {isZh 
+                ? '高余维数 = 更多"弯曲的空间" = 更多几何可能性！'
+                : 'Higher codimension = more "room to bend" = more geometric possibilities!'}
             </p>
           </div>
         </section>
