@@ -8,3 +8,4 @@ export { EmbeddingViz, EmbeddingVizWithLabels, SecondFundamentalFormViz, SecondF
 export { IsotropicViz, NonIsotropicViz, IsotropyComparisonViz } from './IsotropicViz';
 export { TorsionViz, PlanarCurveViz, TorsionComparisonViz } from './TorsionViz';
 export { MultiDirectionViz, GeodesicNormalComparisonViz, DifferentCurvesViz, Chapter4VizCollection } from './Chapter4Viz';
+export { default as EmbeddingComparisonViz, EmbeddingComparisonVizWithLabels } from './EmbeddingComparisonViz';

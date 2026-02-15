@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { MathBlock, Math, Tooltip } from '../components';
-import { NormalSectionVizWithLabels, Chapter4VizCollection } from '../visualizations';
+import { NormalSectionVizWithLabels, Chapter4VizCollection, EmbeddingComparisonVizWithLabels } from '../visualizations';
 
 export default function Chapter4() {
   const { t, i18n } = useTranslation();
@@ -287,6 +287,11 @@ export default function Chapter4() {
                   ? '这就是为什么法截面是"外蕴"的——它取决于你把流形放在哪个空间里、怎么放。而测地线只关心流形本身，不关心它住在哪里。'
                   : 'This is why normal sections are "extrinsic"—they depend on where you place the manifold and how. Geodesics only care about the manifold itself, not where it lives.'}
               </p>
+
+              {/* Visualization of different embeddings */}
+              <div className="mt-4">
+                <EmbeddingComparisonVizWithLabels />
+              </div>
             </div>
             
             <div className="bg-gradient-to-r from-yellow-900/50 to-amber-900/50 rounded-lg p-4 border border-yellow-600">
