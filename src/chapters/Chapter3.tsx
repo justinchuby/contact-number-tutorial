@@ -50,17 +50,6 @@ export default function Chapter3() {
               : 'On a plane, a "straight line" is easy to understand: the shortest path between two points. But on a curved surface?'}
           </p>
 
-          <div className="bg-gradient-to-r from-yellow-900/30 to-orange-900/30 rounded-lg p-4 border border-yellow-700 mb-4">
-            <p className="text-yellow-400 font-semibold mb-2">
-              🚗 {isZh ? '小车类比' : 'Car Analogy'}
-            </p>
-            <p className="text-slate-300 text-sm">
-              {isZh 
-                ? '想象在一个光滑的曲面上放一辆没有方向盘、也无法刹车的小车。一旦给它一个初始速度，它就只能凭着惯性往前滑。它在曲面上划出的轨迹就是测地线——完全由曲面自身的形状决定，不受外界影响。这就是"内蕴"的含义：测地线只和脚下的"地形"有关。'
-                : 'Imagine placing a car with no steering wheel and no brakes on a smooth surface. Once given an initial push, it can only coast on inertia. The path it traces on the surface is a geodesic—determined entirely by the surface\'s own shape, with no external influence. This is what "intrinsic" means: geodesics depend only on the "terrain" beneath.'}
-            </p>
-          </div>
-
           <div className="grid md:grid-cols-2 gap-4 mb-4">
             <div className="bg-slate-800 rounded-lg p-4">
               <h3 className="text-green-400 font-semibold mb-2">
@@ -108,10 +97,15 @@ export default function Chapter3() {
             <p className="text-blue-400 font-semibold mb-2">
               🚗 {isZh ? '开车类比' : 'Driving Analogy'}
             </p>
+            <p className="text-slate-300 text-sm mb-2">
+              {isZh 
+                ? '想象在曲面上放一辆没有方向盘、也无法刹车的小车。一旦给它一个初始速度，它就只能凭着惯性往前滑——方向盘固定不动，只需要踩油门。在弯曲的曲面上，这种路径从外部看会弯曲，但对于曲面上的"居民"来说，它感觉是"直"的。'
+                : 'Imagine placing a car with no steering wheel and no brakes on a curved surface. Once given an initial push, it just coasts on inertia—steering wheel locked, only the gas pedal matters. On a curved surface, this path appears curved from outside, but for "residents" on the surface, it feels perfectly "straight".'}
+            </p>
             <p className="text-slate-300 text-sm">
               {isZh 
-                ? '测地线就像"方向盘不动"的路径。你只需要踩油门，不需要转方向盘。在弯曲的曲面上，这种路径本身就会弯曲，但对于曲面上的"居民"来说，它是"直"的。'
-                : 'A geodesic is like driving with the "steering wheel fixed". You just press the gas, no steering needed. On a curved surface, this path will curve, but for "residents" on the surface, it feels "straight".'}
+                ? '这辆小车划出的轨迹就是测地线——完全由曲面自身的形状决定，不受外界影响。这就是"内蕴"的含义：测地线只和脚下的"地形"有关。'
+                : 'The path this car traces is a geodesic—determined entirely by the surface\'s own shape, with no external influence. This is what "intrinsic" means: geodesics depend only on the "terrain" beneath.'}
             </p>
           </div>
 
