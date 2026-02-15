@@ -498,18 +498,6 @@ export default function Chapter6() {
             </ul>
           </div>
 
-          {/* Why surprising */}
-          <div className="bg-slate-800 rounded-lg p-4 mb-4">
-            <p className="text-purple-400 font-semibold mb-2">
-              🎯 {isZh ? '为什么这个定理令人惊讶？' : 'Why is This Theorem Surprising?'}
-            </p>
-            <p className="text-slate-300 text-sm">
-              {isZh 
-                ? '接触数是纯粹的微分几何概念（比较测地线和法截面），全纯曲线是复几何概念（涉及复数和解析函数）。这个定理揭示了两个看似无关的数学领域之间的深刻联系！'
-                : 'Contact number is purely differential geometric (comparing geodesic and normal section), while holomorphic curve is from complex geometry (involving complex numbers and analytic functions). This theorem reveals deep connections between two seemingly unrelated mathematical fields!'}
-            </p>
-          </div>
-
           <div className="bg-gradient-to-r from-yellow-900/30 to-orange-900/30 rounded-lg p-4 border border-yellow-700">
             <p className="text-yellow-400 font-semibold mb-2">
               🔗 {isZh ? '数学统一性的体现' : 'Manifestation of Mathematical Unity'}
