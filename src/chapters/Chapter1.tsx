@@ -243,12 +243,12 @@ export default function Chapter1() {
 
           <div className="bg-gradient-to-r from-cyan-900/50 to-purple-900/50 rounded-lg p-4 border border-cyan-700">
             <h3 className="text-cyan-400 font-semibold mb-2">
-              🎯 {isZh ? '与接触数的联系' : 'Connection to Contact Number'}
+              📣 {isZh ? '预告' : 'Preview'}
             </h3>
             <p className="text-slate-300">
               {isZh 
-                ? <><Tooltip term="contact-number">接触数</Tooltip>（Contact Number）是李世杰教授与陈邦彦教授提出的一个不变量，用于研究<Tooltip term="euclidean-space">欧氏空间</Tooltip>中<Tooltip term="submanifold">子流形</Tooltip>的几何性质。在后续章节中，我们将深入学习这一理论。</>
-                : <><Tooltip term="contact-number">Contact Number</Tooltip> is an invariant proposed by Prof. Shi-Jie Li and Prof. Bang-Yen Chen, used to study the geometric properties of <Tooltip term="submanifold">submanifolds</Tooltip> in <Tooltip term="euclidean-space">Euclidean space</Tooltip>. We will explore this theory in depth in later chapters.</>}
+                ? <>这些基础概念（流形、子流形、嵌入）是理解陈邦彦教授与李世杰教授工作的基石。在第五章，我们将利用这些概念来定义一个新的几何不变量——它能精确测量子流形的"对称程度"。</>
+                : <>These foundational concepts (manifolds, submanifolds, embeddings) are the building blocks for understanding the work of Prof. Chen and Prof. Li. In Chapter 5, we'll use them to define a new geometric invariant that precisely measures the "degree of symmetry" of submanifolds.</>}
             </p>
           </div>
 

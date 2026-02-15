@@ -148,8 +148,8 @@ export default function Chapter3() {
           
           <p className="text-slate-300 mb-4">
             {isZh 
-              ? '接触数的定义需要考虑所有可能的"起点+方向"组合。'
-              : 'The definition of contact number requires considering all possible "starting point + direction" combinations.'}
+              ? '后续章节中，我们需要考虑流形上所有可能的"起点+方向"组合。'
+              : 'In later chapters, we\'ll need to consider all possible "starting point + direction" combinations on the manifold.'}
           </p>
 
           <div className="bg-slate-800 rounded-lg p-4 mb-4">
@@ -179,7 +179,7 @@ export default function Chapter3() {
         {/* Section 3.4 - Key connection */}
         <section className="bg-gradient-to-r from-red-900/30 to-orange-900/30 rounded-xl p-6 border-2 border-red-700">
           <h2 className="text-xl font-semibold text-red-400 mb-4">
-            ⭐ {isZh ? '3.4 测地线——接触数的第一条曲线' : '3.4 Geodesic—The First Curve in Contact Number'}
+            ⭐ {isZh ? '3.4 测地线的重要性' : '3.4 Why Geodesics Matter'}
           </h2>
           
           <p className="text-slate-300 mb-4">
@@ -194,12 +194,12 @@ export default function Chapter3() {
 
           <div className="bg-slate-900 rounded-lg p-4">
             <p className="text-yellow-400 font-semibold mb-2">
-              🎯 {isZh ? '与接触数的联系' : 'Connection to Contact Number'}
+              📣 {isZh ? '预告' : 'Preview'}
             </p>
             <p className="text-slate-300 text-sm">
               {isZh 
-                ? '这条测地线 γ_u 是接触数定义中的第一条曲线！它代表流形的"内蕴"几何——完全由流形本身决定，不依赖于它是如何嵌入外部空间的。'
-                : 'This geodesic γ_u is the first curve in the contact number definition! It represents the "intrinsic" geometry of the manifold—completely determined by the manifold itself, independent of how it\'s embedded in ambient space.'}
+                ? '测地线 γ_u 代表流形的"内蕴"几何——完全由流形本身决定，不依赖于嵌入方式。在第四章中，我们将引入另一条曲线（法截面），然后比较这两条曲线的差异。'
+                : 'Geodesic γ_u represents the "intrinsic" geometry of the manifold—completely determined by the manifold itself, independent of embedding. In Chapter 4, we\'ll introduce another curve (normal section) and compare the difference between these two curves.'}
             </p>
           </div>
 

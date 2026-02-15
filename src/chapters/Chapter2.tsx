@@ -179,21 +179,16 @@ export default function Chapter2() {
             </div>
           </div>
 
-          {/* Connection to Contact Number */}
+          {/* Preview */}
           <div className="bg-gradient-to-r from-green-900/30 to-cyan-900/30 rounded-lg p-4 border border-green-700">
             <p className="text-green-400 font-semibold mb-2">
-              🎯 {isZh ? '与接触数的联系' : 'Connection to Contact Number'}
+              📣 {isZh ? '预告：余维数的重要性' : 'Preview: Why Codimension Matters'}
             </p>
             <p className="text-slate-300 text-sm">
               {isZh 
-                ? 'Chen-Li 的接触数理论研究的是嵌入的子流形（不自交）。余维数 = m - n 决定了法空间的维数，直接影响：'
-                : 'Chen-Li contact number theory studies embedded submanifolds (no self-intersection). Codimension = m - n determines normal space dimension, directly affecting:'}
+                ? '余维数 = m - n 决定了法空间的维数。在第五章中我们将看到，余维数直接影响子流形可能具有的几何对称性。'
+                : 'Codimension = m - n determines normal space dimension. In Chapter 5, we\'ll see that codimension directly affects what geometric symmetry a submanifold can have.'}
             </p>
-            <ul className="text-slate-400 text-sm mt-2 space-y-1">
-              <li>• {isZh ? '法截面的复杂程度' : 'Complexity of normal sections'}</li>
-              <li>• {isZh ? '接触数的可能取值' : 'Possible values of contact number'}</li>
-              <li>• {isZh ? '几何结构的丰富程度' : 'Richness of geometric structures'}</li>
-            </ul>
             <p className="text-green-300 text-sm mt-2">
               💡 {isZh 
                 ? '高余维数 = 更多"弯曲的空间" = 更多几何可能性！'
@@ -210,8 +205,8 @@ export default function Chapter2() {
           
           <p className="text-slate-300 mb-4">
             {isZh 
-              ? '陈邦彦教授与李世杰教授的接触数理论主要研究欧氏空间中的子流形。'
-              : "The contact number theory by Prof. Bang-Yen Chen and Prof. Shi-Jie Li primarily studies submanifolds in Euclidean space."}
+              ? '陈邦彦教授与李世杰教授的研究主要关注欧氏空间中的子流形。'
+              : "The research by Prof. Bang-Yen Chen and Prof. Shi-Jie Li primarily focuses on submanifolds in Euclidean space."}
           </p>
 
           <div className="bg-slate-800 rounded-lg p-4 mb-4">
@@ -483,9 +478,9 @@ export default function Chapter2() {
               </div>
             </div>
             <p className="text-yellow-400 text-sm mt-3">
-              💡 {isZh 
-                ? '接触数理论正是研究法向部分的几何性质！'
-                : 'Contact number theory studies precisely the geometry of the normal part!'}
+              📣 {isZh 
+                ? '预告：后续章节将深入研究法向部分的几何性质，揭示它如何反映子流形的嵌入特征。'
+                : 'Preview: Later chapters will study the geometry of the normal part, revealing how it reflects embedding characteristics.'}
             </p>
           </div>
 
@@ -528,12 +523,12 @@ export default function Chapter2() {
           
           <div className="bg-gradient-to-r from-red-900/50 to-orange-900/50 rounded-lg p-4 border border-red-700 mb-4">
             <h3 className="text-red-400 font-semibold mb-2">
-              ⭐ {isZh ? '核心概念——接触数理论的关键！' : 'Core Concept—Key to Contact Number Theory!'}
+              ⭐ {isZh ? '核心概念——后续章节的关键工具' : 'Core Concept—Key Tool for Later Chapters'}
             </h3>
             <p className="text-slate-300">
               {isZh 
-                ? '第二基本形式h测量子流形如何"弯曲"地嵌入外部空间。接触数的所有定理都与h的性质密切相关！'
-                : 'The second fundamental form h measures how the submanifold "bends" in the ambient space. All contact number theorems are closely related to properties of h!'}
+                ? '第二基本形式h测量子流形如何"弯曲"地嵌入外部空间。它是后续所有定理的核心数学工具。'
+                : 'The second fundamental form h measures how the submanifold "bends" in the ambient space. It is the core mathematical tool for all theorems to come.'}
             </p>
           </div>
 
@@ -676,18 +671,13 @@ export default function Chapter2() {
 
           <div className="bg-slate-800 rounded-lg p-4">
             <p className="text-yellow-400 font-semibold mb-2">
-              💡 {isZh ? '与接触数的联系' : 'Connection to Contact Number'}
+              📣 {isZh ? '预告' : 'Preview'}
             </p>
-            <p className="text-slate-300 text-sm mb-3">
+            <p className="text-slate-300 text-sm">
               {isZh 
-                ? '接触数通过研究 h(u,u)（沿单位向量u的"自弯曲"）的性质来定义：'
-                : 'Contact number is defined by studying properties of h(u,u) (the "self-bending" along unit vector u):'}
+                ? '第二基本形式 h 是后续章节的核心工具。在第五章，我们将看到 h(u,u)（沿方向u的"自弯曲"）如何决定子流形的对称性质——对 h 的约束越强，子流形越"特殊"。'
+                : 'The second fundamental form h is the core tool for later chapters. In Chapter 5, we\'ll see how h(u,u) (the "self-bending" along direction u) determines the symmetry properties of submanifolds—stronger constraints on h mean more "special" submanifolds.'}
             </p>
-            <ul className="text-slate-300 text-sm space-y-2">
-              <li>• {isZh ? '接触数 ≥ 3 的条件涉及 h(u,u) 的正交性：' : 'Contact number ≥ 3 condition involves orthogonality of h(u,u):'} <Math>{'\\langle h(u,u), h(u,v) \\rangle = 0'}</Math></li>
-              <li>• {isZh ? '这个条件限制了子流形在不同方向上"弯曲的协调性"' : 'This condition restricts how the submanifold "coordinates its bending" in different directions'}</li>
-              <li>• {isZh ? '接触数越高，对h的约束越强，子流形越"特殊"' : 'Higher contact number means stronger constraints on h, more "special" submanifold'}</li>
-            </ul>
           </div>
 
           {/* Second fundamental form visualization */}
@@ -842,15 +832,15 @@ export default function Chapter2() {
             </ul>
           </div>
 
-          {/* Connection to contact number */}
+          {/* Shape operator special properties */}
           <div className="bg-gradient-to-r from-purple-900/30 to-blue-900/30 rounded-lg p-4 border border-purple-700 mb-4">
             <h3 className="text-purple-400 font-semibold mb-2">
-              🔗 {isZh ? '与接触数理论的联系' : 'Connection to Contact Number Theory'}
+              🔗 {isZh ? '形状算子的特殊条件（后续章节）' : 'Special Shape Operator Conditions (Later Chapters)'}
             </h3>
             <p className="text-slate-300 text-sm mb-3">
               {isZh 
-                ? '在Chen-Li的论文中，许多定理涉及形状算子的特殊性质：'
-                : 'In Chen-Li\'s papers, many theorems involve special properties of the shape operator:'}
+                ? '后续章节将研究形状算子满足特殊条件时，子流形会有什么性质：'
+                : 'Later chapters will study what happens when the shape operator satisfies special conditions:'}
             </p>
             <ul className="text-slate-300 text-sm space-y-2">
               <li>• <span className="text-green-400">{isZh ? '伪脐条件' : 'Pseudo-umbilical condition'}</span>: A_H = λI — {isZh ? '沿平均曲率方向的形状算子是恒等的倍数（第7章）' : 'shape operator along mean curvature is scalar identity (Chapter 7)'}</li>

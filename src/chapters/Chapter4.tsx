@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-import { MathBlock, Math, Tooltip } from '../components';
+import { MathBlock, Tooltip } from '../components';
 import { NormalSectionVizWithLabels, Chapter4VizCollection, EmbeddingComparisonVizWithLabels } from '../visualizations';
 
 export default function Chapter4() {
@@ -212,7 +212,7 @@ export default function Chapter4() {
                 : 'Two curves with the same starting point and initial direction—but do they diverge afterward? If so, from which derivative order do they diverge?'}
             </p>
             <p className="text-cyan-400 font-semibold mt-2">
-              {isZh ? '这个问题的答案就是接触数！' : 'The answer to this question is the Contact Number!'}
+              {isZh ? '下一章，我们将精确定义这个"分开的阶数"！' : 'In the next chapter, we\'ll precisely define this "order of divergence"!'}
             </p>
           </div>
 
@@ -294,12 +294,12 @@ export default function Chapter4() {
 
             <div className="mt-3 bg-green-900/30 rounded-lg p-3 border border-green-700">
               <p className="text-green-400 font-semibold text-sm mb-1">
-                💡 {isZh ? '关于圆柱面的接触数' : 'Contact Number of Cylinder'}
+                📣 {isZh ? '预告' : 'Preview'}
               </p>
               <p className="text-slate-300 text-xs">
                 {isZh 
-                  ? '圆柱面的接触数 c# = 2。轴向和环向测地线与法截面完全一致（c# = ∞ 在这些方向），但斜向只有2阶接触。取所有方向的最小值，所以 c# = 2。'
-                  : 'Cylinder has contact number c# = 2. Axial and circumferential geodesics match normal sections exactly (c# = ∞ in those directions), but diagonal has only 2nd order contact. Taking minimum over all directions gives c# = 2.'}
+                  ? '圆柱面上，轴向和环向的测地线与法截面完全一致，但斜向只有前2阶导数相同。下一章将引入一个数来精确描述这种差异——对每个方向取"吻合的最高阶数"，再取所有方向的最小值。'
+                  : 'On a cylinder, axial and circumferential geodesics match normal sections exactly, but diagonally only the first 2 derivatives match. The next chapter will introduce a number to precisely describe this—the highest matching order for each direction, then the minimum over all directions.'}
               </p>
             </div>
           </div>
@@ -384,12 +384,12 @@ export default function Chapter4() {
             
             <div className="bg-gradient-to-r from-yellow-900/50 to-amber-900/50 rounded-lg p-4 border border-yellow-600">
               <h3 className="text-yellow-400 font-semibold mb-2">
-                ⭐ {isZh ? '接触数的意义' : 'Significance of Contact Number'}
+                ⭐ {isZh ? '核心问题' : 'The Central Question'}
               </h3>
               <p className="text-slate-300 text-sm">
                 {isZh 
-                  ? '接触数测量"内蕴几何"与"外蕴几何"在多大程度上一致。接触数越高，子流形的嵌入方式就越"自然"、越"对称"。'
-                  : 'Contact number measures how much "intrinsic geometry" agrees with "extrinsic geometry". Higher contact number means the embedding is more "natural" and "symmetric".'}
+                  ? '测地线（内蕴）和法截面（外蕴）的差异，精确反映了子流形嵌入的"对称程度"。两者越吻合，嵌入越"自然"。下一章将给出精确的数学定义！'
+                  : 'The difference between geodesic (intrinsic) and normal section (extrinsic) precisely reflects the "degree of symmetry" of the embedding. The more they agree, the more "natural" the embedding. The next chapter gives the precise mathematical definition!'}
               </p>
             </div>
           </div>
@@ -436,8 +436,8 @@ export default function Chapter4() {
             </p>
             <p className="text-slate-300 text-sm">
               {isZh 
-                ? '球面的接触数是多少？提示：对于球面，任何方向的测地线和法截面都是……？'
-                : 'What is the contact number of a sphere? Hint: For a sphere, geodesics and normal sections in any direction are...?'}
+                ? '球面上，任何方向的测地线和法截面分别是什么？它们的关系如何？'
+                : 'On a sphere, what are geodesics and normal sections in any direction? How are they related?'}
             </p>
             <details className="mt-2">
               <summary className="text-cyan-400 cursor-pointer hover:text-cyan-300">
@@ -445,8 +445,8 @@ export default function Chapter4() {
               </summary>
               <p className="text-slate-400 text-sm mt-2">
                 {isZh 
-                  ? <>球面的 <Math>{'c^{\\#} = \\infty'}</Math>！因为测地线和法截面都是大圆，它们完全重合。这是因为球面是高度对称的"<Tooltip term="umbilical">全脐</Tooltip>"子流形。</>
-                  : <>Sphere has <Math>{'c^{\\#} = \\infty'}</Math>! Because both geodesics and normal sections are great circles—they coincide completely. This is because the sphere is a highly symmetric "<Tooltip term="umbilical">totally umbilical</Tooltip>" submanifold.</>}
+                  ? <>球面上测地线和法截面都是大圆，它们完全重合！这是因为球面是高度对称的"<Tooltip term="umbilical">全脐</Tooltip>"子流形。换言之，球面的内蕴几何和外蕴几何完全一致。</>
+                  : <>On a sphere, both geodesics and normal sections are great circles—they coincide completely! This is because the sphere is a highly symmetric "<Tooltip term="umbilical">totally umbilical</Tooltip>" submanifold. In other words, intrinsic and extrinsic geometry agree perfectly on a sphere.</>}
               </p>
             </details>
           </div>
@@ -459,8 +459,8 @@ export default function Chapter4() {
           </h2>
           <p className="text-slate-300">
             {isZh 
-              ? '我们已经准备好了两条曲线：测地线γ_u和法截面β_u。下一章，我们将正式定义接触数，并证明为什么它至少为2。这是Chen-Li论文的核心内容！'
-              : 'We\'ve prepared two curves: geodesic γ_u and normal section β_u. In the next chapter, we\'ll formally define contact number and prove why it\'s at least 2. This is the core content of Chen-Li\'s paper!'}
+              ? '我们已经准备好了两条曲线：测地线γ_u（内蕴）和法截面β_u（外蕴）。下一章，我们将正式定义一个不变量来精确衡量它们的"吻合程度"，并证明为什么这个吻合程度至少为2。这是Chen-Li论文的核心内容！'
+              : 'We\'ve prepared two curves: geodesic γ_u (intrinsic) and normal section β_u (extrinsic). In the next chapter, we\'ll formally define an invariant to precisely measure their "degree of agreement" and prove why it\'s at least 2. This is the core content of Chen-Li\'s paper!'}
           </p>
         </section>
 
@@ -473,7 +473,7 @@ export default function Chapter4() {
             <li>✅ {isZh ? '法截面 = 用包含切向量和法空间的平面切割子流形得到的曲线' : 'Normal section = curve from cutting submanifold with plane containing tangent and normal space'}</li>
             <li>✅ {isZh ? '法截面和测地线有相同的起点和初始方向' : 'Normal section and geodesic share same starting point and initial direction'}</li>
             <li>✅ {isZh ? '测地线是内蕴的（只取决于流形本身），法截面是外蕴的（取决于嵌入方式）' : 'Geodesic is intrinsic (depends only on manifold), normal section is extrinsic (depends on embedding)'}</li>
-            <li>✅ {isZh ? '接触数测量这两条曲线"贴合"的程度' : 'Contact number measures how closely these two curves "match"'}</li>
+            <li>✅ {isZh ? '下一章将定义一个不变量来精确衡量这两条曲线的"吻合程度"' : 'Next chapter will define an invariant to precisely measure how closely these two curves "match"'}</li>
             <li>✅ {isZh ? '球面上c# = ∞（测地线=法截面=大圆）' : 'On sphere c# = ∞ (geodesic = normal section = great circle)'}</li>
           </ul>
         </section>
