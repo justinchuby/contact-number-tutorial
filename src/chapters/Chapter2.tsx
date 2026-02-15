@@ -98,6 +98,108 @@ export default function Chapter2() {
               <li>• <span className="text-yellow-400">{isZh ? '浸入' : 'Immersion'}</span>: {isZh ? '打结的耳机线、交叉的铁路轨道、Klein瓶在3D中的表示' : 'Tangled earphone cord, crossing railway tracks, Klein bottle representation in 3D'}</li>
             </ul>
           </div>
+
+          {/* Embedding vs Immersion Deep Dive */}
+          <div className="bg-gradient-to-r from-blue-900/30 to-indigo-900/30 rounded-lg p-4 border border-blue-700 mb-4">
+            <p className="text-blue-400 font-semibold mb-3">
+              🔬 {isZh ? '深入理解：嵌入与浸入的关系' : 'Deep Dive: Relationship Between Embedding and Immersion'}
+            </p>
+            
+            <div className="space-y-3 text-sm">
+              <div>
+                <p className="text-cyan-400 font-semibold mb-1">{isZh ? '关键关系：嵌入 ⊂ 浸入' : 'Key Relationship: Embedding ⊂ Immersion'}</p>
+                <p className="text-slate-300">
+                  {isZh 
+                    ? '每个嵌入都是浸入，但反过来不一定成立。嵌入是"更强"的条件——不仅局部要一对一，全局也要一对一（不允许自交）。'
+                    : 'Every embedding is an immersion, but not vice versa. Embedding is a "stronger" condition—not only locally one-to-one, but globally one-to-one (no self-intersection allowed).'}
+                </p>
+              </div>
+
+              <div>
+                <p className="text-cyan-400 font-semibold mb-1">{isZh ? 'Whitney 定理' : 'Whitney Theorem'}</p>
+                <p className="text-slate-300 mb-2">
+                  {isZh 
+                    ? '著名的 Whitney 定理告诉我们需要多少维空间：'
+                    : 'The famous Whitney theorem tells us how many dimensions we need:'}
+                </p>
+                <ul className="text-slate-400 space-y-1 ml-4">
+                  <li>• {isZh ? '任何 n 维流形都可以浸入 ℝ^{2n-1}' : 'Any n-dimensional manifold can be immersed in ℝ^{2n-1}'}</li>
+                  <li>• {isZh ? '任何 n 维流形都可以嵌入 ℝ^{2n}' : 'Any n-dimensional manifold can be embedded in ℝ^{2n}'}</li>
+                </ul>
+              </div>
+
+              <div className="bg-slate-800 rounded p-3">
+                <p className="text-yellow-400 font-semibold mb-2">{isZh ? '经典例子' : 'Classic Examples'}</p>
+                <table className="w-full text-xs">
+                  <thead>
+                    <tr className="text-slate-400">
+                      <th className="text-left py-1">{isZh ? '流形' : 'Manifold'}</th>
+                      <th className="text-left py-1">dim</th>
+                      <th className="text-left py-1">{isZh ? '最小浸入' : 'Min Immersion'}</th>
+                      <th className="text-left py-1">{isZh ? '最小嵌入' : 'Min Embedding'}</th>
+                    </tr>
+                  </thead>
+                  <tbody className="text-slate-300">
+                    <tr>
+                      <td className="py-1">{isZh ? '圆 S¹' : 'Circle S¹'}</td>
+                      <td>1</td>
+                      <td>ℝ²</td>
+                      <td>ℝ²</td>
+                    </tr>
+                    <tr>
+                      <td className="py-1">{isZh ? '球面 S²' : 'Sphere S²'}</td>
+                      <td>2</td>
+                      <td>ℝ³</td>
+                      <td>ℝ³</td>
+                    </tr>
+                    <tr>
+                      <td className="py-1">Klein{isZh ? '瓶' : ' bottle'}</td>
+                      <td>2</td>
+                      <td>ℝ³ {isZh ? '(自交)' : '(self-int.)'}</td>
+                      <td className="text-orange-400">ℝ⁴</td>
+                    </tr>
+                    <tr>
+                      <td className="py-1">ℝP² {isZh ? '(射影平面)' : '(proj. plane)'}</td>
+                      <td>2</td>
+                      <td>ℝ³ {isZh ? '(自交)' : '(self-int.)'}</td>
+                      <td className="text-orange-400">ℝ⁴</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div>
+                <p className="text-cyan-400 font-semibold mb-1">{isZh ? '为什么 Klein 瓶不能嵌入 ℝ³？' : 'Why can\'t Klein bottle embed in ℝ³?'}</p>
+                <p className="text-slate-300">
+                  {isZh 
+                    ? 'Klein 瓶是不可定向的闭曲面。定理：在 ℝ³ 中，任何闭曲面都会把空间分成"内"和"外"。但 Klein 瓶没有内外之分（不可定向），所以它必须自交才能在 3D 中表示。需要"多一个维度"（ℝ⁴）来避免自交。'
+                    : 'Klein bottle is a non-orientable closed surface. Theorem: In ℝ³, any closed surface divides space into "inside" and "outside". But Klein bottle has no inside/outside (non-orientable), so it must self-intersect in 3D. It needs "one more dimension" (ℝ⁴) to avoid self-intersection.'}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Connection to Contact Number */}
+          <div className="bg-gradient-to-r from-green-900/30 to-cyan-900/30 rounded-lg p-4 border border-green-700">
+            <p className="text-green-400 font-semibold mb-2">
+              🎯 {isZh ? '与接触数的联系' : 'Connection to Contact Number'}
+            </p>
+            <p className="text-slate-300 text-sm">
+              {isZh 
+                ? '李世杰教授研究的是嵌入的子流形（不自交）。余维数 = m - n 决定了法空间的维数，直接影响：'
+                : 'Prof. Li studies embedded submanifolds (no self-intersection). Codimension = m - n determines normal space dimension, directly affecting:'}
+            </p>
+            <ul className="text-slate-400 text-sm mt-2 space-y-1">
+              <li>• {isZh ? '法截面的复杂程度' : 'Complexity of normal sections'}</li>
+              <li>• {isZh ? '接触数的可能取值' : 'Possible values of contact number'}</li>
+              <li>• {isZh ? '几何结构的丰富程度' : 'Richness of geometric structures'}</li>
+            </ul>
+            <p className="text-green-300 text-sm mt-2">
+              💡 {isZh 
+                ? '高余维数 = 更多"弯曲的空间" = 更多几何可能性！'
+                : 'Higher codimension = more "room to bend" = more geometric possibilities!'}
+            </p>
+          </div>
         </section>
 
         {/* Section 2.2 */}
