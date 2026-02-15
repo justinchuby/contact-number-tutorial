@@ -48,9 +48,11 @@ function CuttingPlane({
   return (
     <mesh geometry={geometry}>
       <meshStandardMaterial 
-        color="#8855ff" 
+        color="#ff99ff" 
+        emissive="#aa44ff"
+        emissiveIntensity={0.3}
         transparent 
-        opacity={0.35} 
+        opacity={0.5} 
         side={THREE.DoubleSide}
       />
     </mesh>
