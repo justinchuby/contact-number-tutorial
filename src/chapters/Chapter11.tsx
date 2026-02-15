@@ -18,6 +18,50 @@ export default function Chapter11() {
       </header>
 
       <div className="space-y-8">
+        {/* Chapter Overview */}
+        <section className="bg-gradient-to-r from-purple-900/30 to-indigo-900/30 rounded-xl p-6 border border-purple-700">
+          <h2 className="text-xl font-semibold text-purple-400 mb-4">
+            📋 {isZh ? '本章概览' : 'Chapter Overview'}
+          </h2>
+          <p className="text-slate-300 mb-4">
+            {isZh 
+              ? '学术研究不是孤立的——每一项工作都会启发后来者的探索。本章展示Chen-Li接触数理论以及李世杰教授其他工作如何影响了数学界，以及这些想法如何被后续研究者发展和推广。'
+              : 'Academic research isn\'t isolated—each work inspires further exploration. This chapter shows how Chen-Li\'s contact number theory and Prof. Li\'s other work influenced mathematics, and how these ideas were developed and extended by later researchers.'}
+          </p>
+          <div className="grid md:grid-cols-4 gap-3">
+            <div className="bg-slate-800 rounded-lg p-3 text-center">
+              <div className="text-2xl mb-1">🌐</div>
+              <p className="text-slate-300 text-xs">{isZh ? '伪欧氏推广' : 'Pseudo-Euclidean'}</p>
+            </div>
+            <div className="bg-slate-800 rounded-lg p-3 text-center">
+              <div className="text-2xl mb-1">📐</div>
+              <p className="text-slate-300 text-xs">{isZh ? '高接触数曲面' : 'High Contact'}</p>
+            </div>
+            <div className="bg-slate-800 rounded-lg p-3 text-center">
+              <div className="text-2xl mb-1">🎓</div>
+              <p className="text-slate-300 text-xs">{isZh ? '学术传承' : 'Academic Legacy'}</p>
+            </div>
+            <div className="bg-slate-800 rounded-lg p-3 text-center">
+              <div className="text-2xl mb-1">📅</div>
+              <p className="text-slate-300 text-xs">{isZh ? '研究时间线' : 'Timeline'}</p>
+            </div>
+          </div>
+        </section>
+
+        {/* How research evolves */}
+        <section className="bg-slate-900 rounded-xl p-6">
+          <h2 className="text-xl font-semibold text-slate-400 mb-4">
+            🔄 {isZh ? '数学研究如何发展' : 'How Mathematical Research Evolves'}
+          </h2>
+          <div className="bg-gradient-to-r from-blue-900/30 to-cyan-900/30 rounded-lg p-4 border border-blue-700 mb-4">
+            <p className="text-slate-300 text-sm">
+              {isZh 
+                ? '一项数学研究的影响通常表现在几个方面：(1) 概念被推广到更广泛的情形；(2) 方法被应用到新的问题；(3) 结果被其他研究者引用和发展；(4) 形成新的研究方向。Chen-Li的接触数理论在这些方面都有体现。'
+                : 'A mathematical work\'s impact typically manifests in several ways: (1) concepts are generalized to broader settings; (2) methods are applied to new problems; (3) results are cited and developed by others; (4) new research directions emerge. Chen-Li\'s contact number theory demonstrates all of these.'}
+            </p>
+          </div>
+        </section>
+
         {/* Intro */}
         <section className="bg-gradient-to-r from-blue-900/30 to-indigo-900/30 rounded-xl p-6 border border-blue-700">
           <h2 className="text-xl font-semibold text-blue-400 mb-4">
@@ -25,8 +69,8 @@ export default function Chapter11() {
           </h2>
           <p className="text-slate-300">
             {isZh 
-              ? 'Chen-Li的接触数理论发表于2004年，至今已经启发了多项后续研究。本章介绍这些发展，展示李世杰教授工作的持久影响。'
-              : 'Chen-Li\'s contact number theory, published in 2004, has inspired numerous subsequent studies. This chapter presents these developments, showing the lasting impact of Prof. Li\'s work.'}
+              ? 'Chen-Li的接触数理论发表于2004年，至今已经启发了多项后续研究。以下我们详细介绍这些发展，展示李世杰教授工作的持久影响。'
+              : 'Chen-Li\'s contact number theory, published in 2004, has inspired numerous subsequent studies. Below we detail these developments, showing the lasting impact of Prof. Li\'s work.'}
           </p>
         </section>
 
@@ -36,13 +80,30 @@ export default function Chapter11() {
             {isZh ? '11.1 伪欧氏空间的接触数 (2008)' : '11.1 Contact Number in Pseudo-Euclidean Spaces (2008)'}
           </h2>
           
+          {/* What is pseudo-Euclidean */}
+          <div className="bg-gradient-to-r from-purple-900/30 to-pink-900/30 rounded-lg p-4 border border-purple-700 mb-4">
+            <p className="text-purple-400 font-semibold mb-2">
+              🌌 {isZh ? '什么是伪欧氏空间？' : 'What is Pseudo-Euclidean Space?'}
+            </p>
+            <p className="text-slate-300 text-sm mb-2">
+              {isZh 
+                ? '伪欧氏空间是欧氏空间的推广，其中内积可以取负值。最著名的例子是Lorentz-Minkowski空间，它是爱因斯坦相对论的数学基础。'
+                : 'Pseudo-Euclidean space generalizes Euclidean space to allow inner products to be negative. The most famous example is Lorentz-Minkowski space, the mathematical foundation of Einstein\'s relativity.'}
+            </p>
+            <p className="text-slate-400 text-sm">
+              {isZh 
+                ? '例如：在4维Minkowski空间中，内积定义为 ⟨x,y⟩ = -x₀y₀ + x₁y₁ + x₂y₂ + x₃y₃'
+                : 'Example: In 4D Minkowski space, inner product is ⟨x,y⟩ = -x₀y₀ + x₁y₁ + x₂y₂ + x₃y₃'}
+            </p>
+          </div>
+          
           <div className="bg-slate-800 rounded-lg p-4 mb-4">
             <p className="text-slate-300 font-semibold">Cabrerizo, J.L., Fernández, M., & Gómez, J.S.</p>
             <p className="text-cyan-400">"The Contact Number of a Pseudo-Euclidean Submanifold"</p>
             <p className="text-slate-400 text-sm">Taiwanese Journal of Mathematics, 12(7), 2008</p>
           </div>
 
-          <div className="bg-slate-800 rounded-lg p-4">
+          <div className="bg-slate-800 rounded-lg p-4 mb-4">
             <p className="text-green-400 font-semibold mb-2">
               🔬 {isZh ? '主要贡献' : 'Main Contribution'}
             </p>
@@ -60,6 +121,17 @@ export default function Chapter11() {
                 : 'Established new classification theorems'}
               </li>
             </ul>
+          </div>
+
+          <div className="bg-slate-800 rounded-lg p-4">
+            <p className="text-yellow-400 font-semibold mb-2">
+              💡 {isZh ? '为什么这很重要？' : 'Why is This Important?'}
+            </p>
+            <p className="text-slate-300 text-sm">
+              {isZh 
+                ? '这项工作说明Chen-Li的接触数概念不仅适用于经典几何，还能推广到物理学相关的伪黎曼几何。这扩大了理论的适用范围和潜在应用。'
+                : 'This work shows Chen-Li\'s contact number concept applies not only to classical geometry, but extends to pseudo-Riemannian geometry relevant to physics. This broadens the theory\'s scope and potential applications.'}
+            </p>
           </div>
         </section>
 
@@ -226,6 +298,20 @@ export default function Chapter11() {
               </div>
             ))}
           </div>
+        </section>
+
+        {/* Chapter Summary */}
+        <section className="bg-slate-800 rounded-xl p-6">
+          <h2 className="text-lg font-semibold text-slate-400 mb-4">
+            📝 {isZh ? '本章小结' : 'Chapter Summary'}
+          </h2>
+          <ul className="text-slate-300 text-sm space-y-2">
+            <li>✅ {isZh ? '接触数概念已被推广到伪欧氏空间（2008年Cabrerizo等）' : 'Contact number concept extended to pseudo-Euclidean spaces (Cabrerizo et al. 2008)'}</li>
+            <li>✅ {isZh ? '高接触数曲面得到了深入研究和显式构造' : 'High contact number surfaces studied in depth with explicit constructions'}</li>
+            <li>✅ {isZh ? 'Qin-Li全挠率定理被推广到三维情形（2023年Raffaelli）' : 'Qin-Li total torsion theorem generalized to 3D (Raffaelli 2023)'}</li>
+            <li>✅ {isZh ? 'Chen-Ricci不等式30年发展综述（2024年）' : 'Chen-Ricci inequality 30-year development surveyed (2024)'}</li>
+            <li>✅ {isZh ? '李世杰教授的工作继续影响国际数学研究' : 'Prof. Li\'s work continues to influence international mathematical research'}</li>
+          </ul>
         </section>
 
         {/* Navigation */}
