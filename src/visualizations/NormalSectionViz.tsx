@@ -5,12 +5,10 @@ import * as THREE from 'three';
 
 // The cutting plane visualization - plane containing tangent u and normal space
 function CuttingPlane({ 
-  position, 
   tangent, 
   surfaceNormal, 
   show 
 }: { 
-  position: THREE.Vector3;
   tangent: THREE.Vector3;
   surfaceNormal: THREE.Vector3;
   show: boolean;
@@ -20,19 +18,21 @@ function CuttingPlane({
   // The cutting plane E(p,u) contains: the tangent direction u and the normal space
   // For a surface in E³, normal space is 1D (just the surface normal)
   // So E(p,u) is spanned by u and the surface normal n
+  // For a unit sphere, this plane passes through the origin
   
   const geometry = useMemo(() => {
     const u = tangent.clone().normalize();
     const n = surfaceNormal.clone().normalize();
     
-    // Create a quad in the plane spanned by u and n
+    // Create a quad in the plane spanned by u and n, centered at origin
     const size = 1.5;
+    const center = new THREE.Vector3(0, 0, 0);
     const vertices = new Float32Array([
       // Four corners of the plane
-      ...position.clone().add(u.clone().multiplyScalar(size)).add(n.clone().multiplyScalar(size)).toArray(),
-      ...position.clone().add(u.clone().multiplyScalar(-size)).add(n.clone().multiplyScalar(size)).toArray(),
-      ...position.clone().add(u.clone().multiplyScalar(-size)).add(n.clone().multiplyScalar(-size)).toArray(),
-      ...position.clone().add(u.clone().multiplyScalar(size)).add(n.clone().multiplyScalar(-size)).toArray(),
+      ...center.clone().add(u.clone().multiplyScalar(size)).add(n.clone().multiplyScalar(size)).toArray(),
+      ...center.clone().add(u.clone().multiplyScalar(-size)).add(n.clone().multiplyScalar(size)).toArray(),
+      ...center.clone().add(u.clone().multiplyScalar(-size)).add(n.clone().multiplyScalar(-size)).toArray(),
+      ...center.clone().add(u.clone().multiplyScalar(size)).add(n.clone().multiplyScalar(-size)).toArray(),
     ]);
     
     const indices = new Uint16Array([0, 1, 2, 0, 2, 3]);
@@ -43,7 +43,7 @@ function CuttingPlane({
     geom.computeVertexNormals();
     
     return geom;
-  }, [position, tangent, surfaceNormal]);
+  }, [tangent, surfaceNormal]);
 
   return (
     <mesh geometry={geometry}>
@@ -60,30 +60,37 @@ function CuttingPlane({
 }
 
 // The intersection curve (normal section)
-function NormalSectionCurve({ planeNormal, color = '#ff00ff' }: { planeNormal: THREE.Vector3; color?: string }) {
+function NormalSectionCurve({ 
+  point,
+  tangent, 
+  surfaceNormal,
+  color = '#ff00ff' 
+}: { 
+  point: THREE.Vector3;
+  tangent: THREE.Vector3;
+  surfaceNormal: THREE.Vector3;
+  color?: string;
+}) {
   const points = useMemo(() => {
     const pts: THREE.Vector3[] = [];
-    // For a sphere, the intersection with any plane through center is a great circle
-    // The normal section is in the plane containing u and the normal space
+    // The normal section is the intersection of sphere with the plane E(p,u)
+    // E(p,u) is spanned by tangent direction u and surface normal n
+    // For a unit sphere centered at origin, this plane passes through origin
+    // So the intersection is a great circle
+    
+    // The great circle lies in the plane spanned by u and n
+    // We can parameterize it as: cos(θ)*u + sin(θ)*n
+    const u = tangent.clone().normalize();
+    const n = surfaceNormal.clone().normalize();
+    
     for (let i = 0; i <= 64; i++) {
       const theta = (i / 64) * Math.PI * 2;
-      // Create circle perpendicular to planeNormal
-      const v1 = new THREE.Vector3(1, 0, 0);
-      const v2 = new THREE.Vector3(0, 1, 0);
-      
-      // Gram-Schmidt to get vectors perpendicular to planeNormal
-      const n = planeNormal.clone().normalize();
-      v1.sub(n.clone().multiplyScalar(v1.dot(n))).normalize();
-      v2.crossVectors(n, v1);
-      
-      const x = Math.cos(theta);
-      const y = Math.sin(theta);
-      pts.push(
-        v1.clone().multiplyScalar(x).add(v2.clone().multiplyScalar(y))
-      );
+      const p = u.clone().multiplyScalar(Math.cos(theta))
+                 .add(n.clone().multiplyScalar(Math.sin(theta)));
+      pts.push(p);
     }
     return pts;
-  }, [planeNormal]);
+  }, [point, tangent, surfaceNormal]);
 
   return <Line points={points} color={color} lineWidth={3} />;
 }
@@ -159,9 +166,6 @@ function NormalSectionScene() {
   
   // Normal is just the position for a unit sphere
   const normal = point.clone().normalize();
-  
-  // Plane normal for normal section (perpendicular to tangent × normal)
-  const planeNormal = new THREE.Vector3().crossVectors(tangent, normal).normalize();
 
   return (
     <>
@@ -184,14 +188,13 @@ function NormalSectionScene() {
       
       {/* The cutting plane E(p,u) - contains tangent u and surface normal */}
       <CuttingPlane 
-        position={point} 
         tangent={tangent} 
         surfaceNormal={normal} 
         show={showPlane} 
       />
       
       {/* Normal section curve */}
-      <NormalSectionCurve planeNormal={planeNormal} color="#ff00ff" />
+      <NormalSectionCurve point={point} tangent={tangent} surfaceNormal={normal} color="#ff00ff" />
       
       {/* Point on surface */}
       <mesh position={point}>
