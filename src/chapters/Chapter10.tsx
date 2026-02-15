@@ -101,12 +101,12 @@ export default function Chapter10() {
           
           <div className="bg-gradient-to-r from-green-900/30 to-teal-900/30 rounded-lg p-4 border border-green-700 mb-4">
             <p className="text-green-400 font-semibold mb-2">
-              🎯 {isZh ? '直观理解' : 'Intuitive Understanding'}
+              🎯 {isZh ? '直观理解："黄金视角"' : 'Intuition: The "Golden Viewing Angle"'}
             </p>
             <p className="text-slate-300 text-sm">
               {isZh 
-                ? '想象在子流形M上每点选一个"指向外部"的方向（法向量）。如果沿这个方向，M的弯曲程度处处相同，我们就说这是一个等周截面。就像圆柱面沿中心轴方向，处处"同样地弯"。'
-                : 'Imagine choosing an "outward pointing" direction (normal vector) at each point of M. If the bending of M in this direction is the same everywhere, we call this an isoperimetric section. Like a cylinder along its axis—it "bends the same" everywhere.'}
+                ? '想象你找到了一个非常特殊的观察视角（一个法向量方向）。从这个视角看过去，子流形的平均弯曲程度是一个恒定的常数——无论你走到哪个点，这个数字都不变。我们称这个特殊方向为"黄金视角"。而"平行"条件意味着这个黄金视角在整个曲面上都不会改变——无论你怎么走动，这个能让一切看起来很规整的观察方向始终不变。'
+                : 'Imagine finding a very special viewing angle (a normal direction). From this angle, the surface\'s average bending is a constant—the same no matter which point you visit. We call this the "golden viewing angle". The "parallel" condition means this golden angle never changes across the entire surface—no matter where you walk, this neatly-organized viewing direction stays the same.'}
             </p>
           </div>
 
@@ -232,6 +232,17 @@ export default function Chapter10() {
             ⭐ {isZh ? '10.3 超球面包含定理' : '10.3 Hypersphere Containment Theorem'}
           </h2>
           
+          <div className="bg-gradient-to-r from-teal-900/30 to-cyan-900/30 rounded-lg p-4 border border-teal-700 mb-4">
+            <p className="text-teal-400 font-semibold mb-2">
+              📦 {isZh ? '"紧致"是什么？' : 'What is "Compact"?'}
+            </p>
+            <p className="text-slate-300 text-sm">
+              {isZh 
+                ? '一个简单的理解方式：想象一个甜甜圈或一个篮球的表面。你可以在上面一直走，永远不会"掉下去"——因为它没有边界。但同时，它的总面积是有限的。这种"无边又有限"的性质就是紧致的核心思想。紧致性在定理证明中至关重要，因为它允许我们使用积分工具，并保证极值的存在。'
+                : 'A simple way to understand: imagine a donut or a basketball\'s surface. You can walk on it forever without "falling off"—it has no boundary. Yet its total area is finite. This combination of "boundless yet finite" is the essence of compactness. Compactness is crucial in proofs because it allows integral methods and guarantees existence of extrema.'}
+            </p>
+          </div>
+
           <div className="bg-slate-900 rounded-lg p-4 mb-4">
             <p className="text-cyan-300 font-semibold mb-2">
               {isZh ? '定理 (王霞-李世杰 2003)' : 'Theorem (Wang-Li 2003)'}

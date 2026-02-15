@@ -243,12 +243,27 @@ export default function Chapter1() {
 
           <div className="bg-gradient-to-r from-cyan-900/50 to-purple-900/50 rounded-lg p-4 border border-cyan-700">
             <h3 className="text-cyan-400 font-semibold mb-2">
-              📣 {isZh ? '预告' : 'Preview'}
+              📣 {isZh ? '预告：山坡上的思想实验' : 'Preview: A Thought Experiment on a Hillside'}
             </h3>
+            <p className="text-slate-300 mb-3">
+              {isZh 
+                ? '在我们深入接下来的旅程之前，请先做一个思想实验：'
+                : 'Before diving into the journey ahead, try a thought experiment:'}
+            </p>
+            <p className="text-slate-300 mb-2 italic">
+              {isZh 
+                ? '想象你站在一个连绵起伏的光滑山坡上。你想沿着脚下"最直"的方向往前走——在你看来，最直的那条路是什么样的？'
+                : 'Imagine standing on a smooth, rolling hillside. You want to walk in the "straightest" possible direction—what does the straightest path feel like to you?'}
+            </p>
+            <p className="text-slate-300 mb-2 italic">
+              {isZh 
+                ? '现在换个视角——上帝视角。拿一把巨大的、无限薄的刀（一个平面），垂直地面沿着你前进的方向把山坡切开。刀面和山坡交叉会形成一条曲线。'
+                : 'Now switch perspective—to God\'s view. Take a giant, infinitely thin knife (a plane), and slice vertically through the hill along your direction of travel. The knife and hill intersect to form a curve.'}
+            </p>
             <p className="text-slate-300">
               {isZh 
-                ? <>这些基础概念（流形、子流形、嵌入）是理解陈邦彦教授与李世杰教授工作的基石。在第五章，我们将利用这些概念来定义一个新的几何不变量——它能精确测量子流形的"对称程度"。</>
-                : <>These foundational concepts (manifolds, submanifolds, embeddings) are the building blocks for understanding the work of Prof. Chen and Prof. Li. In Chapter 5, we'll use them to define a new geometric invariant that precisely measures the "degree of symmetry" of submanifolds.</>}
+                ? <>这两条路——你作为山坡居民感觉"最直"的<strong className="text-cyan-400">内在之路</strong>，和上帝视角切出来的<strong className="text-yellow-400">外在之路</strong>——它们的贴合程度到底有多高？这个问题的答案，就是我们整个教程的核心：<strong className="text-green-400">接触数</strong>。</>
+                : <>These two paths—the <strong className="text-cyan-400">intrinsic path</strong> that feels straightest to you the hillside resident, and the <strong className="text-yellow-400">extrinsic path</strong> cut from God's view—how well do they match? The answer to this question is the core of our entire tutorial: the <strong className="text-green-400">Contact Number</strong>.</>}
             </p>
           </div>
 

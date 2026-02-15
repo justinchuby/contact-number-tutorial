@@ -21,6 +21,18 @@ export default function Chapter12() {
           </h2>
           
           <div className="space-y-4">
+            {/* Periodic table metaphor */}
+            <div className="bg-gradient-to-r from-purple-900/30 to-pink-900/30 rounded-lg p-4 border border-purple-700">
+              <h3 className="text-purple-400 font-semibold mb-2">
+                🧪 {isZh ? '几何世界的"元素周期表"' : 'A "Periodic Table" for Geometry'}
+              </h3>
+              <p className="text-slate-300 text-sm mb-2">
+                {isZh 
+                  ? '接触数理论就像在为几何世界绘制一张元素周期表。每个接触数对应着一类独特的几何"物种"：c#=2是最普通的元素，c#=3是各向同性家族，c#=4是常各向同性家族，c#=∞是完美的球面。论文中已给出了c#=6的例子——但c#=5、7或更高的奇数和偶数，它们各自对应着什么样的未知几何特性？这张表上还有大量空白位置，等待未来的数学家去发现和命名。'
+                  : 'Contact number theory is like drawing a periodic table for geometry. Each contact number corresponds to a unique geometric "species": c#=2 is the most common element, c#=3 is the isotropic family, c#=4 the constant isotropic family, c#=∞ the perfect spheres. The paper gives examples with c#=6—but what geometric properties correspond to c#=5, 7, or higher? Many positions on this table remain blank, awaiting future mathematicians to discover and name.'}
+              </p>
+            </div>
+
             <div className="bg-slate-800 rounded-lg p-4">
               <h3 className="text-green-400 font-semibold mb-2">
                 {isZh ? '新的子流形分类不变量' : 'New Submanifold Classification Invariant'}

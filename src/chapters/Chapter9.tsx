@@ -209,10 +209,15 @@ export default function Chapter9() {
             <p className="text-purple-400 font-semibold mb-2">
               🎢 {isZh ? '过山车类比' : 'Roller Coaster Analogy'}
             </p>
-            <p className="text-slate-300 text-sm">
+            <p className="text-slate-300 text-sm mb-2">
               {isZh 
                 ? '坐过山车时，轨道不仅会左右转弯（曲率），还会让你"翻滚"——这种翻滚感就是挠率！挠率测量曲线离开其密切平面的速度。'
                 : 'On a roller coaster, the track not only turns left-right (curvature), but also makes you "roll"—this rolling sensation is torsion! Torsion measures how fast a curve leaves its osculating plane.'}
+            </p>
+            <p className="text-slate-300 text-sm">
+              {isZh 
+                ? '更具体地说：曲率衡量曲线如何在一个平面内弯曲，而挠率衡量曲线如何偏离这个平面向第三个维度扭曲。正的挠率是"向左扭"，负的挠率是"向右扭"。全挠率就是沿着整条闭合曲线把所有的向左扭和向右扭都加起来的结果。'
+                : 'More precisely: curvature measures bending within a plane, while torsion measures twisting away from that plane into the third dimension. Positive torsion is "twisting left", negative is "twisting right". Total torsion sums up all the left-twists and right-twists along the entire closed curve.'}
             </p>
           </div>
 
@@ -408,8 +413,8 @@ export default function Chapter9() {
             </p>
             <p className="text-slate-300 text-sm">
               {isZh 
-                ? '卵形面的凸性带来额外约束。直观地说：卵形面像一个"鼓起来的气球"，曲率线不能在上面"翻筋斗"。数学上，Qin-Li使用了Gauss曲率K>0的性质和积分几何的技巧来证明这个更强的结论。'
-                : 'The convexity of ovaloids provides additional constraints. Intuitively: an ovaloid is like an "inflated balloon" where lines of curvature cannot "do somersaults". Mathematically, Qin-Li used properties of positive Gaussian curvature K>0 and integral geometry techniques to prove this stronger result.'}
+                ? '卵形面的凸性带来额外约束。直观地说：卵形面像一个"鼓起来的气球"，处处正曲率（局部性质），却迫使任何闭合曲率线上所有的向左扭和向右扭必须不多不少恰好完全抵消（全局性质）。这是局部性质（每一点的正曲率）如何对全局行为（整条曲线的总扭曲）施加严格限制的一个深刻例子。'
+                : 'Ovaloid convexity provides extra constraints. Intuitively: an ovaloid is like an "inflated balloon" with positive curvature everywhere (local property), yet this forces all left-twists and right-twists of any closed curvature line to cancel out exactly (global property). This is a profound example of how local properties (positive curvature at each point) impose strict limits on global behavior (total twist of an entire curve).'}
             </p>
           </div>
         </section>

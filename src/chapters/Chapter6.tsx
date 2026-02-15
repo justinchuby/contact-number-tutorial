@@ -66,14 +66,16 @@ export default function Chapter6() {
             <p className="text-blue-400 font-semibold mb-2">
               🌐 {isZh ? '直观理解："各向同性"是什么意思？' : 'Intuition: What Does "Isotropic" Mean?'}
             </p>
-            <p className="text-slate-300 text-sm mb-2">
+            <p className="text-slate-300 text-sm mb-3">
               {isZh 
-                ? '"各向同性"字面意思是"各个方向都一样"。想象你站在曲面上的一点：'
-                : '"Isotropic" literally means "same in all directions". Imagine standing at a point on a surface:'}
+                ? '再回到山坡上。你站在曲面上的一个点，环顾四周。如果无论你朝着哪个方向看，山坡翘起来的那个初始弯曲程度（法曲率）都完全一样，那么你站的这个点就是"各向同性"的。'
+                : 'Back on the hillside. You stand at a point on the surface, looking all around. If the initial bending (normal curvature) looks exactly the same no matter which direction you face, that point is "isotropic".'}
             </p>
-            <ul className="text-slate-300 text-sm space-y-1">
-              <li>🔵 {isZh ? '球面：无论你朝哪个方向看，曲面的弯曲程度都一样——这是各向同性的！' : 'Sphere: No matter which direction you look, the surface bends the same—this is isotropic!'}</li>
-              <li>🥚 {isZh ? '椭球面：沿长轴和短轴方向，弯曲程度不同——这不是各向同性的。' : 'Ellipsoid: Along major vs minor axis, bending differs—this is NOT isotropic.'}</li>
+            <ul className="text-slate-300 text-sm space-y-2">
+              <li>🥣 {isZh ? '碗底的蚂蚁：想象一只蚂蚁站在一个完美的圆碗底部正中心。无论它朝哪个方向看，上坡的坡度都完全一样——没有任何方向比别的方向更特殊。这就是各向同性。' : 'Ant at the bowl bottom: imagine an ant at the center of a perfectly round bowl. The slope is identical in every direction—no direction is special. That\'s isotropy.'}</li>
+              <li>🔵 {isZh ? '球面：最完美的各向同性曲面。站在球面的任何一点，朝任何方向看，弯曲程度都完全相同。' : 'Sphere: the perfect isotropic surface. At any point, looking in any direction, the bending is identical.'}</li>
+              <li>🥔 {isZh ? '薯片（马鞍面）：站在薯片中心的马鞍点上，沿长轴方向它是向上弯的，沿短轴方向又是向下弯的。不同方向弯曲完全不同——典型的非各向同性！' : 'Potato chip (saddle): at the center saddle point, it curves up along one axis and down along the other. Completely different bending in different directions—classic non-isotropic!'}</li>
+              <li>🥚 {isZh ? '椭球面（鸡蛋）：沿长轴和短轴方向弯曲程度不同——也不是各向同性的。' : 'Ellipsoid (egg): bending differs along major vs minor axis—also not isotropic.'}</li>
             </ul>
           </div>
           
@@ -184,15 +186,20 @@ export default function Chapter6() {
             </div>
           </div>
 
-          {/* What does this tell us */}
+          {/* What does this tell us - AHA moment */}
           <div className="bg-gradient-to-r from-yellow-900/30 to-orange-900/30 rounded-lg p-4 border border-yellow-700">
             <p className="text-orange-400 font-semibold mb-2">
-              🎯 {isZh ? '这个定理告诉我们什么？' : 'What Does This Theorem Tell Us?'}
+              💡 {isZh ? 'Aha时刻：动态测量揭示静态性质！' : 'Aha Moment: Dynamic Measurement Reveals Static Property!'}
+            </p>
+            <p className="text-slate-300 text-sm mb-2">
+              {isZh 
+                ? '停下来想想这个定理有多巧妙：一个看似动态的性质（两条曲线的贴合程度）和一个静态的性质（曲面局部的对称性），竟然是完全等价的！'
+                : 'Pause and appreciate how clever this is: a seemingly dynamic property (how closely two curves match) and a static property (local symmetry of the surface) turn out to be completely equivalent!'}
             </p>
             <p className="text-slate-300 text-sm">
               {isZh 
-                ? '接触数不是随意的数字——它精确地刻画了子流形的几何对称性。c# ≥ 3 恰好捕捉了"各向同性"这一重要的几何性质。这建立了一个纯粹分析定义（导数相等的阶数）与几何性质（各向同性）之间的桥梁。'
-                : 'Contact number isn\'t arbitrary—it precisely characterizes submanifold geometric symmetry. c# ≥ 3 exactly captures the important property of "isotropy". This bridges a purely analytic definition (order of derivative equality) with a geometric property (isotropy).'}
+                ? '你不需要站在曲面上拿着量角器去测量所有方向的曲率。你只需要在任何一个方向上比较测地线和法截面——如果它们的"加速度"和"jerk"都一样（三阶接触成立），你就能立刻断定这个点在所有方向上都是对称的。这种"用动态方式刻画静态对称性"的转换，正是接触数理论最美妙的核心洞察。'
+                : 'You don\'t need to stand on the surface with a protractor measuring curvature in every direction. Just compare geodesic and normal section in any direction—if their "acceleration" and "jerk" match (3rd order contact), you can immediately conclude the point is symmetric in all directions. This "dynamic measurement characterizes static symmetry" insight is the most beautiful core of contact number theory.'}
             </p>
           </div>
         </section>
@@ -208,11 +215,15 @@ export default function Chapter6() {
             <p className="text-blue-400 font-semibold mb-2">
               🤔 {isZh ? '为什么要考虑"常"各向同性？' : 'Why Consider "Constant" Isotropy?'}
             </p>
-            <p className="text-slate-300 text-sm">
+            <p className="text-slate-300 text-sm mb-2">
               {isZh 
-                ? '各向同性说的是：在每一点，各方向弯曲相同。但不同点的弯曲程度λ(p)可能不同。常各向同性更强：不仅每点各向同性，而且λ在整个M上是同一个常数！'
-                : 'Isotropy says: at each point, bending is the same in all directions. But the bending magnitude λ(p) might differ between points. Constant isotropy is stronger: not only is each point isotropic, but λ is the same constant over all of M!'}
+                ? '各向同性只要求每个点的各方向弯曲相同，但不同点的弯曲程度可能不同。常各向同性要求整座"山脉"——无论你站在山峰、山腰还是山谷，脚下那种"各方向无差别"的感觉都完全一样。'
+                : 'Isotropy only requires each point to bend equally in all directions, but different points can bend differently. Constant isotropy requires the entire "mountain range"—whether you stand on a peak, slope, or valley, that "direction-independent" feel is exactly the same.'}
             </p>
+            <ul className="text-slate-300 text-sm space-y-1 mt-2">
+              <li>⚽ {isZh ? '足球：完美的常各向同性——每个点的对称性不仅存在，而且数值完全一样。' : 'Soccer ball: perfect constant isotropy—symmetry exists at every point and with the same value.'}</li>
+              <li>🥚 {isZh ? '鸡蛋：在尖端和在腰部的弯曲程度不一样，即使每个点可能是各向同性的，但不是"常"各向同性。' : 'Egg: bending at the tip differs from the middle. Even if each point is isotropic, it\'s not "constant" isotropic.'}</li>
+            </ul>
           </div>
           
           <div className="bg-slate-800 rounded-lg p-4 mb-4">
@@ -290,15 +301,20 @@ export default function Chapter6() {
           </div>
 
           {/* Pattern */}
-          <div className="bg-slate-800 rounded-lg p-4">
+          <div className="bg-slate-800 rounded-lg p-4 mb-4">
             <p className="text-green-400 font-semibold mb-2">
-              📊 {isZh ? '规律总结' : 'Pattern Summary'}
+              📊 {isZh ? '接触数：对称性的"标尺"' : 'Contact Number: A "Ruler" for Symmetry'}
+            </p>
+            <p className="text-slate-300 text-sm mb-3">
+              {isZh 
+                ? '接触数就像一把标尺，把几何对称性划分成了不同的等级：'
+                : 'Contact number acts like a ruler that grades geometric symmetry into levels:'}
             </p>
             <ul className="text-slate-300 text-sm space-y-1">
               <li>• c# ≥ 2: {isZh ? '无条件（所有子流形）' : 'No condition (all submanifolds)'}</li>
-              <li>• c# ≥ 3: {isZh ? '各向同性（各方向弯曲相同）' : 'Isotropic (same bending in all directions)'}</li>
-              <li>• c# ≥ 4: {isZh ? '常各向同性（各方向、各位置弯曲都相同）' : 'Constant isotropic (same bending everywhere)'}</li>
-              <li>• c# = ∞: {isZh ? '全脐（弯曲完全均匀，如球面）' : 'Totally umbilical (completely uniform bending, like sphere)'}</li>
+              <li>• c# ≥ 3: {isZh ? '入门级对称——各向同性（各方向弯曲相同）' : 'Entry-level symmetry—isotropic (same bending in all directions)'}</li>
+              <li>• c# ≥ 4: {isZh ? '进阶级对称——常各向同性（各方向、各位置弯曲都相同）' : 'Advanced symmetry—constant isotropic (same bending everywhere)'}</li>
+              <li>• c# = ∞: {isZh ? '最高级——全脐（如球面、平面，两条路完全重合）' : 'Highest level—totally umbilical (like sphere, plane; two paths completely coincide)'}</li>
             </ul>
           </div>
         </section>
@@ -317,6 +333,23 @@ export default function Chapter6() {
               {isZh 
                 ? '欧氏空间中的曲面M满足 c#(M) = 3 当且仅当 M 是复平面C²中的非平面全纯曲线。'
                 : 'A surface M in Euclidean space has c#(M) = 3 if and only if M is a non-planar holomorphic curve in a complex 2-plane C².'}
+            </p>
+          </div>
+
+          {/* Why surprising */}
+          <div className="bg-gradient-to-r from-purple-900/30 to-pink-900/30 rounded-lg p-4 border border-purple-700 mb-4">
+            <p className="text-purple-400 font-semibold mb-2">
+              🤯 {isZh ? '为什么这个定理令人震惊？' : 'Why Is This Theorem Stunning?'}
+            </p>
+            <p className="text-slate-300 text-sm mb-2">
+              {isZh 
+                ? '这就像发现音乐理论的和声规则竟然能完美预测天气变化一样不可思议！一边是纯粹的微分几何（比较两条曲线的贴合度），另一边是复分析（涉及虚数和解析函数）。这两个看似毫不相关的数学领域，竟然通过一个简单的数字"3"精确地连接在了一起。'
+                : 'This is as incredible as discovering that the rules of musical harmony can perfectly predict weather! On one side: pure differential geometry (comparing how closely two curves match). On the other: complex analysis (involving imaginary numbers and analytic functions). These two seemingly unrelated fields are precisely connected through the simple number "3".'}
+            </p>
+            <p className="text-slate-300 text-sm">
+              {isZh 
+                ? '接触数这把简单的"尺子"，竟然能像试金石一样，检验出一个几何形状有没有"复数的灵魂"。'
+                : 'This simple "ruler" of contact number acts like a touchstone, testing whether a geometric shape has a "complex-number soul".'}
             </p>
           </div>
 

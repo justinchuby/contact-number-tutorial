@@ -25,8 +25,8 @@ export default function Chapter8() {
           </h2>
           <p className="text-slate-300 mb-4">
             {isZh 
-              ? '本章介绍李世杰教授与王美娇1998年的合作研究。这篇论文研究了球面中具有"平行平均曲率向量"的子流形，得到了重要的刚性定理。'
-              : 'This chapter introduces Prof. Li\'s 1998 collaboration with Wang Mei-Jiao. This paper studies submanifolds with "parallel mean curvature vector" in spheres, obtaining important rigidity theorems.'}
+              ? '本章介绍李世杰教授与王美娇1998年的合作研究。这篇论文研究了球面中具有"平行平均曲率向量"的子流形，得到了重要的刚性定理。这项工作展示了一种精妙的"几何侦探"手法——通过"夹挤"（Pinching），让形状自己"招供"真实身份。'
+              : 'This chapter introduces Prof. Li\'s 1998 collaboration with Wang Mei-Jiao. This paper studies submanifolds with "parallel mean curvature vector" in spheres, obtaining important rigidity theorems. This work showcases an elegant "geometric detective" technique—using "pinching" to force shapes to reveal their true identity.'}
           </p>
           <div className="bg-slate-900 rounded-lg p-4">
             <p className="text-slate-400 text-sm font-semibold">📄 {isZh ? '原始论文' : 'Original Paper'}</p>
@@ -245,10 +245,15 @@ export default function Chapter8() {
             <p className="text-cyan-300 font-semibold mb-2">
               🔧 {isZh ? '公式的作用' : 'What the Formula Does'}
             </p>
-            <p className="text-slate-300 text-sm">
+            <p className="text-slate-300 text-sm mb-2">
               {isZh 
                 ? 'Simons公式将第二基本形式h的"Laplacian"（一种二阶导数）与曲率联系起来。这让我们可以用分析学的工具研究几何问题。'
                 : 'The Simons formula relates the "Laplacian" of the second fundamental form h (a type of second derivative) to curvature. This allows us to use analytical tools to study geometric problems.'}
+            </p>
+            <p className="text-slate-300 text-sm">
+              🔍 {isZh 
+                ? 'Laplacian可以理解为一个"张力计"：在曲面上的任何一点，它测量这个点的某个数值与它周围邻居们的平均值之间的差异。如果一个点的值比周围高，就有"向下"的张力；如果比周围低，就有"向上"的张力。通过分析整个曲面上的张力分布，就能洞察形状的内在性质。'
+                : 'Think of the Laplacian as a "tension meter": at any point on the surface, it measures the difference between that point\'s value and the average of its neighbors. If a point is higher than its surroundings, there\'s "downward" tension; if lower, "upward" tension. By analyzing the tension distribution across the entire surface, we can reveal the shape\'s intrinsic properties.'}
             </p>
           </div>
 
@@ -277,11 +282,18 @@ export default function Chapter8() {
             </p>
             <p className="text-slate-300 text-sm mb-2">
               {isZh 
-                ? '"Pinching"意为"夹挤"或"束缚"。Pinching定理说：如果某个几何量被"夹"在一定范围内，那么子流形只能是几种特殊形状。'
-                : '"Pinching" means "squeezing" or "constraining". Pinching theorems say: if some geometric quantity is "squeezed" within a certain range, then the submanifold can only be one of a few special shapes.'}
+                ? '"Pinching"意为"夹挤"或"束缚"。数学家先证明某个积分表达式永远 ≥ 0，然后追问：什么情况下它恰好等于零？这个"等于零"就是最关键的临界状态——绝大部分形状都过不了这个筛子。'
+                : '"Pinching" means "squeezing". Mathematicians first prove some integral expression is always ≥ 0, then ask: when exactly does it equal zero? This "equals zero" is the critical threshold—most shapes fail this filter.'}
+            </p>
+            <p className="text-slate-300 text-sm mb-2">
+              {isZh 
+                ? '💰 钱包类比：如果你告诉我一个钱包里装的全是正面额的硬币，但总金额是零元，唯一的可能就是钱包是空的——一枚硬币都没有。同理，如果积分等于零而每一项都非负，那每一项都必须恰好为零。这就逼迫所有方向上的主曲率必须相等——形状被完全"锁定"了。'
+                : '💰 Wallet analogy: If all coins in a wallet have positive denomination but the total is zero, the only possibility is the wallet is empty. Similarly, if the integral is zero and every term is non-negative, every term must be exactly zero. This forces all principal curvatures to be equal—the shape is completely "locked down".'}
             </p>
             <p className="text-yellow-400 text-sm">
-              💡 {isZh ? '这是"刚性"的体现——几何对象没有太多"自由度"。' : 'This is a manifestation of "rigidity"—geometric objects have limited "degrees of freedom".'}
+              ✂️ {isZh 
+                ? '而"平行"条件在这里扮演了"奥卡姆剃刀"的角色——它就像按下了一个"简化按钮"，让Laplacian公式里的大量变化项都自动消失，只留下一个异常简洁的等式，使证明成为可能。'
+                : 'The "parallel" condition plays the role of "Occam\'s razor" here—it\'s like pressing a "simplify button" that makes many terms in the Laplacian formula vanish, leaving an exceptionally clean equation that makes the proof possible.'}
             </p>
           </div>
 

@@ -32,18 +32,19 @@ export default function Chapter5() {
           {/* Intuitive analogy */}
           <div className="bg-gradient-to-r from-yellow-900/30 to-orange-900/30 rounded-lg p-4 border border-yellow-700 mb-4">
             <p className="text-yellow-400 font-semibold mb-2">
-              🚗 {isZh ? '开车类比' : 'Driving Analogy'}
+              🚗 {isZh ? '物理类比：从速度到加速度' : 'Physics Analogy: From Velocity to Acceleration'}
             </p>
-            <p className="text-slate-300 text-sm mb-2">
+            <p className="text-slate-300 text-sm mb-3">
               {isZh 
-                ? '想象两辆车在高速公路上：'
-                : 'Imagine two cars on a highway:'}
+                ? '想象两辆车从同一个起跑线出发，我们用越来越精密的仪器去比较它们的运动：'
+                : 'Imagine two cars starting from the same line. We compare their motion with increasingly precise instruments:'}
             </p>
-            <ul className="text-slate-300 text-sm space-y-1">
-              <li>• <span className="text-cyan-400">{isZh ? '0阶' : '0th order'}</span>: {isZh ? '两车在同一地点' : 'Both cars at the same location'}</li>
-              <li>• <span className="text-cyan-400">{isZh ? '1阶' : '1st order'}</span>: {isZh ? '同一地点 + 同一速度方向' : 'Same location + same velocity direction'}</li>
-              <li>• <span className="text-cyan-400">{isZh ? '2阶' : '2nd order'}</span>: {isZh ? '同一地点 + 同一速度 + 同一加速度' : 'Same location + same velocity + same acceleration'}</li>
-              <li>• <span className="text-purple-400">{isZh ? 'k阶' : 'kth order'}</span>: {isZh ? '前k个运动特征都相同！' : 'First k motion characteristics all the same!'}</li>
+            <ul className="text-slate-300 text-sm space-y-2">
+              <li>• <span className="text-cyan-400">{isZh ? '0阶' : '0th order'}</span>: {isZh ? '两车在同一地点（位置相同）' : 'Both cars at the same location'}</li>
+              <li>• <span className="text-cyan-400">{isZh ? '1阶' : '1st order'}</span>: {isZh ? '速度方向相同（朝着同一个方向前进）' : 'Same velocity direction (heading the same way)'}</li>
+              <li>• <span className="text-cyan-400">{isZh ? '2阶' : '2nd order'}</span>: {isZh ? '加速度相同——方向盘打的角度一样，乘客感受到的离心力完全相同' : 'Same acceleration—steering angle is identical, passengers feel the same centripetal force'}</li>
+              <li>• <span className="text-purple-400">{isZh ? '3阶' : '3rd order'}</span>: {isZh ? '加速度的变化率也相同——转动方向盘的平顺度一模一样（物理学中叫"jerk"）' : 'Same rate of change of acceleration—the smoothness of turning the steering wheel is identical (called "jerk" in physics)'}</li>
+              <li>• <span className="text-purple-400">{isZh ? 'k阶' : 'kth order'}</span>: {isZh ? '用越来越高倍的"显微镜"观察，两辆车的运动在越来越精微的层面上都无法区分！' : 'With an ever more powerful "microscope", the cars\' motion becomes indistinguishable at increasingly fine levels!'}</li>
             </ul>
           </div>
           
@@ -87,15 +88,20 @@ export default function Chapter5() {
             </div>
           </div>
 
-          {/* DNA analogy */}
+          {/* Kissing + DNA analogy */}
           <div className="bg-gradient-to-r from-green-900/30 to-cyan-900/30 rounded-lg p-4 border border-green-700 mb-4">
             <p className="text-green-400 font-semibold mb-2">
-              🧬 {isZh ? 'DNA类比' : 'DNA Analogy'}
+              💋 {isZh ? '两条曲线的"亲吻"' : 'Two Curves "Kissing"'}
+            </p>
+            <p className="text-slate-300 text-sm mb-2">
+              {isZh 
+                ? '接触阶数衡量的就是两条曲线在接触点处"亲吻"的紧密程度。0阶只是嘴唇轻轻碰到，1阶是方向一致的接吻，2阶是连弯曲弧度都完美贴合……阶数越高，越难分出哪里是一条曲线的结束，哪里是另一条的开始。'
+                : 'Contact order measures how tightly two curves "kiss" at their meeting point. 0th order is barely touching lips, 1st order means the same direction, 2nd order means even the curvature matches perfectly... The higher the order, the harder it is to tell where one curve ends and the other begins.'}
             </p>
             <p className="text-slate-300 text-sm">
-              {isZh 
-                ? '就像DNA测序：两段DNA序列越长的相同前缀，它们的关系越近。接触阶数就像是"几何DNA"的匹配长度！'
-                : 'Like DNA sequencing: the longer the matching prefix of two DNA sequences, the more closely related they are. Contact order is like the matching length of "geometric DNA"!'}
+              🧬 {isZh 
+                ? '另一个类比：就像DNA比对。把两条曲线的泰勒展开式一项一项排开比较——每成功匹配一阶导数，就像DNA序列多匹配了一个碱基对。匹配长度越长，两条曲线的"亲缘关系"越近！'
+                : 'Another analogy: like DNA comparison. Line up the Taylor expansions term by term—each matched derivative is like matching another base pair. The longer the match, the closer the "kinship"!'}
             </p>
           </div>
 
@@ -121,12 +127,12 @@ export default function Chapter5() {
           {/* Key insight analogy */}
           <div className="bg-gradient-to-r from-blue-900/30 to-purple-900/30 rounded-lg p-4 border border-blue-700 mb-4">
             <p className="text-blue-400 font-semibold mb-2">
-              🔍 {isZh ? '核心洞察：两个"自我"的比较' : 'Core Insight: Comparing Two "Selves"'}
+              🔍 {isZh ? '核心洞察：山坡居民 vs 上帝视角' : 'Core Insight: Hillside Resident vs God\'s View'}
             </p>
             <p className="text-slate-300 text-sm">
               {isZh 
-                ? '想象流形M是一个人。测地线γ是"内心的自己"——完全由内在决定（只关心流形本身）。法截面β是"别人眼中的自己"——由外部视角决定（依赖于嵌入方式）。接触数测量这两个"自我"有多一致！'
-                : 'Imagine manifold M is a person. Geodesic γ is the "inner self"—determined entirely from within (only cares about the manifold itself). Normal section β is "how others see you"—determined by external perspective (depends on embedding). Contact number measures how consistent these two "selves" are!'}
+                ? '想象你站在一个光滑的山坡上。作为山坡上的居民，你凭感觉走出最"直"的路——这就是测地线γ，完全由脚下的地形决定。现在换成上帝视角：你拿一把巨大的无限薄的刀，垂直于地面，沿着你前进的方向把山坡切开。刀面与山坡相交形成的曲线就是法截面β。接触数测量的就是：在你出发的那一瞬间，这条"内在之路"和"外在切片之路"的贴合程度到底有多高？'
+                : 'Imagine standing on a smooth hillside. As a resident, you walk the "straightest" path you can feel—that\'s the geodesic γ, determined entirely by the terrain beneath your feet. Now switch to God\'s view: take a giant, infinitely thin knife, hold it perpendicular to the ground, and slice along your direction of travel. The curve where knife meets hillside is the normal section β. Contact number measures: at the moment of departure, how closely do this "inner path" and "outer slice path" match?'}
             </p>
           </div>
           
@@ -378,14 +384,25 @@ export default function Chapter5() {
           </div>
 
           {/* Intuition */}
-          <div className="bg-slate-800 rounded-lg p-4">
+          <div className="bg-slate-800 rounded-lg p-4 mb-4">
             <p className="text-yellow-400 font-semibold mb-2">
               💡 {isZh ? '直观理解' : 'Intuitive Understanding'}
             </p>
             <p className="text-slate-300 text-sm">
               {isZh 
-                ? '测地线和法截面在起点处"起步"完全一样（位置、方向），而且它们"开始转弯"的方式也一样（都是 h(u,u)）。两条曲线只可能在"三阶以上"才开始分道扬镳——这就是为什么接触数至少是2！'
-                : 'Geodesic and normal section "start" identically (position, direction), and they "begin turning" the same way (both h(u,u)). The two curves can only diverge at "third order or higher"—that\'s why contact number is at least 2!'}
+                ? '回到山坡的比喻：无论这个山坡长得多么奇形怪状，在你出发的那一刻，你作为居民感觉最直的路和上帝视角切出来的路，不仅前进方向一致，连弯曲程度都完全一样。真正有趣的差异要从第三阶才开始——也就是"转方向盘的平顺度"开始不同。所以接触数至少是2。'
+                : 'Back to the hillside: no matter how strangely shaped the hillside is, at the moment of departure, the "straightest path" felt by the resident and the "slice path" from God\'s view not only head the same direction, but bend the same way too. Real differences only begin at third order—the "smoothness of turning the wheel" starts to differ. Hence contact number is at least 2.'}
+            </p>
+          </div>
+
+          <div className="bg-gradient-to-r from-purple-900/30 to-pink-900/30 rounded-lg p-4 border border-purple-700">
+            <p className="text-purple-400 font-semibold mb-2">
+              🔑 {isZh ? '关键要点' : 'Key Takeaway'}
+            </p>
+            <p className="text-slate-300 text-sm">
+              {isZh 
+                ? '接触数是一个全局性的数字，它描述的是整个曲面的固有几何品性。它对曲面上的每一点、每一个方向提问："你的内在直路和外在切片之路能在多高阶上保持一致？"然后取其中最保守的答案。既然所有光滑子流形的接触数都至少为2，那真正精彩的故事就从接触数等于3开始了！'
+                : 'Contact number is a global number describing the intrinsic geometric character of the entire surface. It asks every point in every direction: "how closely do your inner path and outer slice path match?" and takes the most conservative answer. Since all smooth submanifolds have c# ≥ 2, the truly exciting story begins at contact number 3!'}
             </p>
           </div>
         </section>
