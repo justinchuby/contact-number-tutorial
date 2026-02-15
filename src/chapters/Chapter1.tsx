@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-import { MathBlock, Math } from '../components';
+import { MathBlock, Math, Tooltip } from '../components';
 import { Chapter1Viz } from '../visualizations';
 
 export default function Chapter1() {
@@ -36,8 +36,12 @@ export default function Chapter1() {
             </p>
             <p className="text-slate-300">
               {isZh 
-                ? '流形是一个空间，它在局部看起来像欧氏空间（平坦的），但在整体上可能有复杂的形状。'
-                : 'A manifold is a space that locally looks like Euclidean space (flat), but may have a complex global shape.'}
+                ? <>
+                    <Tooltip term="manifold">流形</Tooltip>是一个空间，它在局部看起来像<Tooltip term="euclidean-space">欧氏空间</Tooltip>（平坦的），但在整体上可能有复杂的形状。
+                  </>
+                : <>
+                    A <Tooltip term="manifold">manifold</Tooltip> is a space that locally looks like <Tooltip term="euclidean-space">Euclidean space</Tooltip> (flat), but may have a complex global shape.
+                  </>}
             </p>
           </div>
 
@@ -86,8 +90,12 @@ export default function Chapter1() {
             </p>
             <p className="text-slate-300 text-sm">
               {isZh 
-                ? '想象一本世界地图册：每一页都是地球的一小块区域的平面地图。虽然每一页都是平的，但把它们"缝合"在一起，就能描述整个弯曲的地球。数学上，这本"地图册"就叫做Atlas（图册），每一页叫做Chart（坐标卡）。'
-                : 'Imagine a world atlas: each page is a flat map of a small region of Earth. Although each page is flat, "stitching" them together describes the entire curved Earth. In mathematics, this "atlas" is literally called an Atlas, and each page is called a Chart.'}
+                ? <>
+                    想象一本世界地图册：每一页都是地球的一小块区域的平面地图。虽然每一页都是平的，但把它们"缝合"在一起，就能描述整个弯曲的地球。数学上，这本"地图册"就叫做<Tooltip term="atlas">Atlas（图册）</Tooltip>，每一页叫做<Tooltip term="chart">Chart（坐标卡）</Tooltip>。
+                  </>
+                : <>
+                    Imagine a world atlas: each page is a flat map of a small region of Earth. Although each page is flat, "stitching" them together describes the entire curved Earth. In mathematics, this "atlas" is literally called an <Tooltip term="atlas">Atlas</Tooltip>, and each page is called a <Tooltip term="chart">Chart</Tooltip>.
+                  </>}
             </p>
           </div>
           
@@ -103,21 +111,29 @@ export default function Chapter1() {
             </p>
             <p className="text-slate-300 mb-2">
               {isZh 
-                ? '一个n维流形M是一个拓扑空间，满足：对于M中的每一点p，存在一个包含p的开集U和一个同胚映射：'
-                : 'An n-dimensional manifold M is a topological space such that: for every point p in M, there exists an open set U containing p and a homeomorphism:'}
+                ? <>
+                    一个n维<Tooltip term="manifold">流形</Tooltip>M是一个<Tooltip term="topological-space">拓扑空间</Tooltip>，满足：对于M中的每一点p，存在一个包含p的<Tooltip term="open-set">开集</Tooltip>U和一个<Tooltip term="homeomorphism">同胚映射</Tooltip>：
+                  </>
+                : <>
+                    An n-dimensional <Tooltip term="manifold">manifold</Tooltip> M is a <Tooltip term="topological-space">topological space</Tooltip> such that: for every point p in M, there exists an <Tooltip term="open-set">open set</Tooltip> U containing p and a <Tooltip term="homeomorphism">homeomorphism</Tooltip>:
+                  </>}
             </p>
             <MathBlock>{'\\varphi: U \\to \\mathbb{R}^n'}</MathBlock>
             <p className="text-slate-300">
               {isZh 
-                ? '这个映射 (U, φ) 称为局部坐标卡。'
-                : 'This map (U, φ) is called a local coordinate chart.'}
+                ? <>这个映射 (U, φ) 称为<Tooltip term="chart">局部坐标卡</Tooltip>。</>
+                : <>This map (U, φ) is called a <Tooltip term="chart">local coordinate chart</Tooltip>.</>}
             </p>
           </div>
 
           <p className="text-slate-300 mb-4">
             {isZh 
-              ? '更进一步，如果相邻坐标卡之间的转换映射是光滑的，我们就得到光滑流形。如果还配备了度量（用于测量距离和角度），就得到黎曼流形。'
-              : 'Furthermore, if the transition maps between overlapping charts are smooth, we get a smooth manifold. If it also has a metric (for measuring distances and angles), we get a Riemannian manifold.'}
+              ? <>
+                  更进一步，如果相邻<Tooltip term="chart">坐标卡</Tooltip>之间的转换映射是光滑的，我们就得到<Tooltip term="smooth-manifold">光滑流形</Tooltip>。如果还配备了度量（用于测量距离和角度），就得到<Tooltip term="riemannian-manifold">黎曼流形</Tooltip>。
+                </>
+              : <>
+                  Furthermore, if the transition maps between overlapping <Tooltip term="chart">charts</Tooltip> are smooth, we get a <Tooltip term="smooth-manifold">smooth manifold</Tooltip>. If it also has a metric (for measuring distances and angles), we get a <Tooltip term="riemannian-manifold">Riemannian manifold</Tooltip>.
+                </>}
           </p>
         </section>
 
@@ -155,14 +171,14 @@ export default function Chapter1() {
                 {isZh ? '高维流形' : 'Higher-dimensional Manifolds'}
               </h3>
               <ul className="text-slate-300 list-disc list-inside space-y-1">
-                <li>{isZh ? 'n维球面 ' : 'n-sphere '}<Math>{'S^n'}</Math></li>
+                <li>{isZh ? <>n维<Tooltip term="hypersphere">球面</Tooltip> </> : <>n-<Tooltip term="hypersphere">sphere</Tooltip> </>}<Math>{'S^n'}</Math></li>
                 <li>{isZh ? '射影空间 ' : 'Projective space '}<Math>{'\\mathbb{R}P^n'}</Math></li>
               </ul>
             </div>
             
             <div className="bg-slate-800 rounded-lg p-4">
               <h3 className="text-white font-semibold mb-2">
-                {isZh ? '欧氏空间中的子流形' : 'Submanifolds in Euclidean Space'}
+                {isZh ? <><Tooltip term="euclidean-space">欧氏空间</Tooltip>中的<Tooltip term="submanifold">子流形</Tooltip></> : <><Tooltip term="submanifold">Submanifolds</Tooltip> in <Tooltip term="euclidean-space">Euclidean Space</Tooltip></>}
               </h3>
               <ul className="text-slate-300 list-disc list-inside space-y-1">
                 <li><Math>{'S^2 \\subset E^3'}</Math></li>
@@ -192,8 +208,8 @@ export default function Chapter1() {
               <h3 className="text-white font-semibold mb-2">🔬 {isZh ? '物理学' : 'Physics'}</h3>
               <p className="text-slate-300 text-sm">
                 {isZh 
-                  ? '爱因斯坦的广义相对论将时空描述为一个四维流形，弯曲程度由质量决定。'
-                  : "Einstein's General Relativity describes spacetime as a 4-dimensional manifold, with curvature determined by mass."}
+                  ? <>爱因斯坦的广义相对论将时空描述为一个四维<Tooltip term="riemannian-manifold">黎曼流形</Tooltip>，<Tooltip term="curvature">曲率</Tooltip>由质量决定。</>
+                  : <>Einstein's General Relativity describes spacetime as a 4-dimensional <Tooltip term="riemannian-manifold">Riemannian manifold</Tooltip>, with <Tooltip term="curvature">curvature</Tooltip> determined by mass.</>}
               </p>
             </div>
             
@@ -201,8 +217,8 @@ export default function Chapter1() {
               <h3 className="text-white font-semibold mb-2">🤖 {isZh ? '机器人学' : 'Robotics'}</h3>
               <p className="text-slate-300 text-sm">
                 {isZh 
-                  ? '机器人的配置空间（所有可能姿态的集合）通常是一个流形。'
-                  : 'The configuration space of a robot (all possible poses) is typically a manifold.'}
+                  ? <>机器人的配置空间（所有可能姿态的集合）通常是一个<Tooltip term="manifold">流形</Tooltip>。</>
+                  : <>The configuration space of a robot (all possible poses) is typically a <Tooltip term="manifold">manifold</Tooltip>.</>}
               </p>
             </div>
             
@@ -210,8 +226,8 @@ export default function Chapter1() {
               <h3 className="text-white font-semibold mb-2">📊 {isZh ? '数据科学' : 'Data Science'}</h3>
               <p className="text-slate-300 text-sm">
                 {isZh 
-                  ? '流形学习假设高维数据实际上位于一个低维流形上。'
-                  : 'Manifold learning assumes high-dimensional data actually lies on a low-dimensional manifold.'}
+                  ? <>流形学习假设高维数据实际上位于一个低维<Tooltip term="manifold">流形</Tooltip>上。</>
+                  : <>Manifold learning assumes high-dimensional data actually lies on a low-dimensional <Tooltip term="manifold">manifold</Tooltip>.</>}
               </p>
             </div>
             
@@ -219,8 +235,8 @@ export default function Chapter1() {
               <h3 className="text-white font-semibold mb-2">📐 {isZh ? '微分几何' : 'Differential Geometry'}</h3>
               <p className="text-slate-300 text-sm">
                 {isZh 
-                  ? '研究流形上的曲率、测地线、子流形等几何结构。'
-                  : 'Studies geometric structures on manifolds: curvature, geodesics, submanifolds, etc.'}
+                  ? <>研究流形上的<Tooltip term="curvature">曲率</Tooltip>、<Tooltip term="geodesic">测地线</Tooltip>、<Tooltip term="submanifold">子流形</Tooltip>等几何结构。</>
+                  : <>Studies geometric structures on manifolds: <Tooltip term="curvature">curvature</Tooltip>, <Tooltip term="geodesic">geodesics</Tooltip>, <Tooltip term="submanifold">submanifolds</Tooltip>, etc.</>}
               </p>
             </div>
           </div>
@@ -231,8 +247,8 @@ export default function Chapter1() {
             </h3>
             <p className="text-slate-300">
               {isZh 
-                ? '接触数（Contact Number）是李世杰教授与陈邦彦教授提出的一个不变量，用于研究欧氏空间中子流形的几何性质。在后续章节中，我们将深入学习这一理论。'
-                : 'Contact Number is an invariant proposed by Prof. Shi-Jie Li and Prof. Bang-Yen Chen, used to study the geometric properties of submanifolds in Euclidean space. We will explore this theory in depth in later chapters.'}
+                ? <><Tooltip term="contact-number">接触数</Tooltip>（Contact Number）是李世杰教授与陈邦彦教授提出的一个不变量，用于研究<Tooltip term="euclidean-space">欧氏空间</Tooltip>中<Tooltip term="submanifold">子流形</Tooltip>的几何性质。在后续章节中，我们将深入学习这一理论。</>
+                : <><Tooltip term="contact-number">Contact Number</Tooltip> is an invariant proposed by Prof. Shi-Jie Li and Prof. Bang-Yen Chen, used to study the geometric properties of <Tooltip term="submanifold">submanifolds</Tooltip> in <Tooltip term="euclidean-space">Euclidean space</Tooltip>. We will explore this theory in depth in later chapters.</>}
             </p>
           </div>
         </section>
