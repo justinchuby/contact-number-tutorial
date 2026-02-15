@@ -1,16 +1,16 @@
 import { Outlet, useLocation } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import Sidebar from './Sidebar';
 import Header from './Header';
 
 export default function Layout() {
   const location = useLocation();
+  const mainRef = useRef<HTMLElement>(null);
 
-  // Scroll to section when URL has hash (e.g. #section-2.3)
+  // Scroll to section or top on navigation
   useEffect(() => {
     if (location.hash) {
       const id = location.hash.slice(1);
-      // Delay to allow page render after navigation
       const timer = setTimeout(() => {
         const el = document.getElementById(id);
         if (el) {
@@ -19,16 +19,19 @@ export default function Layout() {
       }, 200);
       return () => clearTimeout(timer);
     } else {
-      // No hash: scroll to top
+      // Scroll both window and main container to top
       window.scrollTo(0, 0);
+      if (mainRef.current) {
+        mainRef.current.scrollTo(0, 0);
+      }
     }
-  }, [location]);
+  }, [location.pathname, location.hash]);
 
   return (
     <div className="min-h-screen bg-slate-950 text-white flex flex-col">
       <Sidebar />
       <Header />
-      <main className="ml-64 mt-14 p-8 flex-grow">
+      <main ref={mainRef} className="ml-64 mt-14 p-8 flex-grow">
         <Outlet />
       </main>
       <footer className="ml-64 py-6 px-8 border-t border-slate-800 bg-slate-900/50">
