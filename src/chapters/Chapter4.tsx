@@ -331,17 +331,6 @@ export default function Chapter4() {
               </p>
             </div>
             
-            <div className="bg-gradient-to-r from-green-900/30 to-cyan-900/30 rounded-lg p-4 border border-green-700">
-              <p className="text-green-400 font-semibold mb-2">
-                🔪 {isZh ? '上帝视角的"切片"' : 'God\'s View "Slicing"'}
-              </p>
-              <p className="text-slate-300 text-sm">
-                {isZh 
-                  ? '想象你有了上帝视角，可以从外部观察你脚下的山坡。你拿了一把巨大的、无限薄的刀——在数学里就是一个平面。这把刀垂直于地面，沿着你前进的方向把整个山坡切开。刀面和山坡相交会形成一条曲线——这条曲线就是法截面。它完全是外部观察者的产物：形状不仅取决于山坡本身，还取决于你这把"刀"是怎么放的。'
-                  : 'Imagine having God\'s view, observing the hillside from outside. You take a giant, infinitely thin knife—mathematically, a plane. Hold it perpendicular to the ground and slice along your direction of travel. The knife-surface intersection forms a curve—the normal section. It\'s entirely an external observer\'s product: the shape depends not only on the hillside itself but on how the "knife" is positioned.'}
-              </p>
-            </div>
-            
             <div className="bg-slate-900 rounded-lg p-4">
               <h3 className="text-purple-400 font-semibold mb-2">
                 {isZh ? '法截面 = 外蕴几何' : 'Normal Section = Extrinsic Geometry'}
@@ -350,6 +339,17 @@ export default function Chapter4() {
                 {isZh 
                   ? '法截面依赖于流形是如何嵌入外部空间的。同一个流形以不同方式嵌入，会有不同的法截面。'
                   : 'Normal sections depend on how the manifold is embedded in ambient space. The same manifold embedded differently will have different normal sections.'}
+              </p>
+            </div>
+
+            <div className="bg-gradient-to-r from-green-900/30 to-cyan-900/30 rounded-lg p-4 border border-green-700">
+              <p className="text-green-400 font-semibold mb-2">
+                🔪 {isZh ? '上帝视角的"切片"' : 'God\'s View "Slicing"'}
+              </p>
+              <p className="text-slate-300 text-sm">
+                {isZh 
+                  ? '想象你有了上帝视角，可以从外部观察你脚下的山坡。你拿了一把巨大的、无限薄的刀——在数学里就是一个平面。这把刀垂直于地面，沿着你前进的方向把整个山坡切开。刀面和山坡相交会形成一条曲线——这条曲线就是法截面。它完全是外部观察者的产物：形状不仅取决于山坡本身，还取决于你这把"刀"是怎么放的。'
+                  : 'Imagine having God\'s view, observing the hillside from outside. You take a giant, infinitely thin knife—mathematically, a plane. Hold it perpendicular to the ground and slice along your direction of travel. The knife-surface intersection forms a curve—the normal section. It\'s entirely an external observer\'s product: the shape depends not only on the hillside itself but on how the "knife" is positioned.'}
               </p>
             </div>
 
