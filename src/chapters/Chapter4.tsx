@@ -50,18 +50,6 @@ export default function Chapter4() {
               : 'Given a point p on submanifold M and a unit tangent vector u, we want to construct a special "cutting plane".'}
           </p>
 
-          {/* Giant knife analogy */}
-          <div className="bg-gradient-to-r from-green-900/30 to-cyan-900/30 rounded-lg p-4 border border-green-700 mb-4">
-            <p className="text-green-400 font-semibold mb-2">
-              🔪 {isZh ? '上帝视角的"切片"' : 'God\'s View "Slicing"'}
-            </p>
-            <p className="text-slate-300 text-sm">
-              {isZh 
-                ? '想象你有了上帝视角，可以从外部观察你脚下的山坡。你拿了一把巨大的、无限薄的刀——在数学里就是一个平面。这把刀垂直于地面，沿着你刚才前进的方向把整个山坡切开。刀面和山坡相交会形成一条曲线——这条曲线就是法截面。它完全是外部观察者的产物：形状不仅取决于山坡本身，还取决于你这把"刀"是怎么放的。'
-                : 'Imagine having God\'s view, observing the hillside from above. You take a giant, infinitely thin knife—mathematically, a plane. Hold it perpendicular to the ground and slice along your direction of travel. The knife-surface intersection forms a curve—the normal section. It\'s entirely an external observer\'s product: the shape depends not only on the hillside itself but on how the "knife" is positioned.'}
-            </p>
-          </div>
-
           {/* Why this construction */}
           <div className="bg-gradient-to-r from-yellow-900/30 to-orange-900/30 rounded-lg p-4 border border-yellow-700 mb-4">
             <p className="text-yellow-400 font-semibold mb-2">
@@ -340,6 +328,17 @@ export default function Chapter4() {
                 {isZh 
                   ? '测地线完全由流形本身决定。即使我们把流形"变形"（等距变换），测地线也不变。这是流形作为独立对象的"本质特征"。'
                   : 'Geodesics are completely determined by the manifold itself. Even if we "deform" the manifold (isometry), geodesics remain unchanged. This is the "essential characteristic" of the manifold as an independent object.'}
+              </p>
+            </div>
+            
+            <div className="bg-gradient-to-r from-green-900/30 to-cyan-900/30 rounded-lg p-4 border border-green-700">
+              <p className="text-green-400 font-semibold mb-2">
+                🔪 {isZh ? '上帝视角的"切片"' : 'God\'s View "Slicing"'}
+              </p>
+              <p className="text-slate-300 text-sm">
+                {isZh 
+                  ? '想象你有了上帝视角，可以从外部观察你脚下的山坡。你拿了一把巨大的、无限薄的刀——在数学里就是一个平面。这把刀垂直于地面，沿着你前进的方向把整个山坡切开。刀面和山坡相交会形成一条曲线——这条曲线就是法截面。它完全是外部观察者的产物：形状不仅取决于山坡本身，还取决于你这把"刀"是怎么放的。'
+                  : 'Imagine having God\'s view, observing the hillside from outside. You take a giant, infinitely thin knife—mathematically, a plane. Hold it perpendicular to the ground and slice along your direction of travel. The knife-surface intersection forms a curve—the normal section. It\'s entirely an external observer\'s product: the shape depends not only on the hillside itself but on how the "knife" is positioned.'}
               </p>
             </div>
             
