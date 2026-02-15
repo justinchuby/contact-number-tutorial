@@ -1,4 +1,5 @@
 import { useTranslation } from 'react-i18next';
+import SearchBox from './SearchBox';
 
 export default function Header() {
   const { i18n, t } = useTranslation();
@@ -15,12 +16,15 @@ export default function Header() {
         <span className="text-slate-400 text-sm">|</span>
         <span className="text-slate-300 text-sm">{t('app.subtitle')}</span>
       </div>
-      <button
-        onClick={toggleLanguage}
-        className="px-3 py-1 rounded bg-slate-700 hover:bg-slate-600 text-sm transition-colors"
-      >
-        {i18n.language === 'zh' ? 'English' : '中文'}
-      </button>
+      <div className="flex items-center gap-4">
+        <SearchBox />
+        <button
+          onClick={toggleLanguage}
+          className="px-3 py-1 rounded bg-slate-700 hover:bg-slate-600 text-sm transition-colors"
+        >
+          {i18n.language === 'zh' ? 'English' : '中文'}
+        </button>
+      </div>
     </header>
   );
 }
