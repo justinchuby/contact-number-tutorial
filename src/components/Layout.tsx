@@ -16,7 +16,7 @@ export default function Layout() {
             🤖 本教程内容由 AI 辅助总结生成 | This tutorial content was AI-assisted and generated
           </p>
           <p className="text-slate-600 text-xs">
-            Model: Claude Sonnet 4 (Anthropic) · 基于李世杰教授论文整理
+            Model: Claude Opus 4.5 (Anthropic) · 基于李世杰教授论文整理
           </p>
         </div>
       </footer>
