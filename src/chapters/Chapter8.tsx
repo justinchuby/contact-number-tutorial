@@ -344,10 +344,10 @@ export default function Chapter8() {
             ✅ {isZh ? '本章小结' : 'Chapter Summary'}
           </h2>
           <ul className="text-slate-300 text-sm space-y-2">
-            <li>✅ {isZh ? '平均曲率向量H描述曲面"想要移动"的方向' : 'Mean curvature vector H describes the direction a surface "wants to move"'}</li>
-            <li>✅ {isZh ? '∇⊥H = 0 表示H在法丛中"不变化"（平行）' : '∇⊥H = 0 means H "doesn\'t change" in the normal bundle (parallel)'}</li>
-            <li>✅ {isZh ? 'Simons公式连接几何与分析' : 'Simons formula connects geometry and analysis'}</li>
-            <li>✅ {isZh ? 'Pinching定理：弯曲程度有界 → 形状受限' : 'Pinching theorem: bounded bending → restricted shape'}</li>
+            <li>✓ {isZh ? '平均曲率向量H描述曲面"想要移动"的方向' : 'Mean curvature vector H describes the direction a surface "wants to move"'}</li>
+            <li>✓ {isZh ? '∇⊥H = 0 表示H在法丛中"不变化"（平行）' : '∇⊥H = 0 means H "doesn\'t change" in the normal bundle (parallel)'}</li>
+            <li>✓ {isZh ? 'Simons公式连接几何与分析' : 'Simons formula connects geometry and analysis'}</li>
+            <li>✓ {isZh ? 'Pinching定理：弯曲程度有界 → 形状受限' : 'Pinching theorem: bounded bending → restricted shape'}</li>
           </ul>
 
           {/* Thinking Questions */}

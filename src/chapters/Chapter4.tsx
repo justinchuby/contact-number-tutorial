@@ -470,11 +470,11 @@ export default function Chapter4() {
             ✅ {isZh ? '本章小结' : 'Chapter Summary'}
           </h2>
           <ul className="text-slate-300 text-sm space-y-2">
-            <li>✅ {isZh ? '法截面 = 用包含切向量和法空间的平面切割子流形得到的曲线' : 'Normal section = curve from cutting submanifold with plane containing tangent and normal space'}</li>
-            <li>✅ {isZh ? '法截面和测地线有相同的起点和初始方向' : 'Normal section and geodesic share same starting point and initial direction'}</li>
-            <li>✅ {isZh ? '测地线是内蕴的（只取决于流形本身），法截面是外蕴的（取决于嵌入方式）' : 'Geodesic is intrinsic (depends only on manifold), normal section is extrinsic (depends on embedding)'}</li>
-            <li>✅ {isZh ? '下一章将定义一个不变量来精确衡量这两条曲线的"吻合程度"' : 'Next chapter will define an invariant to precisely measure how closely these two curves "match"'}</li>
-            <li>✅ {isZh ? '球面上c# = ∞（测地线=法截面=大圆）' : 'On sphere c# = ∞ (geodesic = normal section = great circle)'}</li>
+            <li>✓ {isZh ? '法截面 = 用包含切向量和法空间的平面切割子流形得到的曲线' : 'Normal section = curve from cutting submanifold with plane containing tangent and normal space'}</li>
+            <li>✓ {isZh ? '法截面和测地线有相同的起点和初始方向' : 'Normal section and geodesic share same starting point and initial direction'}</li>
+            <li>✓ {isZh ? '测地线是内蕴的（只取决于流形本身），法截面是外蕴的（取决于嵌入方式）' : 'Geodesic is intrinsic (depends only on manifold), normal section is extrinsic (depends on embedding)'}</li>
+            <li>✓ {isZh ? '下一章将定义一个不变量来精确衡量这两条曲线的"吻合程度"' : 'Next chapter will define an invariant to precisely measure how closely these two curves "match"'}</li>
+            <li>✓ {isZh ? '球面上c# = ∞（测地线=法截面=大圆）' : 'On sphere c# = ∞ (geodesic = normal section = great circle)'}</li>
           </ul>
         </section>
 

@@ -247,6 +247,34 @@ export default function Chapter3() {
           </div>
         </section>
 
+        {/* Chapter Summary */}
+        <section className="bg-gradient-to-r from-green-900/50 to-cyan-900/50 rounded-xl p-6 border border-green-700">
+          <h2 className="text-xl font-semibold text-green-400 mb-4">
+            ✅ {isZh ? '本章小结' : 'Chapter Summary'}
+          </h2>
+          <div className="grid md:grid-cols-2 gap-4 text-sm">
+            <div>
+              <p className="text-cyan-400 font-semibold mb-2">{isZh ? '核心概念' : 'Core Concepts'}</p>
+              <ul className="text-slate-300 space-y-1">
+                <li>✓ {isZh ? '测地线：流形上的"最短路径"，弯曲空间中的直线' : 'Geodesic: "shortest path" on manifold, straight line in curved space'}</li>
+                <li>✓ {isZh ? '测地线只取决于流形本身（内蕴性质）' : 'Geodesic depends only on the manifold itself (intrinsic property)'}</li>
+                <li>✓ {isZh ? '不同流形上测地线形态各异：球面大圆、环面螺旋线等' : 'Geodesics vary on different manifolds: great circles on sphere, spirals on torus, etc.'}</li>
+              </ul>
+            </div>
+            <div>
+              <p className="text-yellow-400 font-semibold mb-2">{isZh ? '关键要点' : 'Key Takeaways'}</p>
+              <ul className="text-slate-300 space-y-1">
+                <li>✓ {isZh ? '测地线的"直"是相对于流形而言的' : '"Straight" for geodesics is relative to the manifold'}</li>
+                <li>✓ {isZh ? '地球上飞机沿大圆弧飞行就是测地线的实际应用' : 'Airplanes flying great circle arcs is a real application of geodesics'}</li>
+                <li>✓ {isZh ? '测地线将在后续章节与法截面对比，引出接触数' : 'Geodesics will be compared with normal sections later to define contact number'}</li>
+              </ul>
+            </div>
+          </div>
+          <p className="text-green-400 text-sm mt-4">
+            {isZh ? '下一章：我们将学习法截面——从外部空间切割子流形得到的曲线，它与测地线有何不同？' : 'Next: We\'ll learn about normal sections — curves from cutting the submanifold with ambient planes. How do they differ from geodesics?'}
+          </p>
+        </section>
+
         {/* Navigation */}
         <div className="flex justify-between">
           <Link to="/chapter/2" className="px-6 py-2 bg-slate-700 hover:bg-slate-600 rounded-lg text-white transition-colors">

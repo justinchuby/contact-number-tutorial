@@ -306,11 +306,11 @@ export default function Chapter11() {
             ✅ {isZh ? '本章小结' : 'Chapter Summary'}
           </h2>
           <ul className="text-slate-300 text-sm space-y-2">
-            <li>✅ {isZh ? '接触数概念已被推广到伪欧氏空间（2008年Cabrerizo等）' : 'Contact number concept extended to pseudo-Euclidean spaces (Cabrerizo et al. 2008)'}</li>
-            <li>✅ {isZh ? '高接触数曲面得到了深入研究和显式构造' : 'High contact number surfaces studied in depth with explicit constructions'}</li>
-            <li>✅ {isZh ? 'Qin-Li全挠率定理被推广到三维情形（2023年Raffaelli）' : 'Qin-Li total torsion theorem generalized to 3D (Raffaelli 2023)'}</li>
-            <li>✅ {isZh ? 'Chen-Ricci不等式30年发展综述（2024年）' : 'Chen-Ricci inequality 30-year development surveyed (2024)'}</li>
-            <li>✅ {isZh ? '李世杰教授的工作继续影响国际数学研究' : 'Prof. Li\'s work continues to influence international mathematical research'}</li>
+            <li>✓ {isZh ? '接触数概念已被推广到伪欧氏空间（2008年Cabrerizo等）' : 'Contact number concept extended to pseudo-Euclidean spaces (Cabrerizo et al. 2008)'}</li>
+            <li>✓ {isZh ? '高接触数曲面得到了深入研究和显式构造' : 'High contact number surfaces studied in depth with explicit constructions'}</li>
+            <li>✓ {isZh ? 'Qin-Li全挠率定理被推广到三维情形（2023年Raffaelli）' : 'Qin-Li total torsion theorem generalized to 3D (Raffaelli 2023)'}</li>
+            <li>✓ {isZh ? 'Chen-Ricci不等式30年发展综述（2024年）' : 'Chen-Ricci inequality 30-year development surveyed (2024)'}</li>
+            <li>✓ {isZh ? '李世杰教授的工作继续影响国际数学研究' : 'Prof. Li\'s work continues to influence international mathematical research'}</li>
           </ul>
         </section>
 

@@ -328,10 +328,10 @@ export default function Chapter10() {
             ✅ {isZh ? '本章小结' : 'Chapter Summary'}
           </h2>
           <ul className="text-slate-300 text-sm space-y-2">
-            <li>✅ {isZh ? '等周截面：M₁(ξ)处处相等的单位法向量场' : 'Isoperimetric section: unit normal field with constant M₁(ξ)'}</li>
-            <li>✅ {isZh ? '平行等周截面：等周 + 在法丛中平行（D_X ξ = 0）' : 'Parallel isoperimetric section: isoperimetric + parallel in normal bundle (D_X ξ = 0)'}</li>
-            <li>✅ {isZh ? 'Wang-Li定理：有平行等周截面且正曲率 → 含于超球面' : 'Wang-Li theorem: parallel isoperimetric section + positive curvature → contained in hypersphere'}</li>
-            <li>✅ {isZh ? '这项工作推广了陈邦彦的平行截面定理' : 'This work generalizes Chen\'s parallel section theorem'}</li>
+            <li>✓ {isZh ? '等周截面：M₁(ξ)处处相等的单位法向量场' : 'Isoperimetric section: unit normal field with constant M₁(ξ)'}</li>
+            <li>✓ {isZh ? '平行等周截面：等周 + 在法丛中平行（D_X ξ = 0）' : 'Parallel isoperimetric section: isoperimetric + parallel in normal bundle (D_X ξ = 0)'}</li>
+            <li>✓ {isZh ? 'Wang-Li定理：有平行等周截面且正曲率 → 含于超球面' : 'Wang-Li theorem: parallel isoperimetric section + positive curvature → contained in hypersphere'}</li>
+            <li>✓ {isZh ? '这项工作推广了陈邦彦的平行截面定理' : 'This work generalizes Chen\'s parallel section theorem'}</li>
           </ul>
 
           {/* Thinking Questions */}

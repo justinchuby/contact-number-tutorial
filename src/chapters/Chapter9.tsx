@@ -487,11 +487,11 @@ export default function Chapter9() {
             ✅ {isZh ? '本章小结' : 'Chapter Summary'}
           </h2>
           <ul className="text-slate-300 text-sm space-y-2">
-            <li>✅ {isZh ? '曲率线是沿主曲率方向的曲线，两族曲率线正交' : 'Lines of curvature follow principal directions; two families are orthogonal'}</li>
-            <li>✅ {isZh ? '挠率τ测量曲线"扭曲"程度，全挠率是沿闭曲线的积分' : 'Torsion τ measures curve "twisting"; total torsion is the integral along a closed curve'}</li>
-            <li>✅ {isZh ? 'Qin-Li定理1：闭曲率线的全挠率 = kπ（整数倍）' : 'Qin-Li Theorem 1: total torsion of closed line of curvature = kπ (integer multiple)'}</li>
-            <li>✅ {isZh ? 'Qin-Li定理2：卵形面上闭曲率线的全挠率 = 0' : 'Qin-Li Theorem 2: total torsion on ovaloids = 0'}</li>
-            <li>✅ {isZh ? '这项工作推广了Geppert定理，回应了Blaschke的经典问题' : 'This work generalizes Geppert\'s theorem and addresses Blaschke\'s classical problem'}</li>
+            <li>✓ {isZh ? '曲率线是沿主曲率方向的曲线，两族曲率线正交' : 'Lines of curvature follow principal directions; two families are orthogonal'}</li>
+            <li>✓ {isZh ? '挠率τ测量曲线"扭曲"程度，全挠率是沿闭曲线的积分' : 'Torsion τ measures curve "twisting"; total torsion is the integral along a closed curve'}</li>
+            <li>✓ {isZh ? 'Qin-Li定理1：闭曲率线的全挠率 = kπ（整数倍）' : 'Qin-Li Theorem 1: total torsion of closed line of curvature = kπ (integer multiple)'}</li>
+            <li>✓ {isZh ? 'Qin-Li定理2：卵形面上闭曲率线的全挠率 = 0' : 'Qin-Li Theorem 2: total torsion on ovaloids = 0'}</li>
+            <li>✓ {isZh ? '这项工作推广了Geppert定理，回应了Blaschke的经典问题' : 'This work generalizes Geppert\'s theorem and addresses Blaschke\'s classical problem'}</li>
           </ul>
 
           {/* Thinking Questions */}

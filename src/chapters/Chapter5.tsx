@@ -489,11 +489,11 @@ export default function Chapter5() {
             ✅ {isZh ? '本章小结' : 'Chapter Summary'}
           </h2>
           <ul className="text-slate-300 text-sm space-y-2">
-            <li>✅ {isZh ? '接触阶数：两条曲线在接触点处前k阶导数相等' : 'Contact order: two curves have first k derivatives equal at contact point'}</li>
-            <li>✅ {isZh ? '接触数c#(M)：测地线γ_u和法截面β_u在所有(p,u)处的最小接触阶数' : 'Contact number c#(M): minimum contact order of geodesic γ_u and normal section β_u over all (p,u)'}</li>
-            <li>✅ {isZh ? '任何子流形c# ≥ 2（二阶导数总是相等）' : 'Any submanifold has c# ≥ 2 (2nd derivatives always equal)'}</li>
-            <li>✅ {isZh ? '接触数通过第二基本形式h的性质刻画' : 'Contact number is characterized by properties of second fundamental form h'}</li>
-            <li>✅ {isZh ? '高接触数 = 更"对称"的几何结构' : 'Higher contact number = more "symmetric" geometric structure'}</li>
+            <li>✓ {isZh ? '接触阶数：两条曲线在接触点处前k阶导数相等' : 'Contact order: two curves have first k derivatives equal at contact point'}</li>
+            <li>✓ {isZh ? '接触数c#(M)：测地线γ_u和法截面β_u在所有(p,u)处的最小接触阶数' : 'Contact number c#(M): minimum contact order of geodesic γ_u and normal section β_u over all (p,u)'}</li>
+            <li>✓ {isZh ? '任何子流形c# ≥ 2（二阶导数总是相等）' : 'Any submanifold has c# ≥ 2 (2nd derivatives always equal)'}</li>
+            <li>✓ {isZh ? '接触数通过第二基本形式h的性质刻画' : 'Contact number is characterized by properties of second fundamental form h'}</li>
+            <li>✓ {isZh ? '高接触数 = 更"对称"的几何结构' : 'Higher contact number = more "symmetric" geometric structure'}</li>
           </ul>
 
           {/* Thinking Questions */}

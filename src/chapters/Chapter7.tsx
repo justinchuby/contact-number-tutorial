@@ -494,11 +494,11 @@ export default function Chapter7() {
             ✅ {isZh ? '本章小结' : 'Chapter Summary'}
           </h2>
           <ul className="text-slate-300 text-sm space-y-2">
-            <li>✅ {isZh ? '余维数2时，c# ≥ 3的子流形只有三类：球面、广义螺旋面、全纯曲线' : 'In codim 2, submanifolds with c# ≥ 3 are only: spheres, generalized helicoids, holomorphic curves'}</li>
-            <li>✅ {isZh ? '广义螺旋面是经典螺旋面在高维的推广' : 'Generalized helicoid is high-dimensional generalization of classical helicoid'}</li>
-            <li>✅ {isZh ? 'Pseudo-umbilical：沿H方向的形状算子是恒等的倍数' : 'Pseudo-umbilical: shape operator in H direction is scalar multiple of identity'}</li>
-            <li>✅ {isZh ? 'Chen-Li发现了首例非球面pseudo-umbilical曲面（在E⁶中）' : 'Chen-Li discovered first non-spherical pseudo-umbilical surfaces (in E⁶)'}</li>
-            <li>✅ {isZh ? '接触数理论不仅分类已知对象，还能发现新几何对象' : 'Contact number theory not only classifies known objects but discovers new ones'}</li>
+            <li>✓ {isZh ? '余维数2时，c# ≥ 3的子流形只有三类：球面、广义螺旋面、全纯曲线' : 'In codim 2, submanifolds with c# ≥ 3 are only: spheres, generalized helicoids, holomorphic curves'}</li>
+            <li>✓ {isZh ? '广义螺旋面是经典螺旋面在高维的推广' : 'Generalized helicoid is high-dimensional generalization of classical helicoid'}</li>
+            <li>✓ {isZh ? 'Pseudo-umbilical：沿H方向的形状算子是恒等的倍数' : 'Pseudo-umbilical: shape operator in H direction is scalar multiple of identity'}</li>
+            <li>✓ {isZh ? 'Chen-Li发现了首例非球面pseudo-umbilical曲面（在E⁶中）' : 'Chen-Li discovered first non-spherical pseudo-umbilical surfaces (in E⁶)'}</li>
+            <li>✓ {isZh ? '接触数理论不仅分类已知对象，还能发现新几何对象' : 'Contact number theory not only classifies known objects but discovers new ones'}</li>
           </ul>
         </section>
 

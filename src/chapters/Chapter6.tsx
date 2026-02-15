@@ -541,11 +541,11 @@ export default function Chapter6() {
             ✅ {isZh ? '本章小结' : 'Chapter Summary'}
           </h2>
           <ul className="text-slate-300 text-sm space-y-2">
-            <li>✅ {isZh ? '各向同性：在每点，各方向的法曲率向量长度相同' : 'Isotropic: at each point, normal curvature vector length is same in all directions'}</li>
-            <li>✅ {isZh ? '常各向同性：各向同性 + λ在整个M上是常数' : 'Constant isotropic: isotropic + λ is constant over all M'}</li>
-            <li>✅ {isZh ? '定理1：c# ≥ 3 ⟺ 各向同性（二阶导数相等 ⟺ 各向同性条件）' : 'Theorem 1: c# ≥ 3 ⟺ isotropic (2nd derivatives equal ⟺ isotropy condition)'}</li>
-            <li>✅ {isZh ? '定理2：c# ≥ 4 ⟺ 常各向同性（三阶导数相等 ⟺ 弯曲不随位置变化）' : 'Theorem 2: c# ≥ 4 ⟺ constant isotropic (3rd derivatives equal ⟺ curvature doesn\'t vary)'}</li>
-            <li>✅ {isZh ? '定理3：曲面c# = 3 ⟺ 全纯曲线（微分几何与复几何的联系）' : 'Theorem 3: surface c# = 3 ⟺ holomorphic curve (link between differential and complex geometry)'}</li>
+            <li>✓ {isZh ? '各向同性：在每点，各方向的法曲率向量长度相同' : 'Isotropic: at each point, normal curvature vector length is same in all directions'}</li>
+            <li>✓ {isZh ? '常各向同性：各向同性 + λ在整个M上是常数' : 'Constant isotropic: isotropic + λ is constant over all M'}</li>
+            <li>✓ {isZh ? '定理1：c# ≥ 3 ⟺ 各向同性（二阶导数相等 ⟺ 各向同性条件）' : 'Theorem 1: c# ≥ 3 ⟺ isotropic (2nd derivatives equal ⟺ isotropy condition)'}</li>
+            <li>✓ {isZh ? '定理2：c# ≥ 4 ⟺ 常各向同性（三阶导数相等 ⟺ 弯曲不随位置变化）' : 'Theorem 2: c# ≥ 4 ⟺ constant isotropic (3rd derivatives equal ⟺ curvature doesn\'t vary)'}</li>
+            <li>✓ {isZh ? '定理3：曲面c# = 3 ⟺ 全纯曲线（微分几何与复几何的联系）' : 'Theorem 3: surface c# = 3 ⟺ holomorphic curve (link between differential and complex geometry)'}</li>
           </ul>
 
           {/* Thinking Questions */}
