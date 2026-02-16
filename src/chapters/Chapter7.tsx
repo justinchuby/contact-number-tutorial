@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-import { MathBlock } from '../components';
+import { MathBlock, Tooltip } from '../components';
 import { PseudoUmbilicalViz, NonSphericalPUViz } from '../visualizations';
 
 export default function Chapter7() {
@@ -536,8 +536,8 @@ export default function Chapter7() {
               <p className="text-green-400 font-semibold mb-1">{isZh ? '绿色曲线' : 'Green Curve'}</p>
               <p className="text-slate-400 text-xs">
                 {isZh 
-                  ? '绿色线条是曲面"赤道"(u=0)处的曲线投影。注意这个曲面不是封闭的——它是S²的一个开子集的像，在两极(u→±√3π/2a)处趋于无穷。'
-                  : 'The green line is the projection of the "equator" curve (u=0). Note this surface is not closed—it\'s the image of an open subset of S², approaching infinity near the poles.'}
+                  ? <>绿色线条是曲面"赤道"(u=0)处的曲线投影。注意这个曲面不是封闭的——它是<Tooltip term="open-subset-image">S²的一个开子集的像</Tooltip>，在两极(u→±√3π/2a)处趋于无穷。</>
+                  : <>The green line is the projection of the "equator" curve (u=0). Note this surface is not closed—it's the <Tooltip term="open-subset-image">image of an open subset of S²</Tooltip>, approaching infinity near the poles.</>}
               </p>
             </div>
           </div>
