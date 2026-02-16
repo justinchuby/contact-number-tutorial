@@ -60,16 +60,15 @@ def project(points_6d, matrix):
 
 
 def compute_normals(vertices, u_steps, v_steps):
-    """Compute vertex normals from the grid for offset surface."""
+    """Compute vertex normals from the grid, no periodic wrapping."""
     normals = np.zeros_like(vertices)
     for i in range(u_steps):
         for j in range(v_steps):
             idx = i * v_steps + j
-            # Approximate normal via cross product of grid tangents
             i_next = min(i + 1, u_steps - 1)
             i_prev = max(i - 1, 0)
-            j_next = (j + 1) % v_steps
-            j_prev = (j - 1) % v_steps
+            j_next = min(j + 1, v_steps - 1)
+            j_prev = max(j - 1, 0)
             du = vertices[i_next * v_steps + j] - vertices[i_prev * v_steps + j]
             dv = vertices[i * v_steps + j_next] - vertices[i * v_steps + j_prev]
             n = np.cross(du, dv)
@@ -81,13 +80,49 @@ def compute_normals(vertices, u_steps, v_steps):
     return normals
 
 
+def smooth_normals(normals, u_steps, v_steps, iterations=3):
+    """Laplacian smoothing of normals to reduce artifacts at edges."""
+    for _ in range(iterations):
+        smoothed = normals.copy()
+        for i in range(u_steps):
+            for j in range(v_steps):
+                idx = i * v_steps + j
+                neighbors = []
+                for di, dj in [(-1,0),(1,0),(0,-1),(0,1)]:
+                    ni, nj = i+di, j+dj
+                    if 0 <= ni < u_steps and 0 <= nj < v_steps:
+                        neighbors.append(normals[ni * v_steps + nj])
+                if neighbors:
+                    avg = np.mean(neighbors, axis=0)
+                    norm = np.linalg.norm(avg)
+                    if norm > 1e-10:
+                        smoothed[idx] = avg / norm
+        normals = smoothed
+    return normals
+
+
 def build_solid_mesh(vertices_3d, u_steps, v_steps, thickness=1.5):
     """
     Build a watertight solid mesh from a surface grid.
     Creates outer surface, inner (offset) surface, and side walls.
+    Clamps offset to avoid self-intersection near thin regions.
     """
     normals = compute_normals(vertices_3d, u_steps, v_steps)
-    inner_vertices = vertices_3d - normals * thickness
+    normals = smooth_normals(normals, u_steps, v_steps)
+
+    # Adaptive thickness: reduce near edges where surface is thin
+    thickness_map = np.full(len(vertices_3d), thickness)
+    for i in range(u_steps):
+        # Taper thickness near u-boundaries (poles)
+        edge_dist = min(i, u_steps - 1 - i) / (u_steps * 0.15)
+        taper = min(1.0, edge_dist)
+        for j in range(v_steps):
+            idx = i * v_steps + j
+            thickness_map[idx] *= taper
+    # Minimum thickness
+    thickness_map = np.maximum(thickness_map, 0.3)
+
+    inner_vertices = vertices_3d - normals * thickness_map[:, np.newaxis]
 
     faces = []
 
@@ -97,7 +132,7 @@ def build_solid_mesh(vertices_3d, u_steps, v_steps, thickness=1.5):
 
     n_verts = u_steps * v_steps
 
-    # Outer surface (original)
+    # Outer surface
     for i in range(u_steps - 1):
         for j in range(v_steps - 1):
             i00 = i * v_steps + j
@@ -106,45 +141,43 @@ def build_solid_mesh(vertices_3d, u_steps, v_steps, thickness=1.5):
             i11 = (i + 1) * v_steps + (j + 1)
             add_quad(i00, i10, i11, i01)
 
-    # Inner surface (offset, reversed winding)
+    # Inner surface (reversed winding)
     for i in range(u_steps - 1):
         for j in range(v_steps - 1):
             i00 = n_verts + i * v_steps + j
             i10 = n_verts + (i + 1) * v_steps + j
             i01 = n_verts + i * v_steps + (j + 1)
             i11 = n_verts + (i + 1) * v_steps + (j + 1)
-            add_quad(i00, i01, i11, i10)  # reversed
+            add_quad(i00, i01, i11, i10)
 
-    # Side walls: u boundaries (i=0 and i=u_steps-1)
+    # Side walls: u=0 edge
     for j in range(v_steps - 1):
-        # i = 0 edge
-        o0 = j
-        o1 = j + 1
-        n0 = n_verts + j
-        n1 = n_verts + j + 1
+        o0, o1 = j, j + 1
+        n0, n1 = n_verts + j, n_verts + j + 1
         add_quad(o0, o1, n1, n0)
 
-        # i = u_steps-1 edge
+    # Side walls: u=max edge
+    for j in range(v_steps - 1):
         o0 = (u_steps - 1) * v_steps + j
         o1 = (u_steps - 1) * v_steps + j + 1
-        n0 = n_verts + (u_steps - 1) * v_steps + j
-        n1 = n_verts + (u_steps - 1) * v_steps + j + 1
-        add_quad(o0, n0, n1, o1)  # reversed
-
-    # Side walls: v boundaries (j=0 and j=v_steps-1)
-    for i in range(u_steps - 1):
-        # j = 0 edge
-        o0 = i * v_steps
-        o1 = (i + 1) * v_steps
-        n0 = n_verts + i * v_steps
-        n1 = n_verts + (i + 1) * v_steps
+        n0 = n_verts + o0
+        n1 = n_verts + o1
         add_quad(o0, n0, n1, o1)
 
-        # j = v_steps-1 edge
+    # Side walls: v=0 edge
+    for i in range(u_steps - 1):
+        o0 = i * v_steps
+        o1 = (i + 1) * v_steps
+        n0 = n_verts + o0
+        n1 = n_verts + o1
+        add_quad(o0, n0, n1, o1)
+
+    # Side walls: v=max edge
+    for i in range(u_steps - 1):
         o0 = i * v_steps + (v_steps - 1)
         o1 = (i + 1) * v_steps + (v_steps - 1)
-        n0 = n_verts + i * v_steps + (v_steps - 1)
-        n1 = n_verts + (i + 1) * v_steps + (v_steps - 1)
+        n0 = n_verts + o0
+        n1 = n_verts + o1
         add_quad(o0, o1, n1, n0)
 
     all_vertices = np.vstack([vertices_3d, inner_vertices])
@@ -160,22 +193,14 @@ def build_solid_mesh(vertices_3d, u_steps, v_steps, thickness=1.5):
 
 def generate_stl(name, proj_matrix, u_res=200, v_res=200):
     """Generate one STL file for a given projection."""
-    u_max = S3 * np.pi / (2 * A) * 0.88  # truncate before pole
+    u_max = S3 * np.pi / (2 * A) * 0.85  # conservative truncation
     v_max = 2 * np.pi * S3 / A
 
     u_vals = np.linspace(-u_max, u_max, u_res)
-    v_vals = np.linspace(0, v_max, v_res)
+    v_vals = np.linspace(0, v_max * 0.95, v_res)  # slight gap to avoid seam issues
     uu, vv = np.meshgrid(u_vals, v_vals, indexing='ij')
 
-    # Compute 6D points
     pts_6d = psi(uu.ravel(), vv.ravel())
-
-    # Filter out any non-finite
-    valid = np.all(np.isfinite(pts_6d), axis=1)
-    if not np.all(valid):
-        print(f"  Warning: {np.sum(~valid)} non-finite points filtered")
-
-    # Project to 3D
     pts_3d = project(pts_6d, proj_matrix)
 
     # Scale to ~80mm bounding box
@@ -187,15 +212,15 @@ def generate_stl(name, proj_matrix, u_res=200, v_res=200):
     center = (pts_3d.max(axis=0) + pts_3d.min(axis=0)) / 2
     pts_3d -= center
 
-    # Wall thickness in mm (scaled)
     thickness = 1.5
 
-    print(f"  Bounding box: {(pts_3d.max(axis=0) - pts_3d.min(axis=0)).round(1)} mm")
-    print(f"  Vertices: {len(pts_3d)}, Wall thickness: {thickness} mm")
+    bbox_mm = (pts_3d.max(axis=0) - pts_3d.min(axis=0)).round(1)
+    print(f"  Bounding box: {bbox_mm} mm")
+    print(f"  Vertices: {len(pts_3d)}, Wall thickness: {thickness} mm (tapered at edges)")
 
     stl_mesh = build_solid_mesh(pts_3d, u_res, v_res, thickness)
 
-    outdir = os.path.join(os.path.dirname(__file__), '3d-print')
+    outdir = os.path.join(os.path.dirname(os.path.abspath(__file__)), '3d-print')
     os.makedirs(outdir, exist_ok=True)
     filepath = os.path.join(outdir, f'{name}.stl')
     stl_mesh.save(filepath)
@@ -231,7 +256,7 @@ PROJECTIONS = {
 if __name__ == '__main__':
     print("Generating 3D-printable STL files for Chen-Li Formula (10.20)")
     print(f"Parameters: a={A}, c={C}, β={BETA:.4f}, δ={DELTA:.4f}")
-    print(f"Target: ~80mm bounding box, 1.5mm wall thickness\n")
+    print(f"Target: ~80mm bounding box, 1.5mm wall thickness (tapered at edges)\n")
 
     for name, proj in PROJECTIONS.items():
         print(f"[{proj['label']}]")
@@ -239,4 +264,3 @@ if __name__ == '__main__':
         print()
 
     print("Done! Files are in 3d-print/ directory.")
-    print("Upload to a 3D printing service (e.g., Shapeways, JLCPCB, or local print shop).")
