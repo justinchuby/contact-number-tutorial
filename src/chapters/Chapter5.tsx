@@ -131,7 +131,7 @@ export default function Chapter5() {
             </p>
             <p className="text-slate-300 text-sm">
               {isZh 
-                ? '想象你站在一个光滑的山坡上。作为山坡上的居民，你凭感觉走出最"直"的路——这就是测地线γ，完全由脚下的地形决定。现在换成上帝视角：你拿一把巨大的无限薄的刀，垂直于地面，沿着你前进的方向把山坡切开。刀面与山坡相交形成的曲线就是法截面β。接触数测量的就是：在你出发的那一瞬间，这条"内在之路"和"外在切片之路"的贴合程度到底有多高？'
+                ? '想象你站在一个光滑的山坡上。作为山坡上的居民，你凭感觉走出最"直"的路——这就是测地线γ，完全由脚下的地形决定。现在换成上帝视角：你拿一把巨大的无限薄的刀，垂直于地面，沿着你前进的方向把山坡切开。刀面与山坡相交形成的曲线就是法截线β。接触数测量的就是：在你出发的那一瞬间，这条"内在之路"和"外在切片之路"的贴合程度到底有多高？'
                 : 'Imagine standing on a smooth hillside. As a resident, you walk the "straightest" path you can feel—that\'s the geodesic γ, determined entirely by the terrain beneath your feet. Now switch to God\'s view: take a giant, infinitely thin knife, hold it perpendicular to the ground, and slice along your direction of travel. The curve where knife meets hillside is the normal section β. Contact number measures: at the moment of departure, how closely do this "inner path" and "outer slice path" match?'}
             </p>
           </div>
@@ -162,7 +162,7 @@ export default function Chapter5() {
             
             <div className="bg-slate-900 rounded-lg p-4 border-l-4 border-pink-500">
               <h3 className="text-pink-400 font-semibold mb-2">
-                {isZh ? '法截面' : 'Normal Section'} <Math>{'\\beta_u'}</Math>
+                {isZh ? '法截线' : 'Normal Section'} <Math>{'\\beta_u'}</Math>
               </h3>
               <p className="text-slate-300 text-sm mb-2">
                 {isZh 
@@ -181,21 +181,21 @@ export default function Chapter5() {
           {/* Real example */}
           <div className="bg-slate-900 rounded-lg p-4 mb-4">
             <p className="text-green-400 font-semibold mb-2">
-              🌐 {isZh ? '例子：地球上的"直线"' : 'Example: "Straight Lines" on Earth'}
+              🌐 {isZh ? '例子：椭球面（回顾第四章）' : 'Example: Ellipsoid (Recall Chapter 4)'}
             </p>
             <p className="text-slate-300 text-sm mb-2">
               {isZh 
-                ? '假设你从北京向正东方向"直走"：'
-                : 'Suppose you walk "straight" due east from Beijing:'}
+                ? '回忆第四章中椭球面的例子。在椭球面上选一个点，沿某方向出发：'
+                : 'Recall the ellipsoid example from Chapter 4. Pick a point on an ellipsoid and head in some direction:'}
             </p>
             <ul className="text-slate-400 text-sm space-y-1">
-              <li>• <span className="text-cyan-400">{isZh ? '测地线' : 'Geodesic'}</span>: {isZh ? '你会沿着大圆走，最终回到北京！' : "You'll follow a great circle and eventually return to Beijing!"}</li>
-              <li>• <span className="text-pink-400">{isZh ? '法截面' : 'Normal section'}</span>: {isZh ? '纬线圈（用水平面切地球）——这不是测地线！' : 'Latitude circle (slice Earth with horizontal plane)—this is NOT a geodesic!'}</li>
+              <li>• <span className="text-cyan-400">{isZh ? '测地线' : 'Geodesic'}</span>: {isZh ? '椭球面上"最直"的路径——由曲面自身形状决定，在椭球上通常不是平面曲线' : 'The "straightest" path on the ellipsoid—determined by surface shape, usually not a planar curve on an ellipsoid'}</li>
+              <li>• <span className="text-pink-400">{isZh ? '法截线' : 'Normal section'}</span>: {isZh ? '用包含法向量和切向量的平面切椭球得到的椭圆——由嵌入方式决定' : 'Ellipse from cutting the ellipsoid with a plane containing normal and tangent vectors—determined by embedding'}</li>
             </ul>
             <p className="text-slate-300 text-sm mt-2">
               {isZh 
-                ? '在大多数点上，这两条曲线是不同的。但在某些特殊的流形上，它们可以非常"接近"——这就是高接触数的含义！'
-                : 'At most points, these two curves differ. But on some special manifolds, they can be very "close"—this is what high contact number means!'}
+                ? '在椭球的大多数方向上，这两条曲线是不同的（正如第四章可视化所示）。但在某些特殊的流形上，它们可以非常"接近"——这就是高接触数的含义！'
+                : 'In most directions on an ellipsoid, these two curves differ (as shown in Chapter 4\'s visualization). But on some special manifolds, they can be very "close"—this is what high contact number means!'}
             </p>
           </div>
 
@@ -241,7 +241,7 @@ export default function Chapter5() {
           <div className="bg-slate-800 rounded-lg p-3 mb-4 text-sm">
             <p className="text-slate-400">
               💡 {isZh 
-                ? <>注意：这里的子流形 M 是欧氏空间 E<sup>m</sup> 中的<strong className="text-slate-200">嵌入</strong>子流形（即 M 是 E<sup>m</sup> 的子集，没有自交）。法截面的定义需要用仿射子空间"切割" M，这要求 M 没有自交点。由于浸入在局部都是嵌入，接触数在局部意义上也适用于浸入。</>
+                ? <>注意：这里的子流形 M 是欧氏空间 E<sup>m</sup> 中的<strong className="text-slate-200">嵌入</strong>子流形（即 M 是 E<sup>m</sup> 的子集，没有自交）。法截线的定义需要用仿射子空间"切割" M，这要求 M 没有自交点。由于浸入在局部都是嵌入，接触数在局部意义上也适用于浸入。</>
                 : <>Note: Here M is an <strong className="text-slate-200">embedded</strong> submanifold in E<sup>m</sup> (i.e., M is a subset of E<sup>m</sup> without self-intersections). The normal section definition requires intersecting M with an affine subspace, which needs M to have no self-intersections. Since immersions are locally embeddings, contact number applies locally to immersions as well.</>}
             </p>
           </div>
@@ -274,7 +274,7 @@ export default function Chapter5() {
             <MathBlock>{'c^{\\#}(M) \\geq 2'}</MathBlock>
             <p className="text-slate-300 text-sm">
               {isZh 
-                ? '也就是说，测地线和法截面至少有前两阶导数相同。这是一个普遍成立的结果——不依赖于流形的特殊性质。'
+                ? '也就是说，测地线和法截线至少有前两阶导数相同。这是一个普遍成立的结果——不依赖于流形的特殊性质。'
                 : 'That is, geodesics and normal sections always agree up to at least the 2nd derivative. This holds universally—independent of any special properties of the manifold.'}
             </p>
           </div>
@@ -313,7 +313,7 @@ export default function Chapter5() {
                 <p className="text-cyan-400 font-semibold mb-1">{isZh ? '第一步：0阶和1阶为什么相等？' : 'Step 1: Why are 0th and 1st order equal?'}</p>
                 <p>
                   {isZh 
-                    ? '这是由定义直接保证的！测地线 γ_u 和法截面 β_u 都是从同一点 p 出发、沿同一方向 u 前进的曲线。所以：'
+                    ? '这是由定义直接保证的！测地线 γ_u 和法截线 β_u 都是从同一点 p 出发、沿同一方向 u 前进的曲线。所以：'
                     : 'This is guaranteed directly by definition! Both geodesic γ_u and normal section β_u start from the same point p and move in direction u. So:'}
                 </p>
                 <ul className="list-disc list-inside ml-4 mt-1">
@@ -356,10 +356,10 @@ export default function Chapter5() {
 
               {/* Step 4 */}
               <div>
-                <p className="text-cyan-400 font-semibold mb-1">{isZh ? '第四步：计算法截面的二阶导数' : 'Step 4: Compute normal section\'s second derivative'}</p>
+                <p className="text-cyan-400 font-semibold mb-1">{isZh ? '第四步：计算法截线的二阶导数' : 'Step 4: Compute normal section\'s second derivative'}</p>
                 <p>
                   {isZh 
-                    ? '法截面 β_u 是一条平面曲线：它是子流形 M 与某个平面 π（由 u 和法向量张成）的交集。'
+                    ? '法截线 β_u 是一条平面曲线：它是子流形 M 与某个平面 π（由 u 和法向量张成）的交集。'
                     : 'Normal section β_u is a plane curve: it\'s the intersection of M with a plane π (spanned by u and normal vectors).'}
                 </p>
                 <p className="mt-2">
@@ -420,7 +420,7 @@ export default function Chapter5() {
             </p>
             <p className="text-slate-300 text-sm">
               {isZh 
-                ? '第二基本形式h测量子流形如何"弯曲地嵌入"外部空间。而接触数比较测地线（内蕴）和法截面（外蕴）的差异。两者都涉及"内蕴vs外蕴"的比较，所以它们通过第二基本形式联系起来是自然的！'
+                ? '第二基本形式h测量子流形如何"弯曲地嵌入"外部空间。而接触数比较测地线（内蕴）和法截线（外蕴）的差异。两者都涉及"内蕴vs外蕴"的比较，所以它们通过第二基本形式联系起来是自然的！'
                 : 'The second fundamental form h measures how the submanifold "curves into" ambient space. Contact number compares geodesic (intrinsic) with normal section (extrinsic). Both involve "intrinsic vs extrinsic" comparison, so their connection through h is natural!'}
             </p>
           </div>
@@ -507,7 +507,7 @@ export default function Chapter5() {
           </h2>
           <ul className="text-slate-300 text-sm space-y-2">
             <li>✓ {isZh ? '接触阶数：两条曲线在接触点处前k阶导数相等' : 'Contact order: two curves have first k derivatives equal at contact point'}</li>
-            <li>✓ {isZh ? '接触数c#(M)：测地线γ_u和法截面β_u在所有(p,u)处的最小接触阶数' : 'Contact number c#(M): minimum contact order of geodesic γ_u and normal section β_u over all (p,u)'}</li>
+            <li>✓ {isZh ? '接触数c#(M)：测地线γ_u和法截线β_u在所有(p,u)处的最小接触阶数' : 'Contact number c#(M): minimum contact order of geodesic γ_u and normal section β_u over all (p,u)'}</li>
             <li>✓ {isZh ? '任何子流形c# ≥ 2（二阶导数总是相等）' : 'Any submanifold has c# ≥ 2 (2nd derivatives always equal)'}</li>
             <li>✓ {isZh ? '接触数通过第二基本形式h的性质刻画' : 'Contact number is characterized by properties of second fundamental form h'}</li>
             <li>✓ {isZh ? '高接触数 = 更"对称"的几何结构' : 'Higher contact number = more "symmetric" geometric structure'}</li>
@@ -531,7 +531,7 @@ export default function Chapter5() {
                   </summary>
                   <p className="text-slate-400 text-xs mt-1">
                     {isZh 
-                      ? 'c# = ∞ 意味着测地线和法截面在每一点都完全重合！这种子流形的内蕴几何和外蕴几何完美一致——它以最"自然"的方式嵌入外部空间。'
+                      ? 'c# = ∞ 意味着测地线和法截线在每一点都完全重合！这种子流形的内蕴几何和外蕴几何完美一致——它以最"自然"的方式嵌入外部空间。'
                       : 'c# = ∞ means geodesics and normal sections coincide completely at every point! The intrinsic and extrinsic geometry are in perfect agreement—the submanifold is embedded in the most "natural" way possible.'}
                   </p>
                 </details>

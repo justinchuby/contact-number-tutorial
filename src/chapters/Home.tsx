@@ -71,7 +71,7 @@ export default function Home() {
             📚 {isZh ? '教程结构' : 'Tutorial Structure'}
           </h2>
           <ul className="text-slate-300 space-y-2 text-sm">
-            <li>• <span className="text-green-400">{isZh ? '第1-4章' : 'Ch 1-4'}:</span> {isZh ? '流形基础（流形、子流形、测地线、法截面）' : 'Foundations (Manifolds, Submanifolds, Geodesics, Normal Sections)'}</li>
+            <li>• <span className="text-green-400">{isZh ? '第1-4章' : 'Ch 1-4'}:</span> {isZh ? '流形基础（流形、子流形、测地线、法截线）' : 'Foundations (Manifolds, Submanifolds, Geodesics, Normal Sections)'}</li>
             <li>• <span className="text-cyan-400">{isZh ? '第5-7章' : 'Ch 5-7'}:</span> {isZh ? '接触数理论（定义、定理、分类）' : 'Contact Number Theory (Definition, Theorems, Classification)'}</li>
             <li>• <span className="text-orange-400">{isZh ? '第8-11章' : 'Ch 8-11'}:</span> {isZh ? '进阶内容（相关论文与后续发展）' : 'Advanced (Related Papers & Developments)'}</li>
             <li>• <span className="text-purple-400">{isZh ? '第12章' : 'Ch 12'}:</span> {isZh ? '研究意义与致敬' : 'Significance & Tribute'}</li>

@@ -319,7 +319,7 @@ export default function Chapter2() {
             </p>
             <p className="text-slate-300 text-sm">
               {isZh 
-                ? '在 Chen-Li 的论文中，接触数的定义要求子流形 M 是欧氏空间 E^m 中的子流形——即 M 通过等距嵌入成为 E^m 的一个子集。这是因为法截面的定义需要用一个仿射子空间去"切割" M，而这只有在 M 是一个没有自交的子集时才有意义。因此，本教程中讨论的子流形默认都是嵌入的。'
+                ? '在 Chen-Li 的论文中，接触数的定义要求子流形 M 是欧氏空间 E^m 中的子流形——即 M 通过等距嵌入成为 E^m 的一个子集。这是因为法截线的定义需要用一个仿射子空间去"切割" M，而这只有在 M 是一个没有自交的子集时才有意义。因此，本教程中讨论的子流形默认都是嵌入的。'
                 : 'In Chen-Li\'s paper, the contact number is defined for submanifolds M in Euclidean space E^m—meaning M is isometrically embedded as a subset of E^m. This is because the normal section definition requires intersecting M with an affine subspace, which only makes sense when M is a subset without self-intersections. Thus, submanifolds in this tutorial are embedded by default.'}
             </p>
             <p className="text-slate-400 text-xs mt-2">

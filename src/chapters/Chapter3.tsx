@@ -203,7 +203,7 @@ export default function Chapter3() {
             </p>
             <p className="text-slate-300 text-sm">
               {isZh 
-                ? '测地线 γ_u 代表流形的"内蕴"几何——完全由流形本身决定，不依赖于嵌入方式。在第四章中，我们将引入另一条曲线（法截面），然后比较这两条曲线的差异。'
+                ? '测地线 γ_u 代表流形的"内蕴"几何——完全由流形本身决定，不依赖于嵌入方式。在第四章中，我们将引入另一条曲线（法截线），然后比较这两条曲线的差异。'
                 : 'Geodesic γ_u represents the "intrinsic" geometry of the manifold—completely determined by the manifold itself, independent of embedding. In Chapter 4, we\'ll introduce another curve (normal section) and compare the difference between these two curves.'}
             </p>
           </div>
@@ -271,12 +271,12 @@ export default function Chapter3() {
               <ul className="text-slate-300 space-y-1">
                 <li>✓ {isZh ? '测地线的"直"是相对于流形而言的' : '"Straight" for geodesics is relative to the manifold'}</li>
                 <li>✓ {isZh ? '地球上飞机沿大圆弧飞行就是测地线的实际应用' : 'Airplanes flying great circle arcs is a real application of geodesics'}</li>
-                <li>✓ {isZh ? '测地线将在后续章节与法截面对比，引出接触数' : 'Geodesics will be compared with normal sections later to define contact number'}</li>
+                <li>✓ {isZh ? '测地线将在后续章节与法截线对比，引出接触数' : 'Geodesics will be compared with normal sections later to define contact number'}</li>
               </ul>
             </div>
           </div>
           <p className="text-green-400 text-sm mt-4">
-            {isZh ? '下一章：我们将学习法截面——从外部空间切割子流形得到的曲线，它与测地线有何不同？' : 'Next: We\'ll learn about normal sections — curves from cutting the submanifold with ambient planes. How do they differ from geodesics?'}
+            {isZh ? '下一章：我们将学习法截线——从外部空间切割子流形得到的曲线，它与测地线有何不同？' : 'Next: We\'ll learn about normal sections — curves from cutting the submanifold with ambient planes. How do they differ from geodesics?'}
           </p>
         </section>
 

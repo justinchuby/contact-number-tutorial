@@ -287,7 +287,7 @@ export default function EmbeddingComparisonViz() {
 
       <p className="text-center text-slate-500 text-xs mt-3">
         {isZh 
-          ? '🔍 同一个圆，不同的嵌入方式 → 不同的法空间 → 不同的法截面！'
+          ? '🔍 同一个圆，不同的嵌入方式 → 不同的法空间 → 不同的法截线！'
           : '🔍 Same circle, different embeddings → different normal spaces → different normal sections!'}
       </p>
     </div>
