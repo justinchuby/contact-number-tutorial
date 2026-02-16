@@ -9,3 +9,4 @@ export { IsotropicViz, NonIsotropicViz, IsotropyComparisonViz } from './Isotropi
 export { TorsionViz, PlanarCurveViz, TorsionComparisonViz } from './TorsionViz';
 export { MultiDirectionViz, GeodesicNormalComparisonViz, DifferentCurvesViz, Chapter4VizCollection } from './Chapter4Viz';
 export { default as EmbeddingComparisonViz, EmbeddingComparisonVizWithLabels } from './EmbeddingComparisonViz';
+export { PseudoUmbilicalViz } from './PseudoUmbilicalViz';

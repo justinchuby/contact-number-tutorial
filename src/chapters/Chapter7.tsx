@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { MathBlock } from '../components';
+import { PseudoUmbilicalViz } from '../visualizations';
 
 export default function Chapter7() {
   const { t, i18n } = useTranslation();
@@ -467,6 +468,42 @@ export default function Chapter7() {
                     : 'A non-spherical pseudo-umbilical surface is like a "non-sphere disguised as a sphere"—it\'s uniformly symmetric "on average", but actually non-uniform in some hidden dimensions. Only in 6D and above is there enough "hiding space" for this disguise to be possible!'}
                 </p>
               </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Visualization: Pseudo-umbilical torus from paper */}
+        <section className="bg-slate-900 rounded-xl p-6">
+          <h2 className="text-xl font-semibold text-cyan-400 mb-4">
+            🎮 {isZh ? '可视化：论文中的平坦环面 τₐ (Example 6.6)' : 'Visualization: Flat Torus τₐ from the Paper (Example 6.6)'}
+          </h2>
+          <p className="text-slate-300 text-sm mb-3">
+            {isZh 
+              ? <>这是Chen-Li论文中Example 6.6构造的平坦环面 τ<sub>a</sub> 在三维空间的投影。这个环面嵌入在六维欧氏空间E⁶中，具有接触数 c# = 4，是常各向同性的pseudo-umbilical曲面。由于六维无法直接看到，下面展示了不同的三维投影方式。</>
+              : <>This is the 3D projection of the flat torus τ<sub>a</sub> constructed in Chen-Li's Example 6.6. This torus is embedded in 6-dimensional Euclidean space E⁶ with contact number c# = 4, and is a constant isotropic pseudo-umbilical surface. Since 6D can't be directly visualized, we show different 3D projections below.</>}
+          </p>
+          <div className="bg-slate-800 rounded-lg p-3 mb-3">
+            <p className="text-cyan-400 text-xs font-mono">
+              τₐ(u,v) = (2/√6a)(cos(au/√2)cos(√3av/√2), cos(au/√2)sin(√3av/√2), cos(√2au)/√2, sin(au/√2)cos(√3av/√2), sin(au/√2)sin(√3av/√2), sin(√2au)/√2)
+            </p>
+          </div>
+          <PseudoUmbilicalViz />
+          <div className="mt-3 grid md:grid-cols-2 gap-3 text-sm">
+            <div className="bg-slate-800 rounded p-3">
+              <p className="text-purple-400 font-semibold mb-1">{isZh ? '为什么需要6维？' : 'Why 6 Dimensions?'}</p>
+              <p className="text-slate-400 text-xs">
+                {isZh 
+                  ? '在3维空间中，环面的弯曲在内圈和外圈完全不同，无法实现常各向同性。6维空间提供了4个法方向，足以"隐藏"这种不均匀性。'
+                  : 'In 3D, a torus bends differently on inner and outer rings—impossible to be constant isotropic. 6D provides 4 normal directions, enough to "hide" this non-uniformity.'}
+              </p>
+            </div>
+            <div className="bg-slate-800 rounded p-3">
+              <p className="text-cyan-400 font-semibold mb-1">{isZh ? '青色曲线' : 'Cyan Curve'}</p>
+              <p className="text-slate-400 text-xs">
+                {isZh 
+                  ? '青色线条是环面上的一条测地线（u-参数曲线）的投影。在这个平坦环面上，测地线就是"直线"——但投影到3维后看起来是弯曲的。'
+                  : 'The cyan line is a geodesic (u-parameter curve) on the torus, projected to 3D. On this flat torus, geodesics are "straight"—but appear curved when projected to 3D.'}
+              </p>
             </div>
           </div>
         </section>
