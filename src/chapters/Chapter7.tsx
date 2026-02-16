@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { MathBlock } from '../components';
-import { PseudoUmbilicalViz } from '../visualizations';
+import { PseudoUmbilicalViz, NonSphericalPUViz } from '../visualizations';
 
 export default function Chapter7() {
   const { t, i18n } = useTranslation();
@@ -503,6 +503,41 @@ export default function Chapter7() {
                 {isZh 
                   ? '青色线条是环面上的一条测地线（u-参数曲线）的投影。在这个平坦环面上，测地线就是"直线"——但投影到3维后看起来是弯曲的。'
                   : 'The cyan line is a geodesic (u-parameter curve) on the torus, projected to 3D. On this flat torus, geodesics are "straight"—but appear curved when projected to 3D.'}
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Visualization: Non-spherical pseudo-umbilical surface (10.20) */}
+        <section className="bg-slate-900 rounded-xl p-6">
+          <h2 className="text-xl font-semibold text-orange-400 mb-4">
+            🎮 {isZh ? '可视化：首例非球面 Pseudo-Umbilical 曲面 (公式 10.20)' : 'Visualization: First Non-Spherical Pseudo-Umbilical Surface (Formula 10.20)'}
+          </h2>
+          <p className="text-slate-300 text-sm mb-3">
+            {isZh 
+              ? <>这是Chen-Li论文第10节构造的<strong className="text-orange-400">首例非球面pseudo-umbilical曲面</strong>在三维空间的投影。与上面的平坦环面不同，这个曲面具有<strong>非平行的平均曲率向量</strong>——它是S²(√3/a)的一个开子集嵌入到E⁶中。论文指出 ⟨ψ,ψ⟩ = 3cos²(au/√3)/a²，证明了它不在任何超球面上（即非球面的）。</>
+              : <>This is the 3D projection of the <strong className="text-orange-400">first non-spherical pseudo-umbilical surface</strong> constructed in Section 10 of Chen-Li's paper. Unlike the flat torus above, this surface has <strong>non-parallel mean curvature vector</strong>—it immerses an open subset of S²(√3/a) into E⁶. The paper shows ⟨ψ,ψ⟩ = 3cos²(au/√3)/a², proving it lies on no hypersphere (i.e., non-spherical).</>}
+          </p>
+          <div className="bg-slate-800 rounded-lg p-3 mb-3 text-xs font-mono text-amber-400 overflow-x-auto">
+            <p>ψ(u,v) = cos²(au/√3) · (√3/a·tan(au/√3)·cos(av/√3), √3/a·tan(au/√3)·sin(av/√3), ...)</p>
+            <p className="text-slate-500 mt-1">β = 2(a²+6c²)/3, &nbsp; δ = (2/3)√(a⁴+6a²c²+36c⁴), &nbsp; a=1, c=0.5</p>
+          </div>
+          <NonSphericalPUViz />
+          <div className="mt-3 grid md:grid-cols-2 gap-3 text-sm">
+            <div className="bg-slate-800 rounded p-3">
+              <p className="text-orange-400 font-semibold mb-1">{isZh ? '为什么这个例子重要？' : 'Why is This Example Important?'}</p>
+              <p className="text-slate-400 text-xs">
+                {isZh 
+                  ? '在此之前，所有已知的pseudo-umbilical曲面都是球面或球面的一部分。这个例子首次证明了非球面的pseudo-umbilical曲面确实存在——它推翻了数学家们的猜想。'
+                  : 'Before this, all known pseudo-umbilical surfaces were spheres or parts of spheres. This example first proved that non-spherical pseudo-umbilical surfaces do exist—overturning mathematicians\' conjecture.'}
+              </p>
+            </div>
+            <div className="bg-slate-800 rounded p-3">
+              <p className="text-green-400 font-semibold mb-1">{isZh ? '绿色曲线' : 'Green Curve'}</p>
+              <p className="text-slate-400 text-xs">
+                {isZh 
+                  ? '绿色线条是曲面"赤道"(u=0)处的曲线投影。注意这个曲面不是封闭的——它是S²的一个开子集的像，在两极(u→±√3π/2a)处趋于无穷。'
+                  : 'The green line is the projection of the "equator" curve (u=0). Note this surface is not closed—it\'s the image of an open subset of S², approaching infinity near the poles.'}
               </p>
             </div>
           </div>
