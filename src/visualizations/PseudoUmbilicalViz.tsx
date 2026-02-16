@@ -236,7 +236,7 @@ const NS_PROJECTIONS: { name_zh: string; name_en: string; matrix: number[][] }[]
   },
 ];
 
-function NonSphericalScene({ projIndex }: { projIndex: number }) {
+function NonSphericalScene({ projIndex, highlightU }: { projIndex: number; highlightU: number }) {
   const [time, setTime] = useState(0);
   useFrame(({ clock }) => setTime(clock.getElapsedTime()));
 
@@ -274,20 +274,21 @@ function NonSphericalScene({ projIndex }: { projIndex: number }) {
     return { uLines: uL, vLines: vL };
   }, [proj]);
 
-  // Highlight a curve at u = 0 (equator)
-  const equator = useMemo(() => {
+  // Highlighted u-curve
+  const highlightCurve = useMemo(() => {
     const vMax = 2 * Math.PI * Math.sqrt(3) / a;
+    const uVal = highlightU * uMax;
     const pts: THREE.Vector3[] = [];
     for (let j = 0; j <= 200; j++) {
       const v = (j / 200) * vMax;
-      const p6 = nonSphericalPU(0, v, a, c);
+      const p6 = nonSphericalPU(uVal, v, a, c);
       if (p6.every(x => isFinite(x))) pts.push(project6Dto3D(p6, proj));
     }
     return pts;
-  }, [proj]);
+  }, [proj, highlightU]);
 
-  const animIdx = Math.floor(((Math.sin(time * 0.3) + 1) / 2) * (equator.length - 1));
-  const animPt = equator[animIdx];
+  const animIdx = Math.floor(((Math.sin(time * 0.3) + 1) / 2) * (highlightCurve.length - 1));
+  const animPt = highlightCurve[animIdx];
 
   return (
     <>
@@ -299,7 +300,9 @@ function NonSphericalScene({ projIndex }: { projIndex: number }) {
       {vLines.map((line, i) => (
         <Line key={`v${i}`} points={line} color="#d97706" lineWidth={1} opacity={0.3} transparent />
       ))}
-      <Line points={equator} color="#4ade80" lineWidth={3} />
+      {highlightCurve.length > 2 && (
+        <Line points={highlightCurve} color="#4ade80" lineWidth={3} />
+      )}
       {animPt && (
         <mesh position={animPt}>
           <sphereGeometry args={[0.015, 12, 12]} />
@@ -313,12 +316,13 @@ function NonSphericalScene({ projIndex }: { projIndex: number }) {
 
 export function NonSphericalPUViz() {
   const [projIndex, setProjIndex] = useState(0);
+  const [highlightU, setHighlightU] = useState(0); // normalized: -1 to 1
 
   return (
     <div>
       <div className="h-72 bg-slate-950 rounded-lg overflow-hidden mb-3">
         <Canvas camera={{ position: [2, 1.5, 1.5], fov: 50 }}>
-          <NonSphericalScene projIndex={projIndex} />
+          <NonSphericalScene projIndex={projIndex} highlightU={highlightU} />
         </Canvas>
       </div>
       <div className="flex flex-wrap gap-2 mb-2">
@@ -335,6 +339,25 @@ export function NonSphericalPUViz() {
             {p.name_zh}
           </button>
         ))}
+      </div>
+      <div className="flex items-center gap-3 text-xs text-slate-400">
+        <span className="text-green-400 font-mono whitespace-nowrap">
+          u = {highlightU === 0 ? '0' : (highlightU > 0 ? '+' : '') + (highlightU * 0.92).toFixed(2)} · u<sub>max</sub>
+        </span>
+        <input
+          type="range"
+          min={-100}
+          max={100}
+          value={Math.round(highlightU * 100)}
+          onChange={e => setHighlightU(Number(e.target.value) / 100)}
+          className="flex-1 accent-green-500"
+        />
+        <button
+          onClick={() => setHighlightU(0)}
+          className="px-2 py-0.5 rounded bg-slate-700 hover:bg-slate-600 text-slate-300"
+        >
+          赤道
+        </button>
       </div>
     </div>
   );
