@@ -81,7 +81,7 @@ const searchIndex = {
     { term: 'Lorentz空间', chapter: 11, section: '11.1', description: '一个负特征值的伪欧氏空间' },
     
     // Chapter 12
-    { term: '陈邦彦', chapter: 12, section: '12.1', description: '密歇根州立大学教授，接触数论文合作者' },
+    { term: '陳邦彥', chapter: 12, section: '12.1', description: '密歇根州立大学教授，接触数论文合作者' },
     { term: '李世杰', chapter: 12, section: '12.1', description: '华南师范大学教授，接触数理论创始人' },
   ],
   en: [

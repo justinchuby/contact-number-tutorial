@@ -160,7 +160,7 @@ export default function Chapter11() {
         {/* Section 11.3 */}
         <section className="bg-slate-900 rounded-xl p-6">
           <h2 id="section-11.3" className="text-xl font-semibold text-cyan-400 mb-4">
-            {isZh ? '11.3 陈邦彦教授的持续贡献' : '11.3 Prof. Chen\'s Continued Contributions'}
+            {isZh ? '11.3 陳邦彥教授的持续贡献' : '11.3 Prof. Chen\'s Continued Contributions'}
           </h2>
           
           <div className="space-y-4">
@@ -170,7 +170,7 @@ export default function Chapter11() {
               </h3>
               <p className="text-slate-300 text-sm">
                 {isZh 
-                  ? '陈邦彦的δ-不变量是子流形几何中的重要工具，与接触数理论密切相关。'
+                  ? '陳邦彥的δ-不变量是子流形几何中的重要工具，与接触数理论密切相关。'
                   : 'Bang-Yen Chen\'s δ-invariants are important tools in submanifold geometry, closely related to contact number theory.'}
               </p>
             </div>
@@ -252,7 +252,7 @@ export default function Chapter11() {
               </h3>
               <p className="text-slate-300 text-sm">
                 {isZh 
-                  ? '与密歇根州立大学陈邦彦教授的长期合作，为中美数学交流做出了贡献。'
+                  ? '与密歇根州立大学陳邦彥教授的长期合作，为中美数学交流做出了贡献。'
                   : 'Long-term collaboration with Prof. Bang-Yen Chen at Michigan State University contributed to Sino-American mathematical exchange.'}
               </p>
             </div>
@@ -263,7 +263,7 @@ export default function Chapter11() {
               </h3>
               <p className="text-slate-300 text-sm">
                 {isZh 
-                  ? '《Geometry of Submanifolds》(AMS Contemporary Mathematics, Vol. 756) 是致敬陈邦彦教授贡献的论文集，其中多篇文章引用了Chen-Li的接触数工作。'
+                  ? '《Geometry of Submanifolds》(AMS Contemporary Mathematics, Vol. 756) 是致敬陳邦彥教授贡献的论文集，其中多篇文章引用了Chen-Li的接触数工作。'
                   : '"Geometry of Submanifolds" (AMS Contemporary Mathematics, Vol. 756) is a collection honoring Prof. Chen\'s contributions, with multiple papers citing Chen-Li\'s contact number work.'}
               </p>
             </div>
@@ -284,7 +284,7 @@ export default function Chapter11() {
               { year: '2004', event: isZh ? 'Chen-Li: 接触数理论 ⭐' : 'Chen-Li: Contact Number Theory ⭐', highlight: true },
               { year: '2006', event: isZh ? '高接触数曲面特征研究' : 'High contact number surface characterization' },
               { year: '2008', event: isZh ? 'Cabrerizo等: 伪欧氏接触数' : 'Cabrerizo et al.: Pseudo-Euclidean contact number' },
-              { year: '2020', event: isZh ? 'AMS论文集致敬陈邦彦' : 'AMS proceedings honoring Chen' },
+              { year: '2020', event: isZh ? 'AMS论文集致敬陳邦彥' : 'AMS proceedings honoring Chen' },
               { year: '2023', event: isZh ? 'Raffaelli: 推广Qin-Li全挠率定理' : 'Raffaelli: Generalizing Qin-Li total torsion theorem' },
               { year: '2024', event: isZh ? 'Chen-Blaga: Chen-Ricci不等式30年综述' : 'Chen-Blaga: 30-year Chen-Ricci inequality survey' },
             ].map((item, index) => (

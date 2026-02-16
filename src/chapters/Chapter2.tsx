@@ -338,7 +338,7 @@ export default function Chapter2() {
           
           <p className="text-slate-300 mb-4">
             {isZh 
-              ? '陈邦彦教授与李世杰教授的研究主要关注欧氏空间中的子流形。'
+              ? '陳邦彥教授与李世杰教授的研究主要关注欧氏空间中的子流形。'
               : "The research by Prof. Bang-Yen Chen and Prof. Shi-Jie Li primarily focuses on submanifolds in Euclidean space."}
           </p>
 

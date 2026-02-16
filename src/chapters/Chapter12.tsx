@@ -133,7 +133,7 @@ export default function Chapter12() {
             <div className="md:w-2/3 space-y-4">
               <p className="text-slate-300">
                 {isZh 
-                  ? '李世杰教授是华南师范大学数学系的资深教授，长期从事微分几何研究。他与密歇根州立大学的陈邦彦教授合作，在子流形几何领域做出了重要贡献。'
+                  ? '李世杰教授是华南师范大学数学系的资深教授，长期从事微分几何研究。他与密歇根州立大学的陳邦彥教授合作，在子流形几何领域做出了重要贡献。'
                   : 'Prof. Shi-Jie Li is a senior professor at the Department of Mathematics, South China Normal University. He has collaborated with Prof. Bang-Yen Chen of Michigan State University and made significant contributions to submanifold geometry.'}
               </p>
               

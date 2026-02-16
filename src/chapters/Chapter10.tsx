@@ -274,12 +274,12 @@ export default function Chapter10() {
         {/* Section 10.4 */}
         <section className="bg-slate-900 rounded-xl p-6">
           <h2 id="section-10.4" className="text-xl font-semibold text-cyan-400 mb-4">
-            {isZh ? '10.4 与陈邦彦平行截面定理的关系' : '10.4 Relation to Chen\'s Parallel Section Theorem'}
+            {isZh ? '10.4 与陳邦彥平行截面定理的关系' : '10.4 Relation to Chen\'s Parallel Section Theorem'}
           </h2>
           
           <p className="text-slate-300 mb-4">
             {isZh 
-              ? '陈邦彦教授之前证明了关于平行截面的定理。Wang-Li的工作将"平行截面"条件推广到更弱的"平行等周截面"条件。'
+              ? '陳邦彥教授之前证明了关于平行截面的定理。Wang-Li的工作将"平行截面"条件推广到更弱的"平行等周截面"条件。'
               : 'Professor Bang-Yen Chen previously proved theorems about parallel sections. Wang-Li\'s work generalizes the "parallel section" condition to the weaker "parallel isoperimetric section" condition.'}
           </p>
 
@@ -342,7 +342,7 @@ export default function Chapter10() {
             <li>✓ {isZh ? '等周截面：M₁(ξ)处处相等的单位法向量场' : 'Isoperimetric section: unit normal field with constant M₁(ξ)'}</li>
             <li>✓ {isZh ? '平行等周截面：等周 + 在法丛中平行（D_X ξ = 0）' : 'Parallel isoperimetric section: isoperimetric + parallel in normal bundle (D_X ξ = 0)'}</li>
             <li>✓ {isZh ? 'Wang-Li定理：有平行等周截面且正曲率 → 含于超球面' : 'Wang-Li theorem: parallel isoperimetric section + positive curvature → contained in hypersphere'}</li>
-            <li>✓ {isZh ? '这项工作推广了陈邦彦的平行截面定理' : 'This work generalizes Chen\'s parallel section theorem'}</li>
+            <li>✓ {isZh ? '这项工作推广了陳邦彥的平行截面定理' : 'This work generalizes Chen\'s parallel section theorem'}</li>
           </ul>
 
           {/* Thinking Questions */}
