@@ -31,25 +31,29 @@ function project6Dto3D(p6: number[], proj: number[][]): THREE.Vector3 {
 }
 
 // Predefined projections
-const PROJECTIONS: { name_zh: string; name_en: string; matrix: number[][] }[] = [
+const PROJECTIONS: { name_zh: string; name_en: string; desc_zh: string; matrix: number[][] }[] = [
   {
     name_zh: '投影 1: (x₁, x₂, x₃)',
     name_en: 'Projection 1: (x₁, x₂, x₃)',
+    desc_zh: '只看前3个坐标——相当于从6维空间"正面"看过去，看到环面的cos/sin对称结构。',
     matrix: [[1,0,0,0,0,0],[0,1,0,0,0,0],[0,0,1,0,0,0]]
   },
   {
     name_zh: '投影 2: (x₁, x₄, x₃)',
     name_en: 'Projection 2: (x₁, x₄, x₃)',
+    desc_zh: '混合前半和后半坐标——揭示cos与sin分量之间的关联，展现环面的"扭转"特征。',
     matrix: [[1,0,0,0,0,0],[0,0,0,1,0,0],[0,0,1,0,0,0]]
   },
   {
     name_zh: '投影 3: (x₁+x₄, x₂+x₅, x₃+x₆)',
     name_en: 'Projection 3: (x₁+x₄, x₂+x₅, x₃+x₆)',
+    desc_zh: '把对应的cos和sin分量叠加——看到两组三维子空间如何"协作"构成完整的环面。',
     matrix: [[1,0,0,1,0,0],[0,1,0,0,1,0],[0,0,1,0,0,1]]
   },
   {
     name_zh: '投影 4: 对角投影',
     name_en: 'Projection 4: Diagonal',
+    desc_zh: '用一组斜角系数混合所有6个坐标——像从"对角线"方向观察，展现整体形态。',
     matrix: [
       [0.7, 0.3, 0, -0.3, 0.5, 0],
       [0, 0.5, 0.5, 0.3, 0, -0.4],
@@ -58,7 +62,7 @@ const PROJECTIONS: { name_zh: string; name_en: string; matrix: number[][] }[] = 
   },
 ];
 
-function PseudoUmbilicalScene({ projIndex }: { projIndex: number }) {
+function PseudoUmbilicalScene({ projIndex, highlightU }: { projIndex: number; highlightU: number }) {
   const [time, setTime] = useState(0);
   useFrame(({ clock }) => setTime(clock.getElapsedTime()));
 
@@ -74,7 +78,6 @@ function PseudoUmbilicalScene({ projIndex }: { projIndex: number }) {
     const uL: THREE.Vector3[][] = [];
     const vL: THREE.Vector3[][] = [];
 
-    // u-lines (constant v)
     for (let j = 0; j <= 20; j++) {
       const v = (j / 20) * vPeriod;
       const line: THREE.Vector3[] = [];
@@ -84,7 +87,6 @@ function PseudoUmbilicalScene({ projIndex }: { projIndex: number }) {
       }
       uL.push(line);
     }
-    // v-lines (constant u)
     for (let i = 0; i <= 20; i++) {
       const u = (i / 20) * uPeriod;
       const line: THREE.Vector3[] = [];
@@ -97,36 +99,33 @@ function PseudoUmbilicalScene({ projIndex }: { projIndex: number }) {
     return { uLines: uL, vLines: vL };
   }, [proj]);
 
-  // Highlight one geodesic (u-parameter curve, which is a geodesic on the flat torus)
-  const geodesic = useMemo(() => {
+  // Highlighted u-parameter curve
+  const highlightCurve = useMemo(() => {
     const uPeriod = 2 * Math.PI * Math.sqrt(2) / a;
+    const vPeriod = 2 * Math.PI * Math.sqrt(2) / (Math.sqrt(3) * a);
+    const v0 = ((highlightU + 1) / 2) * vPeriod; // map [-1,1] to [0, vPeriod]
     const pts: THREE.Vector3[] = [];
-    const v0 = 0;
     for (let i = 0; i <= 200; i++) {
       const u = (i / 200) * uPeriod;
       pts.push(project6Dto3D(torusE6(u, v0, a), proj));
     }
     return pts;
-  }, [proj]);
+  }, [proj, highlightU]);
 
-  // Animated point on the geodesic
   const animIdx = Math.floor(((Math.sin(time * 0.4) + 1) / 2) * 199);
-  const animPt = geodesic[animIdx];
+  const animPt = highlightCurve[animIdx];
 
   return (
     <>
       <ambientLight intensity={0.5} />
       <pointLight position={[5, 5, 5]} intensity={0.8} />
-      {/* Surface wireframe */}
       {uLines.map((line, i) => (
         <Line key={`u${i}`} points={line} color="#6d28d9" lineWidth={1} opacity={0.4} transparent />
       ))}
       {vLines.map((line, i) => (
         <Line key={`v${i}`} points={line} color="#7c3aed" lineWidth={1} opacity={0.3} transparent />
       ))}
-      {/* Highlighted geodesic */}
-      <Line points={geodesic} color="#22d3ee" lineWidth={3} />
-      {/* Animated point */}
+      <Line points={highlightCurve} color="#22d3ee" lineWidth={3} />
       {animPt && (
         <mesh position={animPt}>
           <sphereGeometry args={[0.02, 12, 12]} />
@@ -140,12 +139,13 @@ function PseudoUmbilicalScene({ projIndex }: { projIndex: number }) {
 
 export function PseudoUmbilicalViz() {
   const [projIndex, setProjIndex] = useState(0);
+  const [highlightU, setHighlightU] = useState(-1); // normalized: -1 = v=0
 
   return (
     <div>
       <div className="h-72 bg-slate-950 rounded-lg overflow-hidden mb-3">
         <Canvas camera={{ position: [1.5, 1, 1.2], fov: 50 }}>
-          <PseudoUmbilicalScene projIndex={projIndex} />
+          <PseudoUmbilicalScene projIndex={projIndex} highlightU={highlightU} />
         </Canvas>
       </div>
       <div className="flex flex-wrap gap-2 mb-2">
@@ -162,6 +162,26 @@ export function PseudoUmbilicalViz() {
             {p.name_zh}
           </button>
         ))}
+      </div>
+      <p className="text-slate-500 text-xs mb-2 italic">{PROJECTIONS[projIndex].desc_zh}</p>
+      <div className="flex items-center gap-3 text-xs text-slate-400">
+        <span className="text-cyan-400 font-mono whitespace-nowrap">
+          v = {((highlightU + 1) / 2 * 100).toFixed(0)}% · T<sub>v</sub>
+        </span>
+        <input
+          type="range"
+          min={-100}
+          max={100}
+          value={Math.round(highlightU * 100)}
+          onChange={e => setHighlightU(Number(e.target.value) / 100)}
+          className="flex-1 accent-cyan-500"
+        />
+        <button
+          onClick={() => setHighlightU(-1)}
+          className="px-2 py-0.5 rounded bg-slate-700 hover:bg-slate-600 text-slate-300"
+        >
+          v=0
+        </button>
       </div>
     </div>
   );
@@ -209,25 +229,29 @@ function nonSphericalPU(u: number, v: number, a: number, c: number): number[] {
   return [x1, x2, x3, x4, x5, x6];
 }
 
-const NS_PROJECTIONS: { name_zh: string; name_en: string; matrix: number[][] }[] = [
+const NS_PROJECTIONS: { name_zh: string; name_en: string; desc_zh: string; matrix: number[][] }[] = [
   {
     name_zh: '(x₁, x₂, x₃)',
     name_en: '(x₁, x₂, x₃)',
+    desc_zh: '前两个分量是旋转面(cos·tan, sin·tan)——展示曲面如何从赤道向两极"张开"。第三分量是高维振荡项。',
     matrix: [[1,0,0,0,0,0],[0,1,0,0,0,0],[0,0,1,0,0,0]]
   },
   {
     name_zh: '(x₁, x₂, x₅)',
     name_en: '(x₁, x₂, x₅)',
+    desc_zh: '旋转面分量 + 第五分量(cos组合)——看到非球面性质：不同纬度的曲线半径不再均匀。',
     matrix: [[1,0,0,0,0,0],[0,1,0,0,0,0],[0,0,0,0,1,0]]
   },
   {
     name_zh: '(x₃, x₄, x₅)',
     name_en: '(x₃, x₄, x₅)',
+    desc_zh: '只看高维振荡分量——这些是球面上看不到的"隐藏维度"，它们携带了非球面的关键信息。',
     matrix: [[0,0,1,0,0,0],[0,0,0,1,0,0],[0,0,0,0,1,0]]
   },
   {
     name_zh: '混合投影',
     name_en: 'Mixed',
+    desc_zh: '以斜角混合全部6个坐标——从"对角线"方向观察，综合展现曲面的整体几何形态。',
     matrix: [
       [0.6, 0.3, 0, -0.3, 0.5, 0],
       [0, 0.5, 0.4, 0.3, 0, -0.3],
@@ -340,6 +364,7 @@ export function NonSphericalPUViz() {
           </button>
         ))}
       </div>
+      <p className="text-slate-500 text-xs mb-2 italic">{NS_PROJECTIONS[projIndex].desc_zh}</p>
       <div className="flex items-center gap-3 text-xs text-slate-400">
         <span className="text-green-400 font-mono whitespace-nowrap">
           u = {highlightU === 0 ? '0' : (highlightU > 0 ? '+' : '') + (highlightU * 0.92).toFixed(2)} · u<sub>max</sub>

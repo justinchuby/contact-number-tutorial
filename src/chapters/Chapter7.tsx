@@ -482,10 +482,8 @@ export default function Chapter7() {
               ? <>这是Chen-Li论文中Example 6.6构造的平坦环面 τ<sub>a</sub> 在三维空间的投影。这个环面嵌入在六维欧氏空间E⁶中，具有接触数 c# = 4，是常各向同性的pseudo-umbilical曲面。由于六维无法直接看到，下面展示了不同的三维投影方式。</>
               : <>This is the 3D projection of the flat torus τ<sub>a</sub> constructed in Chen-Li's Example 6.6. This torus is embedded in 6-dimensional Euclidean space E⁶ with contact number c# = 4, and is a constant isotropic pseudo-umbilical surface. Since 6D can't be directly visualized, we show different 3D projections below.</>}
           </p>
-          <div className="bg-slate-800 rounded-lg p-3 mb-3">
-            <p className="text-cyan-400 text-xs font-mono">
-              τₐ(u,v) = (2/√6a)(cos(au/√2)cos(√3av/√2), cos(au/√2)sin(√3av/√2), cos(√2au)/√2, sin(au/√2)cos(√3av/√2), sin(au/√2)sin(√3av/√2), sin(√2au)/√2)
-            </p>
+          <div className="bg-slate-800 rounded-lg p-3 mb-3 overflow-x-auto">
+            <MathBlock>{String.raw`\tau_a(u,v) = \frac{2}{\sqrt{6}\,a}\begin{pmatrix} \cos\!\frac{au}{\sqrt{2}}\cos\!\frac{\sqrt{3}\,av}{\sqrt{2}} \\[4pt] \cos\!\frac{au}{\sqrt{2}}\sin\!\frac{\sqrt{3}\,av}{\sqrt{2}} \\[4pt] \frac{1}{\sqrt{2}}\cos\!\sqrt{2}\,au \\[4pt] \sin\!\frac{au}{\sqrt{2}}\cos\!\frac{\sqrt{3}\,av}{\sqrt{2}} \\[4pt] \sin\!\frac{au}{\sqrt{2}}\sin\!\frac{\sqrt{3}\,av}{\sqrt{2}} \\[4pt] \frac{1}{\sqrt{2}}\sin\!\sqrt{2}\,au \end{pmatrix}`}</MathBlock>
           </div>
           <PseudoUmbilicalViz />
           <div className="mt-3 grid md:grid-cols-2 gap-3 text-sm">
@@ -518,9 +516,9 @@ export default function Chapter7() {
               ? <>这是Chen-Li论文第10节构造的<strong className="text-orange-400">首例非球面pseudo-umbilical曲面</strong>在三维空间的投影。与上面的平坦环面不同，这个曲面具有<strong>非平行的平均曲率向量</strong>——它是S²(√3/a)的一个开子集嵌入到E⁶中。论文指出 ⟨ψ,ψ⟩ = 3cos²(au/√3)/a²，证明了它不在任何超球面上（即非球面的）。</>
               : <>This is the 3D projection of the <strong className="text-orange-400">first non-spherical pseudo-umbilical surface</strong> constructed in Section 10 of Chen-Li's paper. Unlike the flat torus above, this surface has <strong>non-parallel mean curvature vector</strong>—it immerses an open subset of S²(√3/a) into E⁶. The paper shows ⟨ψ,ψ⟩ = 3cos²(au/√3)/a², proving it lies on no hypersphere (i.e., non-spherical).</>}
           </p>
-          <div className="bg-slate-800 rounded-lg p-3 mb-3 text-xs font-mono text-amber-400 overflow-x-auto">
-            <p>ψ(u,v) = cos²(au/√3) · (√3/a·tan(au/√3)·cos(av/√3), √3/a·tan(au/√3)·sin(av/√3), ...)</p>
-            <p className="text-slate-500 mt-1">β = 2(a²+6c²)/3, &nbsp; δ = (2/3)√(a⁴+6a²c²+36c⁴), &nbsp; a=1, c=0.5</p>
+          <div className="bg-slate-800 rounded-lg p-3 mb-3 overflow-x-auto">
+            <MathBlock>{String.raw`\psi(u,v) = \cos^2\!\frac{au}{\sqrt{3}} \cdot \begin{pmatrix} \frac{\sqrt{3}}{a}\tan\!\frac{au}{\sqrt{3}}\cos\!\frac{av}{\sqrt{3}} \\[4pt] \frac{\sqrt{3}}{a}\tan\!\frac{au}{\sqrt{3}}\sin\!\frac{av}{\sqrt{3}} \\[4pt] \text{(振荡项 } \sin/\cos \text{ 组合)} \\[4pt] \vdots \end{pmatrix}`}</MathBlock>
+            <MathBlock>{String.raw`\beta = \frac{2(a^2+6c^2)}{3},\quad \delta = \frac{2}{3}\sqrt{a^4+6a^2c^2+36c^4},\quad a=1,\; c=0.5`}</MathBlock>
           </div>
           <NonSphericalPUViz />
           <div className="mt-3 grid md:grid-cols-2 gap-3 text-sm">
