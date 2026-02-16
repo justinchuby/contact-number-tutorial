@@ -34,11 +34,11 @@ const searchIndex = {
     { term: '单位切丛', chapter: 3, section: '3.3', description: '所有单位切向量的集合' },
     
     // Chapter 4
-    { term: '法截面', chapter: 4, section: '4.1', description: '仿射子空间与流形的交线' },
+    { term: '法截线', chapter: 4, section: '4.1', description: '仿射子空间与流形的交线' },
     { term: '仿射子空间', chapter: 4, section: '4.1', description: '由点和方向张成的子空间' },
     
     // Chapter 5
-    { term: '接触数', chapter: 5, section: '5.2', description: '测地线与法截面的接触阶数' },
+    { term: '接触数', chapter: 5, section: '5.2', description: '测地线与法截线的接触阶数' },
     { term: '接触阶数', chapter: 5, section: '5.1', description: '两条曲线的导数相同的最高阶' },
     { term: 'k阶接触', chapter: 5, section: '5.1', description: '前k阶导数都相同' },
     

@@ -230,7 +230,7 @@ export function NormalSectionVizWithLabels() {
       <div className="flex flex-wrap gap-4 text-sm">
         <div className="flex items-center gap-2">
           <div className="w-4 h-1 bg-fuchsia-500 rounded"></div>
-          <span className="text-slate-300">法截面 (Normal Section)</span>
+          <span className="text-slate-300">法截线 (Normal Section)</span>
         </div>
         <div className="flex items-center gap-2">
           <div className="w-4 h-1 bg-green-500 rounded"></div>

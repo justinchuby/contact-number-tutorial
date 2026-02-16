@@ -164,6 +164,8 @@ function DifferentCurvesScene() {
   });
 
   // Create an ellipsoid-like surface where curves differ
+  // Ellipsoid: (x/a)^2 + (y/b)^2 + (z/c)^2 = 1, a=0.8, b=1.0, c=0.6
+  const a = 0.8, b = 1.0, c = 0.6;
   const ellipsoidLines = useMemo(() => {
     const lines: THREE.Vector3[][] = [];
     // Latitude lines
@@ -173,9 +175,9 @@ function DifferentCurvesScene() {
       for (let lon = 0; lon <= 360; lon += 10) {
         const theta = (lon * Math.PI) / 180;
         line.push(new THREE.Vector3(
-          0.6 * Math.cos(phi) * Math.cos(theta),
-          1.0 * Math.cos(phi) * Math.sin(theta),
-          0.8 * Math.sin(phi)
+          a * Math.cos(phi) * Math.cos(theta),
+          b * Math.cos(phi) * Math.sin(theta),
+          c * Math.sin(phi)
         ));
       }
       lines.push(line);
@@ -187,9 +189,9 @@ function DifferentCurvesScene() {
       for (let lat = -90; lat <= 90; lat += 5) {
         const phi = (lat * Math.PI) / 180;
         line.push(new THREE.Vector3(
-          0.6 * Math.cos(phi) * Math.cos(theta),
-          1.0 * Math.cos(phi) * Math.sin(theta),
-          0.8 * Math.sin(phi)
+          a * Math.cos(phi) * Math.cos(theta),
+          b * Math.cos(phi) * Math.sin(theta),
+          c * Math.sin(phi)
         ));
       }
       lines.push(line);
@@ -197,41 +199,56 @@ function DifferentCurvesScene() {
     return lines;
   }, []);
 
-  // Point at top of ellipsoid
-  const point = new THREE.Vector3(0, 0, 0.8);
-  // Direction is implicit in the geodesic/normal section calculations below
+  // Start at equator-side point where difference is visible
+  // Point on ellipsoid at phi=0, theta=45°
+  const startTheta = Math.PI / 4;
+  const startPhi = 0;
+  const point = new THREE.Vector3(
+    a * Math.cos(startPhi) * Math.cos(startTheta),
+    b * Math.cos(startPhi) * Math.sin(startTheta),
+    c * Math.sin(startPhi)
+  );
 
-  // Geodesic (curved path on surface - follows surface)
-  const geodesicPoints = useMemo(() => {
+  // Normal section: intersection of ellipsoid with a plane through the point
+  // containing the normal and a tangent direction.
+  // At phi=0, theta=45°, a tangent direction tilted toward the pole traces a planar ellipse.
+  const normalSectionPoints = useMemo(() => {
     const pts: THREE.Vector3[] = [];
-    for (let i = 0; i <= 50; i++) {
-      const s = (i / 50 - 0.5) * 2;
-      // Approximate geodesic on ellipsoid
-      const x = 0.6 * s;
-      const z = 0.8 * Math.sqrt(Math.max(0, 1 - s * s * 0.6));
-      pts.push(new THREE.Vector3(x, 0, z));
+    // Parametric plane cut through point in xz-like direction (tilted toward pole)
+    for (let i = 0; i <= 60; i++) {
+      const t = ((i / 60) - 0.5) * 2.2;
+      // Move along the meridian direction from starting point
+      const phi = t * 0.9;
+      const x = a * Math.cos(phi) * Math.cos(startTheta);
+      const y = b * Math.cos(phi) * Math.sin(startTheta);
+      const z = c * Math.sin(phi);
+      pts.push(new THREE.Vector3(x, y, z));
     }
     return pts;
   }, []);
 
-  // Normal section (plane cut - different curve)
-  const normalSectionPoints = useMemo(() => {
+  // Geodesic: on an ellipsoid, geodesics generally don't stay in a plane.
+  // Approximate by slightly drifting theta as phi changes (Clairaut's relation).
+  const geodesicPoints = useMemo(() => {
     const pts: THREE.Vector3[] = [];
-    for (let i = 0; i <= 50; i++) {
-      const s = (i / 50 - 0.5) * 2;
-      // Normal section is intersection with plane containing normal
-      const x = 0.6 * s;
-      // Different z profile due to ellipsoid shape
-      const z = 0.8 * Math.sqrt(Math.max(0, 1 - s * s));
-      pts.push(new THREE.Vector3(x, 0, z));
+    for (let i = 0; i <= 60; i++) {
+      const t = ((i / 60) - 0.5) * 2.2;
+      const phi = t * 0.9;
+      // Geodesic drifts in theta due to ellipsoid shape (Clairaut effect)
+      const drift = 0.15 * Math.sin(phi * 1.5);
+      const theta = startTheta + drift;
+      const x = a * Math.cos(phi) * Math.cos(theta);
+      const y = b * Math.cos(phi) * Math.sin(theta);
+      const z = c * Math.sin(phi);
+      pts.push(new THREE.Vector3(x, y, z));
     }
     return pts;
   }, []);
 
   // Animated comparison
   const paramT = (Math.sin(time * 0.5) + 1) / 2;
-  const geodesicPos = geodesicPoints[Math.floor(paramT * 49)];
-  const normalPos = normalSectionPoints[Math.floor(paramT * 49)];
+  const geodesicPos = geodesicPoints[Math.floor(paramT * 59)];
+  const normalPos = normalSectionPoints[Math.floor(paramT * 59)];
 
   return (
     <>
@@ -310,29 +327,29 @@ export function Chapter4VizCollection() {
       {/* Multi-direction visualization */}
       <div>
         <p className="text-cyan-400 font-semibold mb-2">
-          🌈 不同方向的法截面 / Normal Sections in Different Directions
+          🌈 不同方向的法截线 / Normal Sections in Different Directions
         </p>
         <MultiDirectionViz />
         <p className="text-slate-400 text-xs mt-2">
-          从同一点p出发，不同方向u产生不同的法截面（大圆）。每种颜色代表一个方向。
+          从同一点p出发，不同方向u产生不同的法截线（大圆）。每种颜色代表一个方向。
         </p>
       </div>
 
       {/* Sphere case: geodesic = normal section */}
       <div>
         <p className="text-green-400 font-semibold mb-2">
-          ✅ 球面：测地线 = 法截面 / Sphere: Geodesic = Normal Section
+          ✅ 球面：测地线 = 法截线 / Sphere: Geodesic = Normal Section
         </p>
         <GeodesicNormalComparisonViz />
         <p className="text-slate-400 text-xs mt-2">
-          球面上，测地线和法截面都是大圆——完全重合！这就是为什么球面的接触数 c# = ∞
+          球面上，测地线和法截线都是大圆——完全重合！这就是为什么球面的接触数 c# = ∞
         </p>
       </div>
 
       {/* Non-sphere case: geodesic ≠ normal section */}
       <div>
         <p className="text-orange-400 font-semibold mb-2">
-          ⚠️ 椭球面：测地线 ≠ 法截面 / Ellipsoid: Geodesic ≠ Normal Section
+          ⚠️ 椭球面：测地线 ≠ 法截线 / Ellipsoid: Geodesic ≠ Normal Section
         </p>
         <DifferentCurvesViz />
         <div className="flex gap-4 mt-2 text-sm">
@@ -342,7 +359,7 @@ export function Chapter4VizCollection() {
           </div>
           <div className="flex items-center gap-2">
             <div className="w-4 h-1 bg-fuchsia-500 rounded border-dashed"></div>
-            <span className="text-slate-300">法截面 β_u</span>
+            <span className="text-slate-300">法截线 β_u</span>
           </div>
         </div>
         <p className="text-slate-400 text-xs mt-2">

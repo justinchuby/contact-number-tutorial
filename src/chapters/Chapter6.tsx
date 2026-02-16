@@ -145,7 +145,7 @@ export default function Chapter6() {
             </p>
             <p className="text-slate-300 text-sm mb-2">
               {isZh 
-                ? '回忆接触数的定义：c# ≥ k 意味着测地线和法截面在起点处前k-1阶导数都相等。'
+                ? '回忆接触数的定义：c# ≥ k 意味着测地线和法截线在起点处前k-1阶导数都相等。'
                 : 'Recall the definition: c# ≥ k means geodesic and normal section have equal derivatives up to order k-1 at the starting point.'}
             </p>
             <ul className="text-slate-300 text-sm space-y-1">
@@ -162,7 +162,7 @@ export default function Chapter6() {
             </p>
             <p className="text-slate-300 text-sm">
               {isZh 
-                ? '想象在曲面上沿不同方向出发。如果曲面是各向同性的，各方向的弯曲程度相同，那么测地线和法截面在各方向的"贴合程度"也相同——这意味着它们在更高阶上也保持接触。反之，如果各方向弯曲不同，两条曲线会更快地分离。'
+                ? '想象在曲面上沿不同方向出发。如果曲面是各向同性的，各方向的弯曲程度相同，那么测地线和法截线在各方向的"贴合程度"也相同——这意味着它们在更高阶上也保持接触。反之，如果各方向弯曲不同，两条曲线会更快地分离。'
                 : 'Imagine starting in different directions on a surface. If the surface is isotropic, bending is the same in all directions, so geodesic and normal section have the same "closeness" in all directions—meaning they maintain contact to higher order. Conversely, if bending differs by direction, the curves separate faster.'}
             </p>
           </div>
@@ -172,7 +172,7 @@ export default function Chapter6() {
               <p className="text-cyan-400 font-semibold mb-2">→ {isZh ? '正向证明思路' : 'Forward Proof Idea'}</p>
               <p className="text-slate-300 text-sm">
                 {isZh 
-                  ? '若 c#(M) ≥ 3，则测地线和法截面的二阶导数相等。通过计算，这等价于 |h(u,u)| 与方向u无关，即各向同性。'
+                  ? '若 c#(M) ≥ 3，则测地线和法截线的二阶导数相等。通过计算，这等价于 |h(u,u)| 与方向u无关，即各向同性。'
                   : 'If c#(M) ≥ 3, geodesic and normal section have equal 2nd derivatives. By calculation, this is equivalent to |h(u,u)| being independent of direction u, i.e., isotropy.'}
               </p>
             </div>
@@ -198,7 +198,7 @@ export default function Chapter6() {
             </p>
             <p className="text-slate-300 text-sm">
               {isZh 
-                ? '你不需要站在曲面上拿着量角器去测量所有方向的曲率。你只需要在任何一个方向上比较测地线和法截面——如果它们的"加速度"和"jerk"都一样（三阶接触成立），你就能立刻断定这个点在所有方向上都是对称的。这种"用动态方式刻画静态对称性"的转换，正是接触数理论最美妙的核心洞察。'
+                ? '你不需要站在曲面上拿着量角器去测量所有方向的曲率。你只需要在任何一个方向上比较测地线和法截线——如果它们的"加速度"和"jerk"都一样（三阶接触成立），你就能立刻断定这个点在所有方向上都是对称的。这种"用动态方式刻画静态对称性"的转换，正是接触数理论最美妙的核心洞察。'
                 : 'You don\'t need to stand on the surface with a protractor measuring curvature in every direction. Just compare geodesic and normal section in any direction—if their "acceleration" and "jerk" match (3rd order contact), you can immediately conclude the point is symmetric in all directions. This "dynamic measurement characterizes static symmetry" insight is the most beautiful core of contact number theory.'}
             </p>
           </div>
@@ -295,7 +295,7 @@ export default function Chapter6() {
             </p>
             <p className="text-slate-300 text-sm">
               {isZh 
-                ? 'c# ≥ 4 意味着三阶导数也相等。三阶导数涉及曲率的导数（曲率如何随位置变化）。如果测地线和法截面在三阶导数上也一致，说明曲率在空间上不变化——这正是"常"各向同性！'
+                ? 'c# ≥ 4 意味着三阶导数也相等。三阶导数涉及曲率的导数（曲率如何随位置变化）。如果测地线和法截线在三阶导数上也一致，说明曲率在空间上不变化——这正是"常"各向同性！'
                 : 'c# ≥ 4 means 3rd derivatives are also equal. 3rd derivatives involve curvature derivatives (how curvature varies with position). If geodesic and normal section agree at 3rd order, curvature doesn\'t vary spatially—this is exactly "constant" isotropy!'}
             </p>
           </div>

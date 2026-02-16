@@ -23,7 +23,7 @@ export default function Chapter4() {
           </h2>
           <p className="text-slate-300 mb-4">
             {isZh 
-              ? '想象你有一个橙子（球面）。用刀切一刀会得到什么？一个圆！这个圆就是平面与球面的"截面"。法截面就是这个想法的精确数学版本。'
+              ? '想象你有一个橙子（球面）。用刀切一刀会得到什么？一个圆！这个圆就是平面与球面的"截面"。法截线就是这个想法的精确数学版本。'
               : 'Imagine you have an orange (sphere). What do you get if you cut it with a knife? A circle! This circle is the "section" where the plane meets the sphere. Normal section is the precise mathematical version of this idea.'}
           </p>
           <div className="bg-slate-900 rounded-lg p-4">
@@ -41,7 +41,7 @@ export default function Chapter4() {
         {/* Section 4.1 */}
         <section className="bg-slate-900 rounded-xl p-6">
           <h2 id="section-4.1" className="text-xl font-semibold text-cyan-400 mb-4">
-            {isZh ? '4.1 法截面的几何构造' : '4.1 Geometric Construction of Normal Section'}
+            {isZh ? '4.1 法截线的几何构造' : '4.1 Geometric Construction of Normal Section'}
           </h2>
           
           <p className="text-slate-300 mb-4">
@@ -70,7 +70,7 @@ export default function Chapter4() {
               <li>{isZh ? '取点p和方向u' : 'Take point p and direction u'}</li>
               <li>{isZh ? '取p处的整个法空间 T⊥_pM' : 'Take the entire normal space T⊥_pM at p'}</li>
               <li>{isZh ? '用u和T⊥_pM张成一个子空间' : 'Span a subspace using u and T⊥_pM'}</li>
-              <li>{isZh ? '这个子空间与M的交线就是法截面βᵤ' : 'The intersection of this subspace with M is the normal section β_u'}</li>
+              <li>{isZh ? '这个子空间与M的交线就是法截线βᵤ' : 'The intersection of this subspace with M is the normal section β_u'}</li>
             </ol>
           </div>
 
@@ -125,12 +125,12 @@ export default function Chapter4() {
         {/* Interactive visualization - after normal section concept introduced */}
         <section className="bg-slate-900 rounded-xl p-6">
           <h2 className="text-xl font-semibold text-cyan-400 mb-4">
-            🎮 {isZh ? '交互可视化：法截面构造' : 'Interactive: Normal Section Construction'}
+            🎮 {isZh ? '交互可视化：法截线构造' : 'Interactive: Normal Section Construction'}
           </h2>
           <NormalSectionVizWithLabels />
           <p className="text-slate-400 text-sm mt-4">
             {isZh 
-              ? '拖动旋转。观察切向量（绿）、法向量（红）如何确定切割平面（紫），产生法截面（粉）。'
+              ? '拖动旋转。观察切向量（绿）、法向量（红）如何确定切割平面（紫），产生法截线（粉）。'
               : 'Drag to rotate. See how tangent (green) and normal (red) determine the cutting plane (purple), producing the normal section (pink).'}
           </p>
         </section>
@@ -138,12 +138,12 @@ export default function Chapter4() {
         {/* Section 4.2 */}
         <section className="bg-slate-900 rounded-xl p-6">
           <h2 id="section-4.2" className="text-xl font-semibold text-cyan-400 mb-4">
-            {isZh ? '4.2 法截面的参数化' : '4.2 Parametrization of Normal Section'}
+            {isZh ? '4.2 法截线的参数化' : '4.2 Parametrization of Normal Section'}
           </h2>
           
           <p className="text-slate-300 mb-4">
             {isZh 
-              ? '法截面 β_u 是一条曲线，我们用弧长参数化它：'
+              ? '法截线 β_u 是一条曲线，我们用弧长参数化它：'
               : 'The normal section β_u is a curve, which we parametrize by arc length:'}
           </p>
 
@@ -151,7 +151,7 @@ export default function Chapter4() {
             <MathBlock>{'\\beta_u(0) = p, \\quad \\beta_u\'(0) = u, \\quad |\\beta_u\'(s)| = 1'}</MathBlock>
             <p className="text-slate-400 text-sm mt-2">
               {isZh 
-                ? '注意：和测地线一样，法截面也过点p，初始方向也是u。'
+                ? '注意：和测地线一样，法截线也过点p，初始方向也是u。'
                 : 'Note: Like the geodesic, the normal section also passes through p with initial direction u.'}
             </p>
           </div>
@@ -160,7 +160,7 @@ export default function Chapter4() {
         {/* Section 4.3 - Key comparison */}
         <section className="bg-gradient-to-r from-green-900/30 to-emerald-900/30 rounded-xl p-6 border border-green-700">
           <h2 id="section-4.3" className="text-xl font-semibold text-green-400 mb-4">
-            ⚔️ {isZh ? '4.3 测地线 vs 法截面' : '4.3 Geodesic vs Normal Section'}
+            ⚔️ {isZh ? '4.3 测地线 vs 法截线' : '4.3 Geodesic vs Normal Section'}
           </h2>
           
           <div className="overflow-x-auto">
@@ -169,7 +169,7 @@ export default function Chapter4() {
                 <tr className="text-left border-b border-slate-600">
                   <th className="py-2 text-slate-400"></th>
                   <th className="py-2 text-cyan-400">{isZh ? '测地线 γ_u' : 'Geodesic γ_u'}</th>
-                  <th className="py-2 text-purple-400">{isZh ? '法截面 β_u' : 'Normal Section β_u'}</th>
+                  <th className="py-2 text-purple-400">{isZh ? '法截线 β_u' : 'Normal Section β_u'}</th>
                 </tr>
               </thead>
               <tbody className="text-slate-300">
@@ -223,7 +223,7 @@ export default function Chapter4() {
             </p>
             <p className="text-slate-300 text-sm mb-4">
               {isZh 
-                ? '圆柱面是理解测地线与法截面关系的绝佳例子，因为不同方向的测地线形态完全不同！'
+                ? '圆柱面是理解测地线与法截线关系的绝佳例子，因为不同方向的测地线形态完全不同！'
                 : 'The cylinder is a perfect example for understanding geodesic vs normal section, because geodesics look completely different in different directions!'}
             </p>
 
@@ -236,7 +236,7 @@ export default function Chapter4() {
                   {isZh ? '测地线：直线↕️' : 'Geodesic: straight line ↕️'}
                 </p>
                 <p className="text-slate-400 text-xs mb-2">
-                  {isZh ? '法截面：同样是直线' : 'Normal section: also straight line'}
+                  {isZh ? '法截线：同样是直线' : 'Normal section: also straight line'}
                 </p>
                 <p className="text-green-400 text-xs">
                   ✅ γ = β ({isZh ? '完全一致！' : 'identical!'})
@@ -251,7 +251,7 @@ export default function Chapter4() {
                   {isZh ? '测地线：圆⭕' : 'Geodesic: circle ⭕'}
                 </p>
                 <p className="text-slate-400 text-xs mb-2">
-                  {isZh ? '法截面：同样是圆' : 'Normal section: also circle'}
+                  {isZh ? '法截线：同样是圆' : 'Normal section: also circle'}
                 </p>
                 <p className="text-green-400 text-xs">
                   ✅ γ = β ({isZh ? '完全一致！' : 'identical!'})
@@ -266,7 +266,7 @@ export default function Chapter4() {
                   {isZh ? '测地线：螺旋线🌀' : 'Geodesic: helix 🌀'}
                 </p>
                 <p className="text-slate-400 text-xs mb-2">
-                  {isZh ? '法截面：椭圆' : 'Normal section: ellipse'}
+                  {isZh ? '法截线：椭圆' : 'Normal section: ellipse'}
                 </p>
                 <p className="text-red-400 text-xs">
                   ❌ γ ≠ β ({isZh ? '不同！' : 'different!'})
@@ -286,7 +286,7 @@ export default function Chapter4() {
                 </p>
                 <p>
                   {isZh 
-                    ? '为什么斜向法截面是椭圆？法截面是用包含切线和法向的平面切圆柱。斜切圆柱得到的是椭圆（想象斜切香肠）！'
+                    ? '为什么斜向法截线是椭圆？法截线是用包含切线和法向的平面切圆柱。斜切圆柱得到的是椭圆（想象斜切香肠）！'
                     : 'Why is the diagonal normal section an ellipse? Normal section uses a plane containing tangent and normal to cut the cylinder. Cutting a cylinder at an angle gives an ellipse (imagine cutting a sausage diagonally)!'}
                 </p>
               </div>
@@ -298,7 +298,7 @@ export default function Chapter4() {
               </p>
               <p className="text-slate-300 text-xs">
                 {isZh 
-                  ? '圆柱面上，轴向和环向的测地线与法截面完全一致，但斜向只有前2阶导数相同。下一章将引入一个数来精确描述这种差异——对每个方向取"吻合的最高阶数"，再取所有方向的最小值。'
+                  ? '圆柱面上，轴向和环向的测地线与法截线完全一致，但斜向只有前2阶导数相同。下一章将引入一个数来精确描述这种差异——对每个方向取"吻合的最高阶数"，再取所有方向的最小值。'
                   : 'On a cylinder, axial and circumferential geodesics match normal sections exactly, but diagonally only the first 2 derivatives match. The next chapter will introduce a number to precisely describe this—the highest matching order for each direction, then the minimum over all directions.'}
               </p>
             </div>
@@ -308,7 +308,7 @@ export default function Chapter4() {
         {/* Comprehensive visualizations */}
         <section className="bg-slate-900 rounded-xl p-6">
           <h2 className="text-xl font-semibold text-cyan-400 mb-4">
-            🎬 {isZh ? '深入可视化：测地线与法截面的关系' : 'Deep Dive: Geodesic vs Normal Section Relationship'}
+            🎬 {isZh ? '深入可视化：测地线与法截线的关系' : 'Deep Dive: Geodesic vs Normal Section Relationship'}
           </h2>
           <Chapter4VizCollection />
         </section>
@@ -333,11 +333,11 @@ export default function Chapter4() {
             
             <div className="bg-slate-900 rounded-lg p-4">
               <h3 className="text-purple-400 font-semibold mb-2">
-                {isZh ? '法截面 = 外蕴几何' : 'Normal Section = Extrinsic Geometry'}
+                {isZh ? '法截线 = 外蕴几何' : 'Normal Section = Extrinsic Geometry'}
               </h3>
               <p className="text-slate-300 text-sm">
                 {isZh 
-                  ? '法截面依赖于流形是如何嵌入外部空间的。同一个流形以不同方式嵌入，会有不同的法截面。'
+                  ? '法截线依赖于流形是如何嵌入外部空间的。同一个流形以不同方式嵌入，会有不同的法截线。'
                   : 'Normal sections depend on how the manifold is embedded in ambient space. The same manifold embedded differently will have different normal sections.'}
               </p>
             </div>
@@ -348,7 +348,7 @@ export default function Chapter4() {
               </p>
               <p className="text-slate-300 text-sm">
                 {isZh 
-                  ? '想象你有了上帝视角，可以从外部观察你脚下的山坡。你拿了一把巨大的、无限薄的刀——在数学里就是一个平面。这把刀垂直于地面，沿着你前进的方向把整个山坡切开。刀面和山坡相交会形成一条曲线——这条曲线就是法截面。它完全是外部观察者的产物：形状不仅取决于山坡本身，还取决于你这把"刀"是怎么放的。'
+                  ? '想象你有了上帝视角，可以从外部观察你脚下的山坡。你拿了一把巨大的、无限薄的刀——在数学里就是一个平面。这把刀垂直于地面，沿着你前进的方向把整个山坡切开。刀面和山坡相交会形成一条曲线——这条曲线就是法截线。它完全是外部观察者的产物：形状不仅取决于山坡本身，还取决于你这把"刀"是怎么放的。'
                   : 'Imagine having God\'s view, observing the hillside from outside. You take a giant, infinitely thin knife—mathematically, a plane. Hold it perpendicular to the ground and slice along your direction of travel. The knife-surface intersection forms a curve—the normal section. It\'s entirely an external observer\'s product: the shape depends not only on the hillside itself but on how the "knife" is positioned.'}
               </p>
             </div>
@@ -356,11 +356,11 @@ export default function Chapter4() {
             {/* Why different embeddings give different normal sections */}
             <div className="bg-gradient-to-r from-blue-900/30 to-purple-900/30 rounded-lg p-4 border border-blue-600">
               <h3 className="text-blue-400 font-semibold mb-2">
-                🤔 {isZh ? '为什么不同嵌入方式会有不同的法截面？' : 'Why Do Different Embeddings Give Different Normal Sections?'}
+                🤔 {isZh ? '为什么不同嵌入方式会有不同的法截线？' : 'Why Do Different Embeddings Give Different Normal Sections?'}
               </h3>
               <p className="text-slate-300 text-sm mb-3">
                 {isZh 
-                  ? '这是因为法截面的构造依赖于法空间，而法空间由嵌入方式决定：'
+                  ? '这是因为法截线的构造依赖于法空间，而法空间由嵌入方式决定：'
                   : 'This is because normal section construction depends on the normal space, which is determined by the embedding:'}
               </p>
               <div className="grid md:grid-cols-2 gap-3 text-sm mb-3">
@@ -383,7 +383,7 @@ export default function Chapter4() {
               </div>
               <p className="text-yellow-400 text-xs">
                 💡 {isZh 
-                  ? '这就是为什么法截面是"外蕴"的——它取决于你把流形放在哪个空间里、怎么放。而测地线只关心流形本身，不关心它住在哪里。'
+                  ? '这就是为什么法截线是"外蕴"的——它取决于你把流形放在哪个空间里、怎么放。而测地线只关心流形本身，不关心它住在哪里。'
                   : 'This is why normal sections are "extrinsic"—they depend on where you place the manifold and how. Geodesics only care about the manifold itself, not where it lives.'}
               </p>
 
@@ -399,7 +399,7 @@ export default function Chapter4() {
               </h3>
               <p className="text-slate-300 text-sm">
                 {isZh 
-                  ? '测地线（内蕴）和法截面（外蕴）的差异，精确反映了子流形嵌入的"对称程度"。两者越吻合，嵌入越"自然"。下一章将给出精确的数学定义！'
+                  ? '测地线（内蕴）和法截线（外蕴）的差异，精确反映了子流形嵌入的"对称程度"。两者越吻合，嵌入越"自然"。下一章将给出精确的数学定义！'
                   : 'The difference between geodesic (intrinsic) and normal section (extrinsic) precisely reflects the "degree of symmetry" of the embedding. The more they agree, the more "natural" the embedding. The next chapter gives the precise mathematical definition!'}
               </p>
             </div>
@@ -447,7 +447,7 @@ export default function Chapter4() {
             </p>
             <p className="text-slate-300 text-sm">
               {isZh 
-                ? '球面上，任何方向的测地线和法截面分别是什么？它们的关系如何？'
+                ? '球面上，任何方向的测地线和法截线分别是什么？它们的关系如何？'
                 : 'On a sphere, what are geodesics and normal sections in any direction? How are they related?'}
             </p>
             <details className="mt-2">
@@ -456,7 +456,7 @@ export default function Chapter4() {
               </summary>
               <p className="text-slate-400 text-sm mt-2">
                 {isZh 
-                  ? <>球面上测地线和法截面都是大圆，它们完全重合！这是因为球面是高度对称的"<Tooltip term="umbilical">全脐</Tooltip>"子流形。换言之，球面的内蕴几何和外蕴几何完全一致。</>
+                  ? <>球面上测地线和法截线都是大圆，它们完全重合！这是因为球面是高度对称的"<Tooltip term="umbilical">全脐</Tooltip>"子流形。换言之，球面的内蕴几何和外蕴几何完全一致。</>
                   : <>On a sphere, both geodesics and normal sections are great circles—they coincide completely! This is because the sphere is a highly symmetric "<Tooltip term="umbilical">totally umbilical</Tooltip>" submanifold. In other words, intrinsic and extrinsic geometry agree perfectly on a sphere.</>}
               </p>
             </details>
@@ -470,7 +470,7 @@ export default function Chapter4() {
           </h2>
           <p className="text-slate-300">
             {isZh 
-              ? '我们已经准备好了两条曲线：测地线γ_u（内蕴）和法截面β_u（外蕴）。下一章，我们将正式定义一个不变量来精确衡量它们的"吻合程度"，并证明为什么这个吻合程度至少为2。这是Chen-Li论文的核心内容！'
+              ? '我们已经准备好了两条曲线：测地线γ_u（内蕴）和法截线β_u（外蕴）。下一章，我们将正式定义一个不变量来精确衡量它们的"吻合程度"，并证明为什么这个吻合程度至少为2。这是Chen-Li论文的核心内容！'
               : 'We\'ve prepared two curves: geodesic γ_u (intrinsic) and normal section β_u (extrinsic). In the next chapter, we\'ll formally define an invariant to precisely measure their "degree of agreement" and prove why it\'s at least 2. This is the core content of Chen-Li\'s paper!'}
           </p>
         </section>
@@ -481,10 +481,10 @@ export default function Chapter4() {
             ✅ {isZh ? '本章小结' : 'Chapter Summary'}
           </h2>
           <ul className="text-slate-300 text-sm space-y-2">
-            <li>✓ {isZh ? '法截面 = 用包含切向量和法空间的平面切割子流形得到的曲线' : 'Normal section = curve from cutting submanifold with plane containing tangent and normal space'}</li>
-            <li>✓ {isZh ? '法截面和测地线有相同的起点和初始方向' : 'Normal section and geodesic share same starting point and initial direction'}</li>
-            <li>✓ {isZh ? '测地线是内蕴的（只取决于流形本身），法截面是外蕴的（取决于嵌入方式）' : 'Geodesic is intrinsic (depends only on manifold), normal section is extrinsic (depends on embedding)'}</li>
-            <li>✓ {isZh ? '球面上测地线与法截面完全相同（都是大圆）' : 'On sphere, geodesic and normal section are identical (both great circles)'}</li>
+            <li>✓ {isZh ? '法截线 = 用包含切向量和法空间的平面切割子流形得到的曲线' : 'Normal section = curve from cutting submanifold with plane containing tangent and normal space'}</li>
+            <li>✓ {isZh ? '法截线和测地线有相同的起点和初始方向' : 'Normal section and geodesic share same starting point and initial direction'}</li>
+            <li>✓ {isZh ? '测地线是内蕴的（只取决于流形本身），法截线是外蕴的（取决于嵌入方式）' : 'Geodesic is intrinsic (depends only on manifold), normal section is extrinsic (depends on embedding)'}</li>
+            <li>✓ {isZh ? '球面上测地线与法截线完全相同（都是大圆）' : 'On sphere, geodesic and normal section are identical (both great circles)'}</li>
           </ul>
           <div className="mt-6 bg-slate-900 rounded-lg p-4">
             <p className="text-yellow-400 font-semibold mb-3">
@@ -494,7 +494,7 @@ export default function Chapter4() {
               <div>
                 <p className="text-slate-300 text-sm">
                   {isZh 
-                    ? '1. 在球面上，法截面和测地线都是大圆。那在圆柱面上呢？它们还一样吗？'
+                    ? '1. 在球面上，法截线和测地线都是大圆。那在圆柱面上呢？它们还一样吗？'
                     : '1. On a sphere, both normal section and geodesic are great circles. What about on a cylinder? Are they still the same?'}
                 </p>
                 <details className="mt-1">
@@ -503,7 +503,7 @@ export default function Chapter4() {
                   </summary>
                   <p className="text-slate-400 text-xs mt-1">
                     {isZh 
-                      ? '不一样！圆柱面上沿母线方向，测地线和法截面都是直线，是一致的。但沿斜方向，测地线是螺旋线（贴在圆柱面上），而法截面是椭圆（用平面切割圆柱）。它们从同一点出发、同一方向，但很快就分开了。'
+                      ? '不一样！圆柱面上沿母线方向，测地线和法截线都是直线，是一致的。但沿斜方向，测地线是螺旋线（贴在圆柱面上），而法截线是椭圆（用平面切割圆柱）。它们从同一点出发、同一方向，但很快就分开了。'
                       : 'No! Along the generator direction, both are straight lines. But in oblique directions, the geodesic is a helix (on the cylinder surface), while the normal section is an ellipse (plane cutting the cylinder). They start from the same point in the same direction but quickly diverge.'}
                   </p>
                 </details>
@@ -511,7 +511,7 @@ export default function Chapter4() {
               <div>
                 <p className="text-slate-300 text-sm">
                   {isZh 
-                    ? '2. 如果一个子流形上所有方向的法截面都和测地线完全重合，这说明什么？'
+                    ? '2. 如果一个子流形上所有方向的法截线都和测地线完全重合，这说明什么？'
                     : '2. If normal sections coincide with geodesics in every direction on a submanifold, what does that tell us?'}
                 </p>
                 <details className="mt-1">

@@ -257,19 +257,19 @@ export function ContactNumberVizWithControls() {
   const directionInfo: Record<DirectionMode, { zh: string; en: string; desc_zh: string; desc_en: string; order: string }> = {
     axial: { 
       zh: '轴向', en: 'Axial', 
-      desc_zh: '测地线 = 法截面 = 直线。两条曲线完全重合！', 
+      desc_zh: '测地线 = 法截线 = 直线。两条曲线完全重合！', 
       desc_en: 'Geodesic = Normal section = straight line. The two curves coincide completely!',
       order: '∞'
     },
     circumferential: { 
       zh: '环向', en: 'Circumferential', 
-      desc_zh: '测地线 = 法截面 = 圆。两条曲线也完全重合！', 
+      desc_zh: '测地线 = 法截线 = 圆。两条曲线也完全重合！', 
       desc_en: 'Geodesic = Normal section = circle. The two curves also coincide completely!',
       order: '∞'
     },
     diagonal: { 
       zh: '斜向 (45°)', en: 'Diagonal (45°)', 
-      desc_zh: '测地线 = 螺旋线，法截面 = 椭圆。两条曲线从第3阶导数开始不同！', 
+      desc_zh: '测地线 = 螺旋线，法截线 = 椭圆。两条曲线从第3阶导数开始不同！', 
       desc_en: 'Geodesic = helix, Normal section = ellipse. The two curves diverge from the 3rd derivative!',
       order: '2'
     },
@@ -291,7 +291,7 @@ export function ContactNumberVizWithControls() {
         </div>
         <div className="flex items-center gap-2">
           <div className="w-4 h-1 bg-fuchsia-500 rounded"></div>
-          <span className="text-slate-300">法截面 β<sub>u</sub> (Normal Section)</span>
+          <span className="text-slate-300">法截线 β<sub>u</sub> (Normal Section)</span>
         </div>
         <div className="flex items-center gap-2">
           <div className="w-4 h-1 bg-green-400 rounded"></div>

@@ -481,7 +481,7 @@ export default function Chapter9() {
           </h2>
           <p className="text-slate-300">
             {isZh 
-              ? '曲率线和测地线是曲面上两类重要的曲线。全脐曲面（接触数∞）的所有曲线既是测地线又是曲率线。Qin-Li对曲率线全挠率的研究，与李世杰教授在接触数理论中对测地线和法截面关系的研究，都属于曲面几何的核心问题。'
+              ? '曲率线和测地线是曲面上两类重要的曲线。全脐曲面（接触数∞）的所有曲线既是测地线又是曲率线。Qin-Li对曲率线全挠率的研究，与李世杰教授在接触数理论中对测地线和法截线关系的研究，都属于曲面几何的核心问题。'
               : 'Lines of curvature and geodesics are two important types of curves on surfaces. On totally umbilical surfaces (contact number ∞), all curves are both geodesics and lines of curvature. Qin-Li\'s study of total torsion of lines of curvature, like Prof. Li\'s study of geodesic-normal section relations in contact number theory, are both core problems in surface geometry.'}
           </p>
         </section>
