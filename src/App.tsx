@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Layout } from './components';
 import { 
-  Home, Chapter, NotFound,
+  Home, NotFound,
   Chapter1, Chapter2, Chapter3, Chapter4, Chapter5, Chapter6,
   Chapter7, Chapter8, Chapter9, Chapter10, Chapter11, Chapter12 
 } from './chapters';
@@ -28,7 +28,6 @@ function App() {
           <Route path="chapter/10" element={<Chapter10 />} />
           <Route path="chapter/11" element={<Chapter11 />} />
           <Route path="chapter/12" element={<Chapter12 />} />
-          <Route path="chapter/:id" element={<Chapter />} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
