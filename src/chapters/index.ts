@@ -12,3 +12,4 @@ export { default as Chapter9 } from './Chapter9';
 export { default as Chapter10 } from './Chapter10';
 export { default as Chapter11 } from './Chapter11';
 export { default as Chapter12 } from './Chapter12';
+export { default as NotFound } from './NotFound';
