@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useMemo, useState, useCallback } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls, Line } from '@react-three/drei';
 import * as THREE from 'three';
@@ -27,6 +27,63 @@ function project6Dto3D(p6: number[], proj: number[][]): THREE.Vector3 {
     proj[0][0]*p6[0] + proj[0][1]*p6[1] + proj[0][2]*p6[2] + proj[0][3]*p6[3] + proj[0][4]*p6[4] + proj[0][5]*p6[5],
     proj[1][0]*p6[0] + proj[1][1]*p6[1] + proj[1][2]*p6[2] + proj[1][3]*p6[3] + proj[1][4]*p6[4] + proj[1][5]*p6[5],
     proj[2][0]*p6[0] + proj[2][1]*p6[1] + proj[2][2]*p6[2] + proj[2][3]*p6[3] + proj[2][4]*p6[4] + proj[2][5]*p6[5],
+  );
+}
+
+// Custom projection panel: 3 rows × 6 columns of sliders
+const AXIS_LABELS = ['x₁', 'x₂', 'x₃', 'x₄', 'x₅', 'x₆'];
+const ROW_COLORS = ['text-red-400', 'text-green-400', 'text-blue-400'];
+const ROW_ACCENTS = ['accent-red-500', 'accent-green-500', 'accent-blue-500'];
+
+function CustomProjectionPanel({
+  matrix, onChange, onReset, accentColor = 'purple'
+}: {
+  matrix: number[][];
+  onChange: (row: number, col: number, val: number) => void;
+  onReset: () => void;
+  accentColor?: string;
+}) {
+  return (
+    <div className="bg-slate-800 rounded-lg p-3 mt-2">
+      <div className="flex items-center justify-between mb-2">
+        <span className="text-xs text-slate-300 font-semibold">🎛️ 自定义投影矩阵 (3×6)</span>
+        <button
+          onClick={onReset}
+          className={`px-2 py-0.5 rounded text-xs bg-${accentColor}-700 hover:bg-${accentColor}-600 text-white`}
+        >
+          重置
+        </button>
+      </div>
+      <p className="text-slate-500 text-xs mb-2">
+        每行对应3D输出的一个轴，每列对应6D输入的一个分量。拖动滑块调整权重。
+      </p>
+      <div className="space-y-2">
+        {['→ X轴', '→ Y轴', '→ Z轴'].map((label, row) => (
+          <div key={row} className="flex items-center gap-1">
+            <span className={`text-xs font-mono w-10 ${ROW_COLORS[row]}`}>{label}</span>
+            <div className="flex-1 grid grid-cols-6 gap-1">
+              {AXIS_LABELS.map((ax, col) => (
+                <div key={col} className="flex flex-col items-center">
+                  <span className="text-slate-500 text-[9px]">{ax}</span>
+                  <input
+                    type="range"
+                    min={-100}
+                    max={100}
+                    value={Math.round(matrix[row][col] * 100)}
+                    onChange={e => onChange(row, col, Number(e.target.value) / 100)}
+                    className={`w-full h-1 ${ROW_ACCENTS[row]}`}
+                    style={{ minWidth: 0 }}
+                  />
+                  <span className={`text-[9px] font-mono ${ROW_COLORS[row]}`}>
+                    {matrix[row][col].toFixed(1)}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
   );
 }
 
@@ -86,12 +143,11 @@ const PROJECTIONS: { name_zh: string; name_en: string; desc_zh: string; matrix: 
   },
 ];
 
-function PseudoUmbilicalScene({ projIndex, highlightV }: { projIndex: number; highlightV: number }) {
+function PseudoUmbilicalScene({ proj, highlightV }: { proj: number[][]; highlightV: number }) {
   const [time, setTime] = useState(0);
   useFrame(({ clock }) => setTime(clock.getElapsedTime()));
 
   const a = 1;
-  const proj = PROJECTIONS[projIndex].matrix;
 
   // Generate surface mesh lines
   const { uLines, vLines } = useMemo(() => {
@@ -163,22 +219,43 @@ function PseudoUmbilicalScene({ projIndex, highlightV }: { projIndex: number; hi
 
 export function PseudoUmbilicalViz() {
   const [projIndex, setProjIndex] = useState(0);
-  const [highlightV, setHighlightV] = useState(0); // 0 to 1, fraction of vPeriod
+  const [customMode, setCustomMode] = useState(false);
+  const [customMatrix, setCustomMatrix] = useState<number[][]>([[1,0,0,0,0,0],[0,1,0,0,0,0],[0,0,1,0,0,0]]);
+  const [highlightV, setHighlightV] = useState(0);
+
+  const activeProj = customMode ? customMatrix : PROJECTIONS[projIndex].matrix;
+
+  const handleCustomChange = useCallback((row: number, col: number, val: number) => {
+    setCustomMatrix(prev => {
+      const next = prev.map(r => [...r]);
+      next[row][col] = val;
+      return next;
+    });
+  }, []);
+
+  const handlePresetClick = useCallback((i: number) => {
+    setProjIndex(i);
+    setCustomMode(false);
+  }, []);
+
+  const handleCustomReset = useCallback(() => {
+    setCustomMatrix([[1,0,0,0,0,0],[0,1,0,0,0,0],[0,0,1,0,0,0]]);
+  }, []);
 
   return (
     <div>
       <div className="h-72 bg-slate-950 rounded-lg overflow-hidden mb-3">
         <Canvas camera={{ position: [1.5, 1, 1.2], fov: 50 }}>
-          <PseudoUmbilicalScene projIndex={projIndex} highlightV={highlightV} />
+          <PseudoUmbilicalScene proj={activeProj} highlightV={highlightV} />
         </Canvas>
       </div>
       <div className="flex flex-wrap gap-2 mb-2">
         {PROJECTIONS.map((p, i) => (
           <button
             key={i}
-            onClick={() => setProjIndex(i)}
+            onClick={() => handlePresetClick(i)}
             className={`px-3 py-1 rounded text-xs transition-colors ${
-              i === projIndex
+              !customMode && i === projIndex
                 ? 'bg-purple-600 text-white'
                 : 'bg-slate-700 text-slate-300 hover:bg-slate-600'
             }`}
@@ -186,9 +263,28 @@ export function PseudoUmbilicalViz() {
             {p.name_zh}
           </button>
         ))}
+        <button
+          onClick={() => { setCustomMode(true); setCustomMatrix(PROJECTIONS[projIndex].matrix.map(r => [...r])); }}
+          className={`px-3 py-1 rounded text-xs transition-colors ${
+            customMode
+              ? 'bg-yellow-600 text-white'
+              : 'bg-slate-700 text-slate-300 hover:bg-slate-600'
+          }`}
+        >
+          🎛️ 自定义
+        </button>
       </div>
-      <p className="text-slate-500 text-xs mb-2 italic">{PROJECTIONS[projIndex].desc_zh}</p>
-      <div className="flex items-center gap-3 text-xs text-slate-400">
+      {customMode ? (
+        <CustomProjectionPanel
+          matrix={customMatrix}
+          onChange={handleCustomChange}
+          onReset={handleCustomReset}
+          accentColor="purple"
+        />
+      ) : (
+        <p className="text-slate-500 text-xs mb-2 italic">{PROJECTIONS[projIndex].desc_zh}</p>
+      )}
+      <div className="flex items-center gap-3 text-xs text-slate-400 mt-2">
         <span className="text-cyan-400 font-mono whitespace-nowrap">
           v₀ = {(highlightV * 100).toFixed(0)}% · T<sub>v</sub>
         </span>
@@ -308,12 +404,11 @@ const NS_PROJECTIONS: { name_zh: string; name_en: string; desc_zh: string; matri
   },
 ];
 
-function NonSphericalScene({ projIndex, highlightU }: { projIndex: number; highlightU: number }) {
+function NonSphericalScene({ proj, highlightU }: { proj: number[][]; highlightU: number }) {
   const [time, setTime] = useState(0);
   useFrame(({ clock }) => setTime(clock.getElapsedTime()));
 
   const a = 1.0, c = 0.5;
-  const proj = NS_PROJECTIONS[projIndex].matrix;
   const uMax = Math.sqrt(3) * Math.PI / (2 * a) * 0.92; // stay away from pole
 
   const { uLines, vLines } = useMemo(() => {
@@ -388,22 +483,43 @@ function NonSphericalScene({ projIndex, highlightU }: { projIndex: number; highl
 
 export function NonSphericalPUViz() {
   const [projIndex, setProjIndex] = useState(0);
-  const [highlightU, setHighlightU] = useState(0); // normalized: -1 to 1
+  const [customMode, setCustomMode] = useState(false);
+  const [customMatrix, setCustomMatrix] = useState<number[][]>([[1,0,0,0,0,0],[0,1,0,0,0,0],[0,0,1,0,0,0]]);
+  const [highlightU, setHighlightU] = useState(0);
+
+  const activeProj = customMode ? customMatrix : NS_PROJECTIONS[projIndex].matrix;
+
+  const handleCustomChange = useCallback((row: number, col: number, val: number) => {
+    setCustomMatrix(prev => {
+      const next = prev.map(r => [...r]);
+      next[row][col] = val;
+      return next;
+    });
+  }, []);
+
+  const handlePresetClick = useCallback((i: number) => {
+    setProjIndex(i);
+    setCustomMode(false);
+  }, []);
+
+  const handleCustomReset = useCallback(() => {
+    setCustomMatrix([[1,0,0,0,0,0],[0,1,0,0,0,0],[0,0,1,0,0,0]]);
+  }, []);
 
   return (
     <div>
       <div className="h-72 bg-slate-950 rounded-lg overflow-hidden mb-3">
         <Canvas camera={{ position: [2, 1.5, 1.5], fov: 50 }}>
-          <NonSphericalScene projIndex={projIndex} highlightU={highlightU} />
+          <NonSphericalScene proj={activeProj} highlightU={highlightU} />
         </Canvas>
       </div>
       <div className="flex flex-wrap gap-2 mb-2">
         {NS_PROJECTIONS.map((p, i) => (
           <button
             key={i}
-            onClick={() => setProjIndex(i)}
+            onClick={() => handlePresetClick(i)}
             className={`px-3 py-1 rounded text-xs transition-colors ${
-              i === projIndex
+              !customMode && i === projIndex
                 ? 'bg-amber-600 text-white'
                 : 'bg-slate-700 text-slate-300 hover:bg-slate-600'
             }`}
@@ -411,9 +527,28 @@ export function NonSphericalPUViz() {
             {p.name_zh}
           </button>
         ))}
+        <button
+          onClick={() => { setCustomMode(true); setCustomMatrix(NS_PROJECTIONS[projIndex].matrix.map(r => [...r])); }}
+          className={`px-3 py-1 rounded text-xs transition-colors ${
+            customMode
+              ? 'bg-yellow-600 text-white'
+              : 'bg-slate-700 text-slate-300 hover:bg-slate-600'
+          }`}
+        >
+          🎛️ 自定义
+        </button>
       </div>
-      <p className="text-slate-500 text-xs mb-2 italic">{NS_PROJECTIONS[projIndex].desc_zh}</p>
-      <div className="flex items-center gap-3 text-xs text-slate-400">
+      {customMode ? (
+        <CustomProjectionPanel
+          matrix={customMatrix}
+          onChange={handleCustomChange}
+          onReset={handleCustomReset}
+          accentColor="amber"
+        />
+      ) : (
+        <p className="text-slate-500 text-xs mb-2 italic">{NS_PROJECTIONS[projIndex].desc_zh}</p>
+      )}
+      <div className="flex items-center gap-3 text-xs text-slate-400 mt-2">
         <span className="text-green-400 font-mono whitespace-nowrap">
           u = {highlightU === 0 ? '0' : (highlightU > 0 ? '+' : '') + (highlightU * 0.92).toFixed(2)} · u<sub>max</sub>
         </span>
