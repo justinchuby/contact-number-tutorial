@@ -190,7 +190,7 @@ export default function Chapter5() {
             </p>
             <ul className="text-slate-400 text-sm space-y-1">
               <li>• <span className="text-cyan-400">{isZh ? '测地线' : 'Geodesic'}</span>: {isZh ? '椭球面上"最直"的路径——由曲面自身形状决定，在椭球上通常不是平面曲线' : 'The "straightest" path on the ellipsoid—determined by surface shape, usually not a planar curve on an ellipsoid'}</li>
-              <li>• <span className="text-pink-400">{isZh ? '法截线' : 'Normal section'}</span>: {isZh ? '用包含法向量和切向量的平面切椭球得到的椭圆——由嵌入方式决定' : 'Ellipse from cutting the ellipsoid with a plane containing normal and tangent vectors—determined by embedding'}</li>
+              <li>• <span className="text-pink-400">{isZh ? '法截线' : 'Normal section'}</span>: {isZh ? '用包含法向量和切向量的平面切椭球得到的椭圆' : 'Ellipse from cutting the ellipsoid with the plane spanned by the normal and tangent vectors'}</li>
             </ul>
             <p className="text-slate-300 text-sm mt-2">
               {isZh 
