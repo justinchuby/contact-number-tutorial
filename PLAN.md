@@ -733,7 +733,124 @@ npm run dev
 
 ---
 
-## 技术架构更新
+## 🔧 可视化算法详解 (Visualization Algorithm Details)
+
+### 法截线 (Normal Section) 追踪算法
+
+#### 数学定义
+给定3D曲面S上的一点p，在切方向 **T** 上的**法截线**是曲面S与由 **T** 和曲面法向量 **N** 张成的平面的交线。法截线在p处与高亮的测地线**相切**（不是垂直）。
+
+#### 早期错误实现
+最初的代码简单地画了正交参数曲线（如在常u处的v方向曲线），这在参数空间中与测地线垂直，并非真正的法截线。
+
+#### 正确算法: `traceNormalSection()`
+位于 `src/visualizations/PseudoUmbilicalViz.tsx`。
+
+**输入参数**:
+- `surfaceFunc(u, v) → number[6]`: E⁶中的参数曲面
+- `(u0, v0)`: 动画点的参数值
+- `proj`: 3×6 投影矩阵 (E⁶ → E³)
+- `tangentDir`: `'u'` 或 `'v'` — 高亮曲线的参数方向
+- `stepsPerSide`: 每个方向的追踪步数 (如 80–100)
+- `stepSize`: 参数空间中的弧长步长 (如 0.025–0.04)
+
+**第1步 — 在p点计算标架**:
+```
+p = proj(surface(u0, v0))                                           // 3D位置
+∂p/∂u = (proj(surface(u0+ε,v0)) - proj(surface(u0-ε,v0))) / (2ε)   // 中心差分
+∂p/∂v = (proj(surface(u0,v0+ε)) - proj(surface(u0,v0-ε))) / (2ε)
+
+T = normalize(∂p/∂u)  或  normalize(∂p/∂v)   // 沿高亮曲线的切向量
+N = normalize(∂p/∂u × ∂p/∂v)                  // 曲面法向量
+B = normalize(T × N)                           // 副法线（垂直于切割平面）
+```
+
+**第2步 — 定义隐式约束**:
+法截线位于过p点由T和N张成的平面上。曲面上位于该平面内的任何点r满足：
+```
+f(u, v) = (proj(surface(u,v)) - p) · B = 0
+```
+因为B同时垂直于T和N，所以与B的点积在切割平面上恰好为零。
+
+**第3步 — 预测-校正等高线追踪 (Predictor-Corrector Contour Marching)**:
+从(u0, v0)出发，沿两个方向追踪等高线 f(u,v) = 0：
+```
+每一步:
+  // 通过中心差分计算f的梯度
+  ∇f = (∂f/∂u, ∂f/∂v)，使用 f(u±ε, v) 和 f(u, v±ε)
+  |∇f| = √(fu² + fv²)
+
+  // 预测步: 沿梯度的垂直方向步进（即沿等高线方向）
+  u += dir × (-fv / |∇f|) × stepSize
+  v += dir × ( fu / |∇f|) × stepSize
+
+  // 校正步: Newton迭代回到 f=0
+  f_val = f(u, v)
+  重新计算新(u,v)处的 ∇f
+  u -= f_val × fu / |∇f|²
+  v -= f_val × fv / |∇f|²
+
+  // 投影到3D并加入输出
+  point = proj(surface(u, v))
+```
+
+**第4步 — 组装**:
+从起始点分别向前(`dir = +1`)和向后(`dir = -1`)追踪，然后拼接：
+```
+result = [...backward.reverse(), p, ...forward]
+```
+
+#### 算法正确性
+- 梯度 ∇f 指向f增大的方向（远离平面）。垂直方向 (-fv, fu) 沿着等高线 f=0，这恰好是曲面与切割平面的交线。
+- 校正步使用一次Newton迭代将漂移的点拉回 f=0，保持多步追踪的精度。
+- 当 |∇f| → 0 或曲面值变为非有限时中断追踪，避免奇点（极点、域边界）。
+
+#### 性能优化
+- `useMemo` 依赖 `Math.round(animT * 50)`: 每个完整动画周期仅重算约50次，而非每帧都算。
+- 每次重算约200步 × 每步5次曲面求值 ≈ 1000次E⁶求值——足够60fps渲染。
+
+#### 两个可视化中的使用
+
+| 可视化 | 高亮曲线 | tangentDir | 法截面切割平面 |
+|--------|----------|------------|----------------|
+| 平坦环面 (Example 6.6) | v=const 的u曲线 | `'u'` | ⊃ ∂p/∂u, N |
+| 非球面 (Formula 10.20) | u=const 的v曲线 | `'v'` | ⊃ ∂p/∂v, N |
+
+---
+
+### 渐变色网格线 (Gradient Wireframe Colors)
+
+两个可视化使用 `hsl(h, s, l)` 为每条网格线分配独特颜色：
+
+| 可视化 | u方向线 (色调范围) | v方向线 (色调范围) |
+|--------|---------------------|---------------------|
+| 平坦环面 | 0.70–1.00 (紫→粉) | 0.40–0.70 (绿→青) |
+| 非球面 | 0.00–0.20 (红→橙) | 0.30–0.60 (绿→青) |
+
+亮度也有渐变 (0.30–0.55)，相邻线在色调和亮度上都有差异。
+
+---
+
+### 动画暂停/恢复 (Animation Pause/Resume)
+
+两个可视化都有 ⏸/▶ 按钮。实现使用 `useRef` 进行时钟偏移量跟踪：
+- 暂停时: 记录 `pausedAt = clock.getElapsedTime()`
+- 恢复时: 累加 `offset += now - pausedAt`，然后 `time = clock - offset`
+- 这避免了恢复时的时间跳变。
+
+---
+
+### 3D打印雕塑 (STL Generation)
+
+Python脚本 (`generate_stl.py`) 使用 numpy + numpy-stl 生成公式(10.20)非球面pseudo-umbilical曲面的STL文件：
+
+1. 在网格上采样 ψ(u,v)，投影到3D
+2. 构建三角网格，带偏移曲面以产生壁厚
+3. Laplacian法向量平滑（3次迭代）减少边缘伪影
+4. 极点附近自适应壁厚渐变 (1.5mm → 0.3mm)
+5. 导出为STL (~80mm包围盒, ~7.6MB)
+
+**4种投影**: (x₁,x₂,x₃), (x₁,x₂,x₄), (x₁,x₂,x₅), 混合投影
 
 ```
 manifold-tutorial/
