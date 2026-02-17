@@ -3,6 +3,13 @@ import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls, Line } from '@react-three/drei';
 import * as THREE from 'three';
 
+// HSL to hex color for gradient wireframes
+function hsl(h: number, s: number, l: number): string {
+  const c = new THREE.Color();
+  c.setHSL(h, s, l);
+  return '#' + c.getHexString();
+}
+
 // Example 6.6 from Chen-Li (2004): flat torus τ_a in E⁶ with c# = 4
 // τ_a(u,v) = (2/√6a)(cos(au/√2)cos(√3av/√2), cos(au/√2)sin(√3av/√2),
 //   cos(√2au)/√2, sin(au/√2)cos(√3av/√2), sin(au/√2)sin(√3av/√2), sin(√2au)/√2)
@@ -143,16 +150,16 @@ const PROJECTIONS: { name_zh: string; name_en: string; desc_zh: string; matrix: 
   },
 ];
 
-function PseudoUmbilicalScene({ proj, highlightV }: { proj: number[][]; highlightV: number }) {
+function PseudoUmbilicalScene({ proj, highlightV, showNormalSection }: { proj: number[][]; highlightV: number; showNormalSection: boolean }) {
   const [time, setTime] = useState(0);
   useFrame(({ clock }) => setTime(clock.getElapsedTime()));
 
   const a = 1;
+  const uPeriod = 2 * Math.PI * Math.sqrt(2) / a;
+  const vPeriod = 2 * Math.PI * Math.sqrt(2) / (Math.sqrt(3) * a);
 
   // Generate surface mesh lines
   const { uLines, vLines } = useMemo(() => {
-    const uPeriod = 2 * Math.PI * Math.sqrt(2) / a;
-    const vPeriod = 2 * Math.PI * Math.sqrt(2) / (Math.sqrt(3) * a);
     const uSteps = 80;
     const vSteps = 80;
     const uL: THREE.Vector3[][] = [];
@@ -179,33 +186,48 @@ function PseudoUmbilicalScene({ proj, highlightV }: { proj: number[][]; highligh
     return { uLines: uL, vLines: vL };
   }, [proj]);
 
-  // Highlighted curve at constant v = highlightV * vPeriod
+  // Highlighted curve at constant v (u-parameter curve = geodesic)
+  const v0 = highlightV * vPeriod;
   const highlightCurve = useMemo(() => {
-    const uPeriod = 2 * Math.PI * Math.sqrt(2) / a;
-    const vPeriod = 2 * Math.PI * Math.sqrt(2) / (Math.sqrt(3) * a);
-    const v0 = highlightV * vPeriod;
     const pts: THREE.Vector3[] = [];
     for (let i = 0; i <= 200; i++) {
       const u = (i / 200) * uPeriod;
       pts.push(project6Dto3D(torusE6(u, v0, a), proj));
     }
     return pts;
-  }, [proj, highlightV]);
+  }, [proj, v0]);
 
-  const animIdx = Math.floor(((Math.sin(time * 0.4) + 1) / 2) * 199);
+  const animT = (Math.sin(time * 0.4) + 1) / 2;
+  const animIdx = Math.floor(animT * 199);
   const animPt = highlightCurve[animIdx];
+
+  // Normal section: v-direction curve at the animated u position
+  const normalSection = useMemo(() => {
+    if (!showNormalSection) return [];
+    const u0 = animT * uPeriod;
+    const pts: THREE.Vector3[] = [];
+    for (let j = 0; j <= 200; j++) {
+      const v = (j / 200) * vPeriod;
+      pts.push(project6Dto3D(torusE6(u0, v, a), proj));
+    }
+    return pts;
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [proj, showNormalSection, Math.round(animT * 50)]);
 
   return (
     <>
       <ambientLight intensity={0.5} />
       <pointLight position={[5, 5, 5]} intensity={0.8} />
       {uLines.map((line, i) => (
-        <Line key={`u${i}`} points={line} color="#6d28d9" lineWidth={1} opacity={0.4} transparent />
+        <Line key={`u${i}`} points={line} color={hsl(0.75 + (i / uLines.length) * 0.25, 0.7, 0.45)} lineWidth={1} opacity={0.5} transparent />
       ))}
       {vLines.map((line, i) => (
-        <Line key={`v${i}`} points={line} color="#7c3aed" lineWidth={1} opacity={0.3} transparent />
+        <Line key={`v${i}`} points={line} color={hsl(0.55 + (i / vLines.length) * 0.2, 0.6, 0.4)} lineWidth={1} opacity={0.4} transparent />
       ))}
       <Line points={highlightCurve} color="#22d3ee" lineWidth={3} />
+      {showNormalSection && normalSection.length > 2 && (
+        <Line points={normalSection} color="#f472b6" lineWidth={2.5} />
+      )}
       {animPt && (
         <mesh position={animPt}>
           <sphereGeometry args={[0.02, 12, 12]} />
@@ -222,6 +244,7 @@ export function PseudoUmbilicalViz() {
   const [customMode, setCustomMode] = useState(false);
   const [customMatrix, setCustomMatrix] = useState<number[][]>([[1,0,0,0,0,0],[0,1,0,0,0,0],[0,0,1,0,0,0]]);
   const [highlightV, setHighlightV] = useState(0);
+  const [showNormalSection, setShowNormalSection] = useState(false);
 
   const activeProj = customMode ? customMatrix : PROJECTIONS[projIndex].matrix;
 
@@ -246,7 +269,7 @@ export function PseudoUmbilicalViz() {
     <div>
       <div className="h-72 bg-slate-950 rounded-lg overflow-hidden mb-3">
         <Canvas camera={{ position: [1.5, 1, 1.2], fov: 50 }}>
-          <PseudoUmbilicalScene proj={activeProj} highlightV={highlightV} />
+          <PseudoUmbilicalScene proj={activeProj} highlightV={highlightV} showNormalSection={showNormalSection} />
         </Canvas>
       </div>
       <div className="flex flex-wrap gap-2 mb-2">
@@ -301,6 +324,14 @@ export function PseudoUmbilicalViz() {
           className="px-2 py-0.5 rounded bg-slate-700 hover:bg-slate-600 text-slate-300"
         >
           v=0
+        </button>
+        <button
+          onClick={() => setShowNormalSection(v => !v)}
+          className={`px-2 py-0.5 rounded text-xs transition-colors ${
+            showNormalSection ? 'bg-pink-600 text-white' : 'bg-slate-700 text-slate-300 hover:bg-slate-600'
+          }`}
+        >
+          法截线
         </button>
       </div>
     </div>
@@ -404,15 +435,15 @@ const NS_PROJECTIONS: { name_zh: string; name_en: string; desc_zh: string; matri
   },
 ];
 
-function NonSphericalScene({ proj, highlightU }: { proj: number[][]; highlightU: number }) {
+function NonSphericalScene({ proj, highlightU, showNormalSection }: { proj: number[][]; highlightU: number; showNormalSection: boolean }) {
   const [time, setTime] = useState(0);
   useFrame(({ clock }) => setTime(clock.getElapsedTime()));
 
   const a = 1.0, c = 0.5;
-  const uMax = Math.sqrt(3) * Math.PI / (2 * a) * 0.92; // stay away from pole
+  const uMax = Math.sqrt(3) * Math.PI / (2 * a) * 0.92;
+  const vMax = 2 * Math.PI * Math.sqrt(3) / a;
 
   const { uLines, vLines } = useMemo(() => {
-    const vMax = 2 * Math.PI * Math.sqrt(3) / a;
     const uSteps = 60;
     const vSteps = 80;
     const uL: THREE.Vector3[][] = [];
@@ -441,9 +472,8 @@ function NonSphericalScene({ proj, highlightU }: { proj: number[][]; highlightU:
     return { uLines: uL, vLines: vL };
   }, [proj]);
 
-  // Highlighted u-curve
+  // Highlighted u-curve (geodesic direction)
   const highlightCurve = useMemo(() => {
-    const vMax = 2 * Math.PI * Math.sqrt(3) / a;
     const uVal = highlightU * uMax;
     const pts: THREE.Vector3[] = [];
     for (let j = 0; j <= 200; j++) {
@@ -454,21 +484,40 @@ function NonSphericalScene({ proj, highlightU }: { proj: number[][]; highlightU:
     return pts;
   }, [proj, highlightU]);
 
-  const animIdx = Math.floor(((Math.sin(time * 0.3) + 1) / 2) * (highlightCurve.length - 1));
+  // Normal section: v-direction curve through the animated point
+  const animT = (Math.sin(time * 0.3) + 1) / 2;
+  const animIdx = Math.floor(animT * (highlightCurve.length - 1));
   const animPt = highlightCurve[animIdx];
+
+  // Normal section curve at the animated v position, varying u
+  const normalSection = useMemo(() => {
+    if (!showNormalSection) return [];
+    const vVal = animT * vMax;
+    const pts: THREE.Vector3[] = [];
+    for (let i = 0; i <= 200; i++) {
+      const u = -uMax + (i / 200) * 2 * uMax;
+      const p6 = nonSphericalPU(u, vVal, a, c);
+      if (p6.every(x => isFinite(x))) pts.push(project6Dto3D(p6, proj));
+    }
+    return pts;
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [proj, showNormalSection, Math.round(animT * 50)]);
 
   return (
     <>
       <ambientLight intensity={0.5} />
       <pointLight position={[5, 5, 5]} intensity={0.8} />
       {uLines.map((line, i) => (
-        <Line key={`u${i}`} points={line} color="#b45309" lineWidth={1} opacity={0.4} transparent />
+        <Line key={`u${i}`} points={line} color={hsl(0.05 + (i / uLines.length) * 0.12, 0.8, 0.4)} lineWidth={1} opacity={0.5} transparent />
       ))}
       {vLines.map((line, i) => (
-        <Line key={`v${i}`} points={line} color="#d97706" lineWidth={1} opacity={0.3} transparent />
+        <Line key={`v${i}`} points={line} color={hsl(0.3 + (i / vLines.length) * 0.25, 0.6, 0.35)} lineWidth={1} opacity={0.4} transparent />
       ))}
       {highlightCurve.length > 2 && (
         <Line points={highlightCurve} color="#4ade80" lineWidth={3} />
+      )}
+      {showNormalSection && normalSection.length > 2 && (
+        <Line points={normalSection} color="#f472b6" lineWidth={2.5} />
       )}
       {animPt && (
         <mesh position={animPt}>
@@ -486,6 +535,7 @@ export function NonSphericalPUViz() {
   const [customMode, setCustomMode] = useState(false);
   const [customMatrix, setCustomMatrix] = useState<number[][]>([[1,0,0,0,0,0],[0,1,0,0,0,0],[0,0,1,0,0,0]]);
   const [highlightU, setHighlightU] = useState(0);
+  const [showNormalSection, setShowNormalSection] = useState(true);
 
   const activeProj = customMode ? customMatrix : NS_PROJECTIONS[projIndex].matrix;
 
@@ -510,7 +560,7 @@ export function NonSphericalPUViz() {
     <div>
       <div className="h-72 bg-slate-950 rounded-lg overflow-hidden mb-3">
         <Canvas camera={{ position: [2, 1.5, 1.5], fov: 50 }}>
-          <NonSphericalScene proj={activeProj} highlightU={highlightU} />
+          <NonSphericalScene proj={activeProj} highlightU={highlightU} showNormalSection={showNormalSection} />
         </Canvas>
       </div>
       <div className="flex flex-wrap gap-2 mb-2">
@@ -565,6 +615,14 @@ export function NonSphericalPUViz() {
           className="px-2 py-0.5 rounded bg-slate-700 hover:bg-slate-600 text-slate-300"
         >
           赤道
+        </button>
+        <button
+          onClick={() => setShowNormalSection(v => !v)}
+          className={`px-2 py-0.5 rounded text-xs transition-colors ${
+            showNormalSection ? 'bg-pink-600 text-white' : 'bg-slate-700 text-slate-300 hover:bg-slate-600'
+          }`}
+        >
+          法截线
         </button>
       </div>
     </div>
