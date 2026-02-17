@@ -544,7 +544,7 @@ function NonSphericalScene({ proj, highlightU, showNormalSection, paused }: { pr
   });
 
   const a = 1.0, c = 0.5;
-  const uMax = Math.sqrt(3) * Math.PI / (2 * a) * 0.995;
+  const uMax = Math.sqrt(3) * Math.PI / (2 * a) * 0.92;
   const vMax = 2 * Math.PI * Math.sqrt(3) / a;
 
   const { uLines, vLines } = useMemo(() => {
