@@ -37,6 +37,80 @@ function project6Dto3D(p6: number[], proj: number[][]): THREE.Vector3 {
   );
 }
 
+// Trace a true normal section curve on a parametric surface in E⁶.
+// At point (u0,v0), intersects the projected 3D surface with the plane
+// containing the tangent to the highlighted curve and the surface normal.
+// Uses predictor-corrector marching along the implicit level curve f(u,v)=0.
+function traceNormalSection(
+  surfaceFunc: (u: number, v: number) => number[],
+  u0: number, v0: number,
+  proj: number[][],
+  tangentDir: 'u' | 'v',
+  stepsPerSide: number,
+  stepSize: number,
+): THREE.Vector3[] {
+  const eps = 1e-4;
+  const s0 = surfaceFunc(u0, v0);
+  if (!s0.every(x => isFinite(x))) return [];
+  const p = project6Dto3D(s0, proj);
+
+  const sUp = surfaceFunc(u0 + eps, v0), sUm = surfaceFunc(u0 - eps, v0);
+  const sVp = surfaceFunc(u0, v0 + eps), sVm = surfaceFunc(u0, v0 - eps);
+  if (![sUp, sUm, sVp, sVm].every(s => s.every(x => isFinite(x)))) return [];
+
+  const pUp = project6Dto3D(sUp, proj), pUm = project6Dto3D(sUm, proj);
+  const pVp = project6Dto3D(sVp, proj), pVm = project6Dto3D(sVm, proj);
+  const dpdu = new THREE.Vector3().subVectors(pUp, pUm).multiplyScalar(0.5 / eps);
+  const dpdv = new THREE.Vector3().subVectors(pVp, pVm).multiplyScalar(0.5 / eps);
+
+  const T = (tangentDir === 'u' ? dpdu.clone() : dpdv.clone()).normalize();
+  const N = new THREE.Vector3().crossVectors(dpdu, dpdv).normalize();
+  if (N.lengthSq() < 1e-6) return [];
+  const B = new THREE.Vector3().crossVectors(T, N).normalize();
+  if (B.lengthSq() < 1e-6) return [];
+
+  // f(u,v) = (proj(surface(u,v)) - p) · B = 0 defines the cutting plane
+  const px = p.x, py = p.y, pz = p.z;
+  const bx = B.x, by = B.y, bz = B.z;
+  const f = (u: number, v: number): number => {
+    const s = surfaceFunc(u, v);
+    if (!s.every(x => isFinite(x))) return NaN;
+    const rx = proj[0][0]*s[0]+proj[0][1]*s[1]+proj[0][2]*s[2]+proj[0][3]*s[3]+proj[0][4]*s[4]+proj[0][5]*s[5] - px;
+    const ry = proj[1][0]*s[0]+proj[1][1]*s[1]+proj[1][2]*s[2]+proj[1][3]*s[3]+proj[1][4]*s[4]+proj[1][5]*s[5] - py;
+    const rz = proj[2][0]*s[0]+proj[2][1]*s[1]+proj[2][2]*s[2]+proj[2][3]*s[3]+proj[2][4]*s[4]+proj[2][5]*s[5] - pz;
+    return rx * bx + ry * by + rz * bz;
+  };
+
+  const traceSide = (dir: number): THREE.Vector3[] => {
+    const pts: THREE.Vector3[] = [];
+    let u = u0, v = v0;
+    for (let i = 0; i < stepsPerSide; i++) {
+      const fu = (f(u + eps, v) - f(u - eps, v)) / (2 * eps);
+      const fv = (f(u, v + eps) - f(u, v - eps)) / (2 * eps);
+      const gN = Math.sqrt(fu * fu + fv * fv);
+      if (gN < 1e-10 || !isFinite(gN)) break;
+      // Predictor: step along level curve (perpendicular to gradient)
+      u += dir * (-fv / gN) * stepSize;
+      v += dir * (fu / gN) * stepSize;
+      // Corrector: Newton step back to f=0
+      const fVal = f(u, v);
+      if (!isFinite(fVal)) break;
+      const fu2 = (f(u + eps, v) - f(u - eps, v)) / (2 * eps);
+      const fv2 = (f(u, v + eps) - f(u, v - eps)) / (2 * eps);
+      const gN2 = fu2 * fu2 + fv2 * fv2;
+      if (gN2 > 1e-12) { u -= fVal * fu2 / gN2; v -= fVal * fv2 / gN2; }
+      const s = surfaceFunc(u, v);
+      if (!s.every(x => isFinite(x))) break;
+      pts.push(project6Dto3D(s, proj));
+    }
+    return pts;
+  };
+
+  const fwd = traceSide(1);
+  const bwd = traceSide(-1);
+  return [...bwd.reverse(), p, ...fwd];
+}
+
 // Custom projection panel: 3 rows × 6 columns of sliders
 const AXIS_LABELS = ['x₁', 'x₂', 'x₃', 'x₄', 'x₅', 'x₆'];
 const ROW_COLORS = ['text-red-400', 'text-green-400', 'text-blue-400'];
@@ -201,28 +275,25 @@ function PseudoUmbilicalScene({ proj, highlightV, showNormalSection }: { proj: n
   const animIdx = Math.floor(animT * 199);
   const animPt = highlightCurve[animIdx];
 
-  // Normal section: v-direction curve at the animated u position
+  // True normal section: intersection of surface with plane through T and N at animated point
   const normalSection = useMemo(() => {
     if (!showNormalSection) return [];
     const u0 = animT * uPeriod;
-    const pts: THREE.Vector3[] = [];
-    for (let j = 0; j <= 200; j++) {
-      const v = (j / 200) * vPeriod;
-      pts.push(project6Dto3D(torusE6(u0, v, a), proj));
-    }
-    return pts;
+    return traceNormalSection(
+      (u, v) => torusE6(u, v, a), u0, v0, proj, 'u', 100, 0.025
+    );
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [proj, showNormalSection, Math.round(animT * 50)]);
+  }, [proj, showNormalSection, Math.round(animT * 50), v0]);
 
   return (
     <>
       <ambientLight intensity={0.5} />
       <pointLight position={[5, 5, 5]} intensity={0.8} />
       {uLines.map((line, i) => (
-        <Line key={`u${i}`} points={line} color={hsl(0.75 + (i / uLines.length) * 0.25, 0.7, 0.45)} lineWidth={1} opacity={0.5} transparent />
+        <Line key={`u${i}`} points={line} color={hsl(0.70 + (i / uLines.length) * 0.30, 0.85, 0.35 + (i / uLines.length) * 0.20)} lineWidth={1} opacity={0.5} transparent />
       ))}
       {vLines.map((line, i) => (
-        <Line key={`v${i}`} points={line} color={hsl(0.55 + (i / vLines.length) * 0.2, 0.6, 0.4)} lineWidth={1} opacity={0.4} transparent />
+        <Line key={`v${i}`} points={line} color={hsl(0.40 + (i / vLines.length) * 0.30, 0.75, 0.30 + (i / vLines.length) * 0.20)} lineWidth={1} opacity={0.4} transparent />
       ))}
       <Line points={highlightCurve} color="#22d3ee" lineWidth={3} />
       {showNormalSection && normalSection.length > 2 && (
@@ -484,34 +555,31 @@ function NonSphericalScene({ proj, highlightU, showNormalSection }: { proj: numb
     return pts;
   }, [proj, highlightU]);
 
-  // Normal section: v-direction curve through the animated point
+  // Normal section: true normal section through the animated point
   const animT = (Math.sin(time * 0.3) + 1) / 2;
   const animIdx = Math.floor(animT * (highlightCurve.length - 1));
   const animPt = highlightCurve[animIdx];
 
-  // Normal section curve at the animated v position, varying u
+  // True normal section: intersection of surface with plane through T and N at animated point
   const normalSection = useMemo(() => {
     if (!showNormalSection) return [];
+    const uVal = highlightU * uMax;
     const vVal = animT * vMax;
-    const pts: THREE.Vector3[] = [];
-    for (let i = 0; i <= 200; i++) {
-      const u = -uMax + (i / 200) * 2 * uMax;
-      const p6 = nonSphericalPU(u, vVal, a, c);
-      if (p6.every(x => isFinite(x))) pts.push(project6Dto3D(p6, proj));
-    }
-    return pts;
+    return traceNormalSection(
+      (u, v) => nonSphericalPU(u, v, a, c), uVal, vVal, proj, 'v', 80, 0.04
+    );
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [proj, showNormalSection, Math.round(animT * 50)]);
+  }, [proj, showNormalSection, Math.round(animT * 50), highlightU]);
 
   return (
     <>
       <ambientLight intensity={0.5} />
       <pointLight position={[5, 5, 5]} intensity={0.8} />
       {uLines.map((line, i) => (
-        <Line key={`u${i}`} points={line} color={hsl(0.05 + (i / uLines.length) * 0.12, 0.8, 0.4)} lineWidth={1} opacity={0.5} transparent />
+        <Line key={`u${i}`} points={line} color={hsl(0.00 + (i / uLines.length) * 0.20, 0.85, 0.35 + (i / uLines.length) * 0.20)} lineWidth={1} opacity={0.5} transparent />
       ))}
       {vLines.map((line, i) => (
-        <Line key={`v${i}`} points={line} color={hsl(0.3 + (i / vLines.length) * 0.25, 0.6, 0.35)} lineWidth={1} opacity={0.4} transparent />
+        <Line key={`v${i}`} points={line} color={hsl(0.30 + (i / vLines.length) * 0.30, 0.75, 0.30 + (i / vLines.length) * 0.20)} lineWidth={1} opacity={0.4} transparent />
       ))}
       {highlightCurve.length > 2 && (
         <Line points={highlightCurve} color="#4ade80" lineWidth={3} />
