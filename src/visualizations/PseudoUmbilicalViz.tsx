@@ -1,4 +1,4 @@
-import { useMemo, useState, useCallback } from 'react';
+import { useMemo, useState, useCallback, useRef } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls, Line } from '@react-three/drei';
 import * as THREE from 'three';
@@ -224,9 +224,21 @@ const PROJECTIONS: { name_zh: string; name_en: string; desc_zh: string; matrix: 
   },
 ];
 
-function PseudoUmbilicalScene({ proj, highlightV, showNormalSection }: { proj: number[][]; highlightV: number; showNormalSection: boolean }) {
+function PseudoUmbilicalScene({ proj, highlightV, showNormalSection, paused }: { proj: number[][]; highlightV: number; showNormalSection: boolean; paused: boolean }) {
   const [time, setTime] = useState(0);
-  useFrame(({ clock }) => setTime(clock.getElapsedTime()));
+  const pausedAtRef = useRef<number | null>(null);
+  const offsetRef = useRef(0);
+  useFrame(({ clock }) => {
+    if (paused) {
+      if (pausedAtRef.current === null) pausedAtRef.current = clock.getElapsedTime();
+    } else {
+      if (pausedAtRef.current !== null) {
+        offsetRef.current += clock.getElapsedTime() - pausedAtRef.current;
+        pausedAtRef.current = null;
+      }
+      setTime(clock.getElapsedTime() - offsetRef.current);
+    }
+  });
 
   const a = 1;
   const uPeriod = 2 * Math.PI * Math.sqrt(2) / a;
@@ -316,6 +328,7 @@ export function PseudoUmbilicalViz() {
   const [customMatrix, setCustomMatrix] = useState<number[][]>([[1,0,0,0,0,0],[0,1,0,0,0,0],[0,0,1,0,0,0]]);
   const [highlightV, setHighlightV] = useState(0);
   const [showNormalSection, setShowNormalSection] = useState(false);
+  const [paused, setPaused] = useState(false);
 
   const activeProj = customMode ? customMatrix : PROJECTIONS[projIndex].matrix;
 
@@ -340,7 +353,7 @@ export function PseudoUmbilicalViz() {
     <div>
       <div className="h-72 bg-slate-950 rounded-lg overflow-hidden mb-3">
         <Canvas camera={{ position: [1.5, 1, 1.2], fov: 50 }}>
-          <PseudoUmbilicalScene proj={activeProj} highlightV={highlightV} showNormalSection={showNormalSection} />
+          <PseudoUmbilicalScene proj={activeProj} highlightV={highlightV} showNormalSection={showNormalSection} paused={paused} />
         </Canvas>
       </div>
       <div className="flex flex-wrap gap-2 mb-2">
@@ -403,6 +416,14 @@ export function PseudoUmbilicalViz() {
           }`}
         >
           法截线
+        </button>
+        <button
+          onClick={() => setPaused(v => !v)}
+          className={`px-2 py-0.5 rounded text-xs transition-colors ${
+            paused ? 'bg-yellow-600 text-white' : 'bg-slate-700 text-slate-300 hover:bg-slate-600'
+          }`}
+        >
+          {paused ? '▶' : '⏸'}
         </button>
       </div>
     </div>
@@ -506,9 +527,21 @@ const NS_PROJECTIONS: { name_zh: string; name_en: string; desc_zh: string; matri
   },
 ];
 
-function NonSphericalScene({ proj, highlightU, showNormalSection }: { proj: number[][]; highlightU: number; showNormalSection: boolean }) {
+function NonSphericalScene({ proj, highlightU, showNormalSection, paused }: { proj: number[][]; highlightU: number; showNormalSection: boolean; paused: boolean }) {
   const [time, setTime] = useState(0);
-  useFrame(({ clock }) => setTime(clock.getElapsedTime()));
+  const pausedAtRef = useRef<number | null>(null);
+  const offsetRef = useRef(0);
+  useFrame(({ clock }) => {
+    if (paused) {
+      if (pausedAtRef.current === null) pausedAtRef.current = clock.getElapsedTime();
+    } else {
+      if (pausedAtRef.current !== null) {
+        offsetRef.current += clock.getElapsedTime() - pausedAtRef.current;
+        pausedAtRef.current = null;
+      }
+      setTime(clock.getElapsedTime() - offsetRef.current);
+    }
+  });
 
   const a = 1.0, c = 0.5;
   const uMax = Math.sqrt(3) * Math.PI / (2 * a) * 0.92;
@@ -604,6 +637,7 @@ export function NonSphericalPUViz() {
   const [customMatrix, setCustomMatrix] = useState<number[][]>([[1,0,0,0,0,0],[0,1,0,0,0,0],[0,0,1,0,0,0]]);
   const [highlightU, setHighlightU] = useState(0);
   const [showNormalSection, setShowNormalSection] = useState(true);
+  const [paused, setPaused] = useState(false);
 
   const activeProj = customMode ? customMatrix : NS_PROJECTIONS[projIndex].matrix;
 
@@ -628,7 +662,7 @@ export function NonSphericalPUViz() {
     <div>
       <div className="h-72 bg-slate-950 rounded-lg overflow-hidden mb-3">
         <Canvas camera={{ position: [2, 1.5, 1.5], fov: 50 }}>
-          <NonSphericalScene proj={activeProj} highlightU={highlightU} showNormalSection={showNormalSection} />
+          <NonSphericalScene proj={activeProj} highlightU={highlightU} showNormalSection={showNormalSection} paused={paused} />
         </Canvas>
       </div>
       <div className="flex flex-wrap gap-2 mb-2">
@@ -691,6 +725,14 @@ export function NonSphericalPUViz() {
           }`}
         >
           法截线
+        </button>
+        <button
+          onClick={() => setPaused(v => !v)}
+          className={`px-2 py-0.5 rounded text-xs transition-colors ${
+            paused ? 'bg-yellow-600 text-white' : 'bg-slate-700 text-slate-300 hover:bg-slate-600'
+          }`}
+        >
+          {paused ? '▶' : '⏸'}
         </button>
       </div>
     </div>
