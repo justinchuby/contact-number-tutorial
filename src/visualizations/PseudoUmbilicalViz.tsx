@@ -305,7 +305,7 @@ function PseudoUmbilicalScene({ proj, highlightV, showNormalSection, paused }: {
         <Line key={`u${i}`} points={line} color={hsl(0.70 + (i / uLines.length) * 0.30, 0.85, 0.35 + (i / uLines.length) * 0.20)} lineWidth={1} opacity={0.5} transparent />
       ))}
       {vLines.map((line, i) => (
-        <Line key={`v${i}`} points={line} color={hsl(0.40 + (i / vLines.length) * 0.30, 0.75, 0.30 + (i / vLines.length) * 0.20)} lineWidth={1.8} opacity={0.4} transparent />
+        <Line key={`v${i}`} points={line} color={hsl(0.30 + (i / vLines.length) * 0.50, 0.85, 0.25 + (i / vLines.length) * 0.30)} lineWidth={1.8} opacity={0.4} transparent />
       ))}
       <Line points={highlightCurve} color="#22d3ee" lineWidth={3} />
       {showNormalSection && normalSection.length > 2 && (
@@ -612,7 +612,7 @@ function NonSphericalScene({ proj, highlightU, showNormalSection, paused }: { pr
         <Line key={`u${i}`} points={line} color={hsl(0.00 + (i / uLines.length) * 0.20, 0.85, 0.35 + (i / uLines.length) * 0.20)} lineWidth={1} opacity={0.5} transparent />
       ))}
       {vLines.map((line, i) => (
-        <Line key={`v${i}`} points={line} color={hsl(0.30 + (i / vLines.length) * 0.30, 0.75, 0.30 + (i / vLines.length) * 0.20)} lineWidth={1.8} opacity={0.4} transparent />
+        <Line key={`v${i}`} points={line} color={hsl(0.20 + (i / vLines.length) * 0.50, 0.85, 0.25 + (i / vLines.length) * 0.30)} lineWidth={1.8} opacity={0.4} transparent />
       ))}
       {highlightCurve.length > 2 && (
         <Line points={highlightCurve} color="#4ade80" lineWidth={3} />
