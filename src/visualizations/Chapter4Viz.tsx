@@ -1,8 +1,9 @@
-import { useMemo, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls, Line, Sphere, Html } from '@react-three/drei';
 import * as THREE from 'three';
 import { VIZ_CLASSES, VIZ_COLORS } from './theme';
+import { ELLIPSOID_AXES, sampleEllipsoidCurves } from './ellipsoidCurves';
 
 // Geodesic curve (great circle) on sphere
 function GeodesicCurve({
@@ -165,16 +166,20 @@ function ComparisonScene() {
 
 // Show what happens when geodesic ≠ normal section (non-sphere case)
 function DifferentCurvesScene() {
-  const [time, setTime] = useState(0);
+  const geodesicMarker = useRef<THREE.Mesh>(null);
+  const sectionMarker = useRef<THREE.Mesh>(null);
+  const { point, geodesicPoints, normalSectionPoints } = useMemo(() => sampleEllipsoidCurves(), []);
 
   useFrame(({ clock }) => {
-    setTime(clock.getElapsedTime());
+    const sample = (Math.sin(clock.getElapsedTime() * 0.65) + 1) / 2 * (geodesicPoints.length - 1);
+    const index = Math.min(Math.floor(sample), geodesicPoints.length - 2);
+    const fraction = sample - index;
+    geodesicMarker.current?.position.lerpVectors(geodesicPoints[index], geodesicPoints[index + 1], fraction);
+    sectionMarker.current?.position.lerpVectors(normalSectionPoints[index], normalSectionPoints[index + 1], fraction);
   });
 
-  // Create an ellipsoid-like surface where curves differ
-  // Ellipsoid: (x/a)^2 + (y/b)^2 + (z/c)^2 = 1, a=0.8, b=1.0, c=0.6
-  const a = 0.8, b = 1.0, c = 0.6;
   const ellipsoidLines = useMemo(() => {
+    const [a, b, c] = ELLIPSOID_AXES;
     const lines: THREE.Vector3[][] = [];
     // Latitude lines
     for (let lat = -80; lat <= 80; lat += 20) {
@@ -205,58 +210,7 @@ function DifferentCurvesScene() {
       lines.push(line);
     }
     return lines;
-  }, [a, b, c]);
-
-  // Start at equator-side point where difference is visible
-  // Point on ellipsoid at phi=0, theta=45°
-  const startTheta = Math.PI / 4;
-  const startPhi = 0;
-  const point = new THREE.Vector3(
-    a * Math.cos(startPhi) * Math.cos(startTheta),
-    b * Math.cos(startPhi) * Math.sin(startTheta),
-    c * Math.sin(startPhi)
-  );
-
-  // Normal section: intersection of ellipsoid with a plane through the point
-  // containing the normal and a tangent direction.
-  // At phi=0, theta=45°, a tangent direction tilted toward the pole traces a planar ellipse.
-  const normalSectionPoints = useMemo(() => {
-    const pts: THREE.Vector3[] = [];
-    // Parametric plane cut through point in xz-like direction (tilted toward pole)
-    for (let i = 0; i <= 60; i++) {
-      const t = ((i / 60) - 0.5) * 2.2;
-      // Move along the meridian direction from starting point
-      const phi = t * 0.9;
-      const x = a * Math.cos(phi) * Math.cos(startTheta);
-      const y = b * Math.cos(phi) * Math.sin(startTheta);
-      const z = c * Math.sin(phi);
-      pts.push(new THREE.Vector3(x, y, z));
-    }
-    return pts;
-  }, [a, b, c, startTheta]);
-
-  // Geodesic: on an ellipsoid, geodesics generally don't stay in a plane.
-  // Approximate by slightly drifting theta as phi changes (Clairaut's relation).
-  const geodesicPoints = useMemo(() => {
-    const pts: THREE.Vector3[] = [];
-    for (let i = 0; i <= 60; i++) {
-      const t = ((i / 60) - 0.5) * 2.2;
-      const phi = t * 0.9;
-      // Geodesic drifts in theta due to ellipsoid shape (Clairaut effect)
-      const drift = 0.15 * Math.sin(phi * 1.5);
-      const theta = startTheta + drift;
-      const x = a * Math.cos(phi) * Math.cos(theta);
-      const y = b * Math.cos(phi) * Math.sin(theta);
-      const z = c * Math.sin(phi);
-      pts.push(new THREE.Vector3(x, y, z));
-    }
-    return pts;
-  }, [a, b, c, startTheta]);
-
-  // Animated comparison
-  const paramT = (Math.sin(time * 0.5) + 1) / 2;
-  const geodesicPos = geodesicPoints[Math.floor(paramT * 59)];
-  const normalPos = normalSectionPoints[Math.floor(paramT * 59)];
+  }, []);
 
   return (
     <>
@@ -281,18 +235,14 @@ function DifferentCurvesScene() {
       </mesh>
 
       {/* Moving points showing difference */}
-      {geodesicPos && (
-        <mesh position={geodesicPos}>
-          <sphereGeometry args={[0.03, 16, 16]} />
-          <meshStandardMaterial color={VIZ_COLORS.geodesic} emissive={VIZ_COLORS.geodesic} emissiveIntensity={0.24} />
-        </mesh>
-      )}
-      {normalPos && (
-        <mesh position={normalPos}>
-          <sphereGeometry args={[0.03, 16, 16]} />
-          <meshStandardMaterial color={VIZ_COLORS.normalSection} emissive={VIZ_COLORS.normalSection} emissiveIntensity={0.24} />
-        </mesh>
-      )}
+      <mesh ref={geodesicMarker} position={point}>
+        <sphereGeometry args={[0.03, 16, 16]} />
+        <meshStandardMaterial color={VIZ_COLORS.geodesic} emissive={VIZ_COLORS.geodesic} emissiveIntensity={0.24} />
+      </mesh>
+      <mesh ref={sectionMarker} position={point}>
+        <sphereGeometry args={[0.03, 16, 16]} />
+        <meshStandardMaterial color={VIZ_COLORS.normalSection} emissive={VIZ_COLORS.normalSection} emissiveIntensity={0.24} />
+      </mesh>
 
       <OrbitControls enableZoom={true} enablePan={false} />
     </>
@@ -371,7 +321,8 @@ export function Chapter4VizCollection() {
           </div>
         </div>
         <p className="text-stone-600 text-xs mt-2">
-          椭球上，两条曲线从同一点出发、同一方向，但随后分开。它们的"接触阶数"有限。
+          椭球上，两条曲线从同一点沿同一方向出发，初始弯曲相同，之后逐渐分开。
+          / On the ellipsoid, the curves start at the same point with the same tangent and acceleration, then separate.
         </p>
       </div>
     </div>

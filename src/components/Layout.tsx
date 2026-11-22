@@ -2,6 +2,7 @@ import { Outlet, useLocation } from 'react-router-dom';
 import { useEffect, useRef } from 'react';
 import Sidebar from './Sidebar';
 import Header from './Header';
+import ChapterContents from './ChapterContents';
 
 export default function Layout() {
   const location = useLocation();
@@ -11,13 +12,17 @@ export default function Layout() {
   useEffect(() => {
     if (location.hash) {
       const id = location.hash.slice(1);
-      const timer = setTimeout(() => {
-        const el = document.getElementById(id);
-        if (el) {
-          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      const frame = requestAnimationFrame(() => {
+        const target = document.getElementById(id);
+        if (target) {
+          target.scrollIntoView({ block: 'start' });
+          if (!target.hasAttribute('tabindex')) target.tabIndex = -1;
+          target.focus({ preventScroll: true });
+        } else {
+          window.scrollTo(0, 0);
         }
-      }, 200);
-      return () => clearTimeout(timer);
+      });
+      return () => cancelAnimationFrame(frame);
     } else {
       // Scroll both window and main container to top
       window.scrollTo(0, 0);
@@ -25,13 +30,14 @@ export default function Layout() {
         mainRef.current.scrollTo(0, 0);
       }
     }
-  }, [location.pathname, location.hash]);
+  }, [location.key, location.pathname, location.hash]);
 
   return (
     <div className="article-shell min-h-screen text-stone-900 flex flex-col">
       <Sidebar />
       <Header />
       <main ref={mainRef} className="lg:ml-64 mt-14 p-4 lg:p-8 flex-grow">
+        <ChapterContents key={location.pathname} mainRef={mainRef} />
         <Outlet />
       </main>
       <footer className="lg:ml-64 py-6 px-8 border-t border-amber-200/80 bg-amber-50/80">

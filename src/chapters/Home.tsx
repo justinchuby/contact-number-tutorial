@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { ThreeCanvas } from '../components';
+import ContactPaperLink from '../components/ContactPaperLink';
 import { Sphere, Torus } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
 import { useRef } from 'react';
@@ -109,6 +110,12 @@ export default function Home() {
             ? '核心论文：Chen, B.-Y. & Li, S.-J. (2004). "The Contact Number of a Euclidean Submanifold"'
             : 'Core Paper: Chen, B.-Y. & Li, S.-J. (2004). "The Contact Number of a Euclidean Submanifold"'}</p>
           <p className="text-slate-500">Proceedings of the Edinburgh Mathematical Society, 47, 69-100</p>
+          <div className="mt-3 flex flex-wrap gap-x-5 gap-y-2">
+            <ContactPaperLink />
+            <Link to="/chapter/5#section-5.2" className="font-medium text-teal-800 underline underline-offset-4">
+              {isZh ? '直达第 5 章：接触数定义' : 'Jump to Chapter 5: The definition'}
+            </Link>
+          </div>
         </div>
       </div>
     </div>
