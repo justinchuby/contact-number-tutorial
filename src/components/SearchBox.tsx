@@ -44,14 +44,14 @@ const searchIndex = {
 
     // Chapter 6
     { term: '各向同性', chapter: 6, section: '6.1', description: '法曲率向量长度与方向无关' },
-    { term: '常各向同性', chapter: 6, section: '6.3', description: '各向同性且λ在整个M上恒定' },
+    { term: '常各向同性', chapter: 6, section: '6.2', description: '各向同性且λ在整个M上恒定' },
     { term: '全纯曲线', chapter: 6, section: '6.5', description: '由全纯函数参数化的曲线' },
     { term: '全纯函数', chapter: 6, section: '6.5', description: '满足Cauchy-Riemann方程的复函数' },
     { term: '复数', chapter: 6, section: '6.5', description: 'z = x + iy 形式的数' },
 
     // Chapter 7
-    { term: '广义螺旋面', chapter: 7, section: '7.1', description: '螺旋面在高维的推广' },
-    { term: '螺旋面', chapter: 7, section: '7.1', description: '由直线旋转上升生成的极小曲面' },
+    { term: '仿射平面', chapter: 7, section: '7.1', description: '余维数为 2 时接触数为 ∞ 的一类例子' },
+    { term: 'n 维球面', chapter: 7, section: '7.1', description: '余维数为 2 时接触数为 ∞ 的一类例子' },
     { term: '脐点', chapter: 7, section: '7.3', description: '各方向法曲率相同的点' },
     { term: 'pseudo-umbilical', chapter: 7, section: '7.3', description: '沿H方向形状算子是恒等倍数' },
     { term: '伪脐', chapter: 7, section: '7.3', description: '沿H方向形状算子是恒等倍数' },
@@ -59,17 +59,17 @@ const searchIndex = {
     // Chapter 8
     { term: '平均曲率', chapter: 8, section: '8.1', description: '第二基本形式的平均' },
     { term: '平均曲率向量', chapter: 8, section: '8.1', description: 'H = (1/n)tr(h)' },
-    { term: '平行平均曲率', chapter: 8, section: '8.1', description: '∇⊥H = 0' },
-    { term: 'Simons公式', chapter: 8, section: '8.2', description: '第二基本形式的Laplacian' },
-    { term: 'Pinching定理', chapter: 8, section: '8.3', description: '曲率有界则子流形特殊' },
-    { term: '全脐子流形', chapter: 8, section: '8.3', description: '每个点都是脐点' },
+    { term: '平行平均曲率', chapter: 8, section: '8.2', description: '∇⊥H = 0' },
+    { term: 'Simons公式', chapter: 8, section: '8.3', description: '第二基本形式的Laplacian' },
+    { term: 'Pinching定理', chapter: 8, section: '8.4', description: '曲率有界则子流形特殊' },
+    { term: '全脐子流形', chapter: 8, section: '8.4', description: '每个点都是脐点' },
 
     // Chapter 9
     { term: '曲率线', chapter: 9, section: '9.1', description: '主方向切线的曲线' },
     { term: '全挠率', chapter: 9, section: '9.2', description: '挠率沿闭曲线的积分' },
-    { term: '挠率', chapter: 9, section: '9.1', description: '曲线离开密切平面的程度' },
+    { term: '挠率', chapter: 9, section: '9.2', description: '曲线离开密切平面的程度' },
     { term: 'Frenet标架', chapter: 9, section: '9.1', description: '曲线的切向、法向、副法向' },
-    { term: '卵形面', chapter: 9, section: '9.2', description: '高斯曲率处处为正的凸曲面' },
+    { term: '卵形面', chapter: 9, section: '9.3', description: '高斯曲率处处为正的凸曲面' },
 
     // Chapter 10
     { term: '等周截面', chapter: 10, section: '10.1', description: '使M₁(ξ)恒定的法向量场' },
@@ -126,31 +126,31 @@ const searchIndex = {
 
     // Chapter 6
     { term: 'isotropic', chapter: 6, section: '6.1', description: 'Normal curvature length independent of direction' },
-    { term: 'constant isotropic', chapter: 6, section: '6.3', description: 'Isotropic with λ constant on M' },
+    { term: 'constant isotropic', chapter: 6, section: '6.2', description: 'Isotropic with λ constant on M' },
     { term: 'holomorphic curve', chapter: 6, section: '6.5', description: 'Curve parametrized by holomorphic functions' },
     { term: 'holomorphic function', chapter: 6, section: '6.5', description: 'Complex function satisfying Cauchy-Riemann' },
     { term: 'complex number', chapter: 6, section: '6.5', description: 'Number of form z = x + iy' },
 
     // Chapter 7
-    { term: 'generalized helicoid', chapter: 7, section: '7.1', description: 'High-dimensional generalization of helicoid' },
-    { term: 'helicoid', chapter: 7, section: '7.1', description: 'Minimal surface from rotating line' },
+    { term: 'affine plane', chapter: 7, section: '7.1', description: 'A codimension-2 case with infinite contact number' },
+    { term: 'n-sphere', chapter: 7, section: '7.1', description: 'A codimension-2 case with infinite contact number' },
     { term: 'umbilical point', chapter: 7, section: '7.3', description: 'Point with equal normal curvature in all directions' },
     { term: 'pseudo-umbilical', chapter: 7, section: '7.3', description: 'Shape operator in H direction is scalar identity' },
 
     // Chapter 8
     { term: 'mean curvature', chapter: 8, section: '8.1', description: 'Average of second fundamental form' },
     { term: 'mean curvature vector', chapter: 8, section: '8.1', description: 'H = (1/n)tr(h)' },
-    { term: 'parallel mean curvature', chapter: 8, section: '8.1', description: '∇⊥H = 0' },
-    { term: 'Simons formula', chapter: 8, section: '8.2', description: 'Laplacian of second fundamental form' },
-    { term: 'pinching theorem', chapter: 8, section: '8.3', description: 'Bounded curvature implies special submanifold' },
-    { term: 'totally umbilical', chapter: 8, section: '8.3', description: 'Every point is umbilical' },
+    { term: 'parallel mean curvature', chapter: 8, section: '8.2', description: '∇⊥H = 0' },
+    { term: 'Simons formula', chapter: 8, section: '8.3', description: 'Laplacian of second fundamental form' },
+    { term: 'pinching theorem', chapter: 8, section: '8.4', description: 'Bounded curvature implies special submanifold' },
+    { term: 'totally umbilical', chapter: 8, section: '8.4', description: 'Every point is umbilical' },
 
     // Chapter 9
     { term: 'line of curvature', chapter: 9, section: '9.1', description: 'Curve tangent to principal directions' },
     { term: 'total torsion', chapter: 9, section: '9.2', description: 'Integral of torsion along closed curve' },
-    { term: 'torsion', chapter: 9, section: '9.1', description: 'How curve leaves osculating plane' },
+    { term: 'torsion', chapter: 9, section: '9.2', description: 'How curve leaves osculating plane' },
     { term: 'Frenet frame', chapter: 9, section: '9.1', description: 'Tangent, normal, binormal of curve' },
-    { term: 'ovaloid', chapter: 9, section: '9.2', description: 'Convex surface with positive Gaussian curvature' },
+    { term: 'ovaloid', chapter: 9, section: '9.3', description: 'Convex surface with positive Gaussian curvature' },
 
     // Chapter 10
     { term: 'isoperimetric section', chapter: 10, section: '10.1', description: 'Normal vector field with constant M₁(ξ)' },
@@ -183,7 +183,7 @@ export default function SearchBox() {
       return [];
     }
 
-    const q = query.toLowerCase();
+    const q = query.trim().toLowerCase();
     return index.filter(item =>
       item.term.toLowerCase().includes(q) ||
       item.description.toLowerCase().includes(q)
@@ -205,13 +205,6 @@ export default function SearchBox() {
     navigate(`/chapter/${chapter}#${sectionId}`);
     setQuery('');
     setIsOpen(false);
-    // Scroll after navigation with a short delay for page render
-    setTimeout(() => {
-      const el = document.getElementById(sectionId);
-      if (el) {
-        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-    }, 100);
   };
 
   return (

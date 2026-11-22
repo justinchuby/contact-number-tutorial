@@ -1,5 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
+import ContactPaperLink from '../components/ContactPaperLink';
 import { MathBlock, Math } from '../components';
 import { IsotropyComparisonViz } from '../visualizations';
 
@@ -112,12 +113,13 @@ export default function Chapter6() {
 
         {/* Theorem 1: c# ≥ 3 ⟺ Isotropic */}
         <section className="bg-gradient-to-r from-green-900/30 to-cyan-900/30 rounded-xl p-6 border-2 border-amber-900/20">
-          <h2 className="text-xl font-semibold text-green-400 mb-4">{isZh ? '定理1：c#(M) ≥ 3 ⟺ 各向同性' : 'Theorem 1: c#(M) ≥ 3 ⟺ Isotropic'}
+          <h2 id="section-6-isotropy-theorem" className="text-xl font-semibold text-green-400 mb-4">{isZh ? '定理1：c#(M) ≥ 3 ⟺ 各向同性' : 'Theorem 1: c#(M) ≥ 3 ⟺ Isotropic'}
           </h2>
 
           <div className="bg-slate-900 rounded-lg p-4 mb-4">
             <p className="text-white font-semibold mb-3">{isZh ? '陈-李定理 (Chen-Li, 2004)' : 'Chen-Li Theorem (2004)'}
             </p>
+            <p className="mb-3"><ContactPaperLink reference={isZh ? '定理 4.1(2)，第 74 页' : 'Theorem 4.1(2), p. 74'} /></p>
             <p className="text-slate-300">{isZh
                 ? '子流形M的接触数 c#(M) ≥ 3 当且仅当 M 是各向同性的。'
                 : 'The contact number c#(M) ≥ 3 if and only if M is isotropic.'}
@@ -129,13 +131,13 @@ export default function Chapter6() {
             <p className="text-yellow-400 font-semibold mb-2">{isZh ? '为什么是3？为什么不是2或4？' : 'Why 3? Why Not 2 or 4?'}
             </p>
             <p className="text-slate-300 text-sm mb-2">{isZh
-                ? '回忆接触数的定义：c# ≥ k 意味着测地线和法截线在起点处前k-1阶导数都相等。'
-                : 'Recall the definition: c# ≥ k means geodesic and normal section have equal derivatives up to order k-1 at the starting point.'}
+                ? 'c# ≥ k 表示：对每个起点和单位切方向，两条曲线按弧长参数化后，在起点的第 1 至第 k 阶导数都相等。'
+                : 'For c# ≥ k, the two arc-length-parametrized curves agree in derivatives 1 through k at every starting point and in every unit tangent direction.'}
             </p>
             <ul className="text-slate-300 text-sm space-y-1">
-              <li>• c# ≥ 2: {isZh ? '一阶导数相等（切向量相同）——所有子流形都满足' : '1st derivatives equal (same tangent)—all submanifolds satisfy this'}</li>
-              <li>• c# ≥ 3: {isZh ? '二阶导数相等——这正好对应曲率条件，即各向同性！' : '2nd derivatives equal—this exactly corresponds to curvature condition, i.e., isotropy!'}</li>
-              <li>• c# ≥ 4: {isZh ? '三阶导数相等——需要更强的条件（常各向同性）' : '3rd derivatives equal—requires stronger condition (constant isotropic)'}</li>
+              <li>• c# ≥ 2: {isZh ? '前两阶导数相等，所有欧氏子流形都满足' : 'The first two derivatives agree on every Euclidean submanifold'}</li>
+              <li>• c# ≥ 3: {isZh ? '再比较三阶导数，得到各向同性条件' : 'Agreement through the third derivative characterizes isotropy'}</li>
+              <li>• c# ≥ 4: {isZh ? '再比较四阶导数，得到常各向同性条件' : 'Agreement through the fourth derivative characterizes constant isotropy'}</li>
             </ul>
           </div>
 
@@ -153,8 +155,8 @@ export default function Chapter6() {
             <div className="bg-slate-800 rounded-lg p-4">
               <p className="text-cyan-400 font-semibold mb-2">→ {isZh ? '正向证明思路' : 'Forward Proof Idea'}</p>
               <p className="text-slate-300 text-sm">{isZh
-                  ? '若 c#(M) ≥ 3，则测地线和法截线的二阶导数相等。通过计算，这等价于 |h(u,u)| 与方向u无关，即各向同性。'
-                  : 'If c#(M) ≥ 3, geodesic and normal section have equal 2nd derivatives. By calculation, this is equivalent to |h(u,u)| being independent of direction u, i.e., isotropy.'}
+                  ? '比较三阶导数，得到 ⟨h(u,u), h(u,v)⟩ = 0，对每一对正交单位切向量 u、v 都成立。这等价于 |h(u,u)| 与方向 u 无关。'
+                  : 'Agreement of the third derivatives gives ⟨h(u,u), h(u,v)⟩ = 0 for every orthonormal pair u, v. This is equivalent to |h(u,u)| being independent of u.'}
               </p>
             </div>
             <div className="bg-slate-800 rounded-lg p-4">
@@ -175,8 +177,8 @@ export default function Chapter6() {
                 : 'Pause and appreciate how clever this is: a seemingly dynamic property (how closely two curves match) and a static property (local symmetry of the surface) turn out to be completely equivalent!'}
             </p>
             <p className="text-slate-300 text-sm">{isZh
-                ? '你不需要站在曲面上拿着量角器去测量所有方向的曲率。你只需要在任何一个方向上比较测地线和法截线——如果它们的"加速度"和"jerk"都一样（三阶接触成立），你就能立刻断定这个点在所有方向上都是对称的。这种"用动态方式刻画静态对称性"的转换，正是接触数理论最美妙的核心洞察。'
-                : 'You don\'t need to stand on the surface with a protractor measuring curvature in every direction. Just compare geodesic and normal section in any direction—if their "acceleration" and "jerk" match (3rd order contact), you can immediately conclude the point is symmetric in all directions. This "dynamic measurement characterizes static symmetry" insight is the most beautiful core of contact number theory.'}
+                ? '对每个起点和方向比较两条曲线：如果三阶导数也总是相同，那么在每一点，法曲率向量的长度都与方向无关。'
+                : 'Compare the two curves at every starting point and in every direction. If their third derivatives always agree, the length of the normal curvature vector at each point is independent of direction.'}
             </p>
           </div>
         </section>
@@ -241,12 +243,13 @@ export default function Chapter6() {
 
         {/* Theorem 2: c# ≥ 4 ⟺ Constant Isotropic */}
         <section className="bg-gradient-to-r from-purple-900/30 to-pink-900/30 rounded-xl p-6 border-2 border-amber-900/20">
-          <h2 className="text-xl font-semibold text-purple-400 mb-4">{isZh ? '定理2：c#(M) ≥ 4 ⟺ 常各向同性' : 'Theorem 2: c#(M) ≥ 4 ⟺ Constant Isotropic'}
+          <h2 id="section-6.3" className="text-xl font-semibold text-purple-400 mb-4">{isZh ? '定理2：c#(M) ≥ 4 ⟺ 常各向同性' : 'Theorem 2: c#(M) ≥ 4 ⟺ Constant Isotropic'}
           </h2>
 
           <div className="bg-slate-900 rounded-lg p-4 mb-4">
             <p className="text-white font-semibold mb-3">{isZh ? '陈-李定理 (Chen-Li, 2004)' : 'Chen-Li Theorem (2004)'}
             </p>
+            <p className="mb-3"><ContactPaperLink reference={isZh ? '定理 4.1(3)，第 74 页' : 'Theorem 4.1(3), p. 74'} /></p>
             <p className="text-slate-300">{isZh
                 ? '子流形M的接触数 c#(M) ≥ 4 当且仅当 M 是常各向同性的。'
                 : 'The contact number c#(M) ≥ 4 if and only if M is constant isotropic.'}
@@ -258,8 +261,8 @@ export default function Chapter6() {
             <p className="text-yellow-400 font-semibold mb-2">{isZh ? '为什么c# ≥ 4对应常各向同性？' : 'Why Does c# ≥ 4 Correspond to Constant Isotropy?'}
             </p>
             <p className="text-slate-300 text-sm">{isZh
-                ? 'c# ≥ 4 意味着三阶导数也相等。三阶导数涉及曲率的导数（曲率如何随位置变化）。如果测地线和法截线在三阶导数上也一致，说明曲率在空间上不变化——这正是"常"各向同性！'
-                : 'c# ≥ 4 means 3rd derivatives are also equal. 3rd derivatives involve curvature derivatives (how curvature varies with position). If geodesic and normal section agree at 3rd order, curvature doesn\'t vary spatially—this is exactly "constant" isotropy!'}
+                ? '三阶接触已经保证各向同性。进一步比较所有起点与方向的四阶导数，得到额外条件：各向同性函数 λ(p) = |h(u,u)| 在整个子流形上恒定。'
+                : 'Third-order contact already gives isotropy. Comparing fourth derivatives at every starting point and in every direction gives the additional condition that the isotropy function λ(p) = |h(u,u)| is constant on the submanifold.'}
             </p>
           </div>
 
@@ -275,22 +278,23 @@ export default function Chapter6() {
               <li>• c# ≥ 2: {isZh ? '无条件（所有子流形）' : 'No condition (all submanifolds)'}</li>
               <li>• c# ≥ 3: {isZh ? '入门级对称——各向同性（各方向弯曲相同）' : 'Entry-level symmetry—isotropic (same bending in all directions)'}</li>
               <li>• c# ≥ 4: {isZh ? '进阶级对称——常各向同性（各方向、各位置弯曲都相同）' : 'Advanced symmetry—constant isotropic (same bending everywhere)'}</li>
-              <li>• c# = ∞: {isZh ? '最高级——全脐（如球面、平面，两条路完全重合）' : 'Highest level—totally umbilical (like sphere, plane; two paths completely coincide)'}</li>
+              <li>• c# = ∞: {isZh ? '每阶导数都相同，例如球面、平面与 Veronese 曲面' : 'Derivatives agree at every order, for example on spheres, planes, and the Veronese surface'}</li>
             </ul>
           </div>
         </section>
 
         {/* Theorem 3: Surfaces with c# = 3 */}
         <section className="bg-gradient-to-r from-orange-900/30 to-yellow-900/30 rounded-xl p-6 border-2 border-amber-900/20">
-          <h2 className="text-xl font-semibold text-orange-400 mb-4">{isZh ? '定理3：曲面的特殊定理' : 'Theorem 3: Special Theorem for Surfaces'}
+          <h2 id="section-6.5" className="text-xl font-semibold text-orange-400 mb-4">{isZh ? '定理3：曲面的特殊定理' : 'Theorem 3: Special Theorem for Surfaces'}
           </h2>
 
           <div className="bg-slate-900 rounded-lg p-4 mb-4">
             <p className="text-white font-semibold mb-3">{isZh ? '定理：曲面与全纯曲线' : 'Theorem: Surfaces and Holomorphic Curves'}
             </p>
+            <p className="mb-3"><ContactPaperLink reference={isZh ? '推论 5.3，第 78 页' : 'Corollary 5.3, p. 78'} /></p>
             <p className="text-slate-300">{isZh
-                ? '欧氏空间中的曲面M满足 c#(M) = 3 当且仅当 M 是复平面C²中的非平面全纯曲线。'
-                : 'A surface M in Euclidean space has c#(M) = 3 if and only if M is a non-planar holomorphic curve in a complex 2-plane C².'}
+                ? 'E⁴ 中的曲面 M 满足 c#(M) = 3，当且仅当它在 E⁴ 的某个正交复结构下是非平面的全纯曲线。'
+                : 'A surface M in E⁴ has c#(M) = 3 if and only if it is a non-planar holomorphic curve for some orthogonal complex structure on E⁴.'}
             </p>
           </div>
 
@@ -482,13 +486,13 @@ export default function Chapter6() {
                 </tr>
                 <tr className="border-b border-slate-800">
                   <td className="py-3 px-4"><Math>{'c^\\#(M) = 3'}</Math></td>
-                  <td className="py-3 px-4">{isZh ? 'C²中全纯曲线' : 'Holomorphic in C²'}</td>
-                  <td className="py-3 px-4 text-sm">{isZh ? '仅对曲面' : 'Surfaces only'}</td>
+                  <td className="py-3 px-4">{isZh ? '非平面全纯曲线' : 'Non-planar holomorphic curve'}</td>
+                  <td className="py-3 px-4 text-sm">{isZh ? 'E⁴ 中的曲面' : 'Surfaces in E⁴'}</td>
                 </tr>
                 <tr>
                   <td className="py-3 px-4"><Math>{'c^\\#(M) = \\infty'}</Math></td>
-                  <td className="py-3 px-4">{isZh ? '全脐' : 'Totally umbilical'}</td>
-                  <td className="py-3 px-4 text-sm">{isZh ? '如球面、平面' : 'Like spheres, planes'}</td>
+                  <td className="py-3 px-4">{isZh ? '各阶导数都相等' : 'Agreement at every derivative order'}</td>
+                  <td className="py-3 px-4 text-sm">{isZh ? '如球面、平面与 Veronese 曲面' : 'E.g. sphere, plane, Veronese surface'}</td>
                 </tr>
               </tbody>
             </table>
@@ -503,9 +507,9 @@ export default function Chapter6() {
           <ul className="text-slate-300 text-sm space-y-2">
             <li>✓ {isZh ? '各向同性：在每点，各方向的法曲率向量长度相同' : 'Isotropic: at each point, normal curvature vector length is same in all directions'}</li>
             <li>✓ {isZh ? '常各向同性：各向同性 + λ在整个M上是常数' : 'Constant isotropic: isotropic + λ is constant over all M'}</li>
-            <li>✓ {isZh ? '定理1：c# ≥ 3 ⟺ 各向同性（二阶导数相等 ⟺ 各向同性条件）' : 'Theorem 1: c# ≥ 3 ⟺ isotropic (2nd derivatives equal ⟺ isotropy condition)'}</li>
-            <li>✓ {isZh ? '定理2：c# ≥ 4 ⟺ 常各向同性（三阶导数相等 ⟺ 弯曲不随位置变化）' : 'Theorem 2: c# ≥ 4 ⟺ constant isotropic (3rd derivatives equal ⟺ curvature doesn\'t vary)'}</li>
-            <li>✓ {isZh ? '定理3：曲面c# = 3 ⟺ 全纯曲线（微分几何与复几何的联系）' : 'Theorem 3: surface c# = 3 ⟺ holomorphic curve (link between differential and complex geometry)'}</li>
+            <li>✓ {isZh ? '定理1：c# ≥ 3 ⟺ 各向同性（导数相等至三阶）' : 'Theorem 1: c# ≥ 3 ⟺ isotropic (agreement through the third derivative)'}</li>
+            <li>✓ {isZh ? '定理2：c# ≥ 4 ⟺ 常各向同性（导数相等至四阶）' : 'Theorem 2: c# ≥ 4 ⟺ constant isotropic (agreement through the fourth derivative)'}</li>
+            <li>✓ {isZh ? '定理3：E⁴ 中的曲面 c# = 3 ⟺ 某个正交复结构下的非平面全纯曲线' : 'Theorem 3: a surface in E⁴ has c# = 3 ⟺ it is a non-planar holomorphic curve for some orthogonal complex structure'}</li>
           </ul>
 
           <div className="mt-6 bg-slate-900 rounded-lg p-4">

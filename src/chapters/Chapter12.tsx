@@ -19,7 +19,7 @@ export default function Chapter12() {
       <div className="space-y-8">
         {/* Academic Contributions */}
         <section className="bg-slate-900 rounded-xl p-6">
-          <h2 className="text-xl font-semibold text-cyan-400 mb-4">{isZh ? '学术贡献' : 'Academic Contributions'}
+          <h2 id="section-12-contributions" className="text-xl font-semibold text-cyan-400 mb-4">{isZh ? '学术贡献' : 'Academic Contributions'}
           </h2>
 
           <div className="space-y-4">
@@ -64,7 +64,7 @@ export default function Chapter12() {
 
         {/* Real-world Applications */}
         <section className="bg-slate-900 rounded-xl p-6">
-          <h2 className="text-xl font-semibold text-cyan-400 mb-4">{isZh ? '现实应用' : 'Real-world Applications'}
+          <h2 id="section-12-applications" className="text-xl font-semibold text-cyan-400 mb-4">{isZh ? '现实应用' : 'Real-world Applications'}
           </h2>
 
           <div className="grid md:grid-cols-2 gap-4">
@@ -104,7 +104,7 @@ export default function Chapter12() {
 
         {/* Tribute to Prof. Li */}
         <section className="bg-gradient-to-r from-cyan-900/50 to-purple-900/50 rounded-xl p-6 border border-amber-900/20">
-          <h2 className="text-xl font-semibold text-cyan-400 mb-4">{isZh ? '致敬李世杰教授' : 'Tribute to Prof. Shi-Jie Li'}
+          <h2 id="section-12.1" className="text-xl font-semibold text-cyan-400 mb-4">{isZh ? '致敬李世杰教授' : 'Tribute to Prof. Shi-Jie Li'}
           </h2>
 
           <div className="flex flex-col md:flex-row gap-6">
@@ -138,7 +138,7 @@ export default function Chapter12() {
 
         {/* References */}
         <section className="bg-slate-900 rounded-xl p-6">
-          <h2 className="text-xl font-semibold text-cyan-400 mb-4">{isZh ? '参考文献' : 'References'}
+          <h2 id="section-12-references" className="text-xl font-semibold text-cyan-400 mb-4">{isZh ? '参考文献' : 'References'}
           </h2>
 
           <div className="space-y-3 text-slate-300 text-sm">

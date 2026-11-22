@@ -420,8 +420,8 @@ export default function Chapter9() {
           <h2 className="text-xl font-semibold text-red-400 mb-4">{isZh ? '与接触数的联系' : 'Connection to Contact Number'}
           </h2>
           <p className="text-slate-300">{isZh
-              ? '曲率线和测地线是曲面上两类重要的曲线。全脐曲面（接触数∞）的所有曲线既是测地线又是曲率线。Qin-Li对曲率线全挠率的研究，与李世杰教授在接触数理论中对测地线和法截线关系的研究，都属于曲面几何的核心问题。'
-              : 'Lines of curvature and geodesics are two important types of curves on surfaces. On totally umbilical surfaces (contact number ∞), all curves are both geodesics and lines of curvature. Qin-Li\'s study of total torsion of lines of curvature, like Prof. Li\'s study of geodesic-normal section relations in contact number theory, are both core problems in surface geometry.'}
+              ? '曲率线和测地线是曲面上两类重要的曲线。在全脐曲面（如球面）上，每个切方向都是主方向；沿给定方向出发的测地线与相应的法截线局部重合。以球面为例，测地线沿着大圆，非赤道的纬线没有这个性质。Qin-Li 对曲率线全挠率的研究与接触数理论关注的是曲面几何中相邻的两类问题。'
+              : 'Lines of curvature and geodesics are two important types of curves on surfaces. On a totally umbilical surface such as a sphere, every tangent direction is principal, and the geodesic in a given direction coincides locally with its normal section. On the sphere, geodesics follow great circles, while latitude circles away from the equator do not. Qin-Li\'s study of total torsion and contact number theory address related questions in surface geometry.'}
           </p>
         </section>
 

@@ -2,6 +2,7 @@ import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { MathBlock, Math } from '../components';
 import { ContactNumberVizWithControls } from '../visualizations';
+import ContactPaperLink from '../components/ContactPaperLink';
 
 export default function Chapter5() {
   const { t, i18n } = useTranslation();
@@ -115,6 +116,7 @@ export default function Chapter5() {
         <section className="bg-gradient-to-r from-red-900/30 to-orange-900/30 rounded-xl p-6 border-2 border-amber-900/20">
           <h2 id="section-5.2" className="text-xl font-semibold text-red-400 mb-4">{isZh ? '5.2 接触数的正式定义' : '5.2 Formal Definition of Contact Number'}
           </h2>
+          <p className="mb-4"><ContactPaperLink reference={isZh ? '定义 1.1，第 70 页' : 'Definition 1.1, p. 70'} /></p>
 
           {/* Key insight analogy */}
           <div className="bg-gradient-to-r from-blue-900/30 to-purple-900/30 rounded-lg p-4 border border-amber-900/20 mb-4">
@@ -223,7 +225,7 @@ export default function Chapter5() {
 
         {/* Interactive visualization - after concepts are introduced */}
         <section className="bg-slate-900 rounded-xl p-6">
-          <h2 className="text-xl font-semibold text-cyan-400 mb-4">{isZh ? '交互可视化：接触数' : 'Interactive: Contact Number'}
+          <h2 id="section-5-cylinder" className="text-xl font-semibold text-cyan-400 mb-4">{isZh ? '圆柱实验：比较两条曲线' : 'Cylinder experiment: Compare the curves'}
           </h2>
           <ContactNumberVizWithControls />
         </section>
@@ -237,6 +239,7 @@ export default function Chapter5() {
           <div className="bg-gradient-to-r from-green-900/30 to-emerald-900/30 rounded-lg p-4 border-2 border-green-600 mb-4">
             <p className="text-green-400 font-bold text-lg mb-2">{isZh ? '定理 (Chen-Li)' : 'Theorem (Chen-Li)'}
             </p>
+            <p className="mb-3"><ContactPaperLink reference={isZh ? '定理 4.1(1)，第 74 页' : 'Theorem 4.1(1), p. 74'} /></p>
             <p className="text-slate-200">{isZh
                 ? '对于欧氏空间中的任何子流形 M（dim ≥ 2），接触数满足：'
                 : 'For any submanifold M (dim ≥ 2) in Euclidean space, the contact number satisfies:'}

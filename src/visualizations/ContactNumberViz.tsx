@@ -1,4 +1,5 @@
-import { useMemo, useState, useRef } from 'react';
+import { useEffect, useMemo, useState, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls, Line, Html } from '@react-three/drei';
 import * as THREE from 'three';
@@ -9,6 +10,19 @@ type DirectionMode = 'axial' | 'circumferential' | 'diagonal';
 type Point3 = [number, number, number];
 
 const STORY_LOOP_SECONDS = 8;
+const EXPERIMENT_CAMERA: { position: Point3; fov: number } = { position: [2.5, 1.2, 2.5], fov: 45 };
+const STORY_STAGES = [
+  { start: 0, cue: 0, zh: '定点 p', en: 'Mark point p' },
+  { start: 1, cue: 1.98, zh: '选择切方向 u', en: 'Choose tangent u' },
+  { start: 2, cue: 2.98, zh: '张成切割平面', en: 'Construct the cutting plane' },
+  { start: 3, cue: 5.25, zh: '比较 γ 与 β', en: 'Compare γ and β' },
+  { start: 5.55, cue: 6.4, zh: '读取接触阶', en: 'Read the contact order' },
+] as const;
+
+function storyStage(time: number) {
+  const next = STORY_STAGES.findIndex(({ start }) => start > time);
+  return next === -1 ? STORY_STAGES.length - 1 : next - 1;
+}
 const COLORS = {
   geodesic: VIZ_COLORS.geodesic,
   normalSection: VIZ_COLORS.normalSection,
@@ -82,14 +96,15 @@ function CylinderSurface({ radius = 1, height = 3 }: { radius?: number; height?:
 }
 
 // Point marker with label
-function PointMarker({ position, color = COLORS.point, label }: {
+function PointMarker({ position, color = COLORS.point, label, scale = 1 }: {
   position: [number, number, number];
   color?: string;
   label?: string;
+  scale?: number;
 }) {
   return (
     <group position={position}>
-      <mesh>
+      <mesh scale={scale}>
         <sphereGeometry args={[0.04, 16, 16]} />
         <meshStandardMaterial color={color} emissive={color} emissiveIntensity={0.5} />
       </mesh>
@@ -136,23 +151,27 @@ function CuttingPlane({ position, normal, tangent, color = COLORS.normalSection,
   );
 }
 
-function CylinderContactScene({ direction }: { direction: DirectionMode }) {
+function CylinderContactScene({ direction, time }: { direction: DirectionMode; time?: number }) {
+  const { i18n } = useTranslation();
+  const isZh = i18n.language === 'zh';
   const groupRef = useRef<THREE.Group>(null);
   const loopStartRef = useRef(0);
   const lastDirectionRef = useRef(direction);
-  const [storyTime, setStoryTime] = useState(0);
+  const [loopTime, setLoopTime] = useState(0);
+  const storyTime = time ?? loopTime;
   const R = 1; // cylinder radius
   // Point p on cylinder: at angle 0, height 0 → (R, 0, 0)
   const p: [number, number, number] = [R, 0, 0];
   const surfaceNormal = new THREE.Vector3(1, 0, 0); // outward normal at p
 
   useFrame(({ clock }) => {
+    if (time !== undefined) return;
     const elapsed = clock.getElapsedTime();
     if (lastDirectionRef.current !== direction) {
       lastDirectionRef.current = direction;
       loopStartRef.current = elapsed;
     }
-    setStoryTime((elapsed - loopStartRef.current) % STORY_LOOP_SECONDS);
+    setLoopTime((elapsed - loopStartRef.current) % STORY_LOOP_SECONDS);
     if (groupRef.current) {
       groupRef.current.rotation.y = Math.sin(elapsed * 0.25) * 0.18;
     }
@@ -253,15 +272,8 @@ function CylinderContactScene({ direction }: { direction: DirectionMode }) {
     p[1] + surfaceNormal.y * 0.42 * vectorReveal,
     p[2] + surfaceNormal.z * 0.42 * vectorReveal,
   ];
-  const currentStep = storyTime < 1.2
-    ? '① 定点 p'
-    : storyTime < 2.2
-      ? '② 选择切方向 u'
-      : storyTime < 3.4
-        ? '③ 张成切割平面'
-        : storyTime < 5.3
-          ? '④ 比较 γ 与 β'
-          : '⑤ 读取接触阶';
+  const stageIndex = storyStage(storyTime);
+  const currentStep = STORY_STAGES[stageIndex];
 
   return (
     <group ref={groupRef}>
@@ -271,9 +283,7 @@ function CylinderContactScene({ direction }: { direction: DirectionMode }) {
       <CylinderSurface radius={R} height={3} />
 
       {/* Point p */}
-      <group scale={0.75 + 0.25 * pointReveal}>
-      <PointMarker position={p} label="p" />
-      </group>
+      <PointMarker position={p} label="p" scale={0.75 + 0.25 * pointReveal} />
 
       {/* Tangent direction arrow */}
       {vectorReveal > 0.02 && (
@@ -301,19 +311,19 @@ function CylinderContactScene({ direction }: { direction: DirectionMode }) {
       )}
 
       {/* Geodesic curve */}
-      {revealedGeodesicPts.length > 1 && (
+      {geodesicReveal > 0 && revealedGeodesicPts.length > 1 && (
         <Line points={revealedGeodesicPts} color={COLORS.geodesic} lineWidth={4} transparent opacity={0.35 + 0.65 * geodesicReveal} />
       )}
 
       {/* Normal section curve */}
-      {showBothCurves && revealedNormalSectionPts.length > 1 && (
+      {showBothCurves && normalReveal > 0 && revealedNormalSectionPts.length > 1 && (
         <Line points={revealedNormalSectionPts} color={COLORS.normalSection} lineWidth={3} transparent opacity={0.35 + 0.65 * normalReveal} />
       )}
 
       {showBothCurves && conclusionReveal > 0.2 && (
         <Html position={[1.05, 0.34, 0.34]} style={{ pointerEvents: 'none' }}>
           <div className="text-[11px] bg-[#fffaf1]/95 border border-amber-700/30 rounded px-2 py-1 text-amber-800 shadow-lg whitespace-nowrap">
-            p 附近先贴合，随后分开
+            {isZh ? 'p 附近先贴合，随后分开' : 'The curves agree near p, then separate'}
           </div>
         </Html>
       )}
@@ -335,17 +345,15 @@ function CylinderContactScene({ direction }: { direction: DirectionMode }) {
       )}
 
       {/* Contact order label */}
-      <Html position={[0, 1.8, 0]} style={{ pointerEvents: 'none', opacity: conclusionReveal }}>
-        <div className="text-amber-800 text-sm bg-[#fffaf1]/95 px-2 py-1 rounded text-center whitespace-nowrap border border-amber-700/30">{direction === 'diagonal'
-            ? `接触阶 / Contact order: ${contactOrder}  →  γ ≠ β`
-            : `接触阶 / Contact order: ${contactOrder}  →  γ = β`
-          }
+      {conclusionReveal > 0 && <Html position={[0, 1.8, 0]} style={{ pointerEvents: 'none', opacity: conclusionReveal }}>
+        <div className="text-amber-800 text-sm bg-[#fffaf1]/95 px-2 py-1 rounded text-center whitespace-nowrap border border-amber-700/30">
+          {isZh ? '接触阶' : 'Contact order'}: {contactOrder} → {showBothCurves ? 'γ ≠ β' : 'γ = β'}
         </div>
-      </Html>
+      </Html>}
 
       <Html position={[-1.15, -1.72, 0]} style={{ pointerEvents: 'none' }}>
         <div className={VIZ_CLASSES.labelPill}>
-          {currentStep}
+          {stageIndex + 1}. {isZh ? currentStep.zh : currentStep.en}
         </div>
       </Html>
 
@@ -365,7 +373,41 @@ export default function ContactNumberViz({ contactNumber = 2 }: { contactNumber?
 }
 
 export function ContactNumberVizWithControls() {
+  const { i18n } = useTranslation();
+  const isZh = i18n.language === 'zh';
   const [direction, setDirection] = useState<DirectionMode>('axial');
+  const [time, setTime] = useState(0);
+  const [playing, setPlaying] = useState(false);
+  const running = playing && time < STORY_LOOP_SECONDS;
+  const currentStage = storyStage(time);
+  const showResult = time >= STORY_STAGES[4].cue;
+  const buttonClass = 'rounded-lg border border-amber-900/20 bg-white/55 px-3 py-2 text-sm font-semibold text-teal-900 hover:bg-white disabled:opacity-40';
+
+  useEffect(() => {
+    if (!running) return;
+    let previous = performance.now();
+    const timer = window.setInterval(() => {
+      const now = performance.now();
+      const delta = (now - previous) / 1000;
+      previous = now;
+      setTime((elapsed) => Math.min(elapsed + delta, STORY_LOOP_SECONDS));
+    }, 40);
+    return () => window.clearInterval(timer);
+  }, [running]);
+
+  function seek(stage: number) {
+    setPlaying(false);
+    setTime(STORY_STAGES[stage].cue);
+  }
+
+  function togglePlayback() {
+    if (running) {
+      setPlaying(false);
+    } else {
+      if (time >= STORY_LOOP_SECONDS) setTime(0);
+      setPlaying(true);
+    }
+  }
 
   const directionInfo: Record<DirectionMode, { zh: string; en: string; desc_zh: string; desc_en: string; order: string }> = {
     axial: {
@@ -390,10 +432,52 @@ export function ContactNumberVizWithControls() {
 
   return (
     <div className="space-y-4">
+      <div className={VIZ_CLASSES.panel}>
+        <p className="mb-3 text-sm font-semibold text-teal-900">
+          {isZh ? '先猜一猜：换哪个切方向，两条曲线会分开？' : 'Make a prediction: in which tangent direction will the two curves separate?'}
+        </p>
+        <div role="group" aria-label={isZh ? '切方向' : 'Tangent direction'} className="grid grid-cols-3 gap-2">
+          {(['axial', 'circumferential', 'diagonal'] as const).map((choice) => (
+            <button
+              key={choice}
+              type="button"
+              aria-pressed={direction === choice}
+              onClick={() => {
+                setDirection(choice);
+                seek(0);
+              }}
+              className={`rounded-lg border px-2 py-2 text-sm ${direction === choice ? VIZ_CLASSES.buttonActive : VIZ_CLASSES.buttonIdle}`}
+            >
+              {isZh ? directionInfo[choice].zh : directionInfo[choice].en}
+            </button>
+          ))}
+        </div>
+      </div>
+
       <div className={`w-full h-80 ${VIZ_CLASSES.canvas}`}>
-        <Canvas camera={{ position: [2.5, 1.2, 2.5], fov: 45 }}>
-          <CylinderContactScene direction={direction} />
+        <Canvas camera={EXPERIMENT_CAMERA} frameloop="demand">
+          <CylinderContactScene direction={direction} time={time} />
         </Canvas>
+      </div>
+
+      <div className={VIZ_CLASSES.panel}>
+        <p className="mb-3 text-sm font-semibold text-teal-900" aria-live="polite">
+          {currentStage + 1} / {STORY_STAGES.length} · {isZh ? STORY_STAGES[currentStage].zh : STORY_STAGES[currentStage].en}
+        </p>
+        <div className="flex flex-wrap gap-2" role="group" aria-label={isZh ? '播放控制' : 'Playback controls'}>
+          <button type="button" className={buttonClass} onClick={togglePlayback}>
+            {running ? (isZh ? '暂停' : 'Pause') : (isZh ? '播放' : 'Play')}
+          </button>
+          <button type="button" className={buttonClass} disabled={currentStage === 0} onClick={() => seek(currentStage - 1)}>
+            {isZh ? '上一步' : 'Previous step'}
+          </button>
+          <button type="button" className={buttonClass} disabled={currentStage === STORY_STAGES.length - 1} onClick={() => seek(currentStage + 1)}>
+            {isZh ? '下一步' : 'Next step'}
+          </button>
+          <button type="button" className={buttonClass} onClick={() => { setTime(0); setPlaying(true); }}>
+            {isZh ? '重播' : 'Replay'}
+          </button>
+        </div>
       </div>
 
       {/* Legend */}
@@ -420,50 +504,24 @@ export function ContactNumberVizWithControls() {
         </div>
       </div>
 
-      {/* Direction selector */}
-      <div className={VIZ_CLASSES.panel}>
-        <p className="text-stone-700 mb-3 font-semibold">
-          选择切方向 / Choose tangent direction:
-        </p>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
-          {(['axial', 'circumferential', 'diagonal'] as DirectionMode[]).map((d) => (
-            <button
-              key={d}
-              onClick={() => setDirection(d)}
-              className={`px-4 py-3 rounded-xl border-2 text-left transition-all ${
-                direction === d
-                  ? VIZ_CLASSES.buttonActive
-                  : VIZ_CLASSES.buttonIdle
-              }`}
-            >
-              <div className="font-semibold text-sm">{directionInfo[d].zh} / {directionInfo[d].en}
-              </div>
-              <div className="text-xs mt-1 opacity-80">
-                接触阶 c<sup>#</sup> = {directionInfo[d].order}
-              </div>
-            </button>
-          ))}
-        </div>
-      </div>
-
       {/* Explanation for current direction */}
-      <div className={`rounded-lg p-4 border ${
+      {showResult && <div className={`rounded-lg p-4 border ${
         direction === 'diagonal'
           ? 'bg-rose-900/10 border-rose-700/30'
           : 'bg-emerald-900/10 border-emerald-700/30'
       }`}>
-        <p className={`font-semibold mb-1 ${direction === 'diagonal' ? 'text-rose-800' : 'text-emerald-800'}`}>{directionInfo[direction].zh}
+        <p className={`font-semibold mb-1 ${direction === 'diagonal' ? 'text-rose-800' : 'text-emerald-800'}`}>
+          {isZh ? directionInfo[direction].zh : directionInfo[direction].en} · {isZh ? '接触阶' : 'Contact order'} {directionInfo[direction].order}
         </p>
-        <p className="text-stone-700 text-sm">{directionInfo[direction].desc_zh}</p>
-        <p className="text-stone-500 text-xs mt-1">{directionInfo[direction].desc_en}</p>
-      </div>
+        <p className="text-stone-700 text-sm">{isZh ? directionInfo[direction].desc_zh : directionInfo[direction].desc_en}</p>
+      </div>}
 
       {/* Contact number summary */}
-      <div className="rounded-2xl border border-amber-700/25 bg-amber-900/10 p-4">
-        <p className="text-amber-800 font-semibold mb-2">
-          圆柱面的接触数 / Contact Number of Cylinder
-        </p>
-        <div className="grid grid-cols-3 gap-2 text-sm mb-3">
+      <details className="rounded-2xl border border-amber-700/25 bg-amber-900/10 p-4">
+        <summary className="cursor-pointer text-amber-800 font-semibold">
+          {isZh ? '查看圆柱面的接触数' : 'Reveal the contact number of the cylinder'}
+        </summary>
+        <div className="grid grid-cols-3 gap-2 text-sm my-3">
           <div className={`rounded p-2 text-center ${direction === 'axial' ? 'bg-teal-700/[0.12] ring-2 ring-teal-700/40' : 'bg-white/50'}`}>
             <div className="text-stone-600">轴向 Axial</div>
             <div className="text-emerald-800 font-bold">∞</div>
@@ -481,12 +539,12 @@ export function ContactNumberVizWithControls() {
           c<sup>#</sup>(圆柱面) = min(∞, ∞, 2, ...) = <span className="text-amber-800 font-bold text-lg">2</span>
         </p>
         <p className="text-stone-600 text-xs mt-1">
-          接触数 = 所有方向接触阶的最小值。即使大多数方向完美吻合，只要有一个方向不完美，接触数就由那个方向决定。
+          接触数取所有起点和方向的最小接触阶。所有接触阶都至少为 2，而斜向恰好为 2，因此圆柱面的接触数为 2。
         </p>
         <p className="text-stone-500 text-xs">
-          Contact number = minimum contact order over all directions. Even if most directions match perfectly, one imperfect direction determines the contact number.
+          The contact number is the minimum over all starting points and directions. Every contact order is at least 2, and the diagonal example attains 2.
         </p>
-      </div>
+      </details>
     </div>
   );
 }
